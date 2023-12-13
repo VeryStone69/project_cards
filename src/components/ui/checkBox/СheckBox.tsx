@@ -1,4 +1,4 @@
-import { Icon } from '@/components/icon/icon'
+import { Icon } from '@/components/icon/Icon'
 import { Typography } from '@/components/ui/typography'
 import * as RadixCheckbox from '@radix-ui/react-checkbox'
 
