@@ -2,7 +2,6 @@ body {
   background-color: #2a2a2a;
 }
 
-
 .inputBlock {
   top: 20px;
   left: 20px;
@@ -48,14 +47,12 @@ body {
 .inputError {
   color: var(--color-danger-300);
   border: 2px solid var(--color-danger-300);
-
 }
 
 .errorInputTitle {
   font-weight: 400;
   color: var(--color-danger-300);
 }
-
 
 .primaryInput {
   &:active {
