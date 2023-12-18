@@ -1,9 +1,9 @@
-import {Slider} from '@/components/ui/slider/slider'
+import {LoginForm} from "@/components/forms/sign-in";
 
 export function App() {
     return (
         <div>
-            <Slider value={[0, 10]} min={0} max={100}/>
+            <LoginForm/>
         </div>
     )
 }
