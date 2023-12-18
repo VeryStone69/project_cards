@@ -1,0 +1,137 @@
+.root{
+  display: flex;
+  flex-direction: column;
+  gap: 12px 0;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  color: var(--color-light-900);
+}
+
+.item{
+  all: unset;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+  width: 16px;
+  height: 16px;
+}
+
+.item[data-disabled]{
+  z-index: 5;
+  inset: 0;
+
+  box-sizing: border-box;
+
+  border: 2px solid var(--color-accent-900);
+  border-radius: 50%;
+
+  &::before{
+    background-color: inherit;
+  }
+
+  &:hover{
+    &:active{
+      &::before{
+        background-color: inherit;
+      }
+    }
+  }
+}
+
+.item::before{
+  content: '';
+
+  position: absolute;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+
+
+  width: 36px;
+  height: 36px;
+
+  background-color: var(--color-dark-500);
+  border-radius: 50%;
+
+  transition: all 0.3s;
+}
+
+
+.item:focus-visible::before{
+  transform: translate(-50%, -50%);
+  background-color: var(--color-dark-700);
+}
+
+.item:hover::before{
+  transform: translate(-50%, -50%);
+}
+
+.item:hover:active::before{
+  transform: translate(-50%, -50%);
+  background-color: var(--color-accent-900);
+  transition-delay: -0.5s;
+}
+
+
+
+
+.indicator{
+  position: relative;
+  z-index: 10;
+
+  width: 8px;
+  height: 8px;
+
+  background-color: var(--color-accent-500);
+  border-radius: 50%;
+}
+
+.indicator[data-disabled]{
+  position: relative;
+  z-index: 10;
+
+  width: 8px;
+  height: 8px;
+
+  background-color: var(--color-accent-900);
+  border-radius: 50%;
+}
+
+
+.styleUnchecked{
+  position: absolute;
+  z-index: 5;
+  inset: 0;
+
+  box-sizing: border-box;
+
+  border: 2px solid var(--color-accent-500);
+  border-radius: 50%;
+}
+
+.styleDisabled{
+  position: absolute;
+  z-index: 5;
+  inset: 0;
+
+  box-sizing: border-box;
+
+  border: 2px solid var(--color-accent-900);
+  border-radius: 50%;
+}
+
+.typography{
+  cursor: pointer;
+
+  display: inline-flex;
+  flex-direction: row;
+  gap: 0 12px;
+  align-items: center;
+}
+
