@@ -5,7 +5,7 @@
   align-items: flex-start;
   justify-content: flex-start;
 
-  color: var(--color-light-900);
+  color: var(--color-light-100);
 }
 
 .item{
@@ -98,6 +98,8 @@ border-color: red;
   width: 8px;
   height: 8px;
 
+
+
   background-color: var(--color-accent-900);
   border-radius: 50%;
 }
@@ -134,3 +136,18 @@ border-color: red;
   align-items: center;
 }
 
+.typographyDisabled{
+  cursor: pointer;
+
+  display: inline-flex;
+  flex-direction: row;
+  gap: 0 12px;
+  align-items: center;
+
+  color: var(--color-light-900);
+}
+
+
+.error{
+color:var(--color-danger-500)
+}
