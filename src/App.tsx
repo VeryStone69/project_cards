@@ -1,7 +1,9 @@
-import {TextField} from "@/components/ui/TextField/TextField";
+import { Header } from '@/components/header'
 
 export function App() {
-    return <div>
-        <TextField/>
+  return (
+    <div>
+      <Header data={null} logout={() => {}} />
     </div>
+  )
 }
