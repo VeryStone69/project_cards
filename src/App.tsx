@@ -1,9 +1,9 @@
-import { Header } from '@/components/header'
+import {Slider} from '@/components/ui/slider/slider'
 
 export function App() {
-  return (
-    <div>
-      <Header data={null} logout={() => {}} />
-    </div>
-  )
+    return (
+        <div>
+            <Slider value={[0, 10]} min={0} max={100}/>
+        </div>
+    )
 }
