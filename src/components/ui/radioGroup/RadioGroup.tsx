@@ -2,21 +2,28 @@ import { Typography } from '@/components/ui/typography'
 import * as RadioGroupRadix from '@radix-ui/react-radio-group'
 
 import s from './radioGroup.module.scss'
-
+type Option = {
+  title: string
+  value: string
+}
 type RadioGroupProps = {
   className?: string
   disabled?: boolean
+  error?: string
   onValueChange?: (value: string) => void
+  options: Option[]
   value?: string
 }
 export const RadioGroup = ({
   className,
-  disabled = true,
+  disabled,
+  error,
   onValueChange,
+  options,
   value,
 }: RadioGroupProps) => {
-  const classes = (disabled && s.checkboxIndicatorDisabled) || s.checkboxIndicator
-  const styles = disabled ? '' : s.styleUnchecked
+  const stylesRadiogroup = disabled ? '' : s.styleUnchecked
+  const styleTypography = disabled ? s.typographyDisabled : s.typography
 
   return (
     <RadioGroupRadix.Root
@@ -25,20 +32,27 @@ export const RadioGroup = ({
       onValueChange={onValueChange}
       value={value}
     >
-      <Typography as={'label'} className={s.typography} variant={'body2'}>
-        <RadioGroupRadix.Item className={s.item} value={'1'}>
-          <RadioGroupRadix.Indicator className={s.indicator} />
-          <div className={styles}></div>
-        </RadioGroupRadix.Item>
-        text
-      </Typography>
-      <Typography as={'label'} className={s.typography}>
-        <RadioGroupRadix.Item className={s.item} value={'3'}>
-          <RadioGroupRadix.Indicator className={s.indicator} />
-          <div className={s.styleUnchecked}></div>
-        </RadioGroupRadix.Item>
-        text2
-      </Typography>
+      {options.map(radioButton => {
+        return (
+          <Typography
+            as={'label'}
+            className={styleTypography}
+            key={radioButton.value}
+            variant={'body2'}
+          >
+            <RadioGroupRadix.Item className={s.item} value={radioButton.value}>
+              <RadioGroupRadix.Indicator className={s.indicator} />
+              <div className={stylesRadiogroup}></div>
+            </RadioGroupRadix.Item>
+            {radioButton.title}
+          </Typography>
+        )
+      })}
+      {error && (
+        <Typography className={s.error} variant={'caption'}>
+          {error}
+        </Typography>
+      )}
     </RadioGroupRadix.Root>
   )
 }
