@@ -7,9 +7,9 @@ type IconProps = {
   size?: string
 } & ComponentPropsWithoutRef<'svg'>
 
-export const Icon = ({ name, size = '24px' }: IconProps) => {
+export const Icon = ({ name, size = '24px', ...rest }: IconProps) => {
   return (
-    <svg height={size} width={size}>
+    <svg height={size} width={size} {...rest}>
       <use href={`${icon}#${name}`} />
     </svg>
   )
