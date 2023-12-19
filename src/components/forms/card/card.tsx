@@ -1,5 +1,16 @@
 import s from './card.module.scss'
+import {ComponentPropsWithoutRef, forwardRef} from "react";
+import {clsx} from "clsx";
 
-export const CardForm = () => {
-  return <form className={s.root}></form>
-}
+type CardProps = {} & ComponentPropsWithoutRef<'div'>
+
+
+export const Card = forwardRef<HTMLDivElement, CardProps>(({className, ...restProps}, ref) => {
+
+    const classNames = {
+        root: clsx(s.root, className)
+
+    }
+
+    return <div className={classNames.root} ref={ref} {...restProps}></div>
+})
