@@ -27,11 +27,11 @@ const DropdownMenuDemo = () => {
             <Icon name={'beak-container-top'} />
           </DropdownMenu.Arrow>
           <DropdownMenu.Item className={s['DropdownMenuItem']}>
-            <div>
-              <img className={s['userLogo']} />
+            <img className={s['userLogo']} />
+            <div className={s['userDataName']}>
               <Typography variant={'subtitle1'}>Ivan</Typography>
             </div>
-            <div>
+            <div className={s['userDataEmail']}>
               <Typography variant={'caption'}>j&johnson@gmail.com</Typography>
             </div>
 

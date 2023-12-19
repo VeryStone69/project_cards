@@ -12,6 +12,11 @@ button {
   border: 1px solid var(--dark-500, #333);
 }
 
+.userDataName,
+.userDataEmail {
+  display: flex;
+}
+
 .userLogo {
   flex-shrink: 0;
 
