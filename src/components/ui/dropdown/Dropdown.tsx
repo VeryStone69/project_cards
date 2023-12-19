@@ -4,6 +4,7 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 //   DotFilledIcon,
 //   CheckIcon,
 //   ChevronRightIcon,
+import { Icon } from '@/components/icon/Icon'
 // } from '@radix-ui/react-icons';
 import { Typography } from '@/components/ui/typography'
 
@@ -22,6 +23,9 @@ const DropdownMenuDemo = () => {
 
       <DropdownMenu.Portal>
         <DropdownMenu.Content className={s['DropdownMenuContent']} sideOffset={5}>
+          <DropdownMenu.Arrow className={s['DropdownMenuArrow']}>
+            <Icon name={'beak-container-top'} />
+          </DropdownMenu.Arrow>
           <DropdownMenu.Item className={s['DropdownMenuItem']}>
             <div>
               <img className={s['userLogo']} />
@@ -34,17 +38,19 @@ const DropdownMenuDemo = () => {
             {/*<div className={'RightSlot'}>⌘+T</div>*/}
           </DropdownMenu.Item>
 
+          <DropdownMenu.Separator className={s['DropdownMenuSeparator']} />
+
           <DropdownMenu.Item className={s['DropdownMenuItem']}>
             My Profile
             {/*<div className={'RightSlot'}>⌘+T</div>*/}
           </DropdownMenu.Item>
 
+          <DropdownMenu.Separator className={s['DropdownMenuSeparator']} />
+
           <DropdownMenu.Item className={s['DropdownMenuItem']}>
             Sign Out
             {/*<div className={'RightSlot'}>⌘+T</div>*/}
           </DropdownMenu.Item>
-
-          <DropdownMenu.Separator className={'DropdownMenuSeparator'} />
 
           {/*<DropdownMenu.Label className={'DropdownMenuLabel'}>People</DropdownMenu.Label>*/}
           {/*<DropdownMenu.RadioGroup onValueChange={setPerson} value={person}>*/}
@@ -55,8 +61,6 @@ const DropdownMenuDemo = () => {
           {/*    Pedro Duarte*/}
           {/*  </DropdownMenu.RadioItem>*/}
           {/*</DropdownMenu.RadioGroup>*/}
-
-          {/*<DropdownMenu.Arrow className={'DropdownMenuArrow'} />*/}
         </DropdownMenu.Content>
       </DropdownMenu.Portal>
     </DropdownMenu.Root>

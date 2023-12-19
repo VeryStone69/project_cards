@@ -2,6 +2,11 @@
     <!-- checked -->
     <symbol id="checked" viewBox="0 0 24 24">
         <path d="M16 0H2a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V2a2 2 0 00-2-2zM7 14L2 9l1.41-1.41L7 11.17l7.59-7.59L16 5l-9 9z"/>
+    </symbol>\
+
+    <symbol id="beak-container-top" viewBox="0 0 24 24">
+            <path id="beak - top border" d="M189 8L205 8L197 0L189 8Z" fill="#333333"/>
+            <path id="beak - top" d="M189 9.5L205 9.5L197 1.5L189 9.5Z" fill="#171717"/>
     </symbol>
 </svg>
 
