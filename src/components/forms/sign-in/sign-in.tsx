@@ -69,6 +69,7 @@ export const SignIn = ({onSubmit, className}: LoginProps) => {
 
                 <Button type="submit"
                         className={s.button}
+                        fullWidth={true}
                 >Sign in
                 </Button>
             </form>
