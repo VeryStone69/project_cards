@@ -1,18 +1,31 @@
-import {useController, useForm} from 'react-hook-form'
+import {useForm} from 'react-hook-form'
 
 import {Button} from '../../ui/button'
 import {TextField} from '@/components/ui/textField'
-import {Checkbox} from "@/components/ui/checkBox";
+import {z} from 'zod'
+import {zodResolver} from '@hookform/resolvers/zod'
+import {ControlledCheckbox} from "@/components/ui/controlled/controlled-checkbox/controlled-checkbox";
 
-type FormValues = {
-    email: string
-    password: string
-    rememberMe: boolean
-}
+const emailRegex =
+    /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/
+
+const loginSchema = z.object({
+    email: z.string()
+        .trim()
+        .email('Введите действующий адрес электронной почты')
+        .regex(emailRegex),
+    password: z.string()
+        .min(3, 'Пароль должен быть не менее 3 символов')
+        .max(30, 'Пароль должен быть не более 30 символов'),
+    rememberMe: z.boolean().optional()
+})
+
+type FormValues = z.infer<typeof loginSchema>
 
 export const LoginForm = () => {
 
     const {register, handleSubmit, control, formState: {errors}} = useForm<FormValues>({
+        resolver: zodResolver(loginSchema),
         defaultValues: {
             email: '',
             password: '',
@@ -20,43 +33,31 @@ export const LoginForm = () => {
         }
     })
 
-    const {field: {value, onChange},} = useController({name: 'rememberMe', control, defaultValue: false,})
-
     console.log(errors)
 
     const onSubmit = (data: FormValues) => {
         console.log(data)
     }
 
-    const emailRegex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/
-
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <TextField
-                {...register('email', {
-                    pattern: {value: emailRegex, message: 'Введите действующий адрес электронной почты'},
-                    required: 'Поле логина не может быть пустым'
-                })}
+                {...register('email')}
                 label={'Email'}
                 errorMessage={errors.email?.message}
             />
 
             <TextField
-                {...register('password', {
-                    minLength: {value: 3, message: 'Пароль должен быть не менее 3 символов'},
-                    maxLength: {value: 30, message: 'Пароль должен быть не более 30 символов'},
-                    required: 'Поле пароля не может быть пустым'
-                })}
+                {...register('password')}
                 label={'Password'}
                 type={'password'}
                 errorMessage={errors.password?.message}
             />
 
-            <Checkbox
-                checked={value}
-                label={'Remember'}
-                onValueChange={onChange}
-            />
+            <ControlledCheckbox
+                control={control}
+                name={'rememberMe'}
+                label={'Remember me'}/>
 
             <Button type="submit">Submit</Button>
         </form>
