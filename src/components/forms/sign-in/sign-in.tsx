@@ -23,7 +23,7 @@ const loginSchema = z.object({
     rememberMe: z.boolean().optional()
 })
 
-type FormValues = z.infer<typeof loginSchema>
+export type FormValues = z.infer<typeof loginSchema>
 type LoginProps = {
     onSubmit: (values: FormValues) => void
     className?: string
