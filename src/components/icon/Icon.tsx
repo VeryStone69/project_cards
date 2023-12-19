@@ -3,13 +3,14 @@ import { ComponentPropsWithoutRef } from 'react'
 import icon from '@/assets/icons/icons.svg'
 
 type IconProps = {
+  className?: string
   name: string
   size?: string
 } & ComponentPropsWithoutRef<'svg'>
 
-export const Icon = ({ name, size = '24px' }: IconProps) => {
+export const Icon = ({ className, name, size = '24px' }: IconProps) => {
   return (
-    <svg height={size} width={size}>
+    <svg className={className} height={size} width={size}>
       <use href={`${icon}#${name}`} />
     </svg>
   )
