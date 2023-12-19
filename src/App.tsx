@@ -1,9 +1,9 @@
-import {LoginForm} from "@/components/forms/sign-in";
+import {SignIn} from "@/components/forms/sign-in";
 
 export function App() {
     return (
         <div>
-            <LoginForm/>
+            <SignIn/>
         </div>
     )
 }

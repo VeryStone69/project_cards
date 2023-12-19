@@ -5,6 +5,9 @@ import {TextField} from '@/components/ui/textField'
 import {z} from 'zod'
 import {zodResolver} from '@hookform/resolvers/zod'
 import {ControlledCheckbox} from "@/components/ui/controlled/controlled-checkbox/controlled-checkbox";
+import {DevTool} from "@hookform/devtools";
+import {clsx} from "clsx";
+import s from './sign-in.module.scss'
 
 const emailRegex =
     /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/
@@ -21,8 +24,12 @@ const loginSchema = z.object({
 })
 
 type FormValues = z.infer<typeof loginSchema>
+type LoginProps = {
+    onSubmit: (values: FormValues) => void
+    className?: string
+}
 
-export const LoginForm = () => {
+export const SignIn = ({onSubmit, className}: LoginProps) => {
 
     const {register, handleSubmit, control, formState: {errors}} = useForm<FormValues>({
         resolver: zodResolver(loginSchema),
@@ -33,33 +40,38 @@ export const LoginForm = () => {
         }
     })
 
-    console.log(errors)
+    const classNames = clsx(s.form, className)
 
-    const onSubmit = (data: FormValues) => {
-        console.log(data)
-    }
+    return (<>
+            <DevTool control={control}/>
+            <form onSubmit={handleSubmit(onSubmit)} className={classNames}>
+                <TextField
+                    {...register('email')}
+                    label={'Email'}
+                    errorMessage={errors.email?.message}
+                    className={s.email}
+                />
 
-    return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <TextField
-                {...register('email')}
-                label={'Email'}
-                errorMessage={errors.email?.message}
-            />
+                <TextField
+                    {...register('password')}
+                    label={'Password'}
+                    type={'password'}
+                    errorMessage={errors.password?.message}
+                    className={s.password}
+                />
 
-            <TextField
-                {...register('password')}
-                label={'Password'}
-                type={'password'}
-                errorMessage={errors.password?.message}
-            />
+                <ControlledCheckbox
+                    control={control}
+                    name={'rememberMe'}
+                    label={'Remember me'}
+                    className={s.checkbox}
+                />
 
-            <ControlledCheckbox
-                control={control}
-                name={'rememberMe'}
-                label={'Remember me'}/>
-
-            <Button type="submit">Submit</Button>
-        </form>
+                <Button type="submit"
+                        className={s.button}
+                >Sign in
+                </Button>
+            </form>
+        </>
     )
 }
