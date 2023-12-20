@@ -1,69 +1,74 @@
 /* reset */
+
 button {
   all: unset;
 }
 
-.DropdownMenuArrow {
-  color: var(--dark-500, #171717);
-  border: 1px solid var(--dark-500, #333);
-}
-
-.userDataName,
-.userDataEmail {
-  display: flex;
-}
-
 .userLogo {
-  flex-shrink: 0;
-
   width: 36px;
   height: 36px;
-
   background:
     url('./UserLogo.png'),
     lightgray 50% / cover no-repeat;
   border-radius: 36px;
 }
 
-.DropdownMenuBubble {
+.DropdownMenuRoot {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
-  padding: 12px;
-
-  border: 10px solid yellow;
-  border-radius: 4px;
+  justify-content: flex-end;
 }
 
 .DropdownMenuContent {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: flex-start;
-  justify-content: flex-end;
-
-  background: var(--dark-700, #171717);
-  border: 1px solid var(--dark-500, #333);
+  padding: 12px;
+  background: var(--color-dark-700);
+  border: 1px solid var(--color-dark-500);
   border-radius: 4px;
 }
 
-.DropdownMenuItem {
-  color: var(--color-light-100, #fff);
+.item-with-icon {
+  display: flex;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-dark-500);
 
-  .userLogo {
+  p {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-    align-items: flex-start;
-
-    margin-top: 4px;
-    margin-right: 129px;
+    justify-content: center;
+    margin: 0;
   }
 }
 
-.DropdownMenuSeparator {
-  width: 193px;
-  height: 1px;
-  background: var(--dark-500, #333);
+.item-with-icon:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.svg-white {
+  margin-right: 6px;
+  fill: var(--color-light-100);
+}
+
+.DropdownMenuItem {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-dark-500);
+
+  div {
+    display: flex;
+    flex-direction: column;
+    padding-left: 8px;
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+.DropdownMenuArrow {
+  position: relative;
+
+  fill: var(--color-dark-700);
+  stroke: var(--color-dark-500);
+  stroke-linecap: butt;
+  stroke-width: 1px;
 }
