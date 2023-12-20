@@ -1,13 +1,13 @@
 import {useForm} from 'react-hook-form'
 
 import {Button} from '../../ui/button'
-import {TextField} from '@/components/ui/textField'
 import {z} from 'zod'
 import {zodResolver} from '@hookform/resolvers/zod'
 import {ControlledCheckbox} from "@/components/ui/controlled/controlled-checkbox/controlled-checkbox";
 import {DevTool} from "@hookform/devtools";
 import {clsx} from "clsx";
 import s from './sign-in.module.scss'
+import {ControlledTextField} from "@/components/ui/controlled/controlled-text-field/controlled-text-field";
 
 const emailRegex =
     /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/
@@ -31,7 +31,7 @@ type LoginProps = {
 
 export const SignIn = ({onSubmit, className}: LoginProps) => {
 
-    const {register, handleSubmit, control, formState: {errors}} = useForm<FormValues>({
+    const {handleSubmit, control} = useForm<FormValues>({
         resolver: zodResolver(loginSchema),
         defaultValues: {
             email: '',
@@ -44,21 +44,22 @@ export const SignIn = ({onSubmit, className}: LoginProps) => {
 
     return (<>
             <DevTool control={control}/>
+
             <form onSubmit={handleSubmit(onSubmit)} className={classNames}>
-                <TextField
-                    {...register('email')}
+
+                <ControlledTextField
+                    control={control}
+                    name={'email'}
                     label={'Email'}
-                    errorMessage={errors.email?.message}
                     className={s.email}
                 />
 
-                <TextField
-                    {...register('password')}
+                <ControlledTextField
+                    control={control}
                     label={'Password'}
                     type={'password'}
-                    errorMessage={errors.password?.message}
                     className={s.password}
-                />
+                    name={'password'}/>
 
                 <ControlledCheckbox
                     control={control}
