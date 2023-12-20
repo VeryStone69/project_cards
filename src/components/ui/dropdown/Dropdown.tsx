@@ -34,33 +34,17 @@ const DropdownMenuDemo = () => {
             <div className={s['userDataEmail']}>
               <Typography variant={'caption'}>j&johnson@gmail.com</Typography>
             </div>
-
-            {/*<div className={'RightSlot'}>⌘+T</div>*/}
           </DropdownMenu.Item>
-
           <DropdownMenu.Separator className={s['DropdownMenuSeparator']} />
-
           <DropdownMenu.Item className={s['DropdownMenuItem']}>
+            <Icon name={'logoUserDrop'} />
             My Profile
-            {/*<div className={'RightSlot'}>⌘+T</div>*/}
           </DropdownMenu.Item>
-
           <DropdownMenu.Separator className={s['DropdownMenuSeparator']} />
-
           <DropdownMenu.Item className={s['DropdownMenuItem']}>
+            <Icon name={'logout'} />
             Sign Out
-            {/*<div className={'RightSlot'}>⌘+T</div>*/}
           </DropdownMenu.Item>
-
-          {/*<DropdownMenu.Label className={'DropdownMenuLabel'}>People</DropdownMenu.Label>*/}
-          {/*<DropdownMenu.RadioGroup onValueChange={setPerson} value={person}>*/}
-          {/*  <DropdownMenu.RadioItem className={'DropdownMenuRadioItem'} value={'pedro'}>*/}
-          {/*    <DropdownMenu.ItemIndicator className={'DropdownMenuItemIndicator'}>*/}
-          {/*      /!*<DotFilledIcon />*!/*/}
-          {/*    </DropdownMenu.ItemIndicator>*/}
-          {/*    Pedro Duarte*/}
-          {/*  </DropdownMenu.RadioItem>*/}
-          {/*</DropdownMenu.RadioGroup>*/}
         </DropdownMenu.Content>
       </DropdownMenu.Portal>
     </DropdownMenu.Root>
