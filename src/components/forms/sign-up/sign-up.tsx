@@ -1,83 +1,77 @@
-import {useForm} from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
-import {Button} from '../../ui/button'
-import {z} from 'zod'
-import {zodResolver} from '@hookform/resolvers/zod'
-import {DevTool} from "@hookform/devtools";
-import {clsx} from "clsx";
+import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field/controlled-text-field'
+import { DevTool } from '@hookform/devtools'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { clsx } from 'clsx'
+import { z } from 'zod'
+
 import s from './sign-up.module.scss'
-import {ControlledTextField} from "@/components/ui/controlled/controlled-text-field/controlled-text-field";
+
+import { Button } from '../../ui/button'
 
 const emailRegex =
-    /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/
+  /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/
 
-const loginSchema = z.object({
-    email: z.string()
-        .trim()
-        .email('Введите действующий адрес электронной почты')
-        .regex(emailRegex),
-    password: z.string()
-        .min(3, 'Пароль должен быть не менее 3 символов')
-        .max(30, 'Пароль должен быть не более 30 символов'),
-    rememberMe: z.boolean().optional(),
-    confirmPassword: z.string()
-        .min(3, 'Пароль должен быть не менее 3 символов')
-        .max(30, 'Пароль должен быть не более 30 символов'),
+const SignUpSchema = z.object({
+  confirmPassword: z
+    .string()
+    .min(3, 'Пароль должен быть не менее 3 символов')
+    .max(30, 'Пароль должен быть не более 30 символов'),
+  email: z.string().trim().email('Введите действующий адрес электронной почты').regex(emailRegex),
+  password: z
+    .string()
+    .min(3, 'Пароль должен быть не менее 3 символов')
+    .max(30, 'Пароль должен быть не более 30 символов'),
+  rememberMe: z.boolean().optional(),
 })
 
-export type FormValues = z.infer<typeof loginSchema>
+export type FormValues = z.infer<typeof SignUpSchema>
 type LoginProps = {
-    onSubmit: (values: FormValues) => void
-    className?: string
+  className?: string
+  onSubmit: (values: FormValues) => void
 }
 
-export const SignUp = ({onSubmit, className}: LoginProps) => {
+export const SignUp = ({ className, onSubmit }: LoginProps) => {
+  const { control, handleSubmit } = useForm<FormValues>({
+    defaultValues: {
+      confirmPassword: '',
+      email: '',
+      password: '',
+      rememberMe: false,
+    },
+    resolver: zodResolver(SignUpSchema),
+  })
 
-    const {handleSubmit, control} = useForm<FormValues>({
-        resolver: zodResolver(loginSchema),
-        defaultValues: {
-            email: '',
-            password: '',
-            rememberMe: false,
-            confirmPassword: ''
-        }
-    })
+  const classNames = clsx(s.form, className)
 
-    const classNames = clsx(s.form, className)
+  return (
+    <>
+      <DevTool control={control} />
 
-    return (<>
-            <DevTool control={control}/>
+      <form className={classNames} onSubmit={handleSubmit(onSubmit)}>
+        <ControlledTextField className={s.email} control={control} label={'Email'} name={'email'} />
 
-            <form onSubmit={handleSubmit(onSubmit)} className={classNames}>
+        <ControlledTextField
+          className={s.password}
+          control={control}
+          label={'Password'}
+          name={'password'}
+          type={'password'}
+        />
 
-                <ControlledTextField
-                    control={control}
-                    name={'email'}
-                    label={'Email'}
-                    className={s.email}
-                />
+        <ControlledTextField
+          className={s.conformPassword}
+          control={control}
+          label={'Confirm password'}
+          name={'confirmPassword'}
+          type={'password'}
+        />
 
-                <ControlledTextField
-                    control={control}
-                    label={'Password'}
-                    type={'password'}
-                    className={s.password}
-                    name={'password'}/>
-
-                <ControlledTextField
-                    control={control}
-                    name={'confirmPassword'}
-                    label={'Confirm password'}
-                    type={'password'}
-                    className={s.conformPassword}
-                />
-
-                <Button type="submit"
-                        className={s.button}
-                        fullWidth={true}
-                >Sign up
-                </Button>
-            </form>
-        </>
-    )
+        <Button className={s.button} fullWidth type={'submit'}>
+          Sign up
+        </Button>
+      </form>
+    </>
+  )
 }

@@ -12,7 +12,14 @@ export type CheckboxProps = {
   label?: string
   onValueChange?: (checked: boolean) => void
 }
-export const Checkbox = ({ checked, className, disabled, id, label, onValueChange }: CheckboxProps) => {
+export const Checkbox = ({
+  checked,
+  className,
+  disabled,
+  id,
+  label,
+  onValueChange,
+}: CheckboxProps) => {
   const classes = (disabled && s.checkboxIndicatorDisabled) || s.checkboxIndicator
   const styleUnchecked = (disabled && s.frameDisabled) || s.frame
 

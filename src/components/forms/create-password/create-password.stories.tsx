@@ -1,24 +1,23 @@
-import type {Meta, StoryObj} from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 
-import {FormValues, CreatePassword} from './create-password'
+import { CreatePassword, FormValues } from './create-password'
 
 const meta = {
-    title: 'Components/Forms/CreatePassword',
-    component: CreatePassword,
-    tags: ['autodocs'],
+  component: CreatePassword,
+  tags: ['autodocs'],
+  title: 'Components/Forms/CreatePassword',
 } satisfies Meta<typeof CreatePassword>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const CreatePasswordFrom: Story = {
-    render: () => {
-        const onSubmit = (data: FormValues) => {
+  args: {} as any,
+  render: () => {
+    const onSubmit = (data: FormValues) => {
+      console.log(data)
+    }
 
-            console.log(data)
-        }
-
-        return <CreatePassword onSubmit={onSubmit}/>
-    },
-    args: {} as any,
+    return <CreatePassword onSubmit={onSubmit} />
+  },
 }

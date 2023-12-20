@@ -1,9 +1,13 @@
-import {SignIn} from "@/components/forms/sign-in";
+import { ForgotPassword } from '@/components/forms/forgot-password'
 
 export function App() {
-    return (
-        <div>
-            <SignIn/>
-        </div>
-    )
+  return (
+    <div>
+      <ForgotPassword
+        onSubmit={(values: { email: string }) => {
+          console.log(values)
+        }}
+      />
+    </div>
+  )
 }
