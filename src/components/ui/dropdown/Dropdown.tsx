@@ -10,29 +10,55 @@ const DropdownMenuDemo = () => {
   return (
     <div className={s['DropdownMenuRoot']}>
       <DropdownMenu.Root>
+        {/*<DropdownMenu.Trigger asChild>*/}
+        {/*  <img className={s['userLogo']} />*/}
+        {/*</DropdownMenu.Trigger>*/}
+
+        {/*<DropdownMenu.Content className={s['DropdownMenuContent']} sideOffset={8}>*/}
+        {/*  <DropdownMenu.Arrow className={s['DropdownMenuArrow']} height={8} width={14} />*/}
+
+        {/*  <DropDownItem*/}
+        {/*    classNameItem={s.DropdownMenuItem}*/}
+        {/*    classNameSVG={s.userLogo}*/}
+        {/*    userEmail={'j&johnson@gmail.com'}*/}
+        {/*    userName={'Ivan'}*/}
+        {/*  />*/}
+        {/*  <DropDownItemWithIcon*/}
+        {/*    classNameItem={s.itemWithIcon}*/}
+        {/*    classNameSVG={s.svgWhite}*/}
+        {/*    svgId={'logoUserDrop'}*/}
+        {/*    textItem={'My profile'}*/}
+        {/*  />*/}
+        {/*  <DropDownItemWithIcon*/}
+        {/*    classNameItem={s.itemWithIcon}*/}
+        {/*    classNameSVG={s.svgWhite}*/}
+        {/*    svgId={'logout'}*/}
+        {/*    textItem={'Sign Out'}*/}
+        {/*  />*/}
+        {/*</DropdownMenu.Content>*/}
+
         <DropdownMenu.Trigger asChild>
           <img className={s['userLogo']} />
         </DropdownMenu.Trigger>
 
         <DropdownMenu.Content className={s['DropdownMenuContent']} sideOffset={8}>
           <DropdownMenu.Arrow className={s['DropdownMenuArrow']} height={8} width={14} />
-
-          <DropDownItem
-            classNameItem={s.DropdownMenuItem}
-            classNameSVG={s.userLogo}
-            userEmail={'j&johnson@gmail.com'}
-            userName={'Ivan'}
-          />
           <DropDownItemWithIcon
             classNameItem={s.itemWithIcon}
             classNameSVG={s.svgWhite}
-            svgId={'logoUserDrop'}
+            svgId={'playLearn'}
             textItem={'My profile'}
           />
           <DropDownItemWithIcon
             classNameItem={s.itemWithIcon}
             classNameSVG={s.svgWhite}
-            svgId={'logout'}
+            svgId={'edit'}
+            textItem={'My profile'}
+          />
+          <DropDownItemWithIcon
+            classNameItem={s.itemWithIcon}
+            classNameSVG={s.svgWhite}
+            svgId={'trashBin'}
             textItem={'Sign Out'}
           />
         </DropdownMenu.Content>
