@@ -8,7 +8,10 @@ type FormValues = {
 }
 
 export const LoginForm = () => {
-  const { handleSubmit, register } = useForm<FormValues>()
+  // old version
+  // const { handleSubmit, register } = useForm<FormValues>()
+  // new version for deploy
+  const { handleSubmit } = useForm<FormValues>()
 
   const onSubmit = (data: FormValues) => {
     console.log(data)
