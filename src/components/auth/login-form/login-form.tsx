@@ -2,7 +2,6 @@ import { useForm } from 'react-hook-form'
 
 import { Button } from '../../ui/button'
 
-
 type FormValues = {
   email: string
   password: string
@@ -17,8 +16,8 @@ export const LoginForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input name={"email"}><input/>
-      <input name={"password"}><input/>
+      <input name={'email'} />
+      <input name={'password'} />
       <Button type={'submit'}>Submit</Button>
     </form>
   )
