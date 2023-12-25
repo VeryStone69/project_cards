@@ -10,6 +10,7 @@ export function App() {
       </Button>
 
       {/*<Header />*/}
+      {/*<For testing, delete later. Attempt 2/>*/}
       <DropdownMenuDemo />
     </div>
   )
