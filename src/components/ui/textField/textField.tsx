@@ -67,7 +67,7 @@ export const TextField = forwardRef<HTMLInputElement, Props>(
                 onClick={clearField}
                 type={'button'}
               >
-                <Icon height={16} name={'clear'} width={16} />
+                <Icon height={16} name={'cross'} width={16} />
               </button>
             )}
           </div>

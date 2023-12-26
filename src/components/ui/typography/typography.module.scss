@@ -1,4 +1,6 @@
 .body1 {
+  margin: 0;
+
   font-family: var(--font-family-primary);
   font-size: var(--font-size-m);
   font-weight: var(--font-weight-regular);
@@ -8,6 +10,8 @@
 }
 
 .body2 {
+  margin: 0;
+
   font-family: var(--font-family-primary);
   font-size: var(--font-size-s);
   font-weight: var(--font-weight-regular);
@@ -17,6 +21,8 @@
 }
 
 .caption {
+  margin: 0;
+
   font-family: var(--font-family-primary);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-regular);
@@ -26,6 +32,8 @@
 }
 
 .h1 {
+  margin: 0;
+
   font-family: var(--font-family-primary);
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
@@ -35,6 +43,8 @@
 }
 
 .h2 {
+  margin: 0;
+
   font-family: var(--font-family-primary);
   font-size: var(--font-size-l);
   font-weight: var(--font-weight-bold);
@@ -44,6 +54,8 @@
 }
 
 .h3 {
+  margin: 0;
+
   font-family: var(--font-family-primary);
   font-size: var(--font-size-m);
   font-weight: var(--font-weight-bold);
@@ -53,6 +65,8 @@
 }
 
 .large {
+  margin: 0;
+
   font-family: var(--font-family-primary);
   font-size: var(--font-size-xxl);
   font-weight: var(--font-weight-bold);
@@ -62,6 +76,8 @@
 }
 
 .link1 {
+  margin: 0;
+
   font-family: var(--font-family-primary);
   font-size: var(--font-size-s);
   font-weight: var(--font-weight-regular);
@@ -73,11 +89,14 @@
 
 .link1:visited {
   cursor: pointer;
+  margin: 0;
   color: var(--color-info-500);
   text-decoration: underline;
 }
 
 .link2 {
+  margin: 0;
+
   font-family: var(--font-family-primary);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-regular);
@@ -89,11 +108,14 @@
 
 .link2:visited {
   cursor: pointer;
+  margin: 0;
   color: var(--color-info-500);
   text-decoration: underline;
 }
 
 .overline {
+  margin: 0;
+
   font-family: var(--font-family-primary);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-bold);
@@ -103,6 +125,8 @@
 }
 
 .subtitle1 {
+  margin: 0;
+
   font-family: var(--font-family-primary);
   font-size: var(--font-size-m);
   font-weight: var(--font-weight-bold);
@@ -112,6 +136,8 @@
 }
 
 .subtitle2 {
+  margin: 0;
+
   font-family: var(--font-family-primary);
   font-size: var(--font-size-s);
   font-weight: var(--font-weight-bold);
