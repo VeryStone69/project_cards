@@ -9,6 +9,8 @@ display: flex;
 }
 
 .button{
+  cursor: pointer;
+
   box-sizing: border-box;
   width: 24px;
   height: 24px;
@@ -89,6 +91,8 @@ display: flex;
 }
 
 .buttonSelect {
+  cursor: pointer;
+
   box-sizing: border-box;
   width: 24px;
   height: 24px;
