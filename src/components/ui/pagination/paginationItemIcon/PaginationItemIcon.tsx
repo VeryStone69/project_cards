@@ -4,21 +4,33 @@ import { Icon } from '@/components/icon/Icon'
 import { Button } from '@/components/ui/button'
 
 import s from '@/components/ui/pagination/pagination.module.scss'
-
-type PaginationItemIcon = {
+type ButtonType = 'next' | 'previous'
+type PaginationIconProps = {
   buttonStyle?: string
   children?: ReactNode
-  onClick: () => void
-  type: 'end-ellipsis' | 'first' | 'last' | 'next' | 'page' | 'previous' | 'start-ellipsis'
+  disabled: boolean
+  onClick: (type: ButtonType) => void
+  type: ButtonType
 }
-export const PaginationItemIcon = ({ buttonStyle, children, type }: PaginationItemIcon) => {
+export const PaginationItemIcon = ({
+  buttonStyle,
+  children,
+  disabled,
+  onClick,
+  type,
+}: PaginationIconProps) => {
   const icon =
     (type === 'previous' && s.iconButtonPrevious) || (type === 'next' && s.iconButtonNext) || ''
-  const button = buttonStyle ? s.button + ' ' + buttonStyle : s.button + ' ' + s.buttonCustom
+  const buttonDisabled = disabled ? s.buttonDisabled : s.button + ' ' + s.buttonCustom
+  const button = buttonStyle ? s.button + ' ' + buttonStyle : buttonDisabled
+
+  const onClickSelectPage = () => {
+    onClick(type)
+  }
 
   return (
-    <Button className={button}>
+    <Button className={button} disabled={disabled} onClick={onClickSelectPage}>
       {children ? children : <Icon className={icon} name={'arrowDown'} />}
     </Button>
-  );
-};
+  )
+}

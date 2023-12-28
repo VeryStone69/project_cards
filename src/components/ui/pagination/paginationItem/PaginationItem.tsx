@@ -3,21 +3,24 @@ import { Typography } from '@/components/ui/typography'
 
 import s from '@/components/ui/pagination/pagination.module.scss'
 
-export type PaginationItem = {
-  onClick: (page: number) => void
+export type PaginationItemProps = {
+  currentPage: number
+  onClickChangePage: (page: number) => void
   page: number
-  selected: boolean
-  type: 'end-ellipsis' | 'first' | 'last' | 'next' | 'page' | 'previous' | 'start-ellipsis'
+  pagesTotal: number
+  type: 'first' | 'last' | 'page'
 }
-export const PaginationItem = ({ onClick, page, selected }: PaginationItem) => {
+export const PaginationItem = ({ currentPage, onClickChangePage, page }: PaginationItemProps) => {
+  const select = page === currentPage ? s.buttonSelect : s.button
   const onClickButtonPage = () => {
-    console.log(selected)
-    onClick(page)
+    onClickChangePage(page)
   }
 
   return (
-    <Button className={s.button} onClick={onClickButtonPage}>
-      <Typography variant={'body2'}>{page}</Typography>
-    </Button>
-  );
-};
+    <>
+      <Button className={select} onClick={onClickButtonPage}>
+        <Typography variant={'body2'}>{page}</Typography>
+      </Button>
+    </>
+  )
+}

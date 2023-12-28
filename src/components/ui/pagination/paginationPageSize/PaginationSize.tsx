@@ -4,17 +4,17 @@ import { Typography } from '@/components/ui/typography'
 import s from '@/components/ui/pagination/pagination.module.scss'
 
 type PaginationSizeProps = {
-  currentItems: string
-  onChangePageSize: (page: string) => void
+  itemsPerPage: number
+  onChangeItemsPerPage: (page: number) => void
   pageSizeSelect: Option[]
 }
 export const PaginationSize = ({
-  currentItems,
-  onChangePageSize,
+  itemsPerPage,
+  onChangeItemsPerPage,
   pageSizeSelect,
 }: PaginationSizeProps) => {
   const onValueChange = (page: string) => {
-    onChangePageSize(page)
+    onChangeItemsPerPage(+page)
   }
 
   return (
@@ -26,9 +26,9 @@ export const PaginationSize = ({
         <Select
           onValueChange={onValueChange}
           options={pageSizeSelect}
-          placeholder={'test'}
+          placeholder={`${itemsPerPage}`}
           sizeSelect={'small'}
-          value={currentItems}
+          value={`${itemsPerPage}`}
         />
       </div>
       <Typography className={s.typographyPage} variant={'body2'}>
