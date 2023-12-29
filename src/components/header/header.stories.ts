@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Header } from './header'
+import { Header } from '@/components/header/header'
 
 const meta = {
   component: Header,
@@ -16,7 +16,11 @@ type Story = StoryObj<typeof meta>
 
 export const AuthorizedUser: Story = {
   args: {
-    data: null,
+    data: {
+      avatar: '',
+      email: 'junior.gmail.com',
+      name: 'Artyom Korshykau',
+    },
     logout: () => {},
   },
 }

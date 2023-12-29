@@ -1,5 +1,5 @@
+import { Header } from '@/components/header'
 import { Button } from '@/components/ui/button'
-import DropdownMenuDemo from '@/components/ui/dropdown/Dropdown'
 
 export function App() {
   return (
@@ -9,9 +9,7 @@ export function App() {
         Primary Button 2
       </Button>
 
-      {/*<Header />*/}
-      {/*<For testing, delete later. Attempt 3/>*/}
-      <DropdownMenuDemo />
+      <Header />
     </div>
   )
 }
