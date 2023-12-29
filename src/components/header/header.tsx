@@ -1,27 +1,40 @@
-import {memo} from 'react'
+import { memo } from 'react'
 
-import {Logo} from '@/assets/illustrations/logo'
-import avatar from './avatar.jpg'
+import { Logo } from '@/assets/illustrations/logo'
+import { Button } from '@/components/ui/button'
+import { Typography } from '@/components/ui/typography'
 
 import s from './header.module.scss'
 
+import avatar from './avatar.jpg'
+
 type Props = {
-    data: null
-    logout: () => void
+  data: ProfileData | null
+  logout: () => void
 }
 
-export const Header = memo(({data}: Props) => {
-    return (
-        <div className={s.header}>
-            <Logo/>
-            {!data ? (
-                <div className={s.userInfo}>
-                    <div className={s.userName}>User name</div>
-                    <img src={avatar} alt="avatar" className={s.userPhoto}/>
-                </div>
-            ) : (
-                <button>Sign in</button>
-            )}
-        </div>
-    )
+type ProfileData = {
+  avatar: string
+  email: string
+  name: string
+}
+
+export const Header = memo(({ data }: Props) => {
+  return (
+    <div className={s.root}>
+      <div className={s.container}>
+        <Logo />
+        {data ? (
+          <div className={s.userInfo}>
+            <Typography className={s.userName} variant={'subtitle1'}>
+              {data.name || data.email}
+            </Typography>
+            <img alt={'avatar'} className={s.userPhoto} src={avatar} />
+          </div>
+        ) : (
+          <Button>Sign in</Button>
+        )}
+      </div>
+    </div>
+  )
 })
