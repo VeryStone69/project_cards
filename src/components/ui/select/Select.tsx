@@ -3,7 +3,7 @@ import { Typography } from '@/components/ui/typography'
 import * as RadixSelect from '@radix-ui/react-select'
 
 import s from './select.module.scss'
-type Option = {
+export type Option = {
   title: string
   value: string
 }
