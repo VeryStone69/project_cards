@@ -10,7 +10,7 @@ import avatar from './avatar.jpg'
 
 type Props = {
   data: ProfileData | null
-  logout: () => void
+  logout?: () => void
 }
 
 type ProfileData = {

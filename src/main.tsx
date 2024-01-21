@@ -1,27 +1,14 @@
-// import React from 'react'
-//
-// import { App } from '@/App'
-// import ReactDOM from 'react-dom/client'
-//
-// import './styles/index.scss'
-// import '@fontsource/roboto/400.css'
-// import '@fontsource/roboto/700.css'
-//
-// ReactDOM.createRoot(document.getElementById('root')!).render(
-//   <React.StrictMode>
-//     <App />
-import { StrictMode } from 'react'
-
-import { App } from '@/App'
-import { createRoot } from 'react-dom/client'
+import {App} from '@/App'
+import {createRoot} from 'react-dom/client'
 
 import './styles/index.scss'
-//   </React.StrictMode>
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/700.css'
+import {Provider} from "react-redux";
+import {store} from "@/services/store";
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
+        <Provider store={store}>
+            <App/>
+        </Provider>
 )
