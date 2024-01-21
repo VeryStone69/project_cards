@@ -1,4 +1,17 @@
+.formCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  margin: auto;
+  padding: 20px 0;
+}
+
 .form {
+  padding: 0 30px;
+
   .email,
   .password {
     margin-bottom: 24px;
@@ -6,5 +19,40 @@
 
   .button {
     margin-top: 60px;
+  }
+}
+
+.forgot {
+  display: flex;
+  justify-content: flex-end;
+  color: var(--color-accent-500);
+
+  a {
+    text-decoration: none;
+  }
+
+  &:hover {
+    color: var(--color-light-100);
+
+  }
+}
+
+.signup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 20px;
+}
+
+.signupButton {
+  cursor: pointer;
+  color: var(--color-accent-500);
+  text-decoration: underline;
+
+  &:hover {
+    color: var(--color-light-100);
   }
 }

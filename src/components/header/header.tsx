@@ -32,7 +32,7 @@ export const Header = memo(({ data }: Props) => {
             <img alt={'avatar'} className={s.userPhoto} src={avatar} />
           </div>
         ) : (
-          <Button>Sign in</Button>
+          <Button variant={'secondary'}>Sign in</Button>
         )}
       </div>
     </div>

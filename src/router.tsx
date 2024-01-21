@@ -1,14 +1,15 @@
 import {createBrowserRouter, Navigate, Outlet, RouteObject, RouterProvider,} from 'react-router-dom'
 import {NotFound} from "@/pages/not-found/NotFound";
+import {AuthLogin} from "@/pages/auth-login/AuthLogin";
 
 export const PATH = {
     login: '/login',
-    notFound: '/'
+    notFound: '/',
 }
 
 const publicRoutes: RouteObject[] = [
     {
-        element: <div>login</div>,
+        element: <AuthLogin/>,
         path: PATH.login,
     },
     {
