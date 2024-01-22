@@ -34,7 +34,7 @@ export const ForgotPassword = ({ className, onSubmit }: LoginProps) => {
   const classNames = clsx(s.form, className)
 
   return (
-      <div  className={s.formCard}>
+      <div className={s.formCard}>
         <Typography variant={'h1'} className={s.title}>Forgot your password?</Typography>
 
         <form className={classNames} onSubmit={handleSubmit(onSubmit)}>

@@ -4,6 +4,7 @@ import {Login} from "@/pages/login/login";
 import {Register} from "@/pages/register/register";
 import RecoveryPassword from "@/pages/recovery-password/recovery-password";
 import {CheckEmail} from "@/pages/check-email/check-email";
+import {CreateNewPassword} from "@/pages/create-new-password/create-new-password";
 
 export const PATH = {
     login: '/login',
@@ -11,7 +12,8 @@ export const PATH = {
     notFound: '/',
     home: '/home',
     recover: '/recovery',
-    check: '/check-email'
+    check: '/check-email',
+    createNewPassword: '/create-new-password'
 }
 
 const publicRoutes: RouteObject[] = [
@@ -34,6 +36,10 @@ const publicRoutes: RouteObject[] = [
     {
         element: <CheckEmail/>,
         path: PATH.check,
+    },
+    {
+        element: <CreateNewPassword/>,
+        path: PATH.createNewPassword,
     },
 ]
 

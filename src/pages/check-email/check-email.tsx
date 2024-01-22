@@ -4,7 +4,6 @@ import {Header} from "@/components/header";
 import {Button} from "@/components/ui/button";
 import checkEmail from '../../assets/images/check-email.png'
 import styles from './check-email.module.scss'
-import s from "@/components/forms/sign-in/sign-in.module.scss";
 
 export const CheckEmail = () => {
     return (
@@ -13,7 +12,7 @@ export const CheckEmail = () => {
 
             <Card className={styles.card}>
 
-                <Typography variant={"h1"} className={s.title}>Check Email</Typography>
+                <Typography variant={"h1"} className={styles.title}>Check Email</Typography>
 
                 <img src={checkEmail} alt="check-email"/>
 
