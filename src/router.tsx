@@ -1,31 +1,34 @@
 import {createBrowserRouter, Navigate, Outlet, RouteObject, RouterProvider,} from 'react-router-dom'
 import {NotFound} from "@/pages/not-found/NotFound";
-import {AuthLogin} from "@/pages/auth-login/AuthLogin";
+import {Login} from "@/pages/login/login";
+import {Register} from "@/pages/register/register";
 
 export const PATH = {
     login: '/login',
+    register: '/register',
     notFound: '/',
+    home: '/home'
 }
 
 const publicRoutes: RouteObject[] = [
     {
-        element: <AuthLogin/>,
+        element: <Login/>,
         path: PATH.login,
     },
     {
         element: <NotFound/>,
         path: PATH.notFound,
     },
+    {
+        element: <Register/>,
+        path: PATH.register,
+    },
 ]
 
 const privateRoutes: RouteObject[] = [
     {
         element: <div>home</div>,
-        path: '/home',
-    },
-    {
-        element: <div>test</div>,
-        path: '/test',
+        path: PATH.home,
     },
 ]
 

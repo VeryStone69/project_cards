@@ -1,17 +1,16 @@
 import {Header} from "@/components/header";
-import {SignIn} from "@/components/forms/sign-in";
 import {Card} from "@/components/ui/card";
-import styles from './AuthLogin.module.scss'
+import {SignUp} from "@/components/forms/sign-up";
+import styles from './register.module.scss'
 
-export const AuthLogin = () => {
+export const Register = () => {
     return (
         <div className={styles.loginPage}>
             <Header data={null}/>
             <Card className={styles.card}>
-                <SignIn onSubmit={() => {
+                <SignUp onSubmit={() => {
                 }}/>
             </Card>
-
         </div>
     );
 };
