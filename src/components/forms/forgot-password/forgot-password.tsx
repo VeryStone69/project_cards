@@ -34,17 +34,27 @@ export const ForgotPassword = ({ className, onSubmit }: LoginProps) => {
   const classNames = clsx(s.form, className)
 
   return (
-    <>
-      <form className={classNames} onSubmit={handleSubmit(onSubmit)}>
-        <ControlledTextField control={control} label={'Email'} name={'email'} />
-        <Typography className={s.content} variant={'body2'}>
-          Enter your email address and we well send you to hell
-        </Typography>
+      <div  className={s.formCard}>
+        <Typography variant={'h1'} className={s.title}>Forgot your password?</Typography>
 
-        <Button fullWidth type={'submit'}>
-          Send
-        </Button>
-      </form>
-    </>
+        <form className={classNames} onSubmit={handleSubmit(onSubmit)}>
+          <ControlledTextField control={control} label={'Email'} name={'email'}/>
+          <Typography className={s.content} variant={'body2'}>
+            Enter your email address and we well send you to hell
+          </Typography>
+
+          <Button fullWidth type={'submit'}>
+            Send instructions
+          </Button>
+        </form>
+
+        <div className={s.sendCard}>
+          <Typography variant={'body2'}>Did you remember your password?</Typography>
+
+          <Typography variant={'h2'} className={s.sendCardButton}>
+            <a href={'#'}>Try logging in</a>
+          </Typography>
+        </div>
+      </div>
   )
 }

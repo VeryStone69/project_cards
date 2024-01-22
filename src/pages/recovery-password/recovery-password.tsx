@@ -1,19 +1,19 @@
 import {Header} from "@/components/header";
-import {SignIn} from "@/components/forms/sign-in";
 import {Card} from "@/components/ui/card";
-import styles from './login.module.scss'
+import {ForgotPassword} from "@/components/forms/forgot-password";
+import styles from './recovery-password.module.scss'
 
-export const Login = () => {
+const RecoveryPassword = () => {
     return (
-        <div className={styles.loginPage}>
+        <div className={styles.recoverPage}>
             <Header data={null}/>
             <Card className={styles.card}>
-                <SignIn onSubmit={(values) => {
+                <ForgotPassword onSubmit={(values) => {
                     alert(JSON.stringify(values))
                 }}/>
             </Card>
-
         </div>
     );
 };
 
+export default RecoveryPassword;

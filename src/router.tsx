@@ -2,12 +2,14 @@ import {createBrowserRouter, Navigate, Outlet, RouteObject, RouterProvider,} fro
 import {NotFound} from "@/pages/not-found/NotFound";
 import {Login} from "@/pages/login/login";
 import {Register} from "@/pages/register/register";
+import RecoveryPassword from "@/pages/recovery-password/recovery-password";
 
 export const PATH = {
     login: '/login',
     register: '/register',
     notFound: '/',
-    home: '/home'
+    home: '/home',
+    recover: '/recovery'
 }
 
 const publicRoutes: RouteObject[] = [
@@ -22,6 +24,10 @@ const publicRoutes: RouteObject[] = [
     {
         element: <Register/>,
         path: PATH.register,
+    },
+    {
+        element: <RecoveryPassword/>,
+        path: PATH.recover,
     },
 ]
 
@@ -46,7 +52,7 @@ export const Router = () => {
 }
 
 function PrivateRoutes() {
-    const isAuthenticated = false
+    const isAuthenticated = true
 
     return isAuthenticated ? <Outlet/> : <Navigate to={'/login'}/>
 }

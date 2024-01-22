@@ -5,10 +5,11 @@ import styles from './register.module.scss'
 
 export const Register = () => {
     return (
-        <div className={styles.loginPage}>
+        <div className={styles.forgotPage}>
             <Header data={null}/>
             <Card className={styles.card}>
-                <SignUp onSubmit={() => {
+                <SignUp onSubmit={(values) => {
+                    alert(JSON.stringify(values))
                 }}/>
             </Card>
         </div>
