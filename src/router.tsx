@@ -3,13 +3,15 @@ import {NotFound} from "@/pages/not-found/NotFound";
 import {Login} from "@/pages/login/login";
 import {Register} from "@/pages/register/register";
 import RecoveryPassword from "@/pages/recovery-password/recovery-password";
+import {CheckEmail} from "@/pages/check-email/check-email";
 
 export const PATH = {
     login: '/login',
     register: '/register',
     notFound: '/',
     home: '/home',
-    recover: '/recovery'
+    recover: '/recovery',
+    check: '/check-email'
 }
 
 const publicRoutes: RouteObject[] = [
@@ -28,6 +30,10 @@ const publicRoutes: RouteObject[] = [
     {
         element: <RecoveryPassword/>,
         path: PATH.recover,
+    },
+    {
+        element: <CheckEmail/>,
+        path: PATH.check,
     },
 ]
 

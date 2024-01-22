@@ -1,0 +1,31 @@
+.checkEmailPage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: flex-start;
+
+  width: 420px;
+  height: 408px;
+  padding: 10px;
+}
+
+.title {
+  padding: 20px 0;
+}
+
+.text {
+  width: 348px;
+  height: 48px;
+  margin-bottom: 30px;
+
+  color: #C3C1C7;
+  text-align: center;
+}
