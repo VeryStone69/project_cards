@@ -12,7 +12,6 @@ export const Login = () => {
                     alert(JSON.stringify(values))
                 }}/>
             </Card>
-
         </div>
     );
 };

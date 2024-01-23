@@ -5,6 +5,7 @@ import {Register} from "@/pages/register/register";
 import RecoveryPassword from "@/pages/recovery-password/recovery-password";
 import {CheckEmail} from "@/pages/check-email/check-email";
 import {CreateNewPassword} from "@/pages/create-new-password/create-new-password";
+import {InitialLoader} from "@/components/ui/loader/loader";
 
 export const PATH = {
     login: '/login',
@@ -45,7 +46,7 @@ const publicRoutes: RouteObject[] = [
 
 const privateRoutes: RouteObject[] = [
     {
-        element: <div>home</div>,
+        element: <InitialLoader preLoader={false}/>,
         path: PATH.home,
     },
 ]
