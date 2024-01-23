@@ -6,7 +6,7 @@ import { Typography } from '@/components/ui/typography'
 
 import s from './header.module.scss'
 
-import avatar from './avatar.jpg'
+import avatar from '../../assets/images/avatar.jpg'
 
 type Props = {
   data: ProfileData | null

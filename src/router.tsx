@@ -6,6 +6,7 @@ import RecoveryPassword from "@/pages/recovery-password/recovery-password";
 import {CheckEmail} from "@/pages/check-email/check-email";
 import {CreateNewPassword} from "@/pages/create-new-password/create-new-password";
 import {InitialLoader} from "@/components/ui/loader/loader";
+import {Profile} from "@/pages/profile/profile";
 
 export const PATH = {
     login: '/login',
@@ -14,7 +15,8 @@ export const PATH = {
     home: '/home',
     recover: '/recovery',
     check: '/check-email',
-    createNewPassword: '/create-new-password'
+    createNewPassword: '/create-new-password',
+    profile: '/profile'
 }
 
 const publicRoutes: RouteObject[] = [
@@ -48,6 +50,10 @@ const privateRoutes: RouteObject[] = [
     {
         element: <InitialLoader preLoader={false}/>,
         path: PATH.home,
+    },
+    {
+        element: <Profile/>,
+        path: PATH.profile,
     },
 ]
 
