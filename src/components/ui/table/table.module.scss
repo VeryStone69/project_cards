@@ -1,0 +1,40 @@
+
+.root{
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid var(--color-dark-500);
+}
+
+.head{
+  background-color: var(--color-dark-500);
+}
+
+.headCell {
+  padding: 6px 24px;
+
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-m);
+  text-align: left;
+
+}
+
+.cell {
+  padding: 6px 24px;
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-m);
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.row {
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--color-dark-500);
+  }
+}
+
