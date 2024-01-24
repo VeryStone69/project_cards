@@ -22,7 +22,7 @@
 
   color: var(--color-light-100);
 
-  background:transparent;
+  background: transparent;
   border: 1px solid var(--color-dark-300);
   border-left: none;
 
@@ -33,50 +33,46 @@
   background-color: var(--color-dark-700);
   border-color: var(--color-dark-100);
 }
-        
-.TabsRoot:has(:focus-visible){
+
+.TabsRoot:has(:focus-visible) {
   border-radius: 2px;
   outline: 2px solid var(--color-info-700);
   outline-offset: -1px;
 }
 
-.TabsTrigger:disabled{
+.TabsTrigger:disabled {
   cursor: initial;
   color: var(--color-dark-300);
   background-color: var(--color-dark-700);
   border-color: var(--color-dark-300);
- }
+}
 
 .TabsTrigger:not(:first-child, :last-child) {
   border-right: 1px solid var(--color-dark-300);
-  border-left:none;
+  border-left: none;
 }
 
 .TabsTrigger[data-state='active'] {
   background-color: var(--color-accent-500);
   border-color: var(--color-accent-500);
-
 }
 
-.TabsTrigger:first-child[data-state='active']{
-   background-color: var(--color-accent-500);
-   border-color: var(--color-accent-500);
- }
-
-.TabsTrigger:first-child{
-  border-left:1px solid var(--color-dark-300);
-  border-radius: 2px 0 0 2px;
-}
-
-.TabsTrigger:last-child{
-  border-right:1px solid var(--color-dark-300);
-  border-radius: 0 2px 2px 0;
-}
-
-.TabsTrigger:last-child[data-state='active']{
+.TabsTrigger:first-child[data-state='active'] {
   background-color: var(--color-accent-500);
   border-color: var(--color-accent-500);
 }
 
+.TabsTrigger:first-child {
+  border-left: 1px solid var(--color-dark-300);
+  border-radius: 2px 0 0 2px;
+}
 
+.TabsTrigger:last-child {
+  border-right: 1px solid var(--color-dark-300);
+  border-radius: 0 2px 2px 0;
+}
 
+.TabsTrigger:last-child[data-state='active'] {
+  background-color: var(--color-accent-500);
+  border-color: var(--color-accent-500);
+}

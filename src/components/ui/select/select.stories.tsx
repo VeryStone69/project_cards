@@ -7,7 +7,7 @@ const meta = {
   argTypes: {},
   component: Select,
   tags: ['autodocs'],
-  title: 'Components/Select',
+  title: 'Components/ui/Select',
 } satisfies Meta<typeof Select>
 
 export default meta
