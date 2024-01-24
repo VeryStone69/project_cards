@@ -82,5 +82,7 @@
     <symbol id="edit" width="16" height="16"  viewBox="0 0 24 24"><path  d="M19 20H5a1 1 0 0 0 0 2h14a1 1 0 0 0 0-2ZM5 18h4l1-1 9-9a2 2 0 0 0 0-3l-2-2a2 2 0 0 0-3 0l-9 9-1 1v4a1 1 0 0 0 1 1ZM15 4l3 3-2 2-3-3 2-2Zm-9 9 6-6 3 3-6 6H6v-3Z"/></symbol>
     <!-- remove -->
     <symbol id="remove"  width="16" height="16"  viewBox="0 0 24 24"><path  d="M21 6h-5V4.3A2.4 2.4 0 0 0 13.5 2h-3A2.4 2.4 0 0 0 8 4.3V6H3a1 1 0 0 0 0 2h1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8h1a1 1 0 1 0 0-2ZM10 4.3c0-.1.2-.3.5-.3h3c.3 0 .5.2.5.3V6h-4V4.3ZM18 19a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V8h12v11Z"/></symbol>
+
+    <symbol id="arrow-back" xmlns="http://www.w3.org/2000/svg" width="24" height="24"  viewBox="0 0 24 24"><path  d="M19 11H7.1l3.7-4.4a1 1 0 0 0-1.6-1.2l-5 6v.1l-.1.1-.1.4v.4h.1l.1.2 5 6a1 1 0 0 0 1.6-1.2L7 13H19a1 1 0 0 0 0-2Z"/></symbol>
 </svg>
 
