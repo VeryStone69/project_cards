@@ -1,5 +1,4 @@
-
-.SelectTriggerSmall{
+.SelectTriggerSmall {
   cursor: pointer;
 
   z-index: 15;
@@ -20,37 +19,37 @@
   border: 1px solid var(--color-dark-300);
   border-radius: 2px;
 
-  &:hover{
+  &:hover {
     background-color: var(--color-dark-500);
   }
 
-  &:focus-visible{
-    border: none  ;
+  &:focus-visible {
+    border: none;
     outline: 1px solid var(--color-info-700);
   }
 
-  &[data-state='open'] .icon{
+  &[data-state='open'] .icon {
     transform: rotate(180deg);
     fill: var(--color-light-100);
     transition: 0.2s;
   }
 
-  &[data-state='closed'] .icon{
+  &[data-state='closed'] .icon {
     fill: var(--color-light-100);
     transition: 0.2s;
   }
 
-  &[data-disabled]{
-    color:var(--color-dark-300);
-  background: none;
-    border:1px solid var(--color-dark-300);
+  &[data-disabled] {
+    color: var(--color-dark-300);
+    background: none;
+    border: 1px solid var(--color-dark-300);
 
-    &:hover{
+    &:hover {
       background: none;
     }
   }
 
-  &[data-disabled] .icon{
+  &[data-disabled] .icon {
     fill: var(--color-dark-300);
   }
 }
@@ -76,39 +75,39 @@
   border: 1px solid var(--color-dark-300);
   border-radius: 2px;
 
-  &:hover{
-  background-color: var(--color-dark-500);
+  &:hover {
+    background-color: var(--color-dark-500);
   }
 
-  &:focus-visible{
-    border: none  ;
+  &:focus-visible {
+    border: none;
     outline: 1px solid var(--color-info-700);
   }
 
-  &[data-state='open'] .icon{
+  &[data-state='open'] .icon {
     transform: rotate(180deg);
     margin-right: 12px;
     fill: var(--color-light-100);
     transition: 0.2s;
   }
 
-  &[data-state='closed'] .icon{
+  &[data-state='closed'] .icon {
     margin-right: 12px;
     fill: var(--color-light-100);
     transition: 0.2s;
   }
 
-  &[data-disabled]{
-    color:var(--color-dark-300);
+  &[data-disabled] {
+    color: var(--color-dark-300);
     background: none;
-    border:1px solid var(--color-dark-300);
+    border: 1px solid var(--color-dark-300);
 
-    &:hover{
+    &:hover {
       background: none;
     }
   }
 
-  &[data-disabled] .icon{
+  &[data-disabled] .icon {
     fill: var(--color-dark-300);
   }
 }
@@ -128,30 +127,29 @@
   align-items: center;
   height: 36px;
 
-  &[data-highlighted] > label{
+  &[data-highlighted] > label {
     color: var(--color-accent-300);
   }
 
-  &[data-highlighted]{
+  &[data-highlighted] {
     color: var(--color-accent-300);
     background: var(--color-accent-900);
     outline: none;
-    transition: all .5s ;
+    transition: all 0.5s;
   }
 }
 
-.SelectItemSmall{
+.SelectItemSmall {
   cursor: pointer;
   display: flex;
   align-items: center;
   height: 24px;
 
-
   &[data-highlighted] > label {
     color: var(--color-accent-300);
   }
 
-  &[data-highlighted]{
+  &[data-highlighted] {
     font-size: var(--font-size-s);
     line-height: var(--line-height-s);
     color: var(--color-accent-300);
@@ -159,7 +157,7 @@
     background: var(--color-accent-900);
     outline: none;
 
-    transition: all .5s ;
+    transition: all 0.5s;
   }
 }
 
@@ -173,6 +171,6 @@
   line-height: var(--line-height-s);
 }
 
-.typographyLabelDisabled{
-  color:var(--color-dark-300) ;
+.typographyLabelDisabled {
+  color: var(--color-dark-300);
 }

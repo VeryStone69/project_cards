@@ -1,4 +1,4 @@
-.root{
+.root {
   display: flex;
   flex-direction: column;
   gap: 12px 0;
@@ -8,7 +8,7 @@
   color: var(--color-light-100);
 }
 
-.item{
+.item {
   all: unset;
 
   position: relative;
@@ -21,10 +21,10 @@
   width: 16px;
   height: 16px;
 
-border-color: red;
+  border-color: red;
 }
 
-.item[data-disabled]{
+.item[data-disabled] {
   z-index: 5;
   inset: 0;
 
@@ -33,27 +33,26 @@ border-color: red;
   border: 2px solid var(--color-accent-900);
   border-radius: 50%;
 
-  &::before{
+  &::before {
     background-color: inherit;
   }
 
-  &:hover{
-    &:active{
-      &::before{
+  &:hover {
+    &:active {
+      &::before {
         background-color: inherit;
       }
     }
   }
 }
 
-.item::before{
+.item::before {
   content: '';
 
   position: absolute;
-  top:50%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0);
-
 
   width: 36px;
   height: 36px;
@@ -64,23 +63,22 @@ border-color: red;
   transition: all 0.3s;
 }
 
-
-.item:focus-visible::before{
+.item:focus-visible::before {
   transform: translate(-50%, -50%);
   background-color: var(--color-dark-700);
 }
 
-.item:hover::before{
+.item:hover::before {
   transform: translate(-50%, -50%);
 }
 
-.item:hover:active::before{
+.item:hover:active::before {
   transform: translate(-50%, -50%);
   background-color: var(--color-accent-900);
   transition-delay: -0.5s;
 }
 
-.indicator{
+.indicator {
   position: relative;
   z-index: 10;
 
@@ -91,21 +89,18 @@ border-color: red;
   border-radius: 50%;
 }
 
-.indicator[data-disabled]{
+.indicator[data-disabled] {
   position: relative;
   z-index: 10;
 
   width: 8px;
   height: 8px;
 
-
-
   background-color: var(--color-accent-900);
   border-radius: 50%;
 }
 
-
-.styleUnchecked{
+.styleUnchecked {
   position: absolute;
   z-index: 5;
   inset: 0;
@@ -116,7 +111,7 @@ border-color: red;
   border-radius: 50%;
 }
 
-.styleDisabled{
+.styleDisabled {
   position: absolute;
   z-index: 5;
   inset: 0;
@@ -127,7 +122,7 @@ border-color: red;
   border-radius: 50%;
 }
 
-.typography{
+.typography {
   cursor: pointer;
 
   display: inline-flex;
@@ -136,7 +131,7 @@ border-color: red;
   align-items: center;
 }
 
-.typographyDisabled{
+.typographyDisabled {
   cursor: pointer;
 
   display: inline-flex;
@@ -147,7 +142,6 @@ border-color: red;
   color: var(--color-light-900);
 }
 
-
-.error{
-color:var(--color-danger-500)
+.error {
+  color: var(--color-danger-500);
 }
