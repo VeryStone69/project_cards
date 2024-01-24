@@ -1,11 +1,10 @@
-
-.root{
+.root {
   border-collapse: collapse;
   width: 100%;
   border: 1px solid var(--color-dark-500);
 }
 
-.head{
+.head {
   background-color: var(--color-dark-500);
 }
 
@@ -16,7 +15,6 @@
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-m);
   text-align: left;
-
 }
 
 .cell {
@@ -37,4 +35,3 @@
     border-bottom: 1px solid var(--color-dark-500);
   }
 }
-

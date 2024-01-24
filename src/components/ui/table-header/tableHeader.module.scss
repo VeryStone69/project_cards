@@ -1,13 +1,10 @@
-.ceil{
+.ceil {
   transition: 0.3s;
 
   &:hover {
     cursor: pointer;
     background-color: var(--color-dark-300);
   }
-
-
-
 }
 
 .icon {
@@ -17,9 +14,9 @@
   transition: 0.3s;
 }
 
-.iconDown{
+.iconDown {
   position: absolute;
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 
   margin-left: 12px;
 

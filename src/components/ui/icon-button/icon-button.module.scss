@@ -1,5 +1,5 @@
-.button{
-all:unset;
+.button {
+  all: unset;
 
   cursor: pointer;
 
@@ -26,13 +26,13 @@ all:unset;
     z-index: 5;
     top: 0;
     left: 0;
-    transform: translate(35%,30%);
+    transform: translate(35%, 30%);
 
-     fill: var(--color-light-100);
+    fill: var(--color-light-100);
   }
 }
 
-.button::before{
+.button::before {
   content: '';
 
   position: absolute;

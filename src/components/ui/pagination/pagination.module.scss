@@ -1,5 +1,5 @@
-.navigation{
-display: flex;
+.navigation {
+  display: flex;
   align-items: center;
   justify-content: center;
 }
@@ -8,7 +8,7 @@ display: flex;
   color: var(--color-dark-900);
 }
 
-.button{
+.button {
   cursor: pointer;
 
   box-sizing: border-box;
@@ -20,58 +20,57 @@ display: flex;
   color: var(--color-light-100);
 
   background: var(--color-dark-900);
-  border: none ;
+  border: none;
   border-radius: 2px;
   box-shadow: none;
 
-  transition:all 0.3s;
+  transition: all 0.3s;
 
-  &:focus{
+  &:focus {
     background: inherit;
-    border:none;
+    border: none;
     border-radius: 2px;
     box-shadow: none;
   }
 
-  &:focus-visible{
+  &:focus-visible {
     color: var(--color-light-100);
     border-radius: 2px;
     outline: 1px solid var(--color-info-900);
-
   }
 
-  &:hover{
+  &:hover {
     color: var(--color-light-100);
     background-color: var(--color-dark-500);
     border-radius: 2px;
     box-shadow: none;
 
-    &:active{
+    &:active {
       background-color: var(--color-light-100);
 
-      >p{
+      > p {
         color: var(--color-dark-900);
       }
     }
   }
 
-  >.iconButtonPrevious{
+  > .iconButtonPrevious {
     transform: rotate(90deg);
 
     width: 16px;
     height: 16px;
     padding: 0;
 
-    fill:var(--color-light-100);
+    fill: var(--color-light-100);
 
-    &:active{
+    &:active {
       background-color: var(--color-light-100);
       border-radius: 2px;
       fill: var(--color-dark-900);
     }
   }
 
-  >.iconButtonNext{
+  > .iconButtonNext {
     transform: rotate(270deg);
 
     width: 16px;
@@ -79,14 +78,13 @@ display: flex;
     margin: 0;
     padding: 0;
 
-    fill:var(--color-light-100);
+    fill: var(--color-light-100);
 
-    &:active{
+    &:active {
       background-color: var(--color-light-100);
       border-radius: 2px;
       fill: var(--color-dark-900);
     }
-
   }
 }
 
@@ -102,22 +100,21 @@ display: flex;
   color: var(--color-dark-900);
 
   background-color: var(--color-light-100);
-  border: none ;
+  border: none;
   border-radius: 2px;
   box-shadow: none;
 
-  &:focus{
+  &:focus {
     background-color: var(--color-light-100);
-    border:none;
+    border: none;
     border-radius: 2px;
     box-shadow: none;
   }
 
-  &:focus-visible{
+  &:focus-visible {
     color: var(--color-light-100);
     border-radius: 2px;
     outline: 1px solid var(--color-info-900);
-
   }
 
   &:hover {
@@ -128,38 +125,33 @@ display: flex;
   }
 }
 
-
-
-
-.buttonCustom{
+.buttonCustom {
   box-sizing: border-box;
   width: 16px;
   height: 16px;
-  margin-right:8px;
+  margin-right: 8px;
 
   background-color: var(--color-dark-900);
 
-
-  &:hover{
+  &:hover {
     color: var(--color-light-100);
     background-color: var(--color-dark-500);
     border-radius: 2px;
   }
 
-  &:focus-visible{
+  &:focus-visible {
     color: var(--color-light-100);
     background-color: var(--color-dark-900);
     border-radius: 2px;
     outline: 1px solid var(--color-info-900);
   }
 
-
-  &:focus{
+  &:focus {
     background-color: var(--color-dark-900);
     border-radius: 2px;
     box-shadow: none;
 
-    &:hover{
+    &:hover {
       color: var(--color-light-100);
       background-color: var(--color-dark-500);
       border-radius: 2px;
@@ -167,7 +159,7 @@ display: flex;
   }
 }
 
-.buttonDisabled:disabled{
+.buttonDisabled:disabled {
   box-sizing: border-box;
   width: 16px;
   height: 16px;
@@ -177,22 +169,21 @@ display: flex;
   color: var(--color-light-100);
 
   background: var(--color-dark-900);
-  border: none ;
+  border: none;
   border-radius: 2px;
   box-shadow: none;
 
-  >.iconButtonPrevious{
+  > .iconButtonPrevious {
     transform: rotate(90deg);
 
     width: 16px;
     height: 16px;
     padding: 0;
 
-    fill:var(--color-dark-100);
-    
+    fill: var(--color-dark-100);
   }
 
-  >.iconButtonNext{
+  > .iconButtonNext {
     transform: rotate(270deg);
 
     width: 16px;
@@ -200,18 +191,16 @@ display: flex;
     margin: 0;
     padding: 0;
 
-    fill:var(--color-dark-100);
-    
+    fill: var(--color-dark-100);
   }
-
 }
 
-.typographyShow{
+.typographyShow {
   margin-right: 6px;
   margin-left: 16px;
 }
 
-.typographyPage{
+.typographyPage {
   margin-left: 12px;
 }
 
@@ -220,6 +209,6 @@ display: flex;
   height: 24px;
 }
 
-.dods{
+.dods {
   width: 24px;
 }

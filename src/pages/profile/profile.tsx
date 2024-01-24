@@ -1,33 +1,39 @@
-import {Header} from "@/components/header";
-import {Card} from "@/components/ui/card";
+import {Header} from '@/components/header'
+import {Icon} from '@/components/icon/Icon'
+import {Button} from '@/components/ui/button'
+import {Card} from '@/components/ui/card'
+import {Typography} from '@/components/ui/typography'
+
 import s from './profile.module.scss'
-import {Typography} from "@/components/ui/typography";
+
 import avatar from '../../assets/images/avatar.jpg'
-import {Button} from "@/components/ui/button";
-import {Icon} from "@/components/icon/Icon";
+import {FileUploader} from "@/components/ui/file-uploader";
 
 export const Profile = () => {
     return (
         <div className={s.profilePage}>
-            <Header data={{name: 'Artyom Korshykau', email: '', avatar: ''}}/>
+            <Header data={{avatar: '', email: '', name: 'Artyom Korshykau'}}/>
             <Card className={s.card}>
-                <Typography variant={'h1'} className={s.title}>Personal Information</Typography>
+                <Typography className={s.title} variant={'h1'}>
+                    Personal Information
+                </Typography>
                 <div className={s.avatarBlock}>
-                    <img src={avatar} alt="avatar" className={s.avatar}/>
-                    <div className={s.editButtonBlock}></div>
-                    <Icon name={'edit'} fill={'white'} width={'20px'} className={s.editButton}/>
-
+                    <img alt={'avatar'} className={s.avatar} src={avatar}/>
+                    <div className={s.fileUploader}>
+                        <FileUploader/>
+                    </div>
                 </div>
                 <div className={s.nameBlock}>
                     <Typography variant={'h2'}>Artyom</Typography>
-                    <Icon name={'edit'} fill={'white'} width={'20px'}/>
+                    <Icon fill={'white'} name={'edit'} width={'17px'} height={'17px'}/>
                 </div>
-                <Typography variant={'body2'} className={s.email}>example@gmail.com</Typography>
+                <Typography className={s.email} variant={'body2'}>
+                    example@gmail.com
+                </Typography>
                 <Typography variant={'subtitle2'}>
                     <Button variant={'secondary'}>Logout</Button>
                 </Typography>
             </Card>
         </div>
-    );
-};
-
+    )
+}
