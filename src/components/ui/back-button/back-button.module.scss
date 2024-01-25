@@ -1,14 +1,13 @@
 .button {
- cursor: pointer;
+  cursor: pointer;
   width: max-content;
   height: 24px;
 
->a{
-  &:focus{
-    border: none;
+  > a {
+    &:focus {
+      border: none;
+    }
   }
-}
-
 
   svg,
   .text {
