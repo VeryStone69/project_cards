@@ -21,6 +21,7 @@ export const PATH = {
   home: '/home',
   login: '/login',
   notFound: '/',
+  packs: '/packs',
   profile: '/profile',
   recover: '/recovery',
   register: '/register',
