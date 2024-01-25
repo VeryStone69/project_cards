@@ -1,0 +1,17 @@
+.filter{
+display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+
+}
+
+.textField{
+  flex: 0 1 300px;
+}
+
+.clearButton{
+  >svg{
+    fill: var(--color-light-500);
+  }
+}
