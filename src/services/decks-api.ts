@@ -1,10 +1,22 @@
 import { baseApi } from '@/services/base-api'
-import { DeleteDecks, GetDecks, GetDecksArgs } from '@/services/decks-api.types'
+import { GetDecks, GetDecksArgs, GetDecksItems } from '@/services/decks-api.types'
 
 export const decksAPI = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
-      deleteDeck: builder.mutation<DeleteDecks, { id: string }>({
+      createDecks: builder.mutation<GetDecksItems, FormData>({
+        invalidatesTags: ['Decks'],
+        query: arg => {
+          return {
+            body: arg,
+            method: 'POST',
+            params: arg,
+            url: `v1/decks`,
+          }
+        },
+      }),
+      deleteDeck: builder.mutation<Omit<GetDecksItems, 'author'>, { id: string }>({
+        invalidatesTags: ['Decks'],
         query: arg => {
           return {
             body: arg.id,
@@ -13,7 +25,14 @@ export const decksAPI = baseApi.injectEndpoints({
           }
         },
       }),
+      getDeckInfo: builder.query<GetDecks, { id: string }>({
+        query: arg => ({
+          method: 'GET',
+          url: `v1/decks/${arg.id}`,
+        }),
+      }),
       getDecks: builder.query<GetDecks, Partial<GetDecksArgs> | void>({
+        providesTags: ['Decks'],
         query: arg => {
           return {
             method: 'GET',
@@ -22,8 +41,24 @@ export const decksAPI = baseApi.injectEndpoints({
           }
         },
       }),
+      updateDeck: builder.mutation<GetDecksItems, { data: FormData; id: string }>({
+        invalidatesTags: ['Decks'],
+        query: arg => ({
+          body: arg.data,
+          method: 'PATCH',
+          url: `v1/decks/${arg.id}`,
+        }),
+      }),
     }
   },
 })
 
-export const { useDeleteDeckMutation, useGetDecksQuery, useLazyGetDecksQuery } = decksAPI
+export const {
+  useCreateDecksMutation,
+  useDeleteDeckMutation,
+  useGetDeckInfoQuery,
+  useGetDecksQuery,
+  useLazyGetDeckInfoQuery,
+  useLazyGetDecksQuery,
+  useUpdateDeckMutation,
+} = decksAPI
