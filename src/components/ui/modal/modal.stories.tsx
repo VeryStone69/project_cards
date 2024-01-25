@@ -40,8 +40,8 @@ export const EditPackModal = {
             <Checkbox label={'Private pack'} />
           </div>
           <div style={buttonContainer}>
-            <Button>Cancel</Button>
-            <Button>Save Changes</Button>
+            <Button variant={'secondary'}>Cancel</Button>
+            <Button variant={'primary'}>Save Changes</Button>
           </div>
         </Modal>
       </>

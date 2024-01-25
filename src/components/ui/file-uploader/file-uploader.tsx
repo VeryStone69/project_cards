@@ -1,25 +1,20 @@
-import {Icon} from '@/components/icon/Icon'
+import { ComponentPropsWithoutRef } from 'react'
+
+import { Icon } from '@/components/icon/Icon'
+import { clsx } from 'clsx'
 
 import s from './file-uploader.module.scss'
-import {clsx} from "clsx";
-import {ComponentPropsWithoutRef} from "react";
 
 type Props = {} & ComponentPropsWithoutRef<'div'>
 
-export const FileUploader = ({className}: Props) => {
+export const FileUploader = ({ className }: Props) => {
+  const classNames = {
+    root: clsx(s.root, className),
+  }
 
-    const classNames = {
-        root: clsx(s.root, className),
-    }
-
-    return (
-        <div className={classNames.root}>
-            <Icon className={s.editButton}
-                  fill={'white'}
-                  name={'edit'}
-                  width={'15px'}
-                  height={'15px'}
-            />
-        </div>
-    )
+  return (
+    <div className={classNames.root}>
+      <Icon className={s.editButton} fill={'white'} height={'15px'} name={'edit'} width={'15px'} />
+    </div>
+  )
 }
