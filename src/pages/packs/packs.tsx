@@ -8,7 +8,7 @@ import { Table } from '@/components/ui/table'
 import { TableHeader } from '@/components/ui/table-header'
 import { Typography } from '@/components/ui/typography'
 import { FilterControl } from '@/features/filter-control'
-import { useGetDecksQuery } from '@/services/decks-api'
+import { useGetDecksQuery } from '@/services/decksAPI/decks-api'
 
 import defaultMask from '../../assets/images/Mask.jpg'
 
