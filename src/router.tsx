@@ -11,6 +11,7 @@ import { CheckEmail } from '@/pages/check-email/check-email'
 import { CreateNewPassword } from '@/pages/create-new-password/create-new-password'
 import { Login } from '@/pages/login/login'
 import { NotFound } from '@/pages/not-found/NotFound'
+import { Packs } from '@/pages/packs'
 import { Profile } from '@/pages/profile/profile'
 import RecoveryPassword from '@/pages/recovery-password/recovery-password'
 import { Register } from '@/pages/register/register'
@@ -62,6 +63,10 @@ const privateRoutes: RouteObject[] = [
   {
     element: <Profile />,
     path: PATH.profile,
+  },
+  {
+    element: <Packs />,
+    path: PATH.packs,
   },
 ]
 
