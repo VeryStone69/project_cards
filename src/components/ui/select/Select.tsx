@@ -39,11 +39,7 @@ export const Select = ({
             <RadixSelect.Value placeholder={placeholder} />
             <Icon className={s.icon} name={'arrowDown'} />
           </RadixSelect.Trigger>
-          <RadixSelect.Content
-            avoidCollisions={false}
-            className={s.SelectContent}
-            position={'popper'}
-          >
+          <RadixSelect.Content avoidCollisions className={s.SelectContent} position={'popper'}>
             <RadixSelect.Viewport className={s.SelectViewport}>
               {options.map(item => {
                 return (
