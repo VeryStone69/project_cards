@@ -10,6 +10,8 @@ import { Typography } from '@/components/ui/typography'
 import { FilterControl } from '@/features/filter-control'
 import { useGetDecksQuery } from '@/services/decksAPI/decks-api'
 
+import s from './packs.module.scss'
+
 import defaultMask from '../../assets/images/Mask.jpg'
 
 export const Packs = () => {
@@ -84,7 +86,7 @@ export const Packs = () => {
                         src={decks.cover ?? defaultMask}
                         style={{ height: '48px', width: '110px' }}
                       />
-                      <Typography as={'h3'} variant={'body2'}>
+                      <Typography as={'h3'} className={s.link} variant={'body2'}>
                         {decks.name}
                       </Typography>
                     </Button>
