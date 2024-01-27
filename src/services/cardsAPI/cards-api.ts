@@ -1,5 +1,5 @@
 import { baseApi } from '@/services/base-api'
-import { CardRate, CardResponse, CardsItem } from '@/services/cardsAPI/cards-api-types'
+import { CardRate, CardResponse, CardsItem, CardsParams } from '@/services/cardsAPI/cards-api-types'
 
 export const cardsApi = baseApi.injectEndpoints({
   endpoints: builder => {
@@ -24,12 +24,12 @@ export const cardsApi = baseApi.injectEndpoints({
           url: `v1/cards/${arg.id}`,
         }),
       }),
-      getCardsInDeck: builder.query<CardResponse, { id: string }>({
+      getCardsInDeck: builder.query<CardResponse, { packId: string; params: CardsParams }>({
         query: arg => {
           return {
-            body: arg.id,
             method: 'GET',
-            url: `v1/decks/${arg.id}/cards`,
+            params: arg.params ?? {},
+            url: `v1/decks/${arg.packId}/cards`,
           }
         },
       }),
