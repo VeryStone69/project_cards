@@ -1,10 +1,12 @@
-.rating {
-  display: flex;
-  gap: 7px;
-  align-items: center;
-  justify-content: center;
 
-  width: 168px;
-  height: 61px;
-  padding: 24px;
+svg+svg{
+  margin-left: 10px;
+}
+
+.starRate{
+fill: #E5AC39;
+}
+
+.starNoRate{
+  stroke: #E5AC39;
 }
