@@ -24,3 +24,10 @@ export type CardRate = {
   grade: number
   packId: string
 }
+export type CardsParams = {
+  answer?: string
+  currentPage?: number
+  itemsPerPage?: number
+  orderBy?: string
+  question?: string
+} | void
