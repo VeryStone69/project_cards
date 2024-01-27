@@ -25,7 +25,7 @@ export const decksAPI = baseApi.injectEndpoints({
           }
         },
       }),
-      getDeckInfo: builder.query<GetDecks, { id: string }>({
+      getDeckInfo: builder.query<GetDecksItems, { id: string }>({
         query: arg => ({
           method: 'GET',
           url: `v1/decks/${arg.id}`,
