@@ -39,7 +39,7 @@ export const Pagination = ({
   })
 
   return (
-    <nav className={className || s.navigation}>
+    <nav className={className ? className + ' ' + s.navigation : s.navigation}>
       <PaginationItemIcon
         disabled={hidePrevButton}
         onClick={onClickChangeCurrentPage}
