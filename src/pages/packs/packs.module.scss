@@ -1,14 +1,14 @@
-.pagination{
+.pagination {
   margin-top: 24px;
 }
 
-.link{
-  &:hover{
+.link {
+  &:hover {
     color: var(--color-accent-300);
     text-decoration: underline;
   }
 
-  &:active{
+  &:active {
     color: var(--color-light-100);
     text-decoration: underline;
   }
