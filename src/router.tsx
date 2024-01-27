@@ -6,6 +6,7 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
+import { Cards } from '@/components/cards/cards'
 import { InitialLoader } from '@/components/ui/loader/loader'
 import { CheckEmail } from '@/pages/check-email/check-email'
 import { CreateNewPassword } from '@/pages/create-new-password/create-new-password'
@@ -67,6 +68,10 @@ const privateRoutes: RouteObject[] = [
   {
     element: <Packs />,
     path: PATH.packs,
+  },
+  {
+    element: <Cards />,
+    path: `${PATH.packs}/:id`,
   },
 ]
 
