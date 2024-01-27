@@ -18,9 +18,9 @@ export const Layout = ({ children, className }: Props) => {
   }
 
   return (
-    <>
+    <div className={className ? className : s.container}>
       <Header data={profileData} />
-      <div className={className ? className : s.container}>{children}</div>
-    </>
+      {children}
+    </div>
   )
 }
