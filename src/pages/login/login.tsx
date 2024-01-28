@@ -1,8 +1,8 @@
 import { SignIn } from '@/components/forms/sign-in'
 import { Header } from '@/components/header'
 import { Card } from '@/components/ui/card'
-import { useLoginMutation } from '@/services/auth/auth'
-import { LoginData } from '@/services/auth/auth.types'
+import { useLoginMutation } from '@/services/auth-api/auth'
+import { LoginData } from '@/services/auth-api/auth.types'
 
 import styles from './login.module.scss'
 
@@ -16,7 +16,6 @@ export const Login = () => {
       alert(`${data.email} is authorized!`)
     } catch (error: any) {
       // toast.error(error?.data?.message)
-      console.log(error)
     }
   }
 

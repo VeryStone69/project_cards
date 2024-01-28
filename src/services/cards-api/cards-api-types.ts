@@ -1,4 +1,4 @@
-import { DecksPagination } from '@/services/decksAPI/decks-api.types'
+import { DecksPagination } from '@/services/decks-api/decks-api.types'
 
 export type CardResponse = {
   items: CardsItem[]
