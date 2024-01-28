@@ -7,7 +7,11 @@
   }
 }
 
+
+
 .primary {
+  cursor: pointer;
+
   display: inline-flex;
   gap: 10px;
   align-items: center;
@@ -15,37 +19,48 @@
 
   padding: 6px 28px;
 
-  background: var(--primary-500, #8c61ff);
+  background: var(--color-accent-500);
+  border:none;
   border-radius: 4px;
   box-shadow: 0 4px 18px 0 rgb(140 97 255 / 35%);
 
+  &:focus-visible {
+    outline: 2px solid var(--color-info-700);
+  }
+
+  &:hover{
+    background: var(--color-accent-300);
+    border-radius: 4px;
+    box-shadow: 0 4px 18px 0 rgb(140 97 255 / 35%);
+  }
+
   &:active {
-    background: var(--primary-700, #704ecc);
-    border-radius: 4px;
-    box-shadow: 0 4px 18px 0 rgb(140 97 255 / 35%);
-  }
-
-  &:hover {
-    background: var(--primary-300, #a280ff);
-    border-radius: 4px;
-    box-shadow: 0 4px 18px 0 rgb(140 97 255 / 35%);
-  }
-
-  &:focus {
-    background: var(--primary-500, #8c61ff);
-    border: 2px solid var(--info-700, #2f68cc);
+    background: var(--color-accent-700);
     border-radius: 4px;
     box-shadow: 0 4px 18px 0 rgb(140 97 255 / 35%);
   }
 
   &:disabled {
-    background: var(--primary-900, #382766);
-    border-radius: 4px;
-    box-shadow: 0 4px 18px 0 rgb(140 97 255 / 35%);
+  cursor: auto;
+  background: var(--color-accent-900);
+  border-radius: 4px;
+  box-shadow: 0 4px 18px 0 rgb(140 97 255 / 35%);
+
+    >svg{
+      fill: var(--color-light-900);
+    }
+
+    :active{
+      background: var(--color-accent-900);
+    }
   }
+
 }
 
+
 .secondary {
+  cursor: pointer;
+
   display: flex;
   gap: 10px;
   align-items: center;
@@ -54,72 +69,43 @@
   height: 36px;
   padding: 6px 28px;
 
-  background: var(--dark-300, #4c4c4c);
+  background: var(--color-dark-300);
+  border: none;
   border-radius: 4px;
   box-shadow: 0 2px 10px 0 rgb(109 109 109 / 25%);
 
-  &:active {
-    background: var(--dark-500, #333);
-    border-radius: 4px;
-    box-shadow: 0 2px 10px 0 rgb(109 109 109 / 25%);
+  &:focus-visible {
+    outline: 2px solid var(--color-info-700);
   }
 
   &:hover {
-    background: var(--dark-100, #808080);
+    background: var(--color-dark-100);
     border-radius: 4px;
     box-shadow: 0 2px 10px 0 rgb(109 109 109 / 25%);
+
   }
 
-  &:focus {
-    background: var(--dark-300, #4c4c4c);
-    border: 2px solid var(--info-700, #2f68cc);
+  &:active {
+    background: var(--color-dark-500);
     border-radius: 4px;
     box-shadow: 0 2px 10px 0 rgb(109 109 109 / 25%);
   }
 
   &:disabled {
-    background: var(--dark-300, #4c4c4c);
+    cursor: auto;
+
+    color: var(--color-light-900);
+
+    background: var(--color-dark-300);
     border-radius: 4px;
     box-shadow: 0 2px 10px 0 rgb(109 109 109 / 25%);
+
+    >svg{
+      fill: var(--color-light-900);
+    }
   }
 }
 
-.tertiary {
-  display: inline-flex;
-  flex-shrink: 0;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
-
-  height: 36px;
-  padding: 8px 28px;
-
-  background-color: var(--dark-500, #333);
-  border: 1px solid var(--primary-500, #8c61ff);
-  border-radius: 4px;
-
-  &:active {
-    background: var(--primary-900, #382766);
-    border: 1px solid var(--primary-700, #704ecc);
-    border-radius: 4px;
-  }
-
-  &:hover {
-    background: var(--dark-500, #333);
-    border: 1px solid var(--primary-700, #704ecc);
-    border-radius: 4px;
-  }
-
-  &:focus {
-    border: 2px solid var(--info-700, #2f68cc);
-    border-radius: 4px;
-  }
-
-  &:disabled {
-    border: 1px solid var(--primary-900, #382766);
-    border-radius: 4px;
-  }
-}
 
 .link {
   display: inline-flex;
