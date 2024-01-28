@@ -16,6 +16,7 @@ import { Packs } from '@/pages/packs'
 import { Profile } from '@/pages/profile/profile'
 import RecoveryPassword from '@/pages/recovery-password/recovery-password'
 import { Register } from '@/pages/register/register'
+import { useMeQuery } from '@/services/auth/auth'
 
 export const PATH = {
   check: '/check-email',
@@ -84,11 +85,25 @@ const router = createBrowserRouter([
 ])
 
 export const Router = () => {
+  const { isLoading } = useMeQuery()
+
+  if (isLoading) {
+    return <InitialLoader />
+  }
+
   return <RouterProvider router={router} />
 }
 
 function PrivateRoutes() {
-  const isAuthenticated = true
+  const { isError, isLoading, isSuccess } = useMeQuery()
+
+  alert(`${isSuccess}`)
+
+  if (isLoading) {
+    return <InitialLoader />
+  }
+
+  const isAuthenticated = !isError
 
   return isAuthenticated ? <Outlet /> : <Navigate to={'/login'} />
 }
