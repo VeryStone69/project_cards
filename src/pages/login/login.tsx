@@ -12,6 +12,7 @@ export const Login = () => {
   const handleLogin = async (data: LoginData) => {
     try {
       await login(data).unwrap()
+
       alert(`${data.email} is authorized!`)
     } catch (error: any) {
       // toast.error(error?.data?.message)
