@@ -16,7 +16,7 @@ import { Packs } from '@/pages/packs'
 import { Profile } from '@/pages/profile/profile'
 import RecoveryPassword from '@/pages/recovery-password/recovery-password'
 import { Register } from '@/pages/register/register'
-import { useMeQuery } from '@/services/auth/auth'
+import { useMeQuery } from '@/services/auth-api/auth'
 
 export const PATH = {
   check: '/check-email',

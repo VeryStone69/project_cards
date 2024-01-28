@@ -12,7 +12,7 @@ const baseQuery = fetchBaseQuery({
   baseUrl: 'https://api.flashcards.andrii.es/',
   credentials: 'include',
   prepareHeaders: headers => {
-    headers.append('x-auth-skip', 'true')
+    headers.append('x-auth-api-skip', 'true')
   },
 })
 

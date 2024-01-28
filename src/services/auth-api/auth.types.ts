@@ -1,4 +1,4 @@
-export type User = {
+export type UserResponse = {
   avatar: null | string
   created: string
   email: string
@@ -12,6 +12,10 @@ export type LoginData = {
   email: string
   password: string
   rememberMe?: boolean
+}
+
+export type LoginResponse = {
+  accessToken: string
 }
 
 export type RegisterData = Omit<LoginData, 'rememberMe'>

@@ -10,8 +10,8 @@ import { Table } from '@/components/ui/table'
 import { TableHeader } from '@/components/ui/table-header'
 import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
-import { useGetCardsInDeckQuery } from '@/services/cardsAPI/cards-api'
-import { useGetDeckInfoQuery } from '@/services/decksAPI/decks-api'
+import { useGetCardsInDeckQuery } from '@/services/cards-api/cards-api'
+import { useGetDeckInfoQuery } from '@/services/decks-api/decks-api'
 
 import s from './cards.module.scss'
 
