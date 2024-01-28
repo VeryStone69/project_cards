@@ -1,5 +1,5 @@
-import { DeleteUser, NewUserData } from '@/services/admin/admin.types'
-import { baseApi } from '@/services/base-api'
+import { DeleteUser, NewUserData } from '@/services/admin-api/admin.types'
+import { baseApi } from '@/services/base-api/base-api'
 
 export const adminAPI = baseApi.injectEndpoints({
   endpoints: builder => {
