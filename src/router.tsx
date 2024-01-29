@@ -8,6 +8,7 @@ import {
 
 import { Cards } from '@/components/cards/cards'
 import { InitialLoader } from '@/components/ui/loader/loader'
+import AddNewCard from '@/features/add-new-card/add-new-card'
 import { CheckEmail } from '@/pages/check-email/check-email'
 import { CreateNewPassword } from '@/pages/create-new-password/create-new-password'
 import { Login } from '@/pages/login/login'
@@ -17,7 +18,6 @@ import { Profile } from '@/pages/profile/profile'
 import RecoveryPassword from '@/pages/recovery-password/recovery-password'
 import { Register } from '@/pages/register/register'
 import { useMeQuery } from '@/services/auth-api/auth'
-import AddNewDeck from '@/features/add-new-deck/add-new-deck'
 
 export const PATH = {
   check: '/check-email',
@@ -60,7 +60,7 @@ const publicRoutes: RouteObject[] = [
 
 const privateRoutes: RouteObject[] = [
   {
-    element: <AddNewDeck />,
+    element: <AddNewCard />,
     path: PATH.home,
   },
   {

@@ -1,7 +1,6 @@
 import { CSSProperties, useState } from 'react'
 
 import { Button } from '@/components/ui/button'
-import { Checkbox } from '@/components/ui/checkBox'
 import { TextField } from '@/components/ui/textField'
 import { Meta } from '@storybook/react'
 
@@ -37,7 +36,6 @@ export const EditPackModal = {
         <Modal open={open} setOpen={setOpen} title={'Edit pack'}>
           <div style={container}>
             <TextField label={'Pack name'} />
-            <Checkbox label={'Private pack'} />
           </div>
           <div style={buttonContainer}>
             <Button variant={'secondary'}>Cancel</Button>

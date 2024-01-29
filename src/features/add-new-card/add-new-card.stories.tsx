@@ -1,6 +1,5 @@
 import { Icon } from '@/components/icon/Icon'
 import { Button } from '@/components/ui/button'
-import { Checkbox } from '@/components/ui/checkBox'
 import { Modal } from '@/components/ui/modal'
 import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
@@ -16,38 +15,46 @@ const meta = {
   parameters: {
     layout: 'centered',
   },
-  title: 'Components/features/add-new-deck',
+  title: 'Components/features/add-new-card',
 } satisfies Meta<typeof AddNewDeck>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const AddDeckButton: Story = {
+export const AddCardButton: Story = {
   render: () => {
     return (
       <Typography variant={'subtitle2'}>
-        <Button variant={'primary'}>Add New Deck</Button>
+        <Button variant={'primary'}>Add New Card</Button>
       </Typography>
     )
   },
 }
 
-export const AddDeckModal: Story = {
+export const AddCardModal: Story = {
   render: () => {
     return (
-      <Modal open title={'Create new deck'}>
+      <Modal open title={'Add New Card'}>
         <div className={s.inputBlock}>
+          <Typography variant={'subtitle2'}>
+            Enter your question and give the correct answer:
+          </Typography>
+          <TextField label={'Question?'} />
           <div className={s.notImg}>
             <img alt={'notImg'} src={notImg} />
           </div>
           <Typography className={s.uploadButton} variant={'subtitle2'}>
-            <Button variant={'secondary'}>Change cover</Button>
+            <Button variant={'secondary'}>Change image</Button>
             <Icon className={s.imgOnButton} name={'img'} />
           </Typography>
-          <TextField label={'Pack name'} />
 
-          <Typography variant={'body2'}>
-            <Checkbox label={'Private pack'} />
+          <TextField label={'Answer'} />
+          <div className={s.notImg}>
+            <img alt={'notImg'} src={notImg} />
+          </div>
+          <Typography className={s.uploadButton} variant={'subtitle2'}>
+            <Button variant={'secondary'}>Change image</Button>
+            <Icon className={s.imgOnButton} name={'img'} />
           </Typography>
         </div>
 
@@ -56,7 +63,7 @@ export const AddDeckModal: Story = {
             <Button variant={'secondary'}>Cancel</Button>
           </Typography>
           <Typography variant={'subtitle2'}>
-            <Button variant={'primary'}>Send</Button>
+            <Button variant={'primary'}>Add new Card</Button>
           </Typography>
         </div>
       </Modal>
