@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+import notImg from '@/assets/images/not-img.jpg'
 import { Icon } from '@/components/icon/Icon'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkBox'
@@ -7,21 +8,25 @@ import { Modal } from '@/components/ui/modal'
 import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
 
-import s from './add-new-card.module.scss'
+import s from './add-new-deck.module.scss'
 
-const AddNewCard = () => {
+const AddNewDeck = () => {
   const [open, setOpen] = useState(false)
 
   return (
     <div>
       {open && (
-        <Modal open={open} setOpen={setOpen} title={'Add New Deck'}>
+        <Modal open={open} setOpen={setOpen} title={'Create new deck'}>
           <div className={s.inputBlock}>
-            <TextField label={'Pack name'} />
+            <div className={s.notImg}>
+              <img alt={'notImg'} src={notImg} />
+            </div>
             <Typography className={s.uploadButton} variant={'subtitle2'}>
-              <Button variant={'secondary'}>Upload Image</Button>
+              <Button variant={'secondary'}>Change cover</Button>
               <Icon className={s.imgOnButton} name={'img'} />
             </Typography>
+            <TextField label={'Pack name'} />
+
             <Typography variant={'body2'}>
               <Checkbox label={'Private pack'} />
             </Typography>
@@ -32,7 +37,7 @@ const AddNewCard = () => {
               <Button variant={'secondary'}>Cancel</Button>
             </Typography>
             <Typography variant={'subtitle2'}>
-              <Button variant={'primary'}>Add New Pack</Button>
+              <Button variant={'primary'}>Send</Button>
             </Typography>
           </div>
         </Modal>
@@ -47,4 +52,4 @@ const AddNewCard = () => {
   )
 }
 
-export default AddNewCard
+export default AddNewDeck

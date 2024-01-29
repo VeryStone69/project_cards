@@ -1,7 +1,12 @@
 .inputBlock {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
+
+  & img {
+    width: 540px;
+    height: 180px;
+  }
 
   .uploadButton {
     width: 100%;
@@ -22,5 +27,5 @@
 .buttonBlock {
   display: flex;
   justify-content: space-between;
-  margin-top: 50px;
+  margin-top: 30px;
 }

@@ -4,23 +4,25 @@ import { Checkbox } from '@/components/ui/checkBox'
 import { Modal } from '@/components/ui/modal'
 import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
-import AddNewCard from '@/features/add-new-card/add-new-card'
+import AddNewDeck from '@/features/add-new-deck/add-new-deck'
 import { Meta, StoryObj } from '@storybook/react'
 
-import s from '@/features/add-new-card/add-new-card.module.scss'
+import s from '@/features/add-new-deck/add-new-deck.module.scss'
+
+import notImg from '../../assets/images/not-img.jpg'
 
 const meta = {
-  component: AddNewCard,
+  component: AddNewDeck,
   parameters: {
     layout: 'centered',
   },
-  title: 'Components/features/add-new-card',
-} satisfies Meta<typeof AddNewCard>
+  title: 'Components/features/add-new-deck',
+} satisfies Meta<typeof AddNewDeck>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const AddCardButton: Story = {
+export const AddDeckButton: Story = {
   render: () => {
     return (
       <Typography variant={'subtitle2'}>
@@ -30,16 +32,20 @@ export const AddCardButton: Story = {
   },
 }
 
-export const AddCardModal: Story = {
+export const AddDeckModal: Story = {
   render: () => {
     return (
-      <Modal open title={'Add New Deck'}>
+      <Modal open title={'Create new deck'}>
         <div className={s.inputBlock}>
-          <TextField label={'Pack name'} />
+          <div className={s.notImg}>
+            <img alt={'notImg'} src={notImg} />
+          </div>
           <Typography className={s.uploadButton} variant={'subtitle2'}>
-            <Button variant={'secondary'}>Upload Image</Button>
+            <Button variant={'secondary'}>Change cover</Button>
             <Icon className={s.imgOnButton} name={'img'} />
           </Typography>
+          <TextField label={'Pack name'} />
+
           <Typography variant={'body2'}>
             <Checkbox label={'Private pack'} />
           </Typography>
@@ -50,7 +56,7 @@ export const AddCardModal: Story = {
             <Button variant={'secondary'}>Cancel</Button>
           </Typography>
           <Typography variant={'subtitle2'}>
-            <Button variant={'primary'}>Add New Pack</Button>
+            <Button variant={'primary'}>Send</Button>
           </Typography>
         </div>
       </Modal>

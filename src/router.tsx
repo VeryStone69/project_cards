@@ -1,9 +1,9 @@
 import {
+  createBrowserRouter,
   Navigate,
   Outlet,
   RouteObject,
   RouterProvider,
-  createBrowserRouter,
 } from 'react-router-dom'
 
 import { Cards } from '@/components/cards/cards'
@@ -17,6 +17,7 @@ import { Profile } from '@/pages/profile/profile'
 import RecoveryPassword from '@/pages/recovery-password/recovery-password'
 import { Register } from '@/pages/register/register'
 import { useMeQuery } from '@/services/auth-api/auth'
+import AddNewDeck from '@/features/add-new-deck/add-new-deck'
 
 export const PATH = {
   check: '/check-email',
@@ -59,7 +60,7 @@ const publicRoutes: RouteObject[] = [
 
 const privateRoutes: RouteObject[] = [
   {
-    element: <InitialLoader preLoader={false} />,
+    element: <AddNewDeck />,
     path: PATH.home,
   },
   {
