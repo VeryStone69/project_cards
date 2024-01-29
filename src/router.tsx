@@ -7,8 +7,8 @@ import {
 } from 'react-router-dom'
 
 import { Cards } from '@/components/cards/cards'
+import { AddCardForm } from '@/components/forms/add-card-form/card-form'
 import { InitialLoader } from '@/components/ui/loader/loader'
-import AddNewCard from '@/features/add-new-card/add-new-card'
 import { CheckEmail } from '@/pages/check-email/check-email'
 import { CreateNewPassword } from '@/pages/create-new-password/create-new-password'
 import { Login } from '@/pages/login/login'
@@ -24,8 +24,8 @@ export const PATH = {
   createNewPassword: '/create-new-password',
   home: '/home',
   login: '/login',
-  notFound: '/',
-  packs: '/packs',
+  notFound: '/page-not-found',
+  packs: '/',
   profile: '/profile',
   recover: '/recovery',
   register: '/register',
@@ -60,7 +60,7 @@ const publicRoutes: RouteObject[] = [
 
 const privateRoutes: RouteObject[] = [
   {
-    element: <AddNewCard />,
+    element: <AddCardForm onSubmit={() => {}} onValueChange={() => {}} options={[]} />,
     path: PATH.home,
   },
   {
@@ -96,9 +96,7 @@ export const Router = () => {
 }
 
 function PrivateRoutes() {
-  const { isError, isLoading, isSuccess } = useMeQuery()
-
-  alert(`${isSuccess}`)
+  const { isError, isLoading } = useMeQuery()
 
   if (isLoading) {
     return <InitialLoader />

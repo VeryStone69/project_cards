@@ -1,0 +1,24 @@
+.formCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  margin: auto auto 20px;
+  padding: 20px 0;
+}
+
+.form {
+  padding: 0 30px;
+
+  .email {
+    margin: 24px 0;
+  }
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: space-between;
+}
+
