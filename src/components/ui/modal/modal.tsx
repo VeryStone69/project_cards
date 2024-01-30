@@ -2,6 +2,7 @@ import { PropsWithChildren } from 'react'
 
 import { Icon } from '@/components/icon/Icon'
 import { Card } from '@/components/ui/card'
+import { IconButton } from '@/components/ui/icon-button'
 import { Typography } from '@/components/ui/typography'
 import * as Dialog from '@radix-ui/react-dialog'
 
@@ -26,9 +27,12 @@ export const Modal = ({ children, open, setOpen, title }: Props) => (
               </Dialog.Title>
 
               <Dialog.Close asChild>
-                <button className={s.button}>
-                  <Icon name={'cross'} width={'22px'} />
-                </button>
+                <IconButton
+                  className={s.crossButton}
+                  icon={
+                    <Icon className={s.crossSvg} height={'20px'} name={'cross'} width={'20px'} />
+                  }
+                />
               </Dialog.Close>
             </div>
             <div className={s.content}>{children}</div>
