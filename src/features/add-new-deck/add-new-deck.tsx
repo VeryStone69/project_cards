@@ -18,12 +18,10 @@ const AddNewDeck = () => {
       {open && (
         <Modal open={open} setOpen={setOpen} title={'Create new deck'}>
           <div className={s.inputBlock}>
-            <div className={s.notImg}>
-              <img alt={'notImg'} src={notImg} />
-            </div>
+            <img alt={'notImg'} src={notImg} />
             <Typography className={s.uploadButton} variant={'subtitle2'}>
               <Button variant={'secondary'}>Change cover</Button>
-              <Icon className={s.imgOnButton} name={'img'} />
+              <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 20 20'} />
             </Typography>
             <TextField label={'Pack name'} />
 

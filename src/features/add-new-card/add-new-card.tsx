@@ -21,21 +21,17 @@ const AddNewCard = () => {
               Enter your question and give the correct answer:
             </Typography>
             <TextField label={'Question?'} />
-            <div className={s.notImg}>
-              <img alt={'notImg'} src={notImg} />
-            </div>
+            <img alt={'notImg'} src={notImg} />
             <Typography className={s.uploadButton} variant={'subtitle2'}>
               <Button variant={'secondary'}>Change image</Button>
-              <Icon className={s.imgOnButton} name={'img'} />
+              <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 20 20'} />
             </Typography>
 
             <TextField label={'Answer'} />
-            <div className={s.notImg}>
-              <img alt={'notImg'} src={notImg} />
-            </div>
+            <img alt={'notImg'} src={notImg} />
             <Typography className={s.uploadButton} variant={'subtitle2'}>
               <Button variant={'secondary'}>Change image</Button>
-              <Icon className={s.imgOnButton} name={'img'} />
+              <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 20 20'} />
             </Typography>
           </div>
 
