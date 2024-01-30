@@ -113,7 +113,10 @@
 }
 
 .SelectContent {
+  z-index: 100;
+
   width: var(--radix-select-trigger-width);
+
   background-color: var(--color-dark-900);
   border: 1px solid var(--color-dark-300);
   border-radius: 0 0 2px 2px;
