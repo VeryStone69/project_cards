@@ -51,7 +51,7 @@ export const SignUp = ({ className, onSubmit }: LoginProps) => {
       <DevTool control={control} />
 
       <Typography className={s.title} variant={'h1'}>
-        Sign up
+        Registration
       </Typography>
 
       <form className={classNames} onSubmit={handleSubmit(onSubmit)}>
@@ -74,7 +74,7 @@ export const SignUp = ({ className, onSubmit }: LoginProps) => {
         />
 
         <Button className={s.button} fullWidth type={'submit'}>
-          Sign up
+          Register
         </Button>
       </form>
 
@@ -82,7 +82,7 @@ export const SignUp = ({ className, onSubmit }: LoginProps) => {
         <Typography variant={'body2'}>Already have an account?</Typography>
 
         <Typography className={s.signinButton} variant={'h2'}>
-          <a href={'#'}>Sign in</a>
+          <a href={'#'}>Login</a>
         </Typography>
       </div>
     </div>
