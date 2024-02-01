@@ -14,7 +14,7 @@ export const Layout = ({ children, className }: Props) => {
   const profileData = {
     avatar: avatar,
     email: 'ololo@mail.com',
-    name: 'Zipulya',
+    name: 'Oleg Mongol',
   }
 
   return (
