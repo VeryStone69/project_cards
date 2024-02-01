@@ -21,13 +21,10 @@
     opacity: 0.5;
   }
 
+
   svg {
     position: absolute;
     z-index: 5;
-    top: 0;
-    left: 0;
-    transform: translate(35%, 30%);
-
     fill: var(--color-light-100);
   }
 }
@@ -36,8 +33,6 @@
   content: '';
 
   position: absolute;
-  top: -50%;
-  left: -50%;
   transform: scale(0);
 
   width: 26px;
@@ -61,5 +56,5 @@
 
 .button:hover:focus-visible::before {
   transform: scale(1);
-  background-color: var(--color-dark-100);
+  background-color: var(--color-dark-500);
 }

@@ -4,12 +4,14 @@ import { useParams } from 'react-router-dom'
 import { Layout } from '@/components/layout'
 import { BackButton } from '@/components/ui/back-button'
 import { Button } from '@/components/ui/button'
+import { Dropdown } from '@/components/ui/dropdown'
 import { Pagination } from '@/components/ui/pagination/Pagination'
 import { Rating } from '@/components/ui/rating'
 import { Table } from '@/components/ui/table'
 import { TableHeader } from '@/components/ui/table-header'
 import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
+import { DropdownCard } from '@/features/dropdown-card/dropdown-card'
 import { useGetCardsInDeckQuery } from '@/services/cards-api/cards-api'
 import { useGetDeckInfoQuery } from '@/services/decks-api/decks-api'
 
@@ -56,11 +58,19 @@ export const Cards = () => {
       <section style={{ marginTop: '100px' }}>
         <BackButton />
         <div style={{ marginTop: '34px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}
+          >
             <Typography as={'h1'} variant={'large'}>
               {pack.data?.name}
             </Typography>
-
+            <Dropdown className={s.dropDown} sideOffset={-8}>
+              <DropdownCard />
+            </Dropdown>
             <Button>Learn Card</Button>
           </div>
           {pack.data?.cover && (
@@ -70,6 +80,7 @@ export const Cards = () => {
               style={{ height: '6rem', marginBottom: '24px', marginTop: '15px', width: '10rem' }}
             />
           )}
+
           <TextField
             clearField={() => {}}
             onChange={() => {}}

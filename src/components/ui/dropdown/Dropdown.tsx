@@ -1,108 +1,43 @@
+import { ReactNode, forwardRef, useState } from 'react'
+
 import { Icon } from '@/components/icon/Icon'
-import { Typography } from '@/components/ui/typography'
+import { IconButton } from '@/components/ui/icon-button'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 
 import s from './dropdown.module.scss'
 
-const DropdownMenuDemo = () => {
-  return (
-    <div className={s['DropdownMenuRoot']}>
-      <DropdownMenu.Root>
-        <DropdownMenu.Trigger asChild>
-          <img className={s['userLogo']} />
+type Props = {
+  align?: 'center' | 'end' | 'start'
+  children: ReactNode
+  className?: string
+  sideOffset?: number
+  trigger?: ReactNode
+}
+export const Dropdown = forwardRef<any, Props>(
+  ({ align = 'end', children, className, sideOffset = 8, trigger }, ref) => {
+    const [open, setOpen] = useState(false)
+
+    return (
+      <DropdownMenu.Root onOpenChange={setOpen} open={open}>
+        <DropdownMenu.Trigger asChild ref={ref}>
+          {trigger ?? (
+            <IconButton
+              className={className ? className : s.btn}
+              icon={<Icon name={'more'} size={'24px'} />}
+            />
+          )}
         </DropdownMenu.Trigger>
 
-        <DropdownMenu.Content className={s['DropdownMenuContent']} sideOffset={8}>
-          <DropdownMenu.Arrow className={s['DropdownMenuArrow']} height={8} width={14} />
-
-          <DropDownItem
-            classNameItem={s.DropdownMenuItem}
-            classNameSVG={s.userLogo}
-            userEmail={'j&johnson@gmail.com'}
-            userName={'Ivan'}
-          />
-          <DropDownItemWithIcon
-            classNameItem={s.itemWithIcon}
-            classNameSVG={s.svgWhite}
-            svgId={'logoUserDrop'}
-            textItem={'My profile'}
-          />
-          <DropDownItemWithIcon
-            classNameItem={s.itemWithIcon}
-            classNameSVG={s.svgWhite}
-            svgId={'logout'}
-            textItem={'Sign Out'}
-          />
+        <DropdownMenu.Content
+          align={align}
+          className={s.DropdownMenuContent}
+          sideOffset={sideOffset}
+        >
+          <DropdownMenu.Arrow className={s.DropdownMenuArrow} height={10} width={14} />
+          <DropdownMenu.Arrow className={s.DropdownMenuTwoArrow} height={10} width={14} />
+          {children}
         </DropdownMenu.Content>
       </DropdownMenu.Root>
-
-      <DropdownMenu.Root>
-        <DropdownMenu.Trigger asChild>
-          <button>test</button>
-        </DropdownMenu.Trigger>
-
-        <DropdownMenu.Content className={s['DropdownMenuContent']} sideOffset={8}>
-          <DropdownMenu.Arrow className={s['DropdownMenuArrow']} height={8} width={14} />
-          <DropDownItemWithIcon
-            classNameItem={s.itemWithIcon}
-            classNameSVG={s.svgWhite}
-            svgId={'playLearn'}
-            textItem={'My profile'}
-          />
-          <DropDownItemWithIcon
-            classNameItem={s.itemWithIcon}
-            classNameSVG={s.svgWhite}
-            svgId={'edit'}
-            textItem={'My profile'}
-          />
-          <DropDownItemWithIcon
-            classNameItem={s.itemWithIcon}
-            classNameSVG={s.svgWhite}
-            svgId={'trashBin'}
-            textItem={'Sign Out'}
-          />
-        </DropdownMenu.Content>
-      </DropdownMenu.Root>
-    </div>
-  )
-}
-
-export type DropDownProps = {
-  classNameItem?: string
-  classNameSVG?: string
-  onSelect?: (event: Event) => void
-  userEmail?: string
-  userName?: string
-}
-
-type DropDownWithIconProps = Pick<DropDownProps, 'classNameItem' | 'classNameSVG' | 'onSelect'> & {
-  svgId: string
-  textItem?: string
-}
-
-export default DropdownMenuDemo
-
-export const DropDownItem = (props: DropDownProps) => {
-  const { classNameItem, classNameSVG, onSelect, userEmail, userName } = props
-
-  return (
-    <DropdownMenu.Item className={classNameItem} onSelect={onSelect}>
-      <img className={classNameSVG} />
-      <div>
-        <Typography variant={'subtitle1'}>{userName}</Typography>
-        <Typography variant={'caption'}>{userEmail}</Typography>
-      </div>
-    </DropdownMenu.Item>
-  )
-}
-
-export const DropDownItemWithIcon = (props: DropDownWithIconProps) => {
-  const { classNameItem, classNameSVG, onSelect, svgId, textItem } = props
-
-  return (
-    <DropdownMenu.Item className={classNameItem} onSelect={onSelect}>
-      <Icon className={classNameSVG} name={svgId} size={'16px'} />
-      <Typography variant={'caption'}>{textItem}</Typography>
-    </DropdownMenu.Item>
-  )
-}
+    )
+  }
+)
