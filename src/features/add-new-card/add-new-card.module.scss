@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  height: 646px;
+  height: 686px;
 
   & img {
     width: 100%;
@@ -19,15 +19,8 @@
 
     .imgOnButton {
       position: relative;
-      top: -28px;
+      top: -29px;
       left: 195px;
     }
   }
-}
-
-.buttonBlock {
-  display: flex;
-  justify-content: space-between;
-  height: 30px;
-  margin-top: 90px;
 }

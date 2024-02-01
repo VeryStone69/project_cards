@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import notImg from '@/assets/images/not-img.jpg'
+import { ButtonBlock } from '@/components/button-block/button-block'
 import { Icon } from '@/components/icon/Icon'
 import { Button } from '@/components/ui/button'
 import { Modal } from '@/components/ui/modal'
@@ -9,40 +10,33 @@ import { Typography } from '@/components/ui/typography'
 
 import s from './add-new-card.module.scss'
 
-const AddNewCard = () => {
+export const AddNewCard = () => {
   const [open, setOpen] = useState(false)
 
   return (
     <>
       {open && (
-        <Modal open={open} setOpen={setOpen} title={'Add New Card'}>
+        <Modal open={open} setOpen={setOpen} title={'Adding a new card'}>
           <div className={s.inputBlock}>
             <Typography variant={'subtitle2'}>
               Enter your question and give the correct answer:
             </Typography>
-            <TextField label={'Question?'} />
+            <TextField label={'Question:'} />
             <img alt={'notImg'} src={notImg} />
             <Typography className={s.uploadButton} variant={'subtitle2'}>
               <Button variant={'secondary'}>Change image</Button>
-              <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 20 20'} />
+              <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 18 18'} />
             </Typography>
 
-            <TextField label={'Answer'} />
+            <TextField label={'Answer:'} />
             <img alt={'notImg'} src={notImg} />
             <Typography className={s.uploadButton} variant={'subtitle2'}>
               <Button variant={'secondary'}>Change image</Button>
-              <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 20 20'} />
+              <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 18 18'} />
             </Typography>
           </div>
 
-          <div className={s.buttonBlock}>
-            <Typography variant={'subtitle2'}>
-              <Button variant={'secondary'}>Cancel</Button>
-            </Typography>
-            <Typography variant={'subtitle2'}>
-              <Button variant={'primary'}>Add new Card</Button>
-            </Typography>
-          </div>
+          <ButtonBlock primary={'Add a card'} secondary={'Cancel'} />
         </Modal>
       )}
 
@@ -54,5 +48,3 @@ const AddNewCard = () => {
     </>
   )
 }
-
-export default AddNewCard
