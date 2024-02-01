@@ -1,5 +1,5 @@
 import notImg from '@/assets/images/not-img.jpg'
-import ButtonBlock from '@/components/button-block/button-block'
+import { ButtonBlock } from '@/components/button-block/button-block'
 import { AddCardForm } from '@/components/forms/add-card-form'
 import { Icon } from '@/components/icon/Icon'
 import { Button } from '@/components/ui/button'

@@ -7,8 +7,8 @@ import {
 } from 'react-router-dom'
 
 import { Cards } from '@/components/cards/cards'
-import { AddCardForm } from '@/components/forms/add-card-form/card-form'
 import { InitialLoader } from '@/components/ui/loader/loader'
+import { EditPack } from '@/features/edit-pack'
 import { CheckEmail } from '@/pages/check-email/check-email'
 import { CreateNewPassword } from '@/pages/create-new-password/create-new-password'
 import { Login } from '@/pages/login/login'
@@ -60,7 +60,7 @@ const publicRoutes: RouteObject[] = [
 
 const privateRoutes: RouteObject[] = [
   {
-    element: <AddCardForm onSubmit={() => {}} onValueChange={() => {}} options={[]} />,
+    element: <EditPack />,
     path: PATH.home,
   },
   {

@@ -1,4 +1,4 @@
-import ButtonBlock from '@/components/button-block/button-block'
+import { ButtonBlock } from '@/components/button-block/button-block'
 import { Icon } from '@/components/icon/Icon'
 import { Button } from '@/components/ui/button'
 import { Modal } from '@/components/ui/modal'
