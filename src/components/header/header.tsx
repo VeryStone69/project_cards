@@ -37,7 +37,7 @@ export const Header = memo(({ data }: Props) => {
               sideOffset={-6}
               trigger={
                 <button>
-                  <Avatar className={s.userPhoto} src={avatar} userName={data.name} />
+                  <Avatar src={avatar} userName={data.name} />
                 </button>
               }
             >
