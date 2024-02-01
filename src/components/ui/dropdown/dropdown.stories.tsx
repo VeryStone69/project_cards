@@ -1,103 +1,58 @@
-import DropdownMenuDemo, {
-  DropDownItem,
-  DropDownItemWithIcon,
-} from '@/components/ui/dropdown/Dropdown'
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
+import { BrowserRouter } from 'react-router-dom'
+
+import avatar from '@/assets/images/avatar.jpg'
+import { Avatar } from '@/components/ui/avatar'
+import { Dropdown } from '@/components/ui/dropdown/Dropdown'
+import { DropdownCard } from '@/features/dropdown-card'
+import { DropDownUser } from '@/features/dropdown-user'
 import { Meta, StoryObj } from '@storybook/react'
 
-import s from '@/components/ui/dropdown/dropdown.module.scss'
+import s from '@/components/header/header.module.scss'
 
 const meta = {
-  argTypes: {},
-  component: DropdownMenuDemo,
-  parameters: { layout: 'centered' },
+  args: { align: 'center', className: '', trigger: '' },
+  component: Dropdown,
   tags: ['autodocs'],
-  title: 'Components/ui/DropdownMenuDemo',
-} satisfies Meta<typeof DropdownMenuDemo>
+  title: 'Components/ui/DropdownMenu',
+} satisfies Meta<typeof Dropdown>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const DropDownWithlUserLogo: Story = {
-  args: {
-    label: 'This is dropdown',
-  },
-  render: function Render() {
+export const DropDownWithUser: Story = {
+  args: { align: 'center', children: '', className: '', key: '', ref: null, trigger: '' },
+  parameters: { layout: 'centered' },
+  render: () => {
+    const data = {
+      email: 'example@gmail.com',
+      name: 'User',
+    }
+
     return (
-      <>
-        <DropdownMenu.Root>
-          <DropdownMenu.Trigger asChild>
-            <img className={s['userLogo']} />
-          </DropdownMenu.Trigger>
-
-          <DropdownMenu.Content className={s['DropdownMenuContent']} sideOffset={8}>
-            <DropdownMenu.Arrow className={s['DropdownMenuArrow']} height={8} width={14} />
-
-            <DropDownItem
-              classNameItem={s.DropdownMenuItem}
-              classNameSVG={s.userLogo}
-              userEmail={'j&johnson@gmail.com'}
-              userName={'Ivan'}
-            />
-            <DropDownItemWithIcon
-              classNameItem={s.itemWithIcon}
-              classNameSVG={s.svgWhite}
-              svgId={'logoUserDrop'}
-              textItem={'My profile'}
-            />
-            <DropDownItemWithIcon
-              classNameItem={s.itemWithIcon}
-              classNameSVG={s.svgWhite}
-              svgId={'logout'}
-              textItem={'Sign Out'}
-            />
-          </DropdownMenu.Content>
-        </DropdownMenu.Root>
-      </>
+      <BrowserRouter>
+        <Dropdown
+          sideOffset={-7}
+          trigger={
+            <button>
+              <Avatar className={s.userPhoto} src={avatar} userName={data.name} />
+            </button>
+          }
+        >
+          <DropDownUser userEmail={data.email} userName={data.name} />
+        </Dropdown>
+      </BrowserRouter>
     )
   },
 }
 
-export const DropDownWithSVGList: Story = {
-  args: {
-    label: 'This is dropdown',
-  },
-  render: function Render() {
+export const DropDownWithSvg: Story = {
+  args: { align: 'start', children: '', className: '', key: '', ref: null, trigger: '' },
+  parameters: { layout: 'centered' },
+  render: () => {
     return (
-      <>
-        <span> This is default drop-down-menu button:</span>
-        <DropdownMenu.Root>
-          <DropdownMenu.Trigger asChild>
-            <button
-              style={{ border: '1px solid yellowgreen', borderRadius: '5px', margin: '10px' }}
-            >
-              test
-            </button>
-          </DropdownMenu.Trigger>
-
-          <DropdownMenu.Content className={s['DropdownMenuContent']} sideOffset={8}>
-            <DropdownMenu.Arrow className={s['DropdownMenuArrow']} height={8} width={14} />
-            <DropDownItemWithIcon
-              classNameItem={s.itemWithIcon}
-              classNameSVG={s.svgWhite}
-              svgId={'playLearn'}
-              textItem={'My profile'}
-            />
-            <DropDownItemWithIcon
-              classNameItem={s.itemWithIcon}
-              classNameSVG={s.svgWhite}
-              svgId={'edit'}
-              textItem={'My profile'}
-            />
-            <DropDownItemWithIcon
-              classNameItem={s.itemWithIcon}
-              classNameSVG={s.svgWhite}
-              svgId={'trashBin'}
-              textItem={'Sign Out'}
-            />
-          </DropdownMenu.Content>
-        </DropdownMenu.Root>
-      </>
+      <Dropdown sideOffset={10}>
+        <DropdownCard />
+      </Dropdown>
     )
   },
 }
