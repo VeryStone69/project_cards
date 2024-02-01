@@ -1,5 +1,5 @@
-import { Header } from '@/components/header'
 import { Icon } from '@/components/icon/Icon'
+import { Layout } from '@/components/layout'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { FileUploader } from '@/components/ui/file-uploader'
@@ -11,8 +11,7 @@ import avatar from '../../assets/images/avatar.jpg'
 
 export const Profile = () => {
   return (
-    <div className={s.profilePage}>
-      <Header data={{ avatar: '', email: '', name: 'Artyom Korshykau' }} />
+    <Layout>
       <Card className={s.card}>
         <Typography className={s.title} variant={'h1'}>
           Personal Information
@@ -34,6 +33,6 @@ export const Profile = () => {
           <Button variant={'secondary'}>Logout</Button>
         </Typography>
       </Card>
-    </div>
+    </Layout>
   )
 }
