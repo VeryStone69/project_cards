@@ -1,4 +1,4 @@
-import { Header } from '@/components/header'
+import { Layout } from '@/components/layout'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
@@ -9,12 +9,10 @@ import checkEmail from '../../assets/images/check-email.png'
 
 export const CheckEmail = () => {
   return (
-    <div className={styles.checkEmailPage}>
-      <Header data={null} />
-
+    <Layout>
       <Card className={styles.card}>
         <Typography className={styles.title} variant={'h1'}>
-          Check Email
+          Check your email
         </Typography>
 
         <img alt={'check-email'} src={checkEmail} />
@@ -23,8 +21,8 @@ export const CheckEmail = () => {
           We’ve sent an Email with instructions to example@mail.com
         </Typography>
 
-        <Button>Back to Sig In</Button>
+        <Button>Back to login</Button>
       </Card>
-    </div>
+    </Layout>
   )
 }
