@@ -1,5 +1,5 @@
 import { RegisterForm, SignUp } from '@/components/forms/sign-up'
-import { Header } from '@/components/header'
+import { Layout } from '@/components/layout'
 import { Card } from '@/components/ui/card'
 import { useRegisterMutation } from '@/services/auth-api/auth'
 
@@ -13,11 +13,10 @@ export const Register = () => {
   }
 
   return (
-    <div className={styles.forgotPage}>
-      <Header data={null} />
+    <Layout>
       <Card className={styles.card}>
         <SignUp onSubmit={handleRegister} />
       </Card>
-    </div>
+    </Layout>
   )
 }
