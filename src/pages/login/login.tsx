@@ -1,5 +1,5 @@
 import { SignIn } from '@/components/forms/sign-in'
-import { Header } from '@/components/header'
+import { Layout } from '@/components/layout'
 import { Card } from '@/components/ui/card'
 import { useLoginMutation } from '@/services/auth-api/auth'
 import { LoginData } from '@/services/auth-api/auth.types'
@@ -20,11 +20,10 @@ export const Login = () => {
   }
 
   return (
-    <div className={styles.loginPage}>
-      <Header data={null} />
+    <Layout>
       <Card className={styles.card}>
         <SignIn onSubmit={handleLogin} />
       </Card>
-    </div>
+    </Layout>
   )
 }
