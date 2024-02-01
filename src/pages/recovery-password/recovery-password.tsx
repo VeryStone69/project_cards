@@ -1,13 +1,12 @@
 import { ForgotPassword } from '@/components/forms/forgot-password'
-import { Header } from '@/components/header'
+import { Layout } from '@/components/layout'
 import { Card } from '@/components/ui/card'
 
 import styles from './recovery-password.module.scss'
 
 const RecoveryPassword = () => {
   return (
-    <div className={styles.recoverPage}>
-      <Header data={null} />
+    <Layout>
       <Card className={styles.card}>
         <ForgotPassword
           onSubmit={values => {
@@ -15,7 +14,7 @@ const RecoveryPassword = () => {
           }}
         />
       </Card>
-    </div>
+    </Layout>
   )
 }
 
