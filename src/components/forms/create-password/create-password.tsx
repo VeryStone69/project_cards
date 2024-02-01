@@ -52,7 +52,7 @@ export const CreatePassword = ({ className, onSubmit }: LoginProps) => {
         </Typography>
 
         <Button fullWidth type={'submit'}>
-          Create new password
+          Create
         </Button>
       </form>
     </div>
