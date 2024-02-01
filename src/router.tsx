@@ -8,7 +8,6 @@ import {
 
 import { Cards } from '@/components/cards/cards'
 import { InitialLoader } from '@/components/ui/loader/loader'
-import { EditPack } from '@/features/edit-pack'
 import { CheckEmail } from '@/pages/check-email/check-email'
 import { CreateNewPassword } from '@/pages/create-new-password/create-new-password'
 import { Login } from '@/pages/login/login'
@@ -60,7 +59,7 @@ const publicRoutes: RouteObject[] = [
 
 const privateRoutes: RouteObject[] = [
   {
-    element: <EditPack />,
+    element: <InitialLoader />,
     path: PATH.home,
   },
   {
