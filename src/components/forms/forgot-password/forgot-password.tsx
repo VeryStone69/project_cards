@@ -36,7 +36,7 @@ export const ForgotPassword = ({ className, onSubmit }: LoginProps) => {
   return (
     <div className={s.formCard}>
       <Typography className={s.title} variant={'h1'}>
-        Forgot your password?
+        Password recovery
       </Typography>
 
       <form className={classNames} onSubmit={handleSubmit(onSubmit)}>
@@ -46,7 +46,7 @@ export const ForgotPassword = ({ className, onSubmit }: LoginProps) => {
         </Typography>
 
         <Button fullWidth type={'submit'}>
-          Send instructions
+          Send
         </Button>
       </form>
 
@@ -54,7 +54,7 @@ export const ForgotPassword = ({ className, onSubmit }: LoginProps) => {
         <Typography variant={'body2'}>Did you remember your password?</Typography>
 
         <Typography className={s.sendCardButton} variant={'h2'}>
-          <a href={'#'}>Try logging in</a>
+          <a href={'#'}>Login</a>
         </Typography>
       </div>
     </div>
