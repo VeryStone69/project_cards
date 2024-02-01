@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import notImg from '@/assets/images/not-img.jpg'
+import { ButtonBlock } from '@/components/button-block/button-block'
 import { Icon } from '@/components/icon/Icon'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkBox'
@@ -11,20 +12,20 @@ import { Typography } from '@/components/ui/typography'
 
 import s from './edit-pack.module.scss'
 
-const EditPack = () => {
+export const EditPack = () => {
   const [open, setOpen] = useState(false)
 
   return (
     <>
       {open && (
-        <Modal open={open} setOpen={setOpen} title={'Edit Pack'}>
+        <Modal open={open} setOpen={setOpen} title={'Editing a Pack'}>
           <div className={s.inputBlock}>
             <div className={s.notImg}>
               <img alt={'notImg'} src={notImg} />
             </div>
             <Typography className={s.uploadButton} variant={'subtitle2'}>
               <Button variant={'secondary'}>Change cover</Button>
-              <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 20 20'} />
+              <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 18 18'} />
             </Typography>
             <TextField label={'Pack name'} />
 
@@ -33,14 +34,7 @@ const EditPack = () => {
             </Typography>
           </div>
 
-          <div className={s.buttonBlock}>
-            <Typography variant={'subtitle2'}>
-              <Button variant={'secondary'}>Cancel</Button>
-            </Typography>
-            <Typography variant={'subtitle2'}>
-              <Button variant={'primary'}>Send</Button>
-            </Typography>
-          </div>
+          <ButtonBlock className={s.buttonBlock} primary={'Save changes'} secondary={'Cancel'} />
         </Modal>
       )}
       <IconButton
@@ -49,5 +43,3 @@ const EditPack = () => {
     </>
   )
 }
-
-export default EditPack
