@@ -1,3 +1,4 @@
+import ButtonBlock from '@/components/button-block/button-block'
 import { Icon } from '@/components/icon/Icon'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkBox'
@@ -35,30 +36,21 @@ export const AddDeckButton: Story = {
 export const AddDeckModal: Story = {
   render: () => {
     return (
-      <Modal open title={'Create new deck'}>
+      <Modal open title={'Creating a new deck'}>
         <div className={s.inputBlock}>
-          <div className={s.notImg}>
-            <img alt={'notImg'} src={notImg} />
-          </div>
+          <img alt={'notImg'} src={notImg} />
           <Typography className={s.uploadButton} variant={'subtitle2'}>
-            <Button variant={'secondary'}>Change cover</Button>
-            <Icon className={s.imgOnButton} name={'img'} />
+            <Button variant={'secondary'}>Change image</Button>
+            <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 18 18'} />
           </Typography>
-          <TextField label={'Pack name'} />
+          <TextField label={'Deck name'} />
 
           <Typography variant={'body2'}>
-            <Checkbox label={'Private pack'} />
+            <Checkbox label={'Private deck'} />
           </Typography>
         </div>
 
-        <div className={s.buttonBlock}>
-          <Typography variant={'subtitle2'}>
-            <Button variant={'secondary'}>Cancel</Button>
-          </Typography>
-          <Typography variant={'subtitle2'}>
-            <Button variant={'primary'}>Send</Button>
-          </Typography>
-        </div>
+        <ButtonBlock primary={'Create a deck'} secondary={'Cancel'} />
       </Modal>
     )
   },

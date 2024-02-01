@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import notImg from '@/assets/images/not-img.jpg'
+import { ButtonBlock } from '@/components/button-block/button-block'
 import { Icon } from '@/components/icon/Icon'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkBox'
@@ -16,28 +17,21 @@ const AddNewDeck = () => {
   return (
     <div>
       {open && (
-        <Modal open={open} setOpen={setOpen} title={'Create new deck'}>
+        <Modal open={open} setOpen={setOpen} title={'Creating a new deck'}>
           <div className={s.inputBlock}>
             <img alt={'notImg'} src={notImg} />
             <Typography className={s.uploadButton} variant={'subtitle2'}>
-              <Button variant={'secondary'}>Change cover</Button>
-              <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 20 20'} />
+              <Button variant={'secondary'}>Change image</Button>
+              <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 18 18'} />
             </Typography>
-            <TextField label={'Pack name'} />
+            <TextField label={'Deck name'} />
 
             <Typography variant={'body2'}>
-              <Checkbox label={'Private pack'} />
+              <Checkbox label={'Private deck'} />
             </Typography>
           </div>
 
-          <div className={s.buttonBlock}>
-            <Typography variant={'subtitle2'}>
-              <Button variant={'secondary'}>Cancel</Button>
-            </Typography>
-            <Typography variant={'subtitle2'}>
-              <Button variant={'primary'}>Send</Button>
-            </Typography>
-          </div>
+          <ButtonBlock primary={'Create a deck'} secondary={'Cancel'} />
         </Modal>
       )}
 
