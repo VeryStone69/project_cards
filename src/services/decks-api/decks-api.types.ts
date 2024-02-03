@@ -10,7 +10,7 @@ export type DeleteDecks = {
 }
 
 export type GetDecks = {
-  items: GetDecksItems[]
+  items: DecksItems[]
   maxCardsCount: number
   pagination: DecksPagination
 }
@@ -20,7 +20,7 @@ export type GetDecksItemsAuthor = {
   name: string
 }
 
-export type GetDecksItems = {
+export type DecksItems = {
   author: GetDecksItemsAuthor
   cardsCount: number
   cover: string
