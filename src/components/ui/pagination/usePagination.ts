@@ -8,7 +8,6 @@ enum Page {
 
 export default function usePagination({
   currentPage,
-  itemsPerPage,
   onChangePage,
   siblingCount,
   totalPages,
@@ -19,7 +18,7 @@ export default function usePagination({
     { title: '10', value: '10' },
     { title: '15', value: '15' },
   ]
-  const totalElements = Math.ceil(totalPages / +itemsPerPage)
+  const totalElements = Math.ceil(totalPages)
 
   const hideNextButton = currentPage === totalElements
   const hidePrevButton = currentPage === Page.first
