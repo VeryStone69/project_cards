@@ -2,9 +2,11 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   filter: {
+    authorId: undefined as string | undefined,
     searchName: '',
-    sliderValue: [0, 10],
-    tabValue: '',
+    sliderValueMax: undefined as number | undefined,
+    sliderValueMin: 0,
+    tabValue: 'all',
   },
   pagination: {
     currentPage: 1,
@@ -16,6 +18,13 @@ const slice = createSlice({
   initialState,
   name: 'packs',
   reducers: {
+    resetFilters: state => {
+      state.filter.searchName = ''
+      state.filter.tabValue = 'all'
+      state.filter.sliderValueMin = 0
+      state.filter.sliderValueMax = undefined
+      state.pagination.currentPage = 1
+    },
     setCurrentPage: (state, action: PayloadAction<{ newPage: number }>) => {
       state.pagination.currentPage = action.payload.newPage
     },
@@ -26,10 +35,15 @@ const slice = createSlice({
       state.filter.searchName = action.payload.newSearchName
     },
     setSliderValue: (state, action: PayloadAction<{ newSliderValue: number[] }>) => {
-      state.filter.sliderValue = action.payload.newSliderValue
+      state.filter.sliderValueMin = action.payload.newSliderValue[0]
+      state.filter.sliderValueMax = action.payload.newSliderValue[1]
     },
-    setTabValue: (state, action: PayloadAction<{ newTabValue: string }>) => {
+    setTabValue: (
+      state,
+      action: PayloadAction<{ authorId?: string; newTabValue: 'all' | 'my' }>
+    ) => {
       state.filter.tabValue = action.payload.newTabValue
+      state.filter.authorId = action.payload.authorId
     },
   },
 })
