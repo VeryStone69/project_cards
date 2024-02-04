@@ -37,7 +37,7 @@ export const decksAPI = baseApi.injectEndpoints({
           return {
             method: 'GET',
             params: arg ?? {},
-            url: `v2/decks`,
+            url: `v1/decks`,
           }
         },
       }),
