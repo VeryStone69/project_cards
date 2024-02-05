@@ -1,9 +1,9 @@
 import {
-  createBrowserRouter,
   Navigate,
   Outlet,
   RouteObject,
   RouterProvider,
+  createBrowserRouter,
 } from 'react-router-dom'
 
 import { Cards } from '@/components/cards/cards'
@@ -21,10 +21,10 @@ import { useMeQuery } from '@/services/auth-api/auth'
 export const PATH = {
   check: '/check-email',
   createNewPassword: '/create-new-password',
+  decks: '/',
   home: '/home',
   login: '/login',
   notFound: '/page-not-found',
-  packs: '/',
   profile: '/profile',
   recover: '/recovery',
   register: '/register',
@@ -68,11 +68,11 @@ const privateRoutes: RouteObject[] = [
   },
   {
     element: <Packs />,
-    path: PATH.packs,
+    path: PATH.decks,
   },
   {
     element: <Cards />,
-    path: `${PATH.packs}/:id`,
+    path: `${PATH.decks}/:id`,
   },
 ]
 
