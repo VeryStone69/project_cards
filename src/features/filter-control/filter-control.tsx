@@ -7,8 +7,9 @@ import { TextField } from '@/components/ui/textField'
 import s from './filter-control.module.scss'
 
 type FilterControlProps = {
+  clearFilter: () => void
   searchName: string
-  setSearchName: (newString: string) => void
+  setSearchName: (value: string) => void
   setSliderValue: (newValue: number[]) => void
   setTabValue: (value: string) => void
   sliderMaxValue?: number
@@ -16,6 +17,7 @@ type FilterControlProps = {
   tabValue: string
 }
 export const FilterControl = ({
+  clearFilter,
   searchName,
   setSearchName,
   setSliderValue,
@@ -25,16 +27,12 @@ export const FilterControl = ({
   tabValue,
 }: FilterControlProps) => {
   const tabs: Tabs[] = [
-    { disabled: false, title: 'My cards', value: '1' },
-    { disabled: false, title: 'All cards', value: '2' },
+    { disabled: false, title: 'My cards', value: 'my' },
+    { disabled: false, title: 'All cards', value: 'all' },
   ]
+
   const onChangeSwitcher = (value: string) => {
     setTabValue(value)
-  }
-  const clearFilterHandler = () => {
-    setSliderValue([0, sliderMaxValue])
-    setSearchName('')
-    setTabValue('')
   }
 
   return (
@@ -59,7 +57,7 @@ export const FilterControl = ({
         onChange={setSliderValue}
         value={sliderValue}
       />
-      <Button className={s.clearButton} onClick={clearFilterHandler} variant={'secondary'}>
+      <Button className={s.clearButton} onClick={clearFilter} variant={'secondary'}>
         <Icon className={s.icon} name={'remove'} size={'16px'} />
         Clear Filter
       </Button>
