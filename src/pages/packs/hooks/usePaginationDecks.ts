@@ -6,8 +6,8 @@ import { packsActions } from '@/store/packs-slice/packs-slice'
 
 export const usePaginationDecks = () => {
   const dispatch = useAppDispatch()
-  const currentPageDecks = useAppSelector(currentPageSelector)
-  const itemPerPage = useAppSelector(pageSizeSelector)
+  const currentPage = useAppSelector(currentPageSelector)
+  const itemsPerPage = useAppSelector(pageSizeSelector)
   const changePage = useCallback((page: number) => {
     dispatch(packsActions.setCurrentPage({ newPage: page }))
   }, [])
@@ -18,7 +18,7 @@ export const usePaginationDecks = () => {
   return {
     changeItemPerPage,
     changePage,
-    currentPageDecks,
-    itemPerPage,
+    currentPage,
+    itemsPerPage,
   }
 }
