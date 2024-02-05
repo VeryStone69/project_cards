@@ -1,6 +1,4 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-
+import { useDebounce } from '@/app/hooks'
 import { Layout } from '@/components/layout'
 import { Button } from '@/components/ui/button'
 import { Pagination } from '@/components/ui/pagination/Pagination'
@@ -8,23 +6,48 @@ import { Table } from '@/components/ui/table'
 import { TableHeader } from '@/components/ui/table-header'
 import { Typography } from '@/components/ui/typography'
 import { FilterControl } from '@/features/filter-control'
+import { useFilterSetting } from '@/pages/packs/hooks/useFilterSetting'
+import { usePaginationDecks } from '@/pages/packs/hooks/usePaginationDecks'
+import { useMeQuery } from '@/services/auth-api/auth'
 import { useGetDecksQuery } from '@/services/decks-api/decks-api'
+import { TableContentDeck } from '@/widgets/table-content-deck'
 
 import s from './packs.module.scss'
 
-import defaultMask from '../../assets/images/Mask.jpg'
-
 export const Packs = () => {
-  const [currentPageDecks, setCurrentPage] = useState(1)
-  const [itemPerPage, setItemPerPage] = useState(5)
-  const decks = useGetDecksQuery({ currentPage: currentPageDecks, itemsPerPage: itemPerPage })
+  const { changeItemPerPage, changePage, currentPage, itemsPerPage } = usePaginationDecks()
 
-  const changePage = (page: number) => {
-    setCurrentPage(page)
-  }
-  const changeItemPerPage = (item: number) => {
-    setItemPerPage(item)
-  }
+  const { data: me } = useMeQuery()
+  const currentUserId = me?.id
+
+  const {
+    clearFilter,
+    getMyCard,
+    searchName,
+    setName,
+    setSlider,
+    setSort,
+    sliderValueMax,
+    sliderValueMin,
+    sort,
+    tabValue,
+  } = useFilterSetting(currentUserId)
+  const authorId = tabValue === 'my' ? currentUserId : undefined
+  const debouncedValueMin = useDebounce(sliderValueMin)
+  const debouncedValueMax = useDebounce(sliderValueMax)
+
+  const searchNameDebounce = useDebounce(searchName)
+
+  const decks = useGetDecksQuery({
+    authorId,
+    currentPage,
+    itemsPerPage,
+    maxCardsCount: debouncedValueMax,
+    minCardsCount: debouncedValueMin,
+    name: searchNameDebounce,
+    orderBy: sort ? `${sort.key}-${sort.direction}` : null,
+  })
+
   const packsColumns = [
     {
       key: 'name',
@@ -55,53 +78,35 @@ export const Packs = () => {
 
   return (
     <Layout>
-      <div style={{ marginTop: '100px' }}>
-        <div style={{ marginBottom: '30px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <div className={s.packsPage}>
+        <div className={s.setting}>
+          <div className={s.addCard}>
             <Typography as={'h1'} variant={'large'}>
               Packs list
             </Typography>
             <Button>Add new Pack</Button>
           </div>
           <FilterControl
-            searchName={''}
-            setSearchName={() => {}}
-            setSliderValue={() => {}}
-            setTabValue={() => {}}
-            sliderMaxValue={decks?.data?.maxCardsCount}
-            sliderValue={[1]}
-            tabValue={'1'}
+            clearFilter={clearFilter}
+            searchName={searchName}
+            setSearchName={setName}
+            setSliderValue={setSlider}
+            setTabValue={getMyCard}
+            sliderMaxValue={decks.data?.maxCardsCount}
+            sliderValue={[sliderValueMin, sliderValueMax ?? (decks.data?.maxCardsCount || 0)]}
+            tabValue={tabValue}
           />
         </div>
-        <Table.Root style={{ marginBottom: '24px' }}>
-          <TableHeader columns={packsColumns} />
+        <Table.Root className={s.table}>
+          <TableHeader columns={packsColumns} onSort={setSort} sort={sort} />
           <Table.Body>
-            {decks.data?.items.map(decks => {
-              return (
-                <Table.Row key={decks.id}>
-                  <Table.Cell align={'left'}>
-                    <Button as={Link} to={decks.id} variant={'link'}>
-                      <img
-                        alt={'Pack cover'}
-                        src={decks.cover ?? defaultMask}
-                        style={{ height: '48px', width: '110px' }}
-                      />
-                      <Typography as={'h3'} className={s.link} variant={'body2'}>
-                        {decks.name}
-                      </Typography>
-                    </Button>
-                  </Table.Cell>
-                  <Table.Cell>{decks.cardsCount}</Table.Cell>
-                  <Table.Cell>{new Date(decks.updated).toLocaleDateString()}</Table.Cell>
-                  <Table.Cell>{decks.author.name}</Table.Cell>
-                </Table.Row>
-              )
-            })}
+            {decks.data?.items.map(decks => <TableContentDeck deck={decks} key={decks.id} />)}
           </Table.Body>
         </Table.Root>
         <Pagination
-          currentPage={currentPageDecks}
-          itemsPerPage={itemPerPage}
+          className={s.pagination}
+          currentPage={currentPage}
+          itemsPerPage={itemsPerPage}
           onChangeItemsPerPage={changeItemPerPage}
           onChangePage={changePage}
           totalPages={decks.data?.pagination.totalPages}
