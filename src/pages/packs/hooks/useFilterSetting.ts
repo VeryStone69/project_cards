@@ -1,7 +1,8 @@
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import { useAppDispatch, useAppSelector } from '@/app/hooks'
+import { Sort } from '@/components/ui/table-header'
 import {
   searchNameSelector,
   sliderValueMaxSelector,
@@ -16,6 +17,11 @@ export const useFilterSetting = (currentUserId: string | undefined) => {
   const sliderValueMin = useSelector(sliderValueMinSelector)
   const sliderValueMax = useSelector(sliderValueMaxSelector)
   const tabValue = useSelector(tabValueSelector)
+  const [sort, setSort] = useState<Sort>(null)
+  const clearFilter = useCallback(() => {
+    dispatch(packsActions.resetFilters())
+    setSort(null)
+  }, [])
 
   const setName = useCallback((value: string) => {
     dispatch(packsActions.setSearchName({ newSearchName: value }))
@@ -36,12 +42,15 @@ export const useFilterSetting = (currentUserId: string | undefined) => {
   }, [])
 
   return {
+    clearFilter,
     getMyCard,
     searchName,
     setName,
     setSlider,
+    setSort,
     sliderValueMax,
     sliderValueMin,
+    sort,
     tabValue,
   }
 }
