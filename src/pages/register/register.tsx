@@ -1,5 +1,4 @@
 import { RegisterForm, SignUp } from '@/components/forms/sign-up'
-import { Layout } from '@/components/layout'
 import { Card } from '@/components/ui/card'
 import { useRegisterMutation } from '@/services/auth-api/auth'
 
@@ -13,10 +12,8 @@ export const Register = () => {
   }
 
   return (
-    <Layout>
-      <Card className={styles.card}>
-        <SignUp onSubmit={handleRegister} />
-      </Card>
-    </Layout>
+    <Card className={styles.card}>
+      <SignUp onSubmit={handleRegister} />
+    </Card>
   )
 }
