@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 
 import { Cards } from '@/components/cards/cards'
+import { Layout } from '@/components/layout'
 import { InitialLoader } from '@/components/ui/loader/loader'
 import { CheckEmail } from '@/pages/check-email/check-email'
 import { CreateNewPassword } from '@/pages/create-new-password/create-new-password'
@@ -78,30 +79,28 @@ const privateRoutes: RouteObject[] = [
 
 const router = createBrowserRouter([
   {
-    children: privateRoutes,
-    element: <PrivateRoutes />,
+    children: [
+      {
+        children: privateRoutes,
+        element: <PrivateRoutes />,
+      },
+      ...publicRoutes,
+    ],
+    element: <Layout />,
   },
-  ...publicRoutes,
 ])
 
 export const Router = () => {
-  const { isLoading } = useMeQuery()
-
-  if (isLoading) {
-    return <InitialLoader />
-  }
-
   return <RouterProvider router={router} />
 }
 
 function PrivateRoutes() {
   const { isError, isLoading } = useMeQuery()
+  const isAuthenticated = !isError && !isLoading
 
   if (isLoading) {
     return <InitialLoader />
   }
 
-  const isAuthenticated = !isError
-
-  return isAuthenticated ? <Outlet /> : <Navigate to={'/login'} />
+  return isAuthenticated ? <Outlet /> : <Navigate to={PATH.login} />
 }
