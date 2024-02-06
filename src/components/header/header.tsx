@@ -1,4 +1,5 @@
 import { memo } from 'react'
+import { Link } from 'react-router-dom'
 
 import { Logo } from '@/assets/illustrations/logo'
 import { Avatar } from '@/components/ui/avatar'
@@ -9,43 +10,39 @@ import { DropDownUser } from '@/features/dropdown-user/drop-down-user'
 
 import s from './header.module.scss'
 
-import avatar from '../../assets/images/avatar.jpg'
-
-type Props = {
-  data: ProfileData | null
-  logout?: () => void
-}
-
 type ProfileData = {
   avatar: string
   email: string
-  name: string
+  isAuthenticated: boolean
+  userName: string
 }
 
-export const Header = memo(({ data }: Props) => {
+export const Header = memo(({ avatar, email, isAuthenticated, userName }: ProfileData) => {
   return (
     <div className={s.root}>
       <div className={s.container}>
         <Logo />
-        {data ? (
+        {isAuthenticated ? (
           <div className={s.userInfo}>
             <Typography className={s.userName} variant={'subtitle1'}>
-              {data.name || data.email}
+              {userName}
             </Typography>
             <Dropdown
               align={'end'}
-              sideOffset={-6}
+              sideOffset={2}
               trigger={
                 <button>
-                  <Avatar src={avatar} userName={data.name} />
+                  <Avatar src={avatar} userName={userName} />
                 </button>
               }
             >
-              <DropDownUser userEmail={data.email} userName={data.name} />
+              <DropDownUser userEmail={email} userLogo={avatar} userName={userName} />
             </Dropdown>
           </div>
         ) : (
-          <Button variant={'secondary'}>Sign in</Button>
+          <Button as={Link} to={'/login'} variant={'secondary'}>
+            <Typography variant={'subtitle2'}>Sign in</Typography>
+          </Button>
         )}
       </div>
     </div>
