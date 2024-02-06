@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button'
 import { Slider } from '@/components/ui/slider'
 import { TabSwitcher, Tabs } from '@/components/ui/tabSwitcher'
 import { TextField } from '@/components/ui/textField'
+import { Typography } from '@/components/ui/typography'
 
 import s from './filter-control.module.scss'
 
@@ -59,7 +60,7 @@ export const FilterControl = ({
       />
       <Button className={s.clearButton} onClick={clearFilter} variant={'secondary'}>
         <Icon className={s.icon} name={'remove'} size={'16px'} />
-        Clear Filter
+        <Typography variant={'subtitle2'}> Clear Filter</Typography>
       </Button>
     </div>
   )
