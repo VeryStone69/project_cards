@@ -21,7 +21,9 @@ const AddNewDeck = () => {
           <div className={s.inputBlock}>
             <img alt={'notImg'} src={notImg} />
             <Typography className={s.uploadButton} variant={'subtitle2'}>
-              <Button variant={'secondary'}>Change image</Button>
+              <Button fullWidth variant={'secondary'}>
+                Change image
+              </Button>
               <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 18 18'} />
             </Typography>
             <TextField label={'Deck name'} />
