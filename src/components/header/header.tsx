@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Dropdown } from '@/components/ui/dropdown'
 import { Typography } from '@/components/ui/typography'
 import { DropDownUser } from '@/features/dropdown-user/drop-down-user'
+import { useLogOutMutation } from '@/services/auth-api/auth'
 
 import s from './header.module.scss'
 
@@ -18,6 +19,11 @@ type ProfileData = {
 }
 
 export const Header = memo(({ avatar, email, isAuthenticated, userName }: ProfileData) => {
+  const [logOut] = useLogOutMutation()
+  const onlogOut = () => {
+    logOut()
+  }
+
   return (
     <div className={s.root}>
       <div className={s.container}>
@@ -36,7 +42,12 @@ export const Header = memo(({ avatar, email, isAuthenticated, userName }: Profil
                 </button>
               }
             >
-              <DropDownUser userEmail={email} userLogo={avatar} userName={userName} />
+              <DropDownUser
+                onlogOut={onlogOut}
+                userEmail={email}
+                userLogo={avatar}
+                userName={userName}
+              />
             </Dropdown>
           </div>
         ) : (
