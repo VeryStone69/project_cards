@@ -22,7 +22,7 @@ export const useFilterSetting = (currentUserId: string | undefined) => {
     dispatch(packsActions.resetFilters())
     setSort(null)
   }, [])
-
+  const orderBy = sort ? `${sort.key}-${sort.direction}` : null
   const setName = useCallback((value: string) => {
     dispatch(packsActions.setSearchName({ newSearchName: value }))
   }, [])
@@ -44,6 +44,7 @@ export const useFilterSetting = (currentUserId: string | undefined) => {
   return {
     clearFilter,
     getMyCard,
+    orderBy,
     searchName,
     setName,
     setSlider,
