@@ -8,8 +8,10 @@ import {
 
 import { Cards } from '@/components/cards/cards'
 import { InitialLoader } from '@/components/ui/loader/loader'
+import { AddNewCard } from '@/features/add-new-card'
 import { CheckEmail } from '@/pages/check-email/check-email'
 import { CreateNewPassword } from '@/pages/create-new-password/create-new-password'
+import { LearnCard } from '@/pages/learn-card/learn-card'
 import { Login } from '@/pages/login/login'
 import { NotFound } from '@/pages/not-found/NotFound'
 import { Packs } from '@/pages/packs'
@@ -22,6 +24,7 @@ export const PATH = {
   check: '/check-email',
   createNewPassword: '/create-new-password',
   home: '/home',
+  learn: '/learn',
   login: '/login',
   notFound: '/page-not-found',
   packs: '/',
@@ -59,7 +62,7 @@ const publicRoutes: RouteObject[] = [
 
 const privateRoutes: RouteObject[] = [
   {
-    element: <InitialLoader />,
+    element: <AddNewCard />,
     path: PATH.home,
   },
   {
@@ -69,6 +72,10 @@ const privateRoutes: RouteObject[] = [
   {
     element: <Packs />,
     path: PATH.packs,
+  },
+  {
+    element: <LearnCard answer={'Mercedes'} attempts={5} deckName={'Cars'} questions={5} />,
+    path: PATH.learn,
   },
   {
     element: <Cards />,
