@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { Logo } from '@/assets/illustrations/logo'
 import { Avatar } from '@/components/ui/avatar'
@@ -20,14 +20,18 @@ type ProfileData = {
 
 export const Header = memo(({ avatar, email, isAuthenticated, userName }: ProfileData) => {
   const [logOut] = useLogOutMutation()
-  const onlogOut = () => {
+  const navigate = useNavigate()
+  const onLogOut = () => {
     logOut()
   }
 
   return (
     <div className={s.root}>
       <div className={s.container}>
-        <Logo />
+        <div onClick={() => navigate('/')} className={s.logo}>
+          <Logo />
+        </div>
+
         {isAuthenticated ? (
           <div className={s.userInfo}>
             <Typography className={s.userName} variant={'subtitle1'}>
@@ -43,7 +47,7 @@ export const Header = memo(({ avatar, email, isAuthenticated, userName }: Profil
               }
             >
               <DropDownUser
-                onlogOut={onlogOut}
+                onlogOut={onLogOut}
                 userEmail={email}
                 userLogo={avatar}
                 userName={userName}

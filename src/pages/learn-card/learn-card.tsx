@@ -18,7 +18,7 @@ export const LearnCard = () => {
 
   const { data: deckData } = useGetDeckInfoQuery({ id: id ? id : '' })
 
-  const [nextQuestion, { data }] = useUpdateRateCardMutation()
+  const [nextQuestion] = useUpdateRateCardMutation()
 
   const nextQuestionHandler = () => {
     nextQuestion({ cardId: cardData ? cardData.id : '', grade: 1 })
@@ -35,7 +35,7 @@ export const LearnCard = () => {
 
   return (
     <>
-      <BackButton />
+      <BackButton className={s.backButton} />
       {!showAnswer && (
         <Card className={s.card}>
           <Typography variant={'h1'}>{`Learn "${deckData?.name}"`}</Typography>
