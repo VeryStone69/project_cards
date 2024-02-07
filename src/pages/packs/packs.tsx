@@ -23,6 +23,7 @@ export const Packs = () => {
   const {
     clearFilter,
     getMyCard,
+    orderBy,
     searchName,
     setName,
     setSlider,
@@ -45,7 +46,7 @@ export const Packs = () => {
     maxCardsCount,
     minCardsCount,
     name,
-    orderBy: sort ? `${sort.key}-${sort.direction}` : null,
+    orderBy,
   })
 
   if (isLoading) {
