@@ -88,7 +88,7 @@ export const Packs = () => {
             Packs list
           </Typography>
           <Button>
-            <Typography variant={'subtitle2'}>Add New Pack</Typography>{' '}
+            <Typography variant={'subtitle2'}>Add New Pack</Typography>
           </Button>
         </div>
         <FilterControl
