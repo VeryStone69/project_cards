@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { memo, useCallback, useState } from 'react'
 
 import { Icon } from '@/components/icon/Icon'
 import { IconButton } from '@/components/ui/icon-button'
@@ -11,14 +11,14 @@ type Props = {
   id: string
   name: string
 }
-export const DeleteCardButton = ({ id, name }: Props) => {
+export const DeleteCardButton = memo(({ id, name }: Props) => {
   const [open, setOpen] = useState(false)
   const [delCard] = useDeleteCardMutation()
-  const deleteCard = () => {
+  const deleteCard = useCallback(() => {
     delCard({ id }).finally(() => {
       setOpen(false)
     })
-  }
+  }, [id])
 
   return (
     <>
@@ -37,4 +37,4 @@ export const DeleteCardButton = ({ id, name }: Props) => {
       )}
     </>
   )
-}
+})
