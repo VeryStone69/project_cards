@@ -9,18 +9,22 @@ import {
 export const cardsApi = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
-      createCardsInDeck: builder.mutation<Omit<CardsItem, 'grade'>, { data: FormData; id: string }>(
+      createCardsInDeck: builder.mutation<
+        Omit<CardsItem, 'grade'>,
         {
-          invalidatesTags: ['Cards'],
-          query: arg => {
-            return {
-              body: arg.data,
-              method: 'POST',
-              url: `v1/decks/${arg.id}/cards`,
-            }
-          },
+          data: FormData
+          id: string
         }
-      ),
+      >({
+        invalidatesTags: ['Decks'],
+        query: arg => {
+          return {
+            body: arg.data,
+            method: 'POST',
+            url: `v1/decks/${arg.id}/cards`,
+          }
+        },
+      }),
       deleteCard: builder.mutation<void, { id: string }>({
         invalidatesTags: ['Cards'],
         query: arg => ({
@@ -29,7 +33,14 @@ export const cardsApi = baseApi.injectEndpoints({
           url: `v1/cards/${arg.id}`,
         }),
       }),
-      getCardsInDeck: builder.query<CardResponse, { packId: string; params: CardsParams }>({
+      getCardsInDeck: builder.query<
+        CardResponse,
+        {
+          packId: string
+          params: CardsParams
+        }
+      >({
+        providesTags: ['Cards'],
         query: arg => {
           return {
             method: 'GET',
@@ -41,11 +52,16 @@ export const cardsApi = baseApi.injectEndpoints({
       getLearnCard: builder.query<CardsItem, { id: string }>({
         query: arg => ({
           method: 'GET',
-          params: arg,
           url: `v1/decks/${arg.id}/learn`,
         }),
       }),
-      updateCard: builder.mutation<Omit<CardsItem, 'grade'>, { cardId: string; data: FormData }>({
+      updateCard: builder.mutation<
+        Omit<CardsItem, 'grade'>,
+        {
+          cardId: string
+          data: FormData
+        }
+      >({
         invalidatesTags: ['Cards'],
         query: ({ cardId, data }) => ({
           body: data,
@@ -54,10 +70,11 @@ export const cardsApi = baseApi.injectEndpoints({
         }),
       }),
       updateRateCard: builder.mutation<CardsItem, CardRate>({
-        query: ({ packId, ...rest }) => ({
+        invalidatesTags: ['Cards'],
+        query: arg => ({
+          body: arg,
           method: 'POST',
-          params: rest,
-          url: `v1/decks/${packId}/learn`,
+          url: `v1/decks/${arg.cardId}/learn`,
         }),
       }),
     }

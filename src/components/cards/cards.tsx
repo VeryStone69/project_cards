@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import { BackButton } from '@/components/ui/back-button'
 import { Button } from '@/components/ui/button'
@@ -71,13 +71,20 @@ export const Cards = () => {
           <Dropdown align={'center'} className={s.dropDown} sideOffset={-10}>
             <DropdownCard />
           </Dropdown>
-          <Button>Learn Card</Button>
+          <Button as={Link} to={`learn`}>
+            Learn Card
+          </Button>
         </div>
         {pack.data?.cover && (
           <img
             alt={'Cover'}
             src={pack.data.cover}
-            style={{ height: '6rem', marginBottom: '24px', marginTop: '15px', width: '10rem' }}
+            style={{
+              height: '6rem',
+              marginBottom: '24px',
+              marginTop: '15px',
+              width: '10rem',
+            }}
           />
         )}
 

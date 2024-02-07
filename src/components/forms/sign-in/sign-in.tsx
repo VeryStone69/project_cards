@@ -73,7 +73,7 @@ export const SignIn = ({ className, onSubmit }: LoginProps) => {
         </Typography>
 
         <Button className={s.button} fullWidth type={'submit'}>
-          Login
+          <Typography variant={'subtitle2'}>Login</Typography>
         </Button>
       </form>
 

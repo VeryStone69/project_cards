@@ -22,7 +22,6 @@ export type CardsItem = {
 export type CardRate = {
   cardId: string
   grade: number
-  packId: string
 }
 export type CardsParams = {
   answer?: string

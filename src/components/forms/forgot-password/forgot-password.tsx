@@ -46,7 +46,7 @@ export const ForgotPassword = ({ className, onSubmit }: LoginProps) => {
         </Typography>
 
         <Button fullWidth type={'submit'}>
-          Send
+          <Typography variant={'subtitle2'}>Send</Typography>
         </Button>
       </form>
 

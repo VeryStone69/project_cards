@@ -1,15 +1,14 @@
 import {
+  createBrowserRouter,
   Navigate,
   Outlet,
   RouteObject,
   RouterProvider,
-  createBrowserRouter,
 } from 'react-router-dom'
 
 import { Cards } from '@/components/cards/cards'
 import { Layout } from '@/components/layout'
 import { InitialLoader } from '@/components/ui/loader/loader'
-import { AddNewCard } from '@/features/add-new-card'
 import { CheckEmail } from '@/pages/check-email/check-email'
 import { CreateNewPassword } from '@/pages/create-new-password/create-new-password'
 import { LearnCard } from '@/pages/learn-card/learn-card'
@@ -26,7 +25,6 @@ export const PATH = {
   createNewPassword: '/create-new-password',
   decks: '/',
   home: '/home',
-  learn: '/learn',
   login: '/login',
   notFound: '/page-not-found',
   profile: '/profile',
@@ -63,7 +61,7 @@ const publicRoutes: RouteObject[] = [
 
 const privateRoutes: RouteObject[] = [
   {
-    element: <AddNewCard />,
+    element: <LearnCard />,
     path: PATH.home,
   },
   {
@@ -75,8 +73,8 @@ const privateRoutes: RouteObject[] = [
     path: PATH.decks,
   },
   {
-    element: <LearnCard answer={'Mercedes'} attempts={5} deckName={'Cars'} questions={5} />,
-    path: PATH.learn,
+    element: <LearnCard />,
+    path: `${PATH.decks}/:id/learn`,
   },
   {
     element: <Cards />,

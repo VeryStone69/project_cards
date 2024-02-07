@@ -23,31 +23,25 @@ export const AddNewCard = () => {
             </Typography>
             <TextField label={'Question:'} />
             <img alt={'notImg'} src={notImg} />
-            <Typography className={s.uploadButton} variant={'subtitle2'}>
-              <Button fullWidth variant={'secondary'}>
-                Change image
-              </Button>
-              <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 18 18'} />
-            </Typography>
+            <Button fullWidth variant={'secondary'}>
+              <Typography variant={'subtitle2'}>Change image</Typography>
+              <Icon name={'img'} viewBox={'0 0 18 18'} />
+            </Button>
 
             <TextField label={'Answer:'} />
             <img alt={'notImg'} src={notImg} />
-            <Typography className={s.uploadButton} variant={'subtitle2'}>
-              <Button fullWidth variant={'secondary'}>
-                Change image
-              </Button>
-              <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 18 18'} />
-            </Typography>
+            <Button fullWidth variant={'secondary'}>
+              <Typography variant={'subtitle2'}>Change image</Typography>
+              <Icon name={'img'} viewBox={'0 0 18 18'} />
+            </Button>
           </div>
 
           <ButtonBlock primary={'Add a card'} secondary={'Cancel'} />
         </Modal>
       )}
-      <Typography variant={'subtitle2'}>
-        <Button onClick={() => setOpen(!open)} variant={'primary'}>
-          Add New Card
-        </Button>
-      </Typography>
+      <Button onClick={() => setOpen(!open)} variant={'primary'}>
+        <Typography variant={'subtitle2'}>Add New Card</Typography>
+      </Button>
     </>
   )
 }

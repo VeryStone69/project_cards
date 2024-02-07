@@ -19,7 +19,9 @@ export const CheckEmail = () => {
         We’ve sent an Email with instructions to example@mail.com
       </Typography>
 
-      <Button>Back to login</Button>
+      <Typography variant={'subtitle2'}>
+        <Button>Back to login</Button>
+      </Typography>
     </Card>
   )
 }

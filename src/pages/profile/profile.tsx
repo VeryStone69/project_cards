@@ -13,7 +13,7 @@ import s from './profile.module.scss'
 export const Profile = () => {
   const { data: me } = useMeQuery()
   const [logOut] = useLogOutMutation()
-  const onlogOut = () => {
+  const onLogOut = () => {
     logOut()
   }
 
@@ -38,8 +38,8 @@ export const Profile = () => {
           {me?.email}
         </Typography>
         <Typography variant={'subtitle2'}>
-          <Button onClick={onlogOut} variant={'secondary'}>
-            Logout
+          <Button onClick={onLogOut} variant={'secondary'}>
+            <Typography variant={'subtitle2'}>Logout</Typography>
           </Button>
         </Typography>
       </Card>

@@ -51,7 +51,11 @@ export const CreatePassword = ({ className, onSubmit }: LoginProps) => {
           Create new password and we will send you further instructions to email
         </Typography>
 
-        <Button type={'submit'}>Create</Button>
+        <Typography variant={'subtitle2'}>
+          <Button fullWidth type={'submit'}>
+            Create
+          </Button>
+        </Typography>
       </form>
     </div>
   )

@@ -20,12 +20,11 @@ const AddNewDeck = () => {
         <Modal open={open} setOpen={setOpen} title={'Creating a new deck'}>
           <div className={s.inputBlock}>
             <img alt={'notImg'} src={notImg} />
-            <Typography className={s.uploadButton} variant={'subtitle2'}>
-              <Button fullWidth variant={'secondary'}>
-                Change image
-              </Button>
+            <Button fullWidth variant={'secondary'}>
+              <Typography variant={'subtitle2'}>Change image</Typography>
               <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 18 18'} />
-            </Typography>
+            </Button>
+
             <TextField label={'Deck name'} />
 
             <Typography variant={'body2'}>
