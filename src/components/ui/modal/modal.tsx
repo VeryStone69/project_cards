@@ -29,9 +29,7 @@ export const Modal = ({ children, open, setOpen, title }: Props) => (
               <Dialog.Close asChild>
                 <IconButton
                   className={s.crossButton}
-                  icon={
-                    <Icon className={s.crossSvg} height={'20px'} name={'cross'} width={'20px'} />
-                  }
+                  icon={<Icon height={'20px'} name={'cross'} width={'20px'} />}
                 />
               </Dialog.Close>
             </div>
