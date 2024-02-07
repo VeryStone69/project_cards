@@ -27,7 +27,6 @@
 
   svg:hover {
     cursor: pointer;
-
   }
 }
 
@@ -40,18 +39,17 @@
   align-items: center;
   justify-content: center;
 
-  width:96px ;
-  height:96px;
+  width: 96px;
+  height: 96px;
 
-border-radius: 50%;
+  border-radius: 50%;
 
-  >span{
-    width:96px ;
-    height:96px;
+  > span {
+    width: 96px;
+    height: 96px;
   }
 }
 
-.backButton{
+.backButton {
   margin-top: 100px;
 }
-
