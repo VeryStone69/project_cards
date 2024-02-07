@@ -1,6 +1,6 @@
 import { useDebounce } from '@/app/hooks'
-import { Layout } from '@/components/layout'
 import { Button } from '@/components/ui/button'
+import { InitialLoader } from '@/components/ui/loader'
 import { Pagination } from '@/components/ui/pagination/Pagination'
 import { Table } from '@/components/ui/table'
 import { TableHeader } from '@/components/ui/table-header'
@@ -32,22 +32,25 @@ export const Packs = () => {
     sort,
     tabValue,
   } = useFilterSetting(currentUserId)
+
+  const minCardsCount = useDebounce(sliderValueMin)
+  const maxCardsCount = useDebounce(sliderValueMax)
+
+  const name = useDebounce(searchName)
   const authorId = tabValue === 'my' ? currentUserId : undefined
-  const debouncedValueMin = useDebounce(sliderValueMin)
-  const debouncedValueMax = useDebounce(sliderValueMax)
-
-  const searchNameDebounce = useDebounce(searchName)
-
-  const decks = useGetDecksQuery({
+  const { data: decks, isLoading } = useGetDecksQuery({
     authorId,
     currentPage,
     itemsPerPage,
-    maxCardsCount: debouncedValueMax,
-    minCardsCount: debouncedValueMin,
-    name: searchNameDebounce,
+    maxCardsCount,
+    minCardsCount,
+    name,
     orderBy: sort ? `${sort.key}-${sort.direction}` : null,
   })
 
+  if (isLoading) {
+    return <InitialLoader />
+  }
   const packsColumns = [
     {
       key: 'name',
@@ -77,41 +80,41 @@ export const Packs = () => {
   ]
 
   return (
-    <Layout>
-      <div className={s.packsPage}>
-        <div className={s.setting}>
-          <div className={s.addCard}>
-            <Typography as={'h1'} variant={'large'}>
-              Packs list
-            </Typography>
-            <Button>Add new Pack</Button>
-          </div>
-          <FilterControl
-            clearFilter={clearFilter}
-            searchName={searchName}
-            setSearchName={setName}
-            setSliderValue={setSlider}
-            setTabValue={getMyCard}
-            sliderMaxValue={decks.data?.maxCardsCount}
-            sliderValue={[sliderValueMin, sliderValueMax ?? (decks.data?.maxCardsCount || 0)]}
-            tabValue={tabValue}
-          />
+    <div className={s.packsPage}>
+      <div className={s.setting}>
+        <div className={s.addCard}>
+          <Typography as={'h1'} variant={'large'}>
+            Packs list
+          </Typography>
+          <Button>
+            <Typography variant={'subtitle2'}>Add New Pack</Typography>{' '}
+          </Button>
         </div>
-        <Table.Root className={s.table}>
-          <TableHeader columns={packsColumns} onSort={setSort} sort={sort} />
-          <Table.Body>
-            {decks.data?.items.map(decks => <TableContentDeck deck={decks} key={decks.id} />)}
-          </Table.Body>
-        </Table.Root>
-        <Pagination
-          className={s.pagination}
-          currentPage={currentPage}
-          itemsPerPage={itemsPerPage}
-          onChangeItemsPerPage={changeItemPerPage}
-          onChangePage={changePage}
-          totalPages={decks.data?.pagination.totalPages}
+        <FilterControl
+          clearFilter={clearFilter}
+          searchName={searchName}
+          setSearchName={setName}
+          setSliderValue={setSlider}
+          setTabValue={getMyCard}
+          sliderMaxValue={decks?.maxCardsCount}
+          sliderValue={[sliderValueMin, sliderValueMax ?? (decks?.maxCardsCount || 0)]}
+          tabValue={tabValue}
         />
       </div>
-    </Layout>
+      <Table.Root className={s.table}>
+        <TableHeader columns={packsColumns} onSort={setSort} sort={sort} />
+        <Table.Body>
+          {decks?.items.map(decks => <TableContentDeck deck={decks} key={decks.id} />)}
+        </Table.Body>
+      </Table.Root>
+      <Pagination
+        className={s.pagination}
+        currentPage={currentPage}
+        itemsPerPage={itemsPerPage}
+        onChangeItemsPerPage={changeItemPerPage}
+        onChangePage={changePage}
+        totalPages={decks?.pagination.totalPages}
+      />
+    </div>
   )
 }
