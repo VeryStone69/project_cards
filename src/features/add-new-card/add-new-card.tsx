@@ -24,14 +24,18 @@ export const AddNewCard = () => {
             <TextField label={'Question:'} />
             <img alt={'notImg'} src={notImg} />
             <Typography className={s.uploadButton} variant={'subtitle2'}>
-              <Button variant={'secondary'}>Change image</Button>
+              <Button fullWidth variant={'secondary'}>
+                Change image
+              </Button>
               <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 18 18'} />
             </Typography>
 
             <TextField label={'Answer:'} />
             <img alt={'notImg'} src={notImg} />
             <Typography className={s.uploadButton} variant={'subtitle2'}>
-              <Button variant={'secondary'}>Change image</Button>
+              <Button fullWidth variant={'secondary'}>
+                Change image
+              </Button>
               <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 18 18'} />
             </Typography>
           </div>
@@ -39,7 +43,6 @@ export const AddNewCard = () => {
           <ButtonBlock primary={'Add a card'} secondary={'Cancel'} />
         </Modal>
       )}
-
       <Typography variant={'subtitle2'}>
         <Button onClick={() => setOpen(!open)} variant={'primary'}>
           Add New Card
