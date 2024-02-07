@@ -38,7 +38,7 @@ export const DropDownWithUser: Story = {
             </button>
           }
         >
-          <DropDownUser userEmail={data.email} userName={data.name} />
+          <DropDownUser userEmail={data.email} userLogo={avatar} userName={data.name} />
         </Dropdown>
       </BrowserRouter>
     )
