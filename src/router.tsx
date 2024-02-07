@@ -1,12 +1,13 @@
 import {
-  createBrowserRouter,
   Navigate,
   Outlet,
   RouteObject,
   RouterProvider,
+  createBrowserRouter,
 } from 'react-router-dom'
 
 import { Cards } from '@/components/cards/cards'
+import { Layout } from '@/components/layout'
 import { InitialLoader } from '@/components/ui/loader/loader'
 import { AddNewCard } from '@/features/add-new-card'
 import { CheckEmail } from '@/pages/check-email/check-email'
@@ -23,11 +24,11 @@ import { useMeQuery } from '@/services/auth-api/auth'
 export const PATH = {
   check: '/check-email',
   createNewPassword: '/create-new-password',
+  decks: '/',
   home: '/home',
   learn: '/learn',
   login: '/login',
   notFound: '/page-not-found',
-  packs: '/',
   profile: '/profile',
   recover: '/recovery',
   register: '/register',
@@ -71,7 +72,7 @@ const privateRoutes: RouteObject[] = [
   },
   {
     element: <Packs />,
-    path: PATH.packs,
+    path: PATH.decks,
   },
   {
     element: <LearnCard answer={'Mercedes'} attempts={5} deckName={'Cars'} questions={5} />,
@@ -79,36 +80,34 @@ const privateRoutes: RouteObject[] = [
   },
   {
     element: <Cards />,
-    path: `${PATH.packs}/:id`,
+    path: `${PATH.decks}/:id`,
   },
 ]
 
 const router = createBrowserRouter([
   {
-    children: privateRoutes,
-    element: <PrivateRoutes />,
+    children: [
+      {
+        children: privateRoutes,
+        element: <PrivateRoutes />,
+      },
+      ...publicRoutes,
+    ],
+    element: <Layout />,
   },
-  ...publicRoutes,
 ])
 
 export const Router = () => {
-  const { isLoading } = useMeQuery()
-
-  if (isLoading) {
-    return <InitialLoader />
-  }
-
   return <RouterProvider router={router} />
 }
 
 function PrivateRoutes() {
   const { isError, isLoading } = useMeQuery()
+  const isAuthenticated = !isError && !isLoading
 
   if (isLoading) {
     return <InitialLoader />
   }
 
-  const isAuthenticated = !isError
-
-  return isAuthenticated ? <Outlet /> : <Navigate to={'/login'} />
+  return isAuthenticated ? <Outlet /> : <Navigate to={PATH.login} />
 }

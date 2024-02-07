@@ -1,11 +1,17 @@
 .root {
+  cursor: pointer;
+
   position: relative;
 
   width: 24px;
   height: 24px;
 
-  background-color: var(--color-dark-100);
+  background-color: var(--color-dark-300);
   border-radius: 4px;
+
+  &:hover {
+    background-color: var(--color-dark-100);
+  }
 }
 
 .editButton {
@@ -13,8 +19,4 @@
   position: relative;
   top: 2px;
   left: 5px;
-
-  &:hover {
-    fill: var(--color-accent-500);
-  }
 }

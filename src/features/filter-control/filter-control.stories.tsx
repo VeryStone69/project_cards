@@ -29,6 +29,10 @@ export const FilterComponent: Story = {
 
     return (
       <FilterControl
+        clearFilter={() => {
+          setTabValue('')
+          setName('')
+        }}
         searchName={name}
         setSearchName={setName}
         setSliderValue={setSliderValue}

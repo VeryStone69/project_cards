@@ -1,4 +1,6 @@
-.image{
+.image {
+  cursor: pointer;
+
   width: 100%;
   height: 100%;
 
@@ -7,8 +9,9 @@
   border-radius: inherit;
 }
 
-.avatarFallback{
+.avatarFallback {
   display: flex;
+  align-items: center;
   justify-content: center;
 
   width: 100%;
@@ -23,9 +26,13 @@
   border-radius: 50%;
 }
 
-.avatarRoot{
+.avatarRoot {
+  cursor: pointer;
+
   display: inline-flex;
+
   width: 36px;
   height: 36px;
+
   border-radius: 100%;
 }

@@ -1,4 +1,4 @@
-.itemWithIcon p{
+.itemWithIcon p {
   display: flex;
   justify-content: center;
   margin: 0;
@@ -10,7 +10,7 @@
   padding-bottom: 12px;
   border-bottom: 1px solid var(--color-dark-500);
 
-  &:focus-visible{
+  &:focus-visible {
     outline: none;
   }
 
@@ -25,28 +25,26 @@
   }
 }
 
-
 .itemWithIcon {
   display: flex;
   padding: 12px 0;
   border-bottom: 1px solid var(--color-dark-500);
 
-  &:focus-visible{
+  &:focus-visible {
     outline: none;
   }
 
-&:hover{
-   cursor: pointer;
+  &:hover {
+    cursor: pointer;
 
+    > svg {
+      fill: var(--color-accent-300);
+    }
 
-  >svg{
-    fill: var(--color-accent-300);
+    > p {
+      color: var(--color-accent-300);
+    }
   }
-
-  >p{
-    color:var(--color-accent-300) ;
-  }
-}
 }
 
 .itemWithIcon:last-child {

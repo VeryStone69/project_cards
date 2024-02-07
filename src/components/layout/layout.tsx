@@ -1,26 +1,33 @@
-import { ReactNode } from 'react'
+import { Outlet } from 'react-router-dom'
 
 import { Header } from '@/components/header'
+import { InitialLoader } from '@/components/ui/loader'
+import { useMeQuery } from '@/services/auth-api/auth'
 
 import s from './layout.module.scss'
 
-import avatar from '../../assets/images/avatar.jpg'
-
 type Props = {
-  children: ReactNode
   className?: string
 }
-export const Layout = ({ children, className }: Props) => {
-  const profileData = {
-    avatar: avatar,
-    email: 'ololo@mail.com',
-    name: 'Oleg Mongol',
+export const Layout = ({ className }: Props) => {
+  const { data, isError, isLoading } = useMeQuery()
+  const isAuthenticated = !isError && !isLoading
+
+  if (isLoading) {
+    return <InitialLoader />
   }
 
   return (
-    <div className={className ? className : s.container}>
-      <Header data={profileData} />
-      {children}
-    </div>
+    <>
+      <Header
+        avatar={data?.avatar || ''}
+        email={data?.email || ''}
+        isAuthenticated={isAuthenticated}
+        userName={data?.name || ''}
+      />
+      <div className={className ? className : s.container}>
+        <Outlet />
+      </div>
+    </>
   )
 }

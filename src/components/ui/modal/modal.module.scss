@@ -3,7 +3,6 @@
   z-index: 110;
   inset: 0;
   background-color: rgb(0 0 0 / 50%);
-
 }
 
 .root {
@@ -15,6 +14,7 @@
   flex-direction: column;
   gap: 0;
   align-items: stretch;
+  justify-content: center;
 
   box-sizing: content-box;
   max-width: 590px;

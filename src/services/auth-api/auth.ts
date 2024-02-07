@@ -9,6 +9,13 @@ import { baseApi } from '@/services/base-api/base-api'
 export const authAPI = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
+      logOut: builder.mutation<void, void>({
+        invalidatesTags: ['Me'],
+        query: () => ({
+          method: 'POST',
+          url: `/v1/auth/logout`,
+        }),
+      }),
       login: builder.mutation<LoginResponse, LoginData>({
         invalidatesTags: ['Me'],
         query: body => ({
@@ -17,7 +24,7 @@ export const authAPI = baseApi.injectEndpoints({
           url: `/v1/auth/login`,
         }),
       }),
-      me: builder.query<{ success: boolean } | UserResponse | null, void>({
+      me: builder.query<UserResponse | null, void>({
         providesTags: ['Me'],
         query: () => `v1/auth/me`,
       }),
@@ -32,4 +39,4 @@ export const authAPI = baseApi.injectEndpoints({
   },
 })
 
-export const { useLoginMutation, useMeQuery, useRegisterMutation } = authAPI
+export const { useLogOutMutation, useLoginMutation, useMeQuery, useRegisterMutation } = authAPI

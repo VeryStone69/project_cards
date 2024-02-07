@@ -60,7 +60,7 @@ export const Pagination = ({
             key={index}
             onClickChangePage={item.onClickChangePage}
             page={item.page}
-            pagesTotal={paginationItems.length}
+            pagesTotal={totalPages}
             type={item.type}
           />
         )

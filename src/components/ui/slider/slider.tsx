@@ -12,7 +12,7 @@ type SliderProps = {
   value: number[]
 }
 
-export const Slider = ({ label, max, min, onChange, step, value }: SliderProps) => {
+export const Slider = ({ label, max, min, onChange, step = 1, value }: SliderProps) => {
   return (
     <Typography as={'label'} className={s.label} variant={'body2'}>
       {label}

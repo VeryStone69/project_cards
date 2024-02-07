@@ -1,10 +1,10 @@
 import { baseApi } from '@/services/base-api/base-api'
-import { GetDecks, GetDecksArgs, GetDecksItems } from '@/services/decks-api/decks-api.types'
+import { DecksItems, GetDecks, GetDecksArgs } from '@/services/decks-api/decks-api.types'
 
 export const decksAPI = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
-      createDecks: builder.mutation<GetDecksItems, FormData>({
+      createDecks: builder.mutation<DecksItems, FormData>({
         invalidatesTags: ['Decks'],
         query: arg => {
           return {
@@ -15,7 +15,7 @@ export const decksAPI = baseApi.injectEndpoints({
           }
         },
       }),
-      deleteDeck: builder.mutation<Omit<GetDecksItems, 'author'>, { id: string }>({
+      deleteDeck: builder.mutation<Omit<DecksItems, 'author'>, { id: string }>({
         invalidatesTags: ['Decks'],
         query: arg => {
           return {
@@ -25,7 +25,7 @@ export const decksAPI = baseApi.injectEndpoints({
           }
         },
       }),
-      getDeckInfo: builder.query<GetDecksItems, { id: string }>({
+      getDeckInfo: builder.query<DecksItems, { id: string }>({
         query: arg => ({
           method: 'GET',
           url: `v1/decks/${arg.id}`,
@@ -37,11 +37,11 @@ export const decksAPI = baseApi.injectEndpoints({
           return {
             method: 'GET',
             params: arg ?? {},
-            url: `v2/decks`,
+            url: `v1/decks`,
           }
         },
       }),
-      updateDeck: builder.mutation<GetDecksItems, { data: FormData; id: string }>({
+      updateDeck: builder.mutation<DecksItems, { data: FormData; id: string }>({
         invalidatesTags: ['Decks'],
         query: arg => ({
           body: arg.data,
