@@ -18,3 +18,11 @@
 .link{
   align-items: center;
 }
+
+.configButton{
+  display: flex;
+  flex-direction: row;
+  gap: 1.56rem;
+  align-items: center;
+  justify-content: center;
+}

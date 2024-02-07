@@ -4,15 +4,18 @@ import defaultMask from '@/assets/images/Mask.jpg'
 import { Button } from '@/components/ui/button'
 import { Table } from '@/components/ui/table'
 import { Typography } from '@/components/ui/typography'
-import { DeleteCardButton } from '@/features/delete-card-button/delete-card-button'
+import { DeleteDeckButton } from '@/features/delete-deck-button'
+import { EditPack } from '@/features/edit-pack'
 import { DecksItems } from '@/services/decks-api/decks-api.types'
+import { formatDate } from '@/utils/format-date'
 
 import s from './table-content.module.scss'
 
 type Props = {
+  currentUserId: string
   deck: DecksItems
 }
-export const TableContentDeck = ({ deck }: Props) => {
+export const TableContentDeck = ({ currentUserId, deck }: Props) => {
   return (
     <Table.Row key={deck.id}>
       <Table.Cell align={'left'}>
@@ -24,10 +27,15 @@ export const TableContentDeck = ({ deck }: Props) => {
         </Button>
       </Table.Cell>
       <Table.Cell>{deck.cardsCount}</Table.Cell>
-      <Table.Cell>{new Date(deck.updated).toLocaleDateString()}</Table.Cell>
+      <Table.Cell>{formatDate(deck.updated)}</Table.Cell>
       <Table.Cell>{deck.author.name}</Table.Cell>
       <Table.Cell>
-        <DeleteCardButton id={deck.id} name={deck.name} />
+        {currentUserId == deck.author.id && (
+          <div className={s.configButton}>
+            <EditPack />
+            <DeleteDeckButton id={deck.id} name={deck.name} />
+          </div>
+        )}
       </Table.Cell>
     </Table.Row>
   )
