@@ -18,7 +18,7 @@ export const Packs = () => {
   const { changeItemPerPage, changePage, currentPage, itemsPerPage } = usePaginationDecks()
 
   const { data: me } = useMeQuery()
-  const currentUserId = me?.id
+  const currentUserId = me?.id || ''
 
   const {
     clearFilter,
@@ -105,7 +105,9 @@ export const Packs = () => {
       <Table.Root className={s.table}>
         <TableHeader columns={packsColumns} onSort={setSort} sort={sort} />
         <Table.Body>
-          {decks?.items.map(decks => <TableContentDeck deck={decks} key={decks.id} />)}
+          {decks?.items.map(decks => (
+            <TableContentDeck currentUserId={currentUserId} deck={decks} key={decks.id} />
+          ))}
         </Table.Body>
       </Table.Root>
       <Pagination
