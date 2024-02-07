@@ -6,10 +6,12 @@ import { DropdownItemContent, DropdownItemHeader } from '@/components/ui/dropdow
 import s from './drop-down-user.module.scss'
 
 type Props = {
+  onlogOut?: () => void
   userEmail: string
+  userLogo: string
   userName: string
 }
-export const DropDownUser = ({ userEmail, userName }: Props) => {
+export const DropDownUser = ({ onlogOut, userEmail, userLogo, userName }: Props) => {
   const navigate = useNavigate()
   const onSelected = () => {
     navigate('/profile')
@@ -20,6 +22,7 @@ export const DropDownUser = ({ userEmail, userName }: Props) => {
       <DropdownItemHeader
         className={s.DropdownMenuItem}
         userEmail={userEmail}
+        userLogo={userLogo}
         userName={userName}
       />
       <DropdownItemContent
@@ -31,6 +34,7 @@ export const DropDownUser = ({ userEmail, userName }: Props) => {
       <DropdownItemContent
         className={s.itemWithIcon}
         icon={<Icon className={s.svgWhite} name={'logout'} size={'16px'} />}
+        onlogOut={onlogOut}
         title={'Sign Out'}
       />
     </>
