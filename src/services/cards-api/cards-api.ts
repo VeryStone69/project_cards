@@ -50,6 +50,7 @@ export const cardsApi = baseApi.injectEndpoints({
         },
       }),
       getLearnCard: builder.query<CardsItem, { id: string }>({
+        providesTags: ['Cards'],
         query: arg => ({
           method: 'GET',
           url: `v1/decks/${arg.id}/learn`,
