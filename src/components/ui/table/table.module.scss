@@ -21,6 +21,13 @@
   padding: 6px 24px;
   font-size: var(--font-size-s);
   line-height: var(--line-height-m);
+
+  > p {
+    all: unset;
+    position: relative;
+    top: -15px;
+    left: 5px;
+  }
 }
 
 .empty {
@@ -31,6 +38,10 @@
 }
 
 .row {
+  &:hover {
+    background-color: var(--color-dark-700);
+  }
+
   &:not(:last-child) {
     border-bottom: 1px solid var(--color-dark-500);
   }

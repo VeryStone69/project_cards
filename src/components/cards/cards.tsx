@@ -10,27 +10,30 @@ import { Table } from '@/components/ui/table'
 import { TableHeader } from '@/components/ui/table-header'
 import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
+import { AddNewCard } from '@/features/add-new-card'
 import { DeleteCardButton } from '@/features/delete-card-button/delete-card-button'
 import { DropdownCard } from '@/features/dropdown-card/dropdown-card'
+import { EditCard } from '@/features/edit-card'
 import { useGetCardsInDeckQuery } from '@/services/cards-api/cards-api'
 import { useGetDeckInfoQuery } from '@/services/decks-api/decks-api'
 
 import s from './cards.module.scss'
 
-import defaultMask from '../../assets/images/Mask.jpg'
+import defaultMask from '../../assets/images/not-img.jpg'
 
 export const Cards = () => {
   const { id } = useParams()
   const [itemPerPage, setItemPerPage] = useState(5)
   const [currentPageDecks, setCurrentPage] = useState(1)
   const packId = id ?? ('' as string)
-  const isMyPack = 'authUserId === pack.author.id' || true
+  const isMyPack = 'authUserId === pack.author.id' && true
 
   const cards = useGetCardsInDeckQuery({
     packId,
     params: { currentPage: currentPageDecks, itemsPerPage: itemPerPage },
   })
   const pack = useGetDeckInfoQuery({ id: packId })
+
   const cardsColumns = [
     {
       key: 'name',
@@ -54,37 +57,41 @@ export const Cards = () => {
     },
   ]
 
+  isMyPack
+    ? cardsColumns.push({
+        key: 'edit',
+        sortable: true,
+        title: '',
+      })
+    : false
+
   return (
-    <section style={{ marginTop: '100px' }}>
+    <section className={s.layout}>
       <BackButton />
-      <div style={{ marginTop: '34px' }}>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-          }}
-        >
-          <Typography as={'h1'} variant={'h1'}>
-            {pack.data?.name}
-          </Typography>
-          <Dropdown align={'center'} className={s.dropDown} sideOffset={-10}>
-            <DropdownCard />
-          </Dropdown>
-          <Button as={Link} to={`learn`}>
-            Learn Card
-          </Button>
+
+      <div className={s.section}>
+        <div className={s.sectionHeader}>
+          <Typography variant={'large'}>{pack.data?.name}</Typography>
+
+          {isMyPack && (
+            <Dropdown align={'center'} className={s.dropDown} sideOffset={-10}>
+              <DropdownCard />
+            </Dropdown>
+          )}
+
+          {isMyPack ? (
+            <AddNewCard />
+          ) : (
+            <Button as={Link} to={`learn`}>
+              <Typography variant={'subtitle2'}>Learn cards</Typography>
+            </Button>
+          )}
         </div>
         {pack.data?.cover && (
           <img
             alt={'Cover'}
-            src={pack.data.cover}
-            style={{
-              height: '6rem',
-              marginBottom: '24px',
-              marginTop: '15px',
-              width: '10rem',
-            }}
+            className={s.packsImg}
+            src={pack.data.cover ? pack.data.cover : defaultMask}
           />
         )}
 
@@ -96,36 +103,43 @@ export const Cards = () => {
           value={''}
         />
       </div>
-      <Table.Root style={{ marginBottom: '24px', marginTop: '24px' }}>
+      <Table.Root className={s.table}>
         <TableHeader columns={cardsColumns} />
         <Table.Body>
           {cards.data?.items.map(items => {
             return (
               <Table.Row key={items.id}>
-                <Table.Cell align={'left'}>
+                <Table.Cell className={s.questionCell}>
                   <img
                     alt={'Pack cover'}
+                    className={s.questionImg}
                     src={items.questionImg ?? defaultMask}
-                    style={{ height: '48px', width: '110px' }}
                   />
-                  {items.question}
+                  <p>{items.question}</p>
                 </Table.Cell>
-                <Table.Cell>{items.answer}</Table.Cell>
-                <Table.Cell> {new Date(items.updated).toLocaleDateString()}</Table.Cell>
-                <Table.Cell>
+                <Table.Cell className={s.answerCell}>
+                  <img
+                    alt={'Pack cover'}
+                    className={s.answerImg}
+                    src={items.answerImg ?? defaultMask}
+                  />
+                  <p>{items.answer}</p>
+                </Table.Cell>
+                <Table.Cell className={s.dateCell}>
+                  {new Date(items.updated).toLocaleDateString()}
+                </Table.Cell>
+                <Table.Cell className={s.rateCell}>
                   <Rating rating={items.grade} />
                 </Table.Cell>
-                <Table.Cell>
-                  <div>
-                    {isMyPack ? (
-                      <>
-                        <DeleteCardButton id={items.id} name={pack.data?.name || ''} />
-                      </>
-                    ) : (
-                      <></>
-                    )}
-                  </div>
-                </Table.Cell>
+
+                {isMyPack && (
+                  <Table.Cell>
+                    <div className={s.editButtons}>
+                      <EditCard />
+                      <DeleteCardButton id={items.id} name={pack.data?.name || ''} />
+                    </div>
+                  </Table.Cell>
+                )}
               </Table.Row>
             )
           })}

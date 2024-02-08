@@ -28,7 +28,7 @@ export const EditCard = () => {
   ]
 
   return (
-    <div>
+    <>
       {option === '1' && (
         <Modal open={open} setOpen={setOpen} title={'Editing a card'}>
           <AddCardForm onSubmit={() => {}} onValueChange={setOption} options={options} />
@@ -65,6 +65,6 @@ export const EditCard = () => {
       <IconButton
         icon={<Icon height={'16px'} name={'edit'} onClick={() => setOpen(true)} width={'16px'} />}
       />
-    </div>
+    </>
   )
 }
