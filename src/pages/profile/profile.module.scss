@@ -53,3 +53,28 @@
 .backButton {
   margin-top: 100px;
 }
+.editButton {
+  all: unset;
+
+  cursor: pointer;
+
+  position: relative;
+
+  width: 24px;
+  height: 24px;
+
+  background-color: var(--color-dark-300);
+  border-radius: 4px;
+
+  &:hover {
+    background-color: var(--color-dark-100);
+    box-shadow: none;
+  }
+
+  >svg{
+    position: relative;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%,0%);
+  }
+}
