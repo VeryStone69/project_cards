@@ -6,6 +6,7 @@ import s from './button-footer.module.scss'
 
 type Props = {
   className?: string
+  fullWidth?: boolean
   onClickCancel?: () => void
   onClickConfirm?: () => void
   option?: number
@@ -14,6 +15,7 @@ type Props = {
 }
 export const ButtonFooter = ({
   className,
+  fullWidth = false,
   onClickCancel,
   onClickConfirm,
   option = 1,
@@ -25,11 +27,11 @@ export const ButtonFooter = ({
   return (
     <div className={classes}>
       {option === 2 && (
-        <Button onClick={onClickCancel} variant={'secondary'}>
+        <Button fullWidth={fullWidth} onClick={onClickCancel} variant={'secondary'}>
           <Typography variant={'subtitle2'}>{titleCancel}</Typography>
         </Button>
       )}
-      <Button onClick={onClickConfirm}>
+      <Button fullWidth={fullWidth} onClick={onClickConfirm}>
         <Typography variant={'subtitle2'}>{titleConfirm}</Typography>
       </Button>
     </div>
