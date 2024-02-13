@@ -1,29 +1,30 @@
-import { ComponentPropsWithoutRef, ElementType } from 'react'
+import { ChangeEvent } from 'react'
 import { Control, FieldPath, FieldValues, useController } from 'react-hook-form'
 
 import { ButtonProps } from '@/components/ui/button'
 import { FileUploader } from '@/components/ui/file-uploader'
 
-type AsProp<T extends ElementType> = {
-  as?: T
-}
-type PolymorphicComponentProp<T extends ElementType, Props = {}> = Omit<
-  ComponentPropsWithoutRef<T>,
-  PropsToOmit<T, Props>
->
-
-type PropsToOmit<T extends ElementType, P> = keyof (AsProp<T> & P)
-
 type ControlledFileUploaderType<T extends FieldValues> = {
   control: Control<T>
+  errorToast?: () => void
   name: FieldPath<T>
-} & ButtonProps
+} & Omit<ButtonProps, 'onChange' | 'onClick'>
 export const ControlledFileUploader = <T extends FieldValues>({
   control,
+  errorToast,
   name,
   ...rest
 }: ControlledFileUploaderType<T>) => {
-  const { field } = useController({ control, name })
+  const {
+    field: { onChange },
+  } = useController({ control, name })
 
-  return <FileUploader {...rest} {...field} />
+  const changeHandler = async (e: ChangeEvent<HTMLInputElement>) => {
+    onChange(e.target.files?.[0])
+
+    errorToast?.()
+    e.target.value = ''
+  }
+
+  return <FileUploader {...rest} name={name} onChange={changeHandler} />
 }
