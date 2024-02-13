@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field/controlled-text-field'
 import { Option, Select } from '@/components/ui/select'
-import { DevTool } from '@hookform/devtools'
+import { ButtonFooter } from '@/features/button-footer'
 import { clsx } from 'clsx'
 
 import s from '@/components/forms/add-card-form/card-form.module.scss'
@@ -13,12 +13,12 @@ type AddCardFormProps = {
   onValueChange: (value: string) => void
   options: Option[]
 }
-
+type CardData = {
+  answer: string
+  question: string
+}
 export const AddCardForm = ({ className, onSubmit, onValueChange, options }: AddCardFormProps) => {
-  const { control, handleSubmit } = useForm<{
-    answer: string
-    question: string
-  }>({
+  const { control, handleSubmit } = useForm<CardData>({
     defaultValues: {
       answer: '',
       question: '',
@@ -29,8 +29,6 @@ export const AddCardForm = ({ className, onSubmit, onValueChange, options }: Add
 
   return (
     <div className={s.formCard}>
-      <DevTool control={control} />
-
       <form className={classNames} onSubmit={handleSubmit(onSubmit)}>
         <Select
           label={'Choose a question format'}
@@ -50,6 +48,7 @@ export const AddCardForm = ({ className, onSubmit, onValueChange, options }: Add
           label={'Answer:'}
           name={'answer'}
         />
+        <ButtonFooter option={2} titleCancel={'Cancel'} titleConfirm={'Save changes'} />
       </form>
     </div>
   )
