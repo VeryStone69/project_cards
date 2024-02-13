@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
@@ -5,6 +6,7 @@ import { PackFormType, addNewDeckSchema } from '@/utils/zod-resolvers/file-updat
 import { zodResolver } from '@hookform/resolvers/zod'
 
 export const useAddDeckForm = () => {
+  const [open, setOpen] = useState(false)
   const {
     control,
     formState: { errors },
@@ -31,6 +33,7 @@ export const useAddDeckForm = () => {
   const deleteCover = async () => {
     reset({ ...getValues(), cover: null })
     toast.warning('You deleted cover')
+    setOpen(false)
   }
   const toastError = async () => {
     const success = await trigger('cover')
@@ -45,9 +48,10 @@ export const useAddDeckForm = () => {
   return {
     control,
     deleteCover,
-    errors,
     handleSubmit,
     img,
+    open,
+    setOpen,
     toastError,
   }
 }
