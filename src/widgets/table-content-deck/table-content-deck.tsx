@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import defaultMask from '@/assets/images/Mask.jpg'
+import defaultMask from '@/assets/images/not-img.jpg'
 import { Button } from '@/components/ui/button'
 import { Table } from '@/components/ui/table'
 import { Typography } from '@/components/ui/typography'
