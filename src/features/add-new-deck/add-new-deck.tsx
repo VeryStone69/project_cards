@@ -1,38 +1,36 @@
 import { useState } from 'react'
+import { SubmitHandler } from 'react-hook-form'
 
-import notImg from '@/assets/images/not-img.jpg'
-import { ButtonBlock } from '@/components/button-block/button-block'
-import { Icon } from '@/components/icon/Icon'
+import { AddDeckForm } from '@/components/forms/add-deck-form'
 import { Button } from '@/components/ui/button'
-import { Checkbox } from '@/components/ui/checkBox'
 import { Modal } from '@/components/ui/modal'
-import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
+import { useCreateDecksMutation } from '@/services/decks-api/decks-api'
+import { PackFormType } from '@/utils/zod-resolvers/file-update-resolver'
 
-import s from './add-new-deck.module.scss'
-
-const AddNewDeck = () => {
+export const AddNewDeck = () => {
   const [open, setOpen] = useState(false)
+  const [createDeck] = useCreateDecksMutation()
+  const onSubmit: SubmitHandler<PackFormType> = async data => {
+    const form = new FormData()
+
+    form.append('name', data.name)
+    form.append('isPrivate', `${data.isPrivate}`)
+
+    if (data.cover === null) {
+      form.append('cover', '')
+    } else {
+      form.append('cover', data.cover || '')
+    }
+    setOpen(!open)
+    await createDeck(form).unwrap()
+  }
 
   return (
     <div>
       {open && (
         <Modal open={open} setOpen={setOpen} title={'Creating a new deck'}>
-          <div className={s.inputBlock}>
-            <img alt={'notImg'} src={notImg} />
-            <Button fullWidth variant={'secondary'}>
-              <Typography variant={'subtitle2'}>Change image</Typography>
-              <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 18 18'} />
-            </Button>
-
-            <TextField label={'Deck name'} />
-
-            <Typography variant={'body2'}>
-              <Checkbox label={'Private deck'} />
-            </Typography>
-          </div>
-
-          <ButtonBlock primary={'Create a deck'} secondary={'Cancel'} />
+          <AddDeckForm onCancel={() => setOpen(false)} onSubmit={onSubmit} />
         </Modal>
       )}
 
@@ -44,5 +42,3 @@ const AddNewDeck = () => {
     </div>
   )
 }
-
-export default AddNewDeck

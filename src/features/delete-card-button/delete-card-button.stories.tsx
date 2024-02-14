@@ -1,30 +1,46 @@
-import { Provider } from 'react-redux'
+import { useState } from 'react'
 
-import { DeleteCardButton } from '@/features/delete-card-button/delete-card-button'
-import { store } from '@/services/store'
+import { Icon } from '@/components/icon/Icon'
+import { IconButton } from '@/components/ui/icon-button'
+import { Modal } from '@/components/ui/modal'
+import { Typography } from '@/components/ui/typography'
+import { ButtonFooter } from '@/features/button-footer'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
-  component: DeleteCardButton,
+  args: {
+    open: false,
+    setOpen: () => {},
+    title: 'test',
+  },
+  component: Modal,
   parameters: {
     layout: 'centered',
   },
   title: 'Components/features/delete-card-button',
-} satisfies Meta<typeof DeleteCardButton>
+} satisfies Meta<typeof Modal>
 
 export default meta
 type Story = StoryObj<typeof meta>
 export const Default: Story = {
-  args: {
-    id: '1',
-    name: 'test',
-  },
   render: () => {
+    const [open, setOpen] = useState(false)
+
     return (
       <>
-        <Provider store={store}>
-          <DeleteCardButton id={'1'} name={'Test'} />
-        </Provider>
+        <IconButton icon={<Icon name={'remove'} size={'16px'} />} onClick={() => setOpen(true)} />
+        {open && (
+          <Modal open setOpen={() => setOpen(false)} title={'Delete card'}>
+            <Typography variant={'body1'}>
+              Do you really want to remove card? Сard will be deleted.
+            </Typography>
+            <ButtonFooter
+              onClickCancel={() => setOpen(false)}
+              onClickConfirm={() => {}}
+              option={2}
+            />
+          </Modal>
+        )}
       </>
     )
   },

@@ -1,20 +1,36 @@
-import { ComponentPropsWithoutRef } from 'react'
+import { ChangeEvent, ComponentPropsWithoutRef, ElementType, useRef } from 'react'
 
 import { Icon } from '@/components/icon/Icon'
-import { clsx } from 'clsx'
+import { Button, ButtonProps } from '@/components/ui/button'
 
-import s from './file-uploader.module.scss'
+type Props<T extends ElementType = 'button'> = {
+  as?: T
+  name: string
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void
+  variant?: ButtonProps['variant']
+} & Omit<ComponentPropsWithoutRef<T>, 'className' | 'onChange'>
 
-type Props = {} & ComponentPropsWithoutRef<'div'>
+export const FileUploader = <T extends ElementType = 'button'>(
+  props: Props<T> & Omit<ComponentPropsWithoutRef<T>, keyof Props<T>>
+) => {
+  const { as: Component = Button, asProp, children, name, onChange, ...rest } = props
 
-export const FileUploader = ({ className }: Props) => {
-  const classNames = {
-    root: clsx(s.root, className),
-  }
+  const inputRef = useRef<HTMLInputElement>(null)
 
   return (
-    <div className={classNames.root}>
-      <Icon className={s.editButton} fill={'white'} height={'15px'} name={'edit'} width={'15px'} />
-    </div>
+    <>
+      <Component {...asProp} {...rest} onClick={() => inputRef?.current?.click()}>
+        {children ?? <Icon fill={'white'} name={'edit'} size={'15px'} />}
+      </Component>
+
+      <input
+        accept={'image/*'}
+        hidden
+        name={name}
+        onChange={onChange}
+        ref={inputRef}
+        type={'file'}
+      />
+    </>
   )
 }

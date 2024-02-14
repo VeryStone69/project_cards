@@ -1,10 +1,10 @@
 import { useDebounce } from '@/app/hooks'
-import { Button } from '@/components/ui/button'
 import { InitialLoader } from '@/components/ui/loader'
 import { Pagination } from '@/components/ui/pagination/Pagination'
 import { Table } from '@/components/ui/table'
 import { TableHeader } from '@/components/ui/table-header'
 import { Typography } from '@/components/ui/typography'
+import { AddNewDeck } from '@/features/add-new-deck'
 import { FilterControl } from '@/features/filter-control'
 import { useFilterSetting } from '@/pages/packs/hooks/useFilterSetting'
 import { usePaginationDecks } from '@/pages/packs/hooks/usePaginationDecks'
@@ -87,9 +87,7 @@ export const Packs = () => {
           <Typography as={'h1'} variant={'large'}>
             Packs list
           </Typography>
-          <Button>
-            <Typography variant={'subtitle1'}>Add New Deck</Typography>
-          </Button>
+          <AddNewDeck />
         </div>
         <FilterControl
           clearFilter={clearFilter}

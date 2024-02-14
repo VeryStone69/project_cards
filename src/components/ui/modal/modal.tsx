@@ -19,7 +19,7 @@ export const Modal = ({ children, open, setOpen, title }: Props) => (
     <Dialog.Portal>
       <Dialog.Overlay className={s.overlay} />
       <div className={s.root}>
-        <Dialog.Content className={s.window}>
+        <Dialog.Content className={s.window} forceMount>
           <Card className={s.card}>
             <div className={s.header}>
               <Dialog.Title asChild>

@@ -4,6 +4,7 @@ import notImg from '@/assets/images/not-img.jpg'
 import { ButtonBlock } from '@/components/button-block/button-block'
 import { Icon } from '@/components/icon/Icon'
 import { Button } from '@/components/ui/button'
+import { FileUploader } from '@/components/ui/file-uploader'
 import { Modal } from '@/components/ui/modal'
 import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
@@ -23,10 +24,10 @@ export const AddNewCard = () => {
             </Typography>
             <TextField label={'Question:'} />
             <img alt={'notImg'} src={notImg} />
-            <Button fullWidth variant={'secondary'}>
-              <Typography variant={'subtitle2'}>Change image</Typography>
-              <Icon name={'img'} viewBox={'0 0 18 18'} />
-            </Button>
+            <FileUploader name={''} onChange={() => {}} variant={'secondary'}>
+              <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 18 18'} />
+              <Typography variant={'subtitle2'}>Upload Image</Typography>
+            </FileUploader>
 
             <TextField label={'Answer:'} />
             <img alt={'notImg'} src={notImg} />

@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 0 30px;
+
 }
 
 .title {
@@ -10,8 +12,6 @@
 }
 
 .form {
-  padding: 0 30px;
-
   .email {
     margin: 24px 0;
   }
