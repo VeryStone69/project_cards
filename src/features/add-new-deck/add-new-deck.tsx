@@ -22,9 +22,8 @@ export const AddNewDeck = () => {
     } else {
       form.append('cover', data.cover || '')
     }
-
-    await createDeck(form).unwrap()
     setOpen(!open)
+    await createDeck(form).unwrap()
   }
 
   return (
