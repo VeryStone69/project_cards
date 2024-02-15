@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { Link } from 'react-router-dom'
 
 import defaultMask from '@/assets/images/not-img.jpg'
@@ -15,7 +16,7 @@ type Props = {
   currentUserId: string
   deck: DecksItems
 }
-export const TableContentDeck = ({ currentUserId, deck }: Props) => {
+export const TableContentDeck = memo(({ currentUserId, deck }: Props) => {
   return (
     <Table.Row key={deck.id}>
       <Table.Cell align={'left'}>
@@ -32,11 +33,11 @@ export const TableContentDeck = ({ currentUserId, deck }: Props) => {
       <Table.Cell>
         {currentUserId == deck.author.id && (
           <div className={s.configButton}>
-            <EditPack />
+            <EditPack cover={deck.cover} id={deck.id} isPrivate={deck.isPrivate} name={deck.name} />
             <DeleteDeckButton id={deck.id} name={deck.name} />
           </div>
         )}
       </Table.Cell>
     </Table.Row>
   )
-}
+})
