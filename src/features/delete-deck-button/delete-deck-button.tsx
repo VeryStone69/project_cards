@@ -18,7 +18,7 @@ export const DeleteDeckButton = memo(({ id, name }: Props) => {
     delCard({ id }).finally(() => {
       setOpen(false)
     })
-  }, [id])
+  }, [delCard, id])
 
   return (
     <>
