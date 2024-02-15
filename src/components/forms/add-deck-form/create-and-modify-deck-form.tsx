@@ -1,4 +1,5 @@
 import { ComponentPropsWithoutRef, ElementType } from 'react'
+import { SubmitHandler } from 'react-hook-form'
 
 import notImg from '@/assets/images/not-img.jpg'
 import { useAddDeckForm } from '@/components/forms/add-deck-form/hook/useAddDeckForm'
@@ -14,23 +15,49 @@ import { clsx } from 'clsx'
 
 import s from './add-deck-form.module.scss'
 
+export type DefaultValueType = {
+  cover: null | string
+
+  isPrivate: boolean
+  name: string
+}
 type Props<C extends ElementType = 'div'> = {
+  defaultValue?: DefaultValueType
   onCancel: () => void
-  onSubmit: (data: PackFormType) => void
-} & Omit<ComponentPropsWithoutRef<C>, 'onSubmit'>
-export const AddDeckForm = ({ className, onCancel, onSubmit, ...rest }: Props) => {
+  onSubmit: (data: FormData) => void
+} & Omit<ComponentPropsWithoutRef<C>, 'defaultValue' | 'onSubmit'>
+export const CreateAndModifyDeckForm = ({
+  className,
+  defaultValue,
+  onCancel,
+  onSubmit,
+  ...rest
+}: Props) => {
   const classNames = clsx(s.formCard, className)
-  const { control, deleteCover, handleSubmit, img, open, setOpen, toastError } = useAddDeckForm()
+  const { control, deleteCover, handleSubmit, img, open, setOpen, toastError } =
+    useAddDeckForm(defaultValue)
   const imgClasses = clsx(s.image, img && s.hover, open && s.open)
   const onClickHandler = () => {
     if (img) {
       setOpen(prevState => !prevState)
     }
   }
+  const onSubmitHandler: SubmitHandler<PackFormType> = async data => {
+    const form = new FormData()
+
+    form.append('name', data.name)
+    form.append('isPrivate', `${data.isPrivate}`)
+    if (data.cover === null && img === null) {
+      form.append('cover', '')
+    } else if (data.cover) {
+      form.append('cover', data.cover || '')
+    }
+    onSubmit(form)
+  }
 
   return (
     <div className={classNames} {...rest}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmitHandler)}>
         <div className={s.inputBlock}>
           <img alt={'notImg'} className={imgClasses} onClick={onClickHandler} src={img || notImg} />
           <div className={s.deleteCover}>
@@ -58,7 +85,7 @@ export const AddDeckForm = ({ className, onCancel, onSubmit, ...rest }: Props) =
             <ControlledCheckbox control={control} label={'Private deck'} name={'isPrivate'} />
           </Typography>
         </div>
-        <ButtonFooter onClickCancel={onCancel} option={2} titleConfirm={'Create a deck'} />
+        <ButtonFooter onClickCancel={onCancel} option={2} titleConfirm={'Save'} />
       </form>
     </div>
   )
