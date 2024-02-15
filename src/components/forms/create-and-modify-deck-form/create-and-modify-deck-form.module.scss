@@ -4,7 +4,6 @@
   gap: 20px;
   align-items: stretch;
 
-
   .uploadButton {
     height: 36px;
 
@@ -16,15 +15,14 @@
   }
 }
 
-.deleteCover{
+.deleteCover {
   display: flex;
   gap: 1rem;
   align-items: center;
   justify-content: space-between;
 }
 
-
-.image{
+.image {
   aspect-ratio: 2/1;
   width: 100%;
 
