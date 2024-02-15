@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import defaultMask from '@/assets/images/not-img.jpg'
 import { Icon } from '@/components/icon/Icon'
@@ -20,6 +20,10 @@ type Props = {
 }
 export const TableContentDeck = memo(({ currentUserId, deck }: Props) => {
   const isMyDeck = currentUserId === deck.author.id
+  const navigate = useNavigate()
+  const onClickLearnCards = () => {
+    navigate(`${deck.id}/learn`)
+  }
 
   return (
     <Table.Row key={deck.id}>
@@ -47,7 +51,7 @@ export const TableContentDeck = memo(({ currentUserId, deck }: Props) => {
               <IconButton
                 disabled={!deck.cardsCount}
                 icon={<Icon name={'play'} size={'18px'} />}
-                onClick={() => {}}
+                onClick={onClickLearnCards}
                 small
               />
               <DeleteDeckButton id={deck.id} name={deck.name} />
@@ -56,7 +60,7 @@ export const TableContentDeck = memo(({ currentUserId, deck }: Props) => {
             <IconButton
               disabled={!deck.cardsCount}
               icon={<Icon name={'play'} size={'18px'} />}
-              onClick={() => {}}
+              onClick={onClickLearnCards}
               small
             />
           )}
