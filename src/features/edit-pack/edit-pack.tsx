@@ -1,10 +1,11 @@
 import { useState } from 'react'
 
-import { CreateAndModifyDeckForm } from '@/components/forms/add-deck-form'
 import { Icon } from '@/components/icon/Icon'
 import { IconButton } from '@/components/ui/icon-button'
 import { Modal } from '@/components/ui/modal'
 import { useUpdateDeckMutation } from '@/services/decks-api/decks-api'
+
+import { CreateAndModifyDeckForm } from '../../components/forms/create-and-modify-deck-form'
 
 type Props = {
   cover: string

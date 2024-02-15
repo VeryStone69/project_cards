@@ -10,7 +10,7 @@ import { Typography } from '@/components/ui/typography'
 import { ButtonFooter } from '@/features/button-footer'
 import { Meta, StoryObj } from '@storybook/react'
 
-import s from '@/components/forms/add-deck-form/add-deck-form.module.scss'
+import s from '@/components/forms/create-and-modify-deck-form/create-and-modify-deck-form.module.scss'
 
 import notImg from '../../assets/images/not-img.jpg'
 
