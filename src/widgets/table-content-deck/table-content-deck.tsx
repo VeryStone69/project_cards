@@ -2,7 +2,9 @@ import { memo } from 'react'
 import { Link } from 'react-router-dom'
 
 import defaultMask from '@/assets/images/not-img.jpg'
+import { Icon } from '@/components/icon/Icon'
 import { Button } from '@/components/ui/button'
+import { IconButton } from '@/components/ui/icon-button'
 import { Table } from '@/components/ui/table'
 import { Typography } from '@/components/ui/typography'
 import { DeleteDeckButton } from '@/features/delete-deck-button'
@@ -17,6 +19,8 @@ type Props = {
   deck: DecksItems
 }
 export const TableContentDeck = memo(({ currentUserId, deck }: Props) => {
+  const isMyDeck = currentUserId === deck.author.id
+
   return (
     <Table.Row key={deck.id}>
       <Table.Cell align={'left'}>
@@ -31,12 +35,32 @@ export const TableContentDeck = memo(({ currentUserId, deck }: Props) => {
       <Table.Cell>{formatDate(deck.updated)}</Table.Cell>
       <Table.Cell>{deck.author.name}</Table.Cell>
       <Table.Cell>
-        {currentUserId == deck.author.id && (
-          <div className={s.configButton}>
-            <EditPack cover={deck.cover} id={deck.id} isPrivate={deck.isPrivate} name={deck.name} />
-            <DeleteDeckButton id={deck.id} name={deck.name} />
-          </div>
-        )}
+        <div className={s.configButton}>
+          {isMyDeck ? (
+            <>
+              <EditPack
+                cover={deck.cover}
+                id={deck.id}
+                isPrivate={deck.isPrivate}
+                name={deck.name}
+              />
+              <IconButton
+                disabled={!deck.cardsCount}
+                icon={<Icon name={'play'} size={'18px'} />}
+                onClick={() => {}}
+                small
+              />
+              <DeleteDeckButton id={deck.id} name={deck.name} />
+            </>
+          ) : (
+            <IconButton
+              disabled={!deck.cardsCount}
+              icon={<Icon name={'play'} size={'18px'} />}
+              onClick={() => {}}
+              small
+            />
+          )}
+        </div>
       </Table.Cell>
     </Table.Row>
   )
