@@ -47,6 +47,10 @@
   transform: scale(1);
 }
 
+.button:disabled:hover::before {
+  background: none;
+}
+
 .button:hover:active::before {
   transform: scale(1);
   background-color: var(--color-dark-100);
@@ -56,4 +60,8 @@
 .button:hover:focus-visible::before {
   transform: scale(1);
   background-color: var(--color-dark-500);
+}
+
+.button:disabled:hover:active::before {
+  background: none;
 }
