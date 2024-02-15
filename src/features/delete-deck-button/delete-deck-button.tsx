@@ -32,6 +32,7 @@ export const DeleteDeckButton = memo(({ id, name }: Props) => {
             onClickCancel={() => setOpen(false)}
             onClickConfirm={deleteCard}
             option={2}
+            titleConfirm={'delete deck'}
           />
         </Modal>
       )}
