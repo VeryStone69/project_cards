@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { CreateAndModifyDeckForm } from '@/components/forms/add-deck-form'
+import { CreateAndModifyDeckForm } from '@/components/forms/create-and-modify-deck-form'
 import { Button } from '@/components/ui/button'
 import { Modal } from '@/components/ui/modal'
 import { Typography } from '@/components/ui/typography'

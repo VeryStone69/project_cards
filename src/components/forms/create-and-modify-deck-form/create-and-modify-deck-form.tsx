@@ -2,7 +2,7 @@ import { ComponentPropsWithoutRef, ElementType } from 'react'
 import { SubmitHandler } from 'react-hook-form'
 
 import notImg from '@/assets/images/not-img.jpg'
-import { useAddDeckForm } from '@/components/forms/add-deck-form/hook/useAddDeckForm'
+import { useAddDeckForm } from '@/components/forms/create-and-modify-deck-form/hook/useAddDeckForm'
 import { Icon } from '@/components/icon/Icon'
 import { Button } from '@/components/ui/button'
 import { ControlledCheckbox } from '@/components/ui/controlled/controlled-checkbox/controlled-checkbox'
@@ -13,11 +13,10 @@ import { ButtonFooter } from '@/features/button-footer'
 import { PackFormType } from '@/utils/zod-resolvers/file-update-resolver'
 import { clsx } from 'clsx'
 
-import s from './add-deck-form.module.scss'
+import s from './create-and-modify-deck-form.module.scss'
 
 export type DefaultValueType = {
   cover: null | string
-
   isPrivate: boolean
   name: string
 }
