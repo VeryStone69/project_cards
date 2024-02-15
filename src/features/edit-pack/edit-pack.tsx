@@ -1,40 +1,48 @@
 import { useState } from 'react'
+import { SubmitHandler } from 'react-hook-form'
 
-import notImg from '@/assets/images/not-img.jpg'
-import { ButtonBlock } from '@/components/button-block/button-block'
+import { AddDeckForm } from '@/components/forms/add-deck-form'
 import { Icon } from '@/components/icon/Icon'
-import { Button } from '@/components/ui/button'
-import { Checkbox } from '@/components/ui/checkBox'
 import { IconButton } from '@/components/ui/icon-button'
 import { Modal } from '@/components/ui/modal'
-import { TextField } from '@/components/ui/textField'
-import { Typography } from '@/components/ui/typography'
+import { useUpdateDeckMutation } from '@/services/decks-api/decks-api'
+import { PackFormType } from '@/utils/zod-resolvers/file-update-resolver'
 
-import s from './edit-pack.module.scss'
-
-export const EditPack = () => {
+type Props = {
+  cover: string
+  id: string
+  isPrivate: boolean
+  name: string
+}
+export const EditPack = ({ cover, id, isPrivate, name }: Props) => {
+  const defaultValue = { cover, isPrivate, name }
   const [open, setOpen] = useState(false)
+  const [updateDeck] = useUpdateDeckMutation()
+  const onSubmit: SubmitHandler<PackFormType> = async data => {
+    console.log(data)
+    const form = new FormData()
+
+    form.append('name', data.name)
+    form.append('isPrivate', `${data.isPrivate}`)
+
+    if (data.cover === null) {
+      form.append('cover', '')
+    } else {
+      form.append('cover', data.cover || '')
+    }
+    setOpen(!open)
+    await updateDeck({ data: form, id }).unwrap()
+  }
 
   return (
     <>
       {open && (
-        <Modal open={open} setOpen={setOpen} title={'Editing a Pack'}>
-          <div className={s.inputBlock}>
-            <div className={s.notImg}>
-              <img alt={'notImg'} src={notImg} />
-            </div>
-            <Typography className={s.uploadButton} variant={'subtitle2'}>
-              <Button variant={'secondary'}>Change cover</Button>
-              <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 18 18'} />
-            </Typography>
-            <TextField label={'Pack name'} />
-
-            <Typography variant={'body2'}>
-              <Checkbox label={'Private pack'} />
-            </Typography>
-          </div>
-
-          <ButtonBlock className={s.buttonBlock} primary={'Save changes'} secondary={'Cancel'} />
+        <Modal open={open} setOpen={setOpen} title={'Edit Pack'}>
+          <AddDeckForm
+            defaultValue={defaultValue}
+            onCancel={() => setOpen(false)}
+            onSubmit={onSubmit}
+          />
         </Modal>
       )}
       <IconButton
