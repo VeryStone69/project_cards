@@ -1,25 +1,27 @@
 import { useState } from 'react'
 
 import { Icon } from '@/components/icon/Icon'
-import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkBox'
+import { FileUploader } from '@/components/ui/file-uploader'
 import { IconButton } from '@/components/ui/icon-button'
 import { Modal } from '@/components/ui/modal'
 import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
 import { ButtonFooter } from '@/features/button-footer'
-import { EditPack } from '@/features/edit-pack/edit-pack'
 import { Meta, StoryObj } from '@storybook/react'
+
+import s from '@/components/forms/add-deck-form/add-deck-form.module.scss'
 
 import notImg from '../../assets/images/not-img.jpg'
 
 const meta = {
-  component: EditPack,
+  args: { open: false, setOpen: () => {}, title: 'test' },
+  component: Modal,
   parameters: {
     layout: 'centered',
   },
   title: 'Components/features/edit-pack',
-} satisfies Meta<typeof EditPack>
+} satisfies Meta<typeof Modal>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -43,14 +45,15 @@ export const EditPackModal: Story = {
               <img alt={'notImg'} src={notImg} />
 
               <Typography style={{ height: '36px' }} variant={'subtitle2'}>
-                <Button fullWidth variant={'secondary'}>
-                  Change cover
-                </Button>
-                <Icon
-                  name={'img'}
-                  style={{ left: '195px', position: 'relative', top: '-29px' }}
-                  viewBox={'0 0 18 18'}
-                />
+                <FileUploader
+                  name={'test'}
+                  onChange={() => {}}
+                  style={{ width: '100%' }}
+                  variant={'secondary'}
+                >
+                  <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 18 18'} />
+                  <Typography variant={'subtitle2'}>Upload Image</Typography>
+                </FileUploader>
               </Typography>
               <TextField label={'Pack name'} />
 
