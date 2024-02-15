@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { DefaultValueType } from '@/components/forms/add-deck-form'
+import { DefaultValueType } from '@/components/forms/create-and-modify-deck-form'
 import { PackFormType, addNewDeckSchema } from '@/utils/zod-resolvers/file-update-resolver'
 import { zodResolver } from '@hookform/resolvers/zod'
 
