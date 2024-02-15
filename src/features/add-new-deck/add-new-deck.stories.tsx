@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { AddDeckForm } from '@/components/forms/add-deck-form'
+import { CreateAndModifyDeckForm } from '@/components/forms/add-deck-form'
 import { Button } from '@/components/ui/button'
 import { Modal } from '@/components/ui/modal'
 import { Typography } from '@/components/ui/typography'
@@ -26,7 +26,7 @@ export const AddDeck: Story = {
       <div>
         {open && (
           <Modal open={open} setOpen={setOpen} title={'Creating a new deck'}>
-            <AddDeckForm onCancel={() => setOpen(false)} onSubmit={() => {}} />
+            <CreateAndModifyDeckForm onCancel={() => setOpen(false)} onSubmit={() => {}} />
           </Modal>
         )}
 
