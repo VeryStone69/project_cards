@@ -2,43 +2,41 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
+import { DefaultValueType } from '@/components/forms/add-deck-form'
 import { PackFormType, addNewDeckSchema } from '@/utils/zod-resolvers/file-update-resolver'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-export const useAddDeckForm = () => {
+export const useAddDeckForm = (defaultValue?: DefaultValueType) => {
   const [open, setOpen] = useState(false)
-  const {
-    control,
-    formState: { errors },
-    getFieldState,
-    getValues,
-    handleSubmit,
-    reset,
-    trigger,
-    watch,
-  } = useForm<PackFormType>({
-    defaultValues: {
-      cover: null,
-      isPrivate: false,
-      name: '',
-    },
+  const [img, setImg] = useState<null | string>(defaultValue?.cover || null)
 
-    resolver: zodResolver(addNewDeckSchema),
-  })
+  const { control, getFieldState, getValues, handleSubmit, reset, setValue, trigger, watch } =
+    useForm<PackFormType>({
+      defaultValues: {
+        cover: null,
+        isPrivate: defaultValue?.isPrivate || false,
+        name: defaultValue?.name || '',
+      },
 
-  const file = watch('cover')
-
-  const img = file && !errors.cover ? URL.createObjectURL(file) : null
+      resolver: zodResolver(addNewDeckSchema),
+    })
 
   const deleteCover = async () => {
     reset({ ...getValues(), cover: null })
     toast.warning('You deleted cover')
     setOpen(false)
+    setImg(null)
   }
   const toastError = async () => {
     const success = await trigger('cover')
+    const file = watch('cover')
+
     const { error } = getFieldState('cover')
 
+    if (file && success) {
+      setValue('cover', file)
+      setImg(URL.createObjectURL(file))
+    }
     if (!success && error?.message) {
       toast.error(error.message)
       reset({ ...getValues(), cover: null })
