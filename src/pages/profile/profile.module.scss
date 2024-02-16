@@ -6,8 +6,9 @@
   justify-content: center;
 
   width: 420px;
-  height: 348px;
+  height: 420px;
   margin: 0 auto;
+  padding: 33px 36px;
 }
 
 .avatarBlock {
@@ -20,15 +21,7 @@
   }
 }
 
-.nameBlock {
-  display: flex;
-  gap: 15px;
-  align-items: center;
 
-  svg:hover {
-    cursor: pointer;
-  }
-}
 
 .email {
   color: var(--color-dark-100);
@@ -53,6 +46,7 @@
 .backButton {
   margin-top: 100px;
 }
+
 .editButton {
   all: unset;
 
@@ -66,15 +60,30 @@
   background-color: var(--color-dark-300);
   border-radius: 4px;
 
-  &:hover {
-    background-color: var(--color-dark-100);
-    box-shadow: none;
-  }
-
   > svg {
     position: relative;
     top: 0;
     left: 50%;
     transform: translate(-50%, 0%);
   }
+
+  &:hover {
+    background-color: var(--color-dark-100);
+    box-shadow: none;
+  }
+
+}
+
+.nameBlock {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+
+  svg:hover {
+    cursor: pointer;
+  }
+}
+
+.textField{
+  width: 100%;
 }
