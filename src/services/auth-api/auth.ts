@@ -2,6 +2,7 @@ import {
   LoginData,
   LoginResponse,
   RegisterData,
+  UpdateProfile,
   UserResponse,
 } from '@/services/auth-api/auth.types'
 import { baseApi } from '@/services/base-api/base-api'
@@ -35,8 +36,22 @@ export const authAPI = baseApi.injectEndpoints({
           url: `/v1/auth/sign-up`,
         }),
       }),
+      updateProfile: builder.mutation<UserResponse, UpdateProfile>({
+        invalidatesTags: ['Me'],
+        query: body => ({
+          body,
+          method: 'PATCH',
+          url: `v1/auth/me`,
+        }),
+      }),
     }
   },
 })
 
-export const { useLogOutMutation, useLoginMutation, useMeQuery, useRegisterMutation } = authAPI
+export const {
+  useLogOutMutation,
+  useLoginMutation,
+  useMeQuery,
+  useRegisterMutation,
+  useUpdateProfileMutation,
+} = authAPI
