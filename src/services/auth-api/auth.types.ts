@@ -18,4 +18,6 @@ export type LoginResponse = {
   accessToken: string
 }
 
+export type UpdateProfile = FormData
+
 export type RegisterData = Omit<LoginData, 'rememberMe'>
