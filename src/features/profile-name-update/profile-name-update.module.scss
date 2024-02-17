@@ -1,0 +1,12 @@
+.nameBlock {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+
+  svg:hover {
+    cursor: pointer;
+  }
+}
+.email {
+  color: var(--color-dark-100);
+}
