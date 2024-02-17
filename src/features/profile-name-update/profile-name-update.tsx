@@ -9,7 +9,7 @@ import { IconButton } from '@/components/ui/icon-button'
 import { Typography } from '@/components/ui/typography'
 import { useLogOutMutation, useUpdateProfileMutation } from '@/services/auth-api/auth'
 
-import s from '@/pages/profile/profile.module.scss'
+import s from './profile-name-update.module.scss'
 
 type Props<T extends ElementType = 'div'> = {
   as?: T
