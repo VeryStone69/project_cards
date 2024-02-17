@@ -8,7 +8,7 @@ import { useUpdateProfileMutation } from '@/services/auth-api/auth'
 import { coverSchema } from '@/utils/zod-resolvers/file-update-resolver'
 import * as z from 'zod'
 
-import s from '@/pages/profile/profile.module.scss'
+import s from './profile-photo-loader.module.scss'
 
 export const ProfilePhotoLoader = () => {
   const [updateProfile] = useUpdateProfileMutation()
@@ -29,8 +29,9 @@ export const ProfilePhotoLoader = () => {
     } catch (err) {
       if (err instanceof z.ZodError) {
         toast.error(err.issues[0].message)
+      } else {
+        toast.error('avatar not upload')
       }
-      toast.error('avatar not upload')
     }
   }
   const deleteAvatar = async () => {
