@@ -1,0 +1,19 @@
+.avatarBlock {
+  position: relative;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 96px;
+  height: 96px;
+
+  border-radius: 50%;
+
+  > span {
+    width: 96px;
+    height: 96px;
+  }
+}
