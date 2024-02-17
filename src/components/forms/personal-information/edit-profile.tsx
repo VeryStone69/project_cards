@@ -14,7 +14,7 @@ import { Button } from '../../ui/button'
 export type FormValues = z.infer<typeof editProfileSchema>
 type LoginProps = {
   className?: string
-  name: string
+  name: string | undefined
   onSubmit: (values: FormValues) => void
 }
 
