@@ -13,9 +13,9 @@ import s from '@/pages/profile/profile.module.scss'
 
 type Props<T extends ElementType = 'div'> = {
   as?: T
-  email: string
+  email: string | undefined
   isEdit: boolean
-  name: string
+  name: string | undefined
   setEdit: (value: boolean) => void
 } & Omit<ComponentPropsWithoutRef<T>, 'name'>
 export const ProfileNameUpdate = <T extends ElementType = 'div'>(
@@ -34,9 +34,15 @@ export const ProfileNameUpdate = <T extends ElementType = 'div'>(
 
     form.append('name', data.name)
 
-    setEdit(false)
-    await updateProfile(form).unwrap()
-    toast.success('name successful changed')
+    try {
+      setEdit(false)
+      await toast.promise(updateProfile(form).unwrap(), {
+        pending: 'Change name',
+        success: 'name successful changed',
+      })
+    } catch (err) {
+      toast.error('renaming canceled')
+    }
   }
 
   return (
