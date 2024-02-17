@@ -13,87 +13,8 @@ position: relative;
   padding: 33px 36px;
 }
 
-.avatarBlock {
-  position: relative;
-
-  .fileUploader {
-    position: absolute;
-    top: 75px;
-    left: 75px;
-
-
-  }
-}
-
-
-.remove{
-position: relative;
-  top: -75px;
-  left: 50%;
-
-}
-
-.email {
-  color: var(--color-dark-100);
-}
-
-.avatar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 96px;
-  height: 96px;
-
-  border-radius: 50%;
-
-  > span {
-    width: 96px;
-    height: 96px;
-  }
-}
-
 .backButton {
   margin-top: 100px;
-}
-
-.editButton {
-  all: unset;
-
-  cursor: pointer;
-
-  position: relative;
-
-  width: 24px;
-  height: 24px;
-
-  background-color: var(--color-dark-300);
-  border-radius: 4px;
-
-
-
-  > svg {
-    position: relative;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, 0%);
-  }
-
-  &:hover {
-    background-color: var(--color-dark-100);
-    box-shadow: none;
-  }
-
-}
-
-.nameBlock {
-  display: flex;
-  gap: 15px;
-  align-items: center;
-
-  svg:hover {
-    cursor: pointer;
-  }
 }
 
 .textField{
