@@ -12,6 +12,14 @@
 
   .logo {
     cursor: pointer;
+
+    >svg{
+      transition: 0.3s;
+
+      &:hover {
+        filter: drop-shadow(0 0 6px var(--color-accent-100));
+      }
+    }
   }
 }
 
