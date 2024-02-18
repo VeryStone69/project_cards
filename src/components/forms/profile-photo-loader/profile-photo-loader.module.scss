@@ -1,17 +1,13 @@
-
 .fileUploader {
   position: absolute;
   top: 75px;
   left: 75px;
-
-
 }
 
-.remove{
+.remove {
   position: relative;
   top: -75px;
   left: 50%;
-
 }
 
 .editButton {
@@ -27,8 +23,6 @@
   background-color: var(--color-dark-300);
   border-radius: 4px;
 
-
-
   > svg {
     position: relative;
     top: 0;
@@ -40,5 +34,4 @@
     background-color: var(--color-dark-100);
     box-shadow: none;
   }
-
 }
