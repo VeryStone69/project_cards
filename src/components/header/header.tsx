@@ -28,7 +28,7 @@ export const Header = memo(({ avatar, email, isAuthenticated, userName }: Profil
   return (
     <div className={s.root}>
       <div className={s.container}>
-        <div onClick={() => navigate('/')} className={s.logo}>
+        <div className={s.logo} onClick={() => navigate('/')}>
           <Logo />
         </div>
 
