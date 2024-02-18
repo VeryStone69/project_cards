@@ -9,8 +9,10 @@ import { coverSchema } from '@/utils/zod-resolvers/file-update-resolver'
 import * as z from 'zod'
 
 import s from './profile-photo-loader.module.scss'
-
-export const ProfilePhotoLoader = () => {
+type Props = {
+  avatar: string | undefined
+}
+export const ProfilePhotoLoader = ({ avatar }: Props) => {
   const [updateProfile] = useUpdateProfileMutation()
 
   const onChangeHandler = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -50,11 +52,13 @@ export const ProfilePhotoLoader = () => {
 
   return (
     <div className={s.fileUploader}>
-      <IconButton
-        className={s.remove}
-        icon={<Icon fill={'remove'} name={'close'} size={'16px'} />}
-        onClick={deleteAvatar}
-      />
+      {avatar && (
+        <IconButton
+          className={s.remove}
+          icon={<Icon fill={'remove'} name={'close'} size={'16px'} />}
+          onClick={deleteAvatar}
+        />
+      )}
       <FileUploader className={s.editButton} name={'avatar'} onChange={onChangeHandler}>
         <Icon fill={'white'} name={'edit'} size={'16px'} />
       </FileUploader>
