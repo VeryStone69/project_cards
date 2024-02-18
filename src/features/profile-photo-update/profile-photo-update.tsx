@@ -19,7 +19,7 @@ export const ProfilePhotoUpdate = <T extends ElementType = 'div'>(
   return (
     <Component className={s.avatarBlock}>
       <Avatar className={s.avatar} src={avatar} />
-      {!isEdit && <ProfilePhotoLoader />}
+      {!isEdit && <ProfilePhotoLoader avatar={avatar} />}
     </Component>
   )
 }
