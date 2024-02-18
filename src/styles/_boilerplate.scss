@@ -1,10 +1,12 @@
 html {
+  overflow-y: auto;
+
   box-sizing: border-box;
+
   font-size: 100%;
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-y: auto;
 
 
   &::-webkit-scrollbar {
