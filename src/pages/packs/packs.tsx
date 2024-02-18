@@ -1,5 +1,6 @@
 import { useDebounce } from '@/app/hooks'
-import { InitialLoader } from '@/components/ui/loader'
+import { packsColumns } from '@/common/consts/packs-columns'
+import { InitialLoader, PreLoader } from '@/components/ui/loader'
 import { Pagination } from '@/components/ui/pagination/Pagination'
 import { Table } from '@/components/ui/table'
 import { TableHeader } from '@/components/ui/table-header'
@@ -39,7 +40,11 @@ export const Packs = () => {
 
   const name = useDebounce(searchName)
   const authorId = tabValue === 'my' ? currentUserId : undefined
-  const { data: decks, isLoading } = useGetDecksQuery({
+  const {
+    data: decks,
+    isFetching,
+    isLoading,
+  } = useGetDecksQuery({
     authorId,
     currentPage,
     itemsPerPage,
@@ -50,38 +55,12 @@ export const Packs = () => {
   })
 
   if (isLoading) {
-    return <InitialLoader />
+    return <PreLoader />
   }
-  const packsColumns = [
-    {
-      key: 'name',
-      sortable: true,
-      title: 'Name',
-    },
-    {
-      key: 'cardsCount',
-      sortable: true,
-      title: 'Cards',
-    },
-    {
-      key: 'updated',
-      sortable: true,
-      title: 'Last Updated',
-    },
-    {
-      key: 'created',
-      sortable: true,
-      title: 'Created By',
-    },
-    {
-      key: 'controls',
-      sortable: true,
-      title: '',
-    },
-  ]
 
   return (
     <div className={s.packsPage}>
+      {isFetching && <InitialLoader />}
       <div className={s.setting}>
         <div className={s.addCard}>
           <Typography as={'h1'} variant={'large'}>
