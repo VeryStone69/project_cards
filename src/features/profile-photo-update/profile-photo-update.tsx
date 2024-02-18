@@ -1,9 +1,10 @@
 import { ComponentPropsWithoutRef, ElementType } from 'react'
 
-import { ProfilePhotoLoader } from '@/components/forms/profile-photo-loader'
 import { Avatar } from '@/components/ui/avatar'
 
 import s from './profile-photo.module.scss'
+
+import { ProfilePhotoLoader } from '../profile-photo-loader'
 
 type Props<T extends ElementType = 'div'> = {
   as?: T
