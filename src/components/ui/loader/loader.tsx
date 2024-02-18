@@ -14,7 +14,7 @@ export const InitialLoader = ({ preLoader }: Props) => {
 
 export const PreLoader = () => {
   return (
-    <div>
+    <div className={s.loader}>
       <l-ring bg-opacity={'0'} color={'#8C61FFFF'} size={'30'} speed={'2'} stroke={'2'}></l-ring>
     </div>
   )
