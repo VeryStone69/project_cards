@@ -7,9 +7,9 @@ import s from './drop-down-user.module.scss'
 
 type Props = {
   onlogOut?: () => void
-  userEmail: string
-  userLogo: string
-  userName: string
+  userEmail?: string
+  userLogo?: string
+  userName?: string
 }
 export const DropDownUser = ({ onlogOut, userEmail, userLogo, userName }: Props) => {
   const navigate = useNavigate()
