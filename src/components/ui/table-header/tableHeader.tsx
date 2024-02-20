@@ -46,7 +46,7 @@ export const TableHeader = ({ columns, onSort, sort, ...props }: TableHeaderProp
 
   return (
     <Table.Head {...props}>
-      <Table.Row>
+      <Table.Row className={s.row}>
         {columns.map(({ key, sortable, title }) => {
           const sortCondition = sort && sort.key === key
           const classesIcon = s.icon + ' ' + (sort?.direction === 'desc' && s.iconDown)
