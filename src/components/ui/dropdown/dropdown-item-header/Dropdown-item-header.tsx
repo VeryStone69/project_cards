@@ -10,8 +10,8 @@ export type DropDownHeaderProps = {
   className?: string
   onSelect?: (event: Event) => void
   userEmail?: string
-  userLogo: string
-  userName: string
+  userLogo?: string
+  userName?: string
 } & ComponentPropsWithoutRef<'div'>
 export const DropdownItemHeader = ({
   className,
