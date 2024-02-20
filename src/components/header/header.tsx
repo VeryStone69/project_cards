@@ -1,6 +1,8 @@
 import { memo } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
+import { useAppDispatch } from '@/app/hooks'
 import { Logo } from '@/assets/illustrations/logo'
 import { Avatar } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
@@ -8,21 +10,27 @@ import { Dropdown } from '@/components/ui/dropdown'
 import { Typography } from '@/components/ui/typography'
 import { DropDownUser } from '@/features/dropdown-user/drop-down-user'
 import { useLogOutMutation } from '@/services/auth-api/auth'
+import { packsActions } from '@/store/packs-slice/packs-slice'
 
 import s from './header.module.scss'
 
 type ProfileData = {
-  avatar: string
-  email: string
+  avatar?: string
+  email?: string
   isAuthenticated: boolean
-  userName: string
+  userName?: string
 }
 
-export const Header = memo(({ avatar, email, isAuthenticated, userName }: ProfileData) => {
+export const Header = memo(({ avatar, email, isAuthenticated = false, userName }: ProfileData) => {
   const [logOut] = useLogOutMutation()
   const navigate = useNavigate()
-  const onLogOut = () => {
-    logOut()
+  const dispatch = useAppDispatch()
+  const onLogOut = async () => {
+    await toast.promise(logOut(), {
+      pending: 'Logout from account',
+      success: 'You successfully logged out',
+    })
+    dispatch(packsActions.resetFilters())
   }
 
   return (
@@ -32,7 +40,7 @@ export const Header = memo(({ avatar, email, isAuthenticated, userName }: Profil
           <Logo />
         </div>
 
-        {isAuthenticated ? (
+        {isAuthenticated && (
           <div className={s.userInfo}>
             <Typography className={s.userName} variant={'subtitle1'}>
               {userName}
@@ -54,7 +62,8 @@ export const Header = memo(({ avatar, email, isAuthenticated, userName }: Profil
               />
             </Dropdown>
           </div>
-        ) : (
+        )}
+        {!isAuthenticated && (
           <Button as={Link} to={'/login'} variant={'secondary'}>
             <Typography variant={'subtitle2'}>Sign in</Typography>
           </Button>
