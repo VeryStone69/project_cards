@@ -1,6 +1,7 @@
-import { RegisterForm, SignUp } from '@/components/forms/sign-up'
+import { SignUp } from '@/components/forms/sign-up'
 import { Card } from '@/components/ui/card'
 import { useRegisterMutation } from '@/services/auth-api/auth'
+import { RegisterForm } from '@/utils/zod-resolvers/file-update-resolver'
 
 import styles from './register.module.scss'
 
