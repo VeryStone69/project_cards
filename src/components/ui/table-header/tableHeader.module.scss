@@ -24,3 +24,11 @@
 
   transition: 0.3s;
 }
+
+.row{
+  background: var(--color-dark-500);
+
+  &:hover{
+    background: var(--color-dark-500);
+  }
+}
