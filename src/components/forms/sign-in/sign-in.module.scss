@@ -22,19 +22,47 @@
   }
 }
 
+.register {
+  cursor: pointer;
+  color: var(--color-accent-500);
+}
+
+.registerLink{
+  display: inline-flex;
+  margin-bottom: 10px;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--color-accent-300);
+    text-decoration: underline;
+
+    &:active{
+      color: var(--color-accent-700);
+    }
+  }
+}
+
+
 .forgot {
   display: flex;
   justify-content: flex-end;
   color: var(--color-accent-500);
+}
 
-  a {
-    text-decoration: none;
-  }
+.forgotLink{
+  text-decoration: none;
 
   &:hover {
     color: var(--color-light-100);
+
+    &:active{
+      color: var(--color-light-900);
+    }
   }
 }
+
+
+
 
 .signup {
   display: flex;
@@ -46,12 +74,4 @@
   margin-top: 20px;
 }
 
-.signupButton {
-  cursor: pointer;
-  color: var(--color-accent-500);
-  text-decoration: underline;
 
-  &:hover {
-    color: var(--color-light-100);
-  }
-}
