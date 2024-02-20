@@ -21,7 +21,7 @@ export const packsColumns = [
   },
   {
     key: 'controls',
-    sortable: true,
+    sortable: false,
     title: '',
   },
 ]
