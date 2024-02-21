@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { FormValues, SignIn } from './sign-in'
+import { FormValues } from '@/utils/zod-resolvers/file-update-resolver'
+
+import { SignIn } from './sign-in'
 
 const meta = {
   component: SignIn,
