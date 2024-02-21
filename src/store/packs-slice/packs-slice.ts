@@ -38,10 +38,7 @@ const slice = createSlice({
       state.filter.sliderValueMin = action.payload.newSliderValue[0]
       state.filter.sliderValueMax = action.payload.newSliderValue[1]
     },
-    setTabValue: (
-      state,
-      action: PayloadAction<{ authorId?: string; newTabValue: 'all' | 'my' }>
-    ) => {
+    setTabValue: (state, action: PayloadAction<{ authorId?: string; newTabValue: string }>) => {
       state.filter.tabValue = action.payload.newTabValue
       state.filter.authorId = action.payload.authorId
     },
