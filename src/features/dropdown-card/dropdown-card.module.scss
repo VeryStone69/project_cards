@@ -1,0 +1,41 @@
+.dropdownCard {
+  z-index: 100;
+  width: 5rem;
+
+  > div {
+    &:not(:last-child) {
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--color-dark-500);
+    }
+
+    &:not(:first-child) {
+      padding-top: 12px;
+    }
+  }
+}
+
+.itemContent {
+  display: flex;
+  align-items: center;
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  &:hover {
+    cursor: pointer;
+
+    > svg {
+      fill: var(--color-accent-300);
+    }
+
+    > p {
+      color: var(--color-accent-300);
+    }
+  }
+
+  > svg {
+    margin-right: 6px;
+    fill: var(--color-light-100);
+  }
+}

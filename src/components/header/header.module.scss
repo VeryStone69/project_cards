@@ -5,26 +5,32 @@
   right: 0;
   left: 0;
 
-  width: 1280px;
   height: 65px;
 
   background-color: var(--color-dark-700);
   border-bottom: 1px solid var(--color-dark-500);
+
+  .logo {
+    cursor: pointer;
+
+    > svg {
+      transition: 0.3s;
+
+      &:hover {
+        filter: drop-shadow(0 0 6px var(--color-accent-100));
+      }
+    }
+  }
 }
 
 .container {
   display: flex;
-  flex-direction: row;
-  gap: 0;
-  column-gap: 0;
   align-items: center;
   justify-content: space-between;
 
-  box-sizing: content-box;
-  max-width: 1010px;
+  max-width: 1140px;
   height: 100%;
   margin: 0 auto;
-  padding-inline: 12px;
 
   .userInfo {
     display: flex;
@@ -35,6 +41,7 @@
 
     .userName {
       text-decoration: none;
+      border-bottom: 2px dashed var(--color-light-100);
       outline: none;
       transition: 0.3s;
 
@@ -58,11 +65,8 @@
 }
 
 .userPhoto {
-  top: 12px;
-  left: 1108px;
-
+  cursor: pointer;
   width: 36px;
   height: 36px;
-
   border-radius: 50%;
 }

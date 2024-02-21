@@ -1,0 +1,32 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 420px;
+  height: max-content;
+  margin: 90px auto 0;
+  padding: 36px;
+
+  .info {
+    width: 100%;
+    text-align: left;
+  }
+
+  .answer {
+    width: 100%;
+    text-align: left;
+  }
+
+  .rate {
+    width: 100%;
+    text-align: left;
+  }
+}
+
+.backButton {
+  position: relative;
+  top: 100px;
+}

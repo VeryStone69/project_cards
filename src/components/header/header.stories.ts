@@ -16,18 +16,18 @@ type Story = StoryObj<typeof meta>
 
 export const AuthorizedUser: Story = {
   args: {
-    data: {
-      avatar: '',
-      email: 'junior.gmail.com',
-      name: 'Artyom Korshykau',
-    },
-    logout: () => {},
+    avatar: '',
+    email: 'junior.gmail.com',
+    isAuthenticated: true,
+    userName: 'Artyom Korshykau',
   },
 }
 
 export const UnauthorizedUser: Story = {
   args: {
-    data: null,
-    logout: () => {},
+    avatar: '',
+    email: 'junior.gmail.com',
+    isAuthenticated: false,
+    userName: 'Artyom Korshykau',
   },
 }

@@ -1,4 +1,4 @@
-.body1{
+.body1 {
   margin: 0;
 
   font-family: var(--font-family-primary);
@@ -9,18 +9,18 @@
   color: var(--color-light-100);
 }
 
-.body2{
+.body2 {
   margin: 0;
 
   font-family: var(--font-family-primary);
   font-size: var(--font-size-s);
   font-weight: var(--font-weight-regular);
   font-style: normal;
-  line-height:var(--line-height-m) ;
+  line-height: var(--line-height-m);
   color: var(--color-light-100);
 }
 
-.caption{
+.caption {
   margin: 0;
 
   font-family: var(--font-family-primary);
@@ -31,18 +31,18 @@
   color: var(--color-light-100);
 }
 
-.h1{
+.h1 {
   margin: 0;
 
   font-family: var(--font-family-primary);
   font-size: var(--font-size-xl);
-  font-weight:var(--font-weight-bold);
+  font-weight: var(--font-weight-bold);
   font-style: normal;
   line-height: var(--line-height-l);
   color: var(--color-light-100);
 }
 
-.h2{
+.h2 {
   margin: 0;
 
   font-family: var(--font-family-primary);
@@ -53,7 +53,7 @@
   color: var(--color-light-100);
 }
 
-.h3{
+.h3 {
   margin: 0;
 
   font-family: var(--font-family-primary);
@@ -64,85 +64,83 @@
   color: var(--color-light-100);
 }
 
-.large{
+.large {
   margin: 0;
 
   font-family: var(--font-family-primary);
-  font-size: var( --font-size-xxl);
+  font-size: var(--font-size-xxl);
   font-weight: var(--font-weight-bold);
   font-style: normal;
   line-height: var(--line-height-l);
   color: var(--color-light-100);
 }
 
-.link1{
+.link1 {
   margin: 0;
 
   font-family: var(--font-family-primary);
   font-size: var(--font-size-s);
-  font-weight:var(--font-weight-regular);
+  font-weight: var(--font-weight-regular);
   font-style: normal;
-  line-height:var(--line-height-m);
-  color: var(--color-info-500);
-  text-decoration-line: underline;
-
-}
-
-.link1:visited{
-   cursor: pointer;
-  margin: 0;
-   color: var(--color-info-500);
-   text-decoration: underline;
- }
-
-.link2{
-  margin: 0;
-
-  font-family: var(--font-family-primary);
-  font-size: var(--font-size-xs);
-  font-weight:var(--font-weight-regular);
-  font-style: normal;
-  line-height:var(--line-height-s);
+  line-height: var(--line-height-m);
   color: var(--color-info-500);
   text-decoration-line: underline;
 }
 
-.link2:visited{
+.link1:visited {
   cursor: pointer;
   margin: 0;
   color: var(--color-info-500);
   text-decoration: underline;
-
 }
 
-.overline{
+.link2 {
   margin: 0;
 
   font-family: var(--font-family-primary);
   font-size: var(--font-size-xs);
-  font-weight:var(--font-weight-bold);
+  font-weight: var(--font-weight-regular);
+  font-style: normal;
+  line-height: var(--line-height-s);
+  color: var(--color-info-500);
+  text-decoration-line: underline;
+}
+
+.link2:visited {
+  cursor: pointer;
+  margin: 0;
+  color: var(--color-info-500);
+  text-decoration: underline;
+}
+
+.overline {
+  margin: 0;
+
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
   font-style: normal;
   line-height: var(--line-height-s);
   color: var(--color-light-100);
 }
 
-.subtitle1{
+.subtitle1 {
   margin: 0;
 
   font-family: var(--font-family-primary);
-  font-size:var(--font-size-m);
-  font-weight:var(--font-weight-bold);
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-bold);
   font-style: normal;
   line-height: var(--line-height-m);
   color: var(--color-light-100);
 }
 
-.subtitle2{
+.subtitle2 {
   margin: 0;
 
   font-family: var(--font-family-primary);
-  font-size:var(--font-size-s);
-  font-weight:var(--font-weight-bold);
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-bold);
   font-style: normal;
   line-height: var(--line-height-m);
   color: var(--color-light-100);

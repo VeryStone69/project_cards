@@ -1,12 +1,13 @@
 import { Option } from '@/components/ui/select'
+
 enum Page {
   first = 1,
   next = 1,
   previous = 1,
 }
+
 export default function usePagination({
   currentPage,
-  itemsPerPage,
   onChangePage,
   siblingCount,
   totalPages,
@@ -17,7 +18,7 @@ export default function usePagination({
     { title: '10', value: '10' },
     { title: '15', value: '15' },
   ]
-  const totalElements = Math.ceil(totalPages / +itemsPerPage)
+  const totalElements = Math.ceil(totalPages)
 
   const hideNextButton = currentPage === totalElements
   const hidePrevButton = currentPage === Page.first
@@ -33,40 +34,41 @@ export default function usePagination({
   const totalPageNumbers = siblingCount + 5
 
   /*
-        Calculates left and right index and make sure they are within range 1 and totalElements
-      */
+          Calculates left and right index and make sure they are within range 1 and totalElements
+        */
   const leftSiblingIndex = Math.max(currentPage - siblingCount, 1)
   const rightSiblingIndex = Math.min(currentPage + siblingCount, totalElements)
 
   /*
-        We do not show dots when there is just one page number to be inserted between the extremes of sibling and the page limits i.e 1 and totalElements. Hence we are using leftSiblingIndex > 2 and rightSiblingIndex < totalElements - 2
-      */
+          We do not show dots when there is just one page number to be inserted between the extremes of sibling and the page limits i.e 1 and totalElements.
+           Hence, we are using leftSiblingIndex > 2 and rightSiblingIndex < totalElements - 2
+        */
   const shouldShowLeftDots = leftSiblingIndex > 2
   const shouldShowRightDots = rightSiblingIndex < totalElements - 2
 
   const firstPageIndex = { onClickChangePage, page: Page.first }
 
   /*
-  Creates an array of a certain length and sets elements from it
-    starting value to ending value.
-  */
+    Creates an array of a certain length and sets elements from it
+      starting value to ending value.
+    */
   const siblingPage = (first: number, last: number) => {
     return Array.from({ length: last - first + 1 }, (_, index) => first + index)
   }
 
   /*
-        Case 1:
-        If the number of pages is less than the page numbers we want to show in our
-        pagination, we return and assign the range siblingPage [1...totalElements] which we then map and display on the page
-      */
+          Case 1:
+          If the number of pages is less than the page numbers we want to show in our
+          pagination, we return and assign the range siblingPage [1...totalElements] which we then map and display on the page
+        */
   if (totalPageNumbers >= totalElements) {
     paginationItems = siblingPage(1, totalElements).map((_el, index) => {
       return { onClickChangePage, page: index + 1 }
     })
   }
   /*
-        Case 2: No left dots to show, but rights dots to be shown
-      */
+          Case 2: No left dots to show, but rights dots to be shown
+        */
   if (!shouldShowLeftDots && shouldShowRightDots) {
     const leftItemCount = 3 + 2 * siblingCount
     const leftRange = siblingPage(1, leftItemCount).map((_el, index) => {
@@ -76,8 +78,8 @@ export default function usePagination({
     paginationItems = [...leftRange, dots, lastPage]
   }
   /*
-        Case 3: No right dots to show, but left dots to be shown
-      */
+          Case 3: No right dots to show, but left dots to be shown
+        */
   if (shouldShowLeftDots && !shouldShowRightDots) {
     const rightItemCount = 3 + 2 * siblingCount
     const rightRange = siblingPage(totalElements - rightItemCount + 1, totalElements).map(_el => {
@@ -87,8 +89,8 @@ export default function usePagination({
     paginationItems = [firstPageIndex, dots, ...rightRange]
   }
   /*
-    	Case 4: Both left and right dots to be shown
-    */
+          Case 4: Both left and right dots to be shown
+      */
   if (shouldShowLeftDots && shouldShowRightDots) {
     const middleRange = siblingPage(leftSiblingIndex, rightSiblingIndex).map(_el => {
       return { onClickChangePage, page: _el }

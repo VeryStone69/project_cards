@@ -1,0 +1,39 @@
+.ceil {
+  transition: 0.3s;
+
+  &:hover {
+    cursor: pointer;
+    background-color: var(--color-dark-300);
+  }
+
+  &:last-child {
+    cursor: auto;
+    background: inherit;
+  }
+}
+
+.icon {
+  position: absolute;
+  margin-left: 12px;
+  fill: var(--color-light-100);
+  transition: 0.3s;
+}
+
+.iconDown {
+  position: absolute;
+  transform: rotate(180deg);
+
+  margin-left: 12px;
+
+  fill: var(--color-light-100);
+
+  transition: 0.3s;
+}
+
+.row {
+  background: var(--color-dark-500);
+
+  &:hover {
+    background: var(--color-dark-500);
+  }
+}

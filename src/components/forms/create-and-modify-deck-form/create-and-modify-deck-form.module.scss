@@ -1,0 +1,41 @@
+.inputBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: stretch;
+
+  .uploadButton {
+    height: 36px;
+
+    .imgOnButton {
+      position: relative;
+      top: -29px;
+      left: 195px;
+    }
+  }
+}
+
+.deleteCover {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.image {
+  aspect-ratio: 2/1;
+  width: 100%;
+
+  object-fit: cover;
+  border-radius: 4px;
+
+  transition: 0.3s;
+
+  &.hover {
+    cursor: pointer;
+  }
+
+  &.open {
+    aspect-ratio: 1/1;
+  }
+}

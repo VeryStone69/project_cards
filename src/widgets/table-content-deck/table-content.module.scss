@@ -1,0 +1,33 @@
+.iconTable {
+  width: 7.3rem;
+  height: 3rem;
+  object-fit: cover;
+}
+
+.title {
+  &:hover {
+    color: var(--color-accent-300);
+    text-decoration: underline;
+  }
+
+  &:active {
+    color: var(--color-light-100);
+    text-decoration: underline;
+  }
+}
+
+.link {
+  align-items: center;
+}
+
+.configButton {
+  display: flex;
+  flex-direction: row;
+  gap: 1.56rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.cell {
+  display: flex;
+}

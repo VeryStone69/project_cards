@@ -1,0 +1,67 @@
+.pagination {
+  margin-bottom: 36px;
+}
+
+.dropDown {
+  margin-right: auto;
+  margin-left: 1rem;
+}
+
+.layout {
+  margin-top: 100px;
+
+  .section {
+    margin-top: 34px;
+
+    .sectionHeader {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .packsImg {
+      height: 100px;
+      margin: 15px 0 24px;
+    }
+  }
+
+  .table {
+    margin: 24px 0;
+
+    .questionCell {
+      width: 365px;
+
+      .questionImg {
+        max-width: 70px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 3px;
+      }
+    }
+  }
+
+  .editButtons {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .answerCell {
+    width: 365px;
+
+    .answerImg {
+      max-width: 70px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 3px;
+    }
+  }
+
+  .dateCell {
+    width: 140px;
+  }
+
+  .rateCell {
+    width: 170px;
+  }
+}

@@ -1,0 +1,37 @@
+.fileUploader {
+  position: absolute;
+  top: 75px;
+  left: 75px;
+}
+
+.remove {
+  position: relative;
+  top: -75px;
+  left: 50%;
+}
+
+.editButton {
+  all: unset;
+
+  cursor: pointer;
+
+  position: relative;
+
+  width: 24px;
+  height: 24px;
+
+  background-color: var(--color-dark-300);
+  border-radius: 4px;
+
+  > svg {
+    position: relative;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0%);
+  }
+
+  &:hover {
+    background-color: var(--color-dark-100);
+    box-shadow: none;
+  }
+}

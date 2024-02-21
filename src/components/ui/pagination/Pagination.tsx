@@ -39,7 +39,7 @@ export const Pagination = ({
   })
 
   return (
-    <nav className={className || s.navigation}>
+    <nav className={className ? className + ' ' + s.navigation : s.navigation}>
       <PaginationItemIcon
         disabled={hidePrevButton}
         onClick={onClickChangeCurrentPage}
@@ -60,7 +60,7 @@ export const Pagination = ({
             key={index}
             onClickChangePage={item.onClickChangePage}
             page={item.page}
-            pagesTotal={paginationItems.length}
+            pagesTotal={totalPages}
             type={item.type}
           />
         )

@@ -8,7 +8,7 @@ const meta = {
   component: TabSwitcher,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
-  title: 'Components/TabSwitcher',
+  title: 'Components/ui/TabSwitcher',
 } satisfies Meta<typeof TabSwitcher>
 
 export default meta

@@ -1,67 +1,15 @@
-/* reset */
-
 button {
   all: unset;
 }
 
-.userLogo {
-  width: 36px;
-  height: 36px;
-  background:
-    url('./UserLogo.png'),
-    lightgray 50% / cover no-repeat;
-  border-radius: 36px;
-}
-
-.DropdownMenuRoot {
-  display: flex;
-  justify-content: flex-end;
-}
-
 .DropdownMenuContent {
+  z-index: 100;
+
   padding: 12px;
+
   background: var(--color-dark-700);
   border: 1px solid var(--color-dark-500);
   border-radius: 4px;
-}
-
-.itemWithIcon {
-  display: flex;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--color-dark-500);
-
-  p {
-    display: flex;
-    justify-content: center;
-    margin: 0;
-  }
-}
-
-.itemWithIcon:last-child {
-  padding-bottom: 0;
-  border-bottom: none;
-}
-
-.svgWhite {
-  margin-right: 6px;
-  fill: var(--color-light-100);
-}
-
-.DropdownMenuItem {
-  display: flex;
-  justify-content: center;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--color-dark-500);
-
-  div {
-    display: flex;
-    flex-direction: column;
-    padding-left: 8px;
-
-    p {
-      margin: 0;
-    }
-  }
 }
 
 .DropdownMenuArrow {
@@ -69,6 +17,17 @@ button {
 
   fill: var(--color-dark-700);
   stroke: var(--color-dark-500);
+  stroke-linecap: butt;
+  stroke-width: 1px;
+}
+
+.DropdownMenuTwoArrow {
+  position: relative;
+  z-index: 1;
+  top: -1px;
+  left: 0;
+
+  fill: var(--color-dark-700);
   stroke-linecap: butt;
   stroke-width: 1px;
 }

@@ -1,0 +1,25 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: flex-start;
+
+  width: 420px;
+  height: 408px;
+  margin: 90px auto 0;
+  padding: 10px;
+}
+
+.title {
+  padding: 20px 0;
+}
+
+.text {
+  width: 348px;
+  height: 48px;
+  margin-bottom: 30px;
+
+  color: #c3c1c7;
+  text-align: center;
+}

@@ -11,13 +11,13 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const editProfileSchema: Story = {
+export const EditProfileSchema: Story = {
   args: {} as any,
   render: () => {
     const onSubmit = (data: FormValues) => {
       console.log(data)
     }
 
-    return <EditProfile onSubmit={onSubmit} />
+    return <EditProfile name={'test'} onSubmit={onSubmit} />
   },
 }
