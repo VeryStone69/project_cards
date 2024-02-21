@@ -27,7 +27,7 @@
   color: var(--color-accent-500);
 }
 
-.registerLink{
+.registerLink {
   display: inline-flex;
   margin-bottom: 10px;
   text-decoration: none;
@@ -36,12 +36,11 @@
     color: var(--color-accent-300);
     text-decoration: underline;
 
-    &:active{
+    &:active {
       color: var(--color-accent-700);
     }
   }
 }
-
 
 .forgot {
   display: flex;
@@ -49,20 +48,17 @@
   color: var(--color-accent-500);
 }
 
-.forgotLink{
+.forgotLink {
   text-decoration: none;
 
   &:hover {
     color: var(--color-light-100);
 
-    &:active{
+    &:active {
       color: var(--color-light-900);
     }
   }
 }
-
-
-
 
 .signup {
   display: flex;
@@ -73,5 +69,3 @@
 
   margin-top: 20px;
 }
-
-
