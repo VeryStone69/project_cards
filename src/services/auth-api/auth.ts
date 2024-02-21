@@ -12,6 +12,15 @@ export const authAPI = baseApi.injectEndpoints({
     return {
       logOut: builder.mutation<void, void>({
         invalidatesTags: ['Me'],
+        async onQueryStarted(_, { dispatch, queryFulfilled }) {
+          const patchResult = dispatch(authAPI.util.updateQueryData('me', undefined, () => null))
+
+          try {
+            await queryFulfilled
+          } catch {
+            patchResult.undo()
+          }
+        },
         query: () => ({
           method: 'POST',
           url: `/v1/auth/logout`,
