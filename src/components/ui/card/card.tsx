@@ -4,7 +4,7 @@ import { clsx } from 'clsx'
 
 import s from './card.module.scss'
 
-type CardProps = {} & ComponentPropsWithoutRef<'div'>
+type CardProps = ComponentPropsWithoutRef<'div'>
 
 export const Card = forwardRef<HTMLDivElement, CardProps>(({ className, ...restProps }, ref) => {
   const classNames = {
