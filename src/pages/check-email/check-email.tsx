@@ -1,3 +1,5 @@
+import { Link, useParams } from 'react-router-dom'
+
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
@@ -7,6 +9,8 @@ import styles from './check-email.module.scss'
 import checkEmail from '../../assets/images/check-email.png'
 
 export const CheckEmail = () => {
+  const { email } = useParams()
+
   return (
     <Card className={styles.card}>
       <Typography className={styles.title} variant={'h1'}>
@@ -16,11 +20,13 @@ export const CheckEmail = () => {
       <img alt={'check-email'} src={checkEmail} />
 
       <Typography className={styles.text} variant={'body2'}>
-        We’ve sent an Email with instructions to example@mail.com
+        We’ve sent an Email with instructions to {email}
       </Typography>
 
       <Typography variant={'subtitle2'}>
-        <Button>Back to login</Button>
+        <Button as={Link} to={'/login'}>
+          Back to login
+        </Button>
       </Typography>
     </Card>
   )
