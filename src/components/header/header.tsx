@@ -11,6 +11,7 @@ import { Typography } from '@/components/ui/typography'
 import { DropDownUser } from '@/features/dropdown-user/drop-down-user'
 import { useLogOutMutation } from '@/services/auth-api/auth'
 import { packsActions } from '@/store/packs-slice/packs-slice'
+import { errorNotification } from '@/utils/error-notification/error-notification'
 
 import s from './header.module.scss'
 
@@ -26,11 +27,15 @@ export const Header = memo(({ avatar, email, isAuthenticated = false, userName }
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const onLogOut = async () => {
-    await toast.promise(logOut(), {
-      pending: 'Logout from account',
-      success: 'You successfully logged out',
-    })
-    dispatch(packsActions.resetFilters())
+    try {
+      await toast.promise(logOut().unwrap(), {
+        pending: 'Logout from account',
+        success: 'You successfully logged out',
+      })
+      dispatch(packsActions.resetFilters())
+    } catch (err) {
+      errorNotification(err)
+    }
   }
 
   return (

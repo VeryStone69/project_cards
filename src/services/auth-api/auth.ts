@@ -1,7 +1,9 @@
 import {
   LoginData,
   LoginResponse,
+  RecoverPassword,
   RegisterData,
+  ResetPassword,
   UpdateProfile,
   UserResponse,
 } from '@/services/auth-api/auth.types'
@@ -38,11 +40,25 @@ export const authAPI = baseApi.injectEndpoints({
         providesTags: ['Me'],
         query: () => `v1/auth/me`,
       }),
+      recoverPassword: builder.mutation<void, RecoverPassword>({
+        query: body => ({
+          body,
+          method: 'POST',
+          url: `v1/auth/recover-password`,
+        }),
+      }),
       register: builder.mutation<UserResponse, RegisterData>({
         query: body => ({
           body,
           method: 'POST',
           url: `/v1/auth/sign-up`,
+        }),
+      }),
+      resetPassword: builder.mutation<void, { data: ResetPassword; token: string }>({
+        query: ({ token, ...data }) => ({
+          body: data,
+          method: 'POST',
+          url: `v1/auth/reset-password/${token}`,
         }),
       }),
       updateProfile: builder.mutation<UserResponse, UpdateProfile>({
@@ -61,6 +77,8 @@ export const {
   useLogOutMutation,
   useLoginMutation,
   useMeQuery,
+  useRecoverPasswordMutation,
   useRegisterMutation,
+  useResetPasswordMutation,
   useUpdateProfileMutation,
 } = authAPI

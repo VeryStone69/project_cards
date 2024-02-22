@@ -58,7 +58,11 @@ export const SignInSchema = z.object({
 export const forgotPasswordSchema = z.object({
   email: emailValid,
 })
+export const resetPasswordSchema = z.object({
+  password: passwordValid,
+})
 export type FormValuesForgotPassword = z.infer<typeof forgotPasswordSchema>
 export type FormValues = z.infer<typeof SignInSchema>
 export type PackFormType = z.infer<typeof addNewDeckSchema>
 export type RegisterForm = z.infer<typeof signUpSchema>
+export type CreateNewPasswordForm = z.infer<typeof resetPasswordSchema>

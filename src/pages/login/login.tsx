@@ -6,8 +6,8 @@ import { SignIn } from '@/components/forms/sign-in'
 import { Card } from '@/components/ui/card'
 import { InitialLoader } from '@/components/ui/loader'
 import { useLoginMutation } from '@/services/auth-api/auth'
-import { LoginData } from '@/services/auth-api/auth.types'
 import { errorNotification } from '@/utils/error-notification/error-notification'
+import { FormValues } from '@/utils/zod-resolvers/file-update-resolver'
 
 import s from './login.module.scss'
 
@@ -15,7 +15,7 @@ export const Login = () => {
   const [login, { isLoading }] = useLoginMutation()
 
   const navigate = useNavigate()
-  const handleLogin: SubmitHandler<LoginData> = async data => {
+  const handleLogin: SubmitHandler<FormValues> = async data => {
     try {
       await login(data).unwrap()
       navigate('/')
