@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { CreatePassword, FormValues } from './create-password'
+import { CreateNewPasswordForm } from '@/utils/zod-resolvers/file-update-resolver'
+
+import { CreatePassword } from './create-password'
 
 const meta = {
   component: CreatePassword,
@@ -14,7 +16,7 @@ type Story = StoryObj<typeof meta>
 export const CreatePasswordFrom: Story = {
   args: {} as any,
   render: () => {
-    const onSubmit = (data: FormValues) => {
+    const onSubmit = (data: CreateNewPasswordForm) => {
       console.log(data)
     }
 
