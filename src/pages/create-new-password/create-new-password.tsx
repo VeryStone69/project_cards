@@ -2,6 +2,7 @@ import { SubmitHandler } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
+import { PATH } from '@/common/consts/routes'
 import { CreatePassword } from '@/components/forms/create-password'
 import { Card } from '@/components/ui/card'
 import { useResetPasswordMutation } from '@/services/auth-api/auth'
@@ -17,11 +18,9 @@ export const CreateNewPassword = () => {
   const submitHandler: SubmitHandler<CreateNewPasswordForm> = async data => {
     try {
       if (token) {
-        await toast.promise(resetPassword({ data, token }).unwrap(), {
-          pending: 'password recovery',
-          success: 'password changed successfully',
-        })
-        navigate(`/login`)
+        await resetPassword({ data, token }).unwrap()
+        navigate(`${PATH.login}`)
+        toast.success('The password has been changed')
       }
     } catch (err) {
       errorNotification(err)
