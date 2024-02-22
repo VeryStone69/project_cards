@@ -37,6 +37,9 @@ export const authAPI = baseApi.injectEndpoints({
         }),
       }),
       me: builder.query<UserResponse | null, void>({
+        extraOptions: {
+          maxRetries: 0,
+        },
         providesTags: ['Me'],
         query: () => `v1/auth/me`,
       }),
