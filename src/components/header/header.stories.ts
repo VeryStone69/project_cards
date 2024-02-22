@@ -18,16 +18,10 @@ export const AuthorizedUser: Story = {
   args: {
     avatar: '',
     email: 'junior.gmail.com',
-    isAuthenticated: true,
     userName: 'Artyom Korshykau',
   },
 }
 
 export const UnauthorizedUser: Story = {
-  args: {
-    avatar: '',
-    email: 'junior.gmail.com',
-    isAuthenticated: false,
-    userName: 'Artyom Korshykau',
-  },
+  args: {},
 }
