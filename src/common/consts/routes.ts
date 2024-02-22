@@ -4,8 +4,8 @@ export const PATH = {
   decks: '/',
   home: '/home',
   login: '/login',
-  notFound: '/page-not-found',
+  notFound: '/*',
   profile: '/profile',
   recover: '/recovery',
   register: '/register',
-}
+} as const

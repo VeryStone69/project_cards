@@ -81,6 +81,7 @@ export const router = createBrowserRouter([
       ...publicRoutes,
     ],
     element: <Layout />,
+    path: PATH.decks,
   },
 ])
 
