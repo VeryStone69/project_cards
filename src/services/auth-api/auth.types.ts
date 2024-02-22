@@ -21,3 +21,10 @@ export type LoginResponse = {
 export type UpdateProfile = FormData
 
 export type RegisterData = Omit<LoginData, 'rememberMe'>
+export type RecoverPassword = {
+  email: string
+  html: string
+}
+export type ResetPassword = {
+  password: string
+}
