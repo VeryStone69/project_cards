@@ -2,33 +2,28 @@ import { useForm } from 'react-hook-form'
 
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field/controlled-text-field'
 import { Typography } from '@/components/ui/typography'
+import {
+  CreateNewPasswordForm,
+  resetPasswordSchema,
+} from '@/utils/zod-resolvers/file-update-resolver'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { clsx } from 'clsx'
-import { z } from 'zod'
 
 import s from './create-password.module.scss'
 
 import { Button } from '../../ui/button'
 
-const createPasswordSchema = z.object({
-  password: z
-    .string()
-    .min(3, 'Пароль должен быть не менее 3 символов')
-    .max(30, 'Пароль должен быть не более 30 символов'),
-})
-
-export type FormValues = z.infer<typeof createPasswordSchema>
 type LoginProps = {
   className?: string
-  onSubmit: (values: FormValues) => void
+  onSubmit: (values: CreateNewPasswordForm) => void
 }
 
 export const CreatePassword = ({ className, onSubmit }: LoginProps) => {
-  const { control, handleSubmit } = useForm<FormValues>({
+  const { control, handleSubmit } = useForm<CreateNewPasswordForm>({
     defaultValues: {
       password: '',
     },
-    resolver: zodResolver(createPasswordSchema),
+    resolver: zodResolver(resetPasswordSchema),
   })
 
   const classNames = clsx(s.form, className)
