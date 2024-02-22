@@ -9,17 +9,11 @@ type Props = {
   className?: string
 }
 export const Layout = ({ className }: Props) => {
-  const { data, isError, isLoading } = useMeQuery()
-  const isAuthenticated = (!isError && !isLoading && data !== null) || false
+  const { data } = useMeQuery()
 
   return (
     <>
-      <Header
-        avatar={data?.avatar || undefined}
-        email={data?.email}
-        isAuthenticated={isAuthenticated}
-        userName={data?.name}
-      />
+      <Header avatar={data?.avatar || undefined} email={data?.email} userName={data?.name} />
       <div className={className ? className : s.container}>
         <Outlet />
       </div>

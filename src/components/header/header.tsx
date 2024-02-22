@@ -18,11 +18,10 @@ import s from './header.module.scss'
 type ProfileData = {
   avatar?: string
   email?: string
-  isAuthenticated: boolean
   userName?: string
 }
 
-export const Header = memo(({ avatar, email, isAuthenticated = false, userName }: ProfileData) => {
+export const Header = memo(({ avatar, email, userName }: ProfileData) => {
   const [logOut] = useLogOutMutation()
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -45,7 +44,7 @@ export const Header = memo(({ avatar, email, isAuthenticated = false, userName }
           <Logo />
         </div>
 
-        {isAuthenticated && (
+        {userName && (
           <div className={s.userInfo}>
             <Typography className={s.userName} variant={'subtitle1'}>
               {userName}
@@ -68,7 +67,7 @@ export const Header = memo(({ avatar, email, isAuthenticated = false, userName }
             </Dropdown>
           </div>
         )}
-        {!isAuthenticated && (
+        {!userName && (
           <Button as={Link} to={'/login'} variant={'secondary'}>
             <Typography variant={'subtitle2'}>Sign in</Typography>
           </Button>
