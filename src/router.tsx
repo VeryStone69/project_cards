@@ -6,6 +6,7 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
+import { PATH } from '@/common/consts/routes'
 import { Cards } from '@/components/cards/cards'
 import { Layout } from '@/components/layout'
 import { InitialLoader } from '@/components/ui/loader/loader'
@@ -19,18 +20,6 @@ import { Profile } from '@/pages/profile/profile'
 import { RecoveryPassword } from '@/pages/recovery-password/recovery-password'
 import { Register } from '@/pages/register/register'
 import { useMeQuery } from '@/services/auth-api/auth'
-
-export const PATH = {
-  check: '/check-email',
-  createNewPassword: '/create-new-password',
-  decks: '/',
-  home: '/home',
-  login: '/login',
-  notFound: '/page-not-found',
-  profile: '/profile',
-  recover: '/recovery',
-  register: '/register',
-}
 
 const publicRoutes: RouteObject[] = [
   {
