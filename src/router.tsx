@@ -16,7 +16,7 @@ import { Login } from '@/pages/login/login'
 import { NotFound } from '@/pages/not-found/NotFound'
 import { Packs } from '@/pages/packs'
 import { Profile } from '@/pages/profile/profile'
-import RecoveryPassword from '@/pages/recovery-password/recovery-password'
+import { RecoveryPassword } from '@/pages/recovery-password/recovery-password'
 import { Register } from '@/pages/register/register'
 import { useMeQuery } from '@/services/auth-api/auth'
 
@@ -51,11 +51,11 @@ const publicRoutes: RouteObject[] = [
   },
   {
     element: <CheckEmail />,
-    path: PATH.check,
+    path: `${PATH.check}/:email`,
   },
   {
     element: <CreateNewPassword />,
-    path: PATH.createNewPassword,
+    path: `${PATH.createNewPassword}/:token`,
   },
 ]
 
