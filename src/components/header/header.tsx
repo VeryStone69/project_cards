@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 
 import { useAppDispatch } from '@/app/hooks'
 import { Logo } from '@/assets/illustrations/logo'
+import { PATH } from '@/common/consts/routes'
 import { Avatar } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Dropdown } from '@/components/ui/dropdown'
@@ -40,7 +41,7 @@ export const Header = memo(({ avatar, email, userName }: ProfileData) => {
   return (
     <div className={s.root}>
       <div className={s.container}>
-        <div className={s.logo} onClick={() => navigate('/')}>
+        <div className={s.logo} onClick={() => navigate(PATH.decks)}>
           <Logo />
         </div>
 
