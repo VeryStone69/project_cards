@@ -101,6 +101,7 @@ export const decksAPI = baseApi.injectEndpoints({
           data.data.forEach((value, key) => {
             parsedData[key] = value
           })
+
           for (const { endpointName, originalArgs } of decksAPI.util.selectInvalidatedBy(
             getState(),
             [{ type: 'Decks' }]
