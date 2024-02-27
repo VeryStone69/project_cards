@@ -41,7 +41,7 @@ export const Header = memo(({ avatar, email, userName }: ProfileData) => {
   return (
     <div className={s.root}>
       <div className={s.container}>
-        <div className={s.logo} onClick={() => navigate(PATH.decks)}>
+        <div className={s.logo} onClick={() => navigate(PATH.base)}>
           <Logo />
         </div>
 
