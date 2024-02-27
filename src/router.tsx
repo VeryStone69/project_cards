@@ -41,10 +41,6 @@ const publicRoutes: RouteObject[] = [
     path: `${PATH.check}/:email`,
   },
   {
-    element: <Packs />,
-    path: PATH.decks,
-  },
-  {
     element: <CreateNewPassword />,
     path: `${PATH.createNewPassword}/:token`,
   },
@@ -66,6 +62,10 @@ const privateRoutes: RouteObject[] = [
   {
     element: <Cards />,
     path: `${PATH.decks}/:id`,
+  },
+  {
+    element: <Packs />,
+    path: PATH.decks,
   },
 ]
 
@@ -93,6 +93,7 @@ export const router = createBrowserRouter([
       ...publicRoutes,
     ],
     element: <Layout />,
+    path: PATH.base,
   },
 ])
 
