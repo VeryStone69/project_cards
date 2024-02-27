@@ -6,6 +6,29 @@ export const decksAPI = baseApi.injectEndpoints({
     return {
       createDecks: builder.mutation<DecksItems, FormData>({
         invalidatesTags: ['Decks'],
+        async onQueryStarted(_, { dispatch, getState, queryFulfilled }) {
+          let patchResult: any
+
+          try {
+            const res = await queryFulfilled
+
+            for (const { endpointName, originalArgs } of decksAPI.util.selectInvalidatedBy(
+              getState(),
+              [{ type: 'Decks' }]
+            )) {
+              if (endpointName !== 'getDecks') {
+                continue
+              }
+              patchResult = dispatch(
+                decksAPI.util.updateQueryData(endpointName, originalArgs, draft => {
+                  draft.items.unshift(res.data)
+                })
+              )
+            }
+          } catch {
+            patchResult?.undo()
+          }
+        },
         query: arg => {
           return {
             body: arg,
@@ -17,6 +40,33 @@ export const decksAPI = baseApi.injectEndpoints({
       }),
       deleteDeck: builder.mutation<Omit<DecksItems, 'author'>, { id: string }>({
         invalidatesTags: ['Decks'],
+        async onQueryStarted({ id }, { dispatch, getState, queryFulfilled }) {
+          let patchResult: any
+
+          for (const { endpointName, originalArgs } of decksAPI.util.selectInvalidatedBy(
+            getState(),
+            [{ type: 'Decks' }]
+          )) {
+            if (endpointName !== 'getDecks') {
+              continue
+            }
+            patchResult = dispatch(
+              decksAPI.util.updateQueryData(endpointName, originalArgs, draft => {
+                const index = draft?.items?.findIndex(deck => deck.id === id)
+
+                if (index !== undefined && index !== -1) {
+                  draft?.items?.splice(index, 1)
+                }
+              })
+            )
+          }
+
+          try {
+            await queryFulfilled
+          } catch {
+            patchResult?.undo()
+          }
+        },
         query: arg => {
           return {
             body: arg.id,
@@ -36,15 +86,46 @@ export const decksAPI = baseApi.injectEndpoints({
         providesTags: ['Decks'],
         query: arg => {
           return {
-            method: 'GET',
             params: arg ?? {},
-            providesTags: ['Decks'],
             url: `v1/decks`,
           }
         },
       }),
       updateDeck: builder.mutation<DecksItems, { data: FormData; id: string }>({
         invalidatesTags: ['Decks'],
+        onQueryStarted: async function ({ id, ...data }, { dispatch, getState, queryFulfilled }) {
+          let patchResult: any
+
+          const parsedData: Record<string, any> = {}
+
+          data.data.forEach((value, key) => {
+            parsedData[key] = value
+          })
+          for (const { endpointName, originalArgs } of decksAPI.util.selectInvalidatedBy(
+            getState(),
+            [{ type: 'Decks' }]
+          )) {
+            if (endpointName !== 'getDecks') {
+              continue
+            }
+            patchResult = dispatch(
+              decksAPI.util.updateQueryData(endpointName, originalArgs, draft => {
+                const index = draft?.items?.findIndex(deck => deck.id === id)
+
+                if (index === -1) {
+                  return
+                }
+                Object.assign(draft?.items?.[index], parsedData)
+              })
+            )
+          }
+
+          try {
+            await queryFulfilled
+          } catch {
+            patchResult?.undo()
+          }
+        },
         query: arg => ({
           body: arg.data,
           method: 'PATCH',
