@@ -5,6 +5,7 @@ import { Icon } from '@/components/icon/Icon'
 import { IconButton } from '@/components/ui/icon-button'
 import { Modal } from '@/components/ui/modal'
 import { useUpdateDeckMutation } from '@/services/decks-api/decks-api'
+import { errorNotification } from '@/utils/error-notification/error-notification'
 
 type Props = {
   cover: string
@@ -18,7 +19,11 @@ export const EditPack = ({ cover, id, isPrivate, name }: Props) => {
   const [updateDeck] = useUpdateDeckMutation()
   const editDeckHandler = async (data: FormData) => {
     setOpen(!open)
-    await updateDeck({ data, id }).unwrap()
+    try {
+      await updateDeck({ data, id }).unwrap()
+    } catch (err) {
+      errorNotification(err)
+    }
   }
 
   return (
