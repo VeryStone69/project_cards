@@ -1,5 +1,4 @@
 import { SubmitHandler } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { SignIn } from '@/components/forms/sign-in'
@@ -13,12 +12,10 @@ import s from './login.module.scss'
 
 export const Login = () => {
   const [login, { isLoading }] = useLoginMutation()
-
-  const navigate = useNavigate()
   const handleLogin: SubmitHandler<FormValues> = async data => {
     try {
       await login(data).unwrap()
-      navigate('/')
+
       toast.success(`You are successful authorized!`)
     } catch (err) {
       errorNotification(err)

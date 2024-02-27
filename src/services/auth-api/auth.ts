@@ -19,6 +19,7 @@ export const authAPI = baseApi.injectEndpoints({
 
           try {
             await queryFulfilled
+            dispatch(authAPI.util.resetApiState())
           } catch {
             patchResult.undo()
           }

@@ -22,8 +22,10 @@ import { Register } from '@/pages/register/register'
 import { useMeQuery } from '@/services/auth-api/auth'
 
 const publicRoutes: RouteObject[] = [
+  { element: <NotFound />, path: PATH.notFound },
   {
-    element: <Login />,
+    children: [{ element: <Login /> }],
+    element: <RedirectSingInToDeck />,
     path: PATH.login,
   },
   {
@@ -50,16 +52,12 @@ const publicRoutes: RouteObject[] = [
 
 const privateRoutes: RouteObject[] = [
   {
-    element: <LearnCard />,
-    path: PATH.home,
-  },
-  {
     element: <Profile />,
     path: PATH.profile,
   },
   {
-    element: <Packs />,
-    path: PATH.decks,
+    element: <Navigate to={PATH.decks} />,
+    path: PATH.base,
   },
   {
     element: <LearnCard />,
@@ -68,6 +66,10 @@ const privateRoutes: RouteObject[] = [
   {
     element: <Cards />,
     path: `${PATH.decks}/:id`,
+  },
+  {
+    element: <Packs />,
+    path: PATH.decks,
   },
 ]
 
@@ -78,9 +80,24 @@ export const router = createBrowserRouter([
         children: privateRoutes,
         element: <PrivateRoutes />,
       },
+      {
+        children: [
+          {
+            children: [
+              {
+                element: <Login />,
+                path: `${PATH.login}`,
+              },
+            ],
+            element: <Outlet />,
+          },
+        ],
+        element: <RedirectSingInToDeck />,
+      },
       ...publicRoutes,
     ],
     element: <Layout />,
+    path: PATH.base,
   },
 ])
 
@@ -89,12 +106,22 @@ export const Router = () => {
 }
 
 function PrivateRoutes() {
-  const { isError, isLoading } = useMeQuery()
-  const isAuthenticated = !isError && !isLoading
+  const { data, isError, isLoading } = useMeQuery()
+  const isAuthenticated = (!isError && !isLoading && !!data) || false
 
   if (isLoading) {
     return <InitialLoader />
   }
 
   return isAuthenticated ? <Outlet /> : <Navigate to={PATH.login} />
+}
+function RedirectSingInToDeck() {
+  const { data, isError, isLoading } = useMeQuery()
+  const isAuthenticated = (!isError && !isLoading && !!data) || false
+
+  if (isLoading) {
+    return <InitialLoader />
+  }
+
+  return isAuthenticated ? <Navigate to={PATH.decks} /> : <Outlet />
 }

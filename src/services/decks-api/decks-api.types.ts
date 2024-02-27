@@ -1,14 +1,3 @@
-export type DeleteDecks = {
-  cardsCount: number
-  cover: string
-  created: string
-  id: string
-  isPrivate: boolean
-  name: string
-  updated: string
-  userId: string
-}
-
 export type GetDecks = {
   items: DecksItems[]
   maxCardsCount: number
