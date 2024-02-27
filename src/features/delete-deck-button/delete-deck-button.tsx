@@ -6,6 +6,7 @@ import { Modal } from '@/components/ui/modal'
 import { Typography } from '@/components/ui/typography'
 import { ButtonFooter } from '@/features/button-footer'
 import { useDeleteDeckMutation } from '@/services/decks-api/decks-api'
+import { errorNotification } from '@/utils/error-notification/error-notification'
 
 type Props = {
   id: string
@@ -13,12 +14,15 @@ type Props = {
 }
 export const DeleteDeckButton = memo(({ id, name }: Props) => {
   const [open, setOpen] = useState(false)
-  const [delCard] = useDeleteDeckMutation()
-  const deleteCard = useCallback(() => {
-    delCard({ id }).finally(() => {
-      setOpen(false)
-    })
-  }, [delCard, id])
+  const [delDeck] = useDeleteDeckMutation()
+  const deleteCard = useCallback(async () => {
+    setOpen(false)
+    try {
+      await delDeck({ id }).unwrap()
+    } catch (err) {
+      errorNotification(err)
+    }
+  }, [delDeck, id])
 
   return (
     <>
