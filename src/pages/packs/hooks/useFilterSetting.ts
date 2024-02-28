@@ -30,16 +30,24 @@ export const useFilterSetting = (currentUserId: string | undefined) => {
   const setSlider = useCallback((value: number[]) => {
     dispatch(packsActions.setSliderValue({ newSliderValue: value }))
   }, [])
-  const getMyCard = useCallback((value: string) => {
-    if (value === 'my') {
-      if (currentUserId) {
-        dispatch(packsActions.setTabValue({ authorId: currentUserId, newTabValue: value }))
+  const getMyCard = useCallback(
+    (value: string) => {
+      if (value === 'my') {
+        if (currentUserId) {
+          dispatch(
+            packsActions.setTabValue({
+              authorId: currentUserId,
+              newTabValue: value,
+            })
+          )
+        }
       }
-    }
-    if (value === 'all') {
-      dispatch(packsActions.setTabValue({ newTabValue: value }))
-    }
-  }, [])
+      if (value === 'all') {
+        dispatch(packsActions.setTabValue({ newTabValue: value }))
+      }
+    },
+    [currentUserId, dispatch]
+  )
 
   return {
     clearFilter,

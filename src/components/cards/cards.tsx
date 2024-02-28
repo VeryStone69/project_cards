@@ -14,6 +14,7 @@ import { AddNewCard } from '@/features/add-new-card'
 import { DeleteCardButton } from '@/features/delete-card-button/delete-card-button'
 import { DropdownCard } from '@/features/dropdown-card/dropdown-card'
 import { EditCard } from '@/features/edit-card'
+import { useMeQuery } from '@/services/auth-api/auth'
 import { useGetCardsInDeckQuery } from '@/services/cards-api/cards-api'
 import { useGetDeckInfoQuery } from '@/services/decks-api/decks-api'
 
@@ -26,13 +27,14 @@ export const Cards = () => {
   const [itemPerPage, setItemPerPage] = useState(5)
   const [currentPageDecks, setCurrentPage] = useState(1)
   const packId = id ?? ('' as string)
-  const isMyPack = 'authUserId === pack.author.id' && true
+  const { data: meData } = useMeQuery()
 
-  const cards = useGetCardsInDeckQuery({
+  const { data: cardsData } = useGetCardsInDeckQuery({
     packId,
     params: { currentPage: currentPageDecks, itemsPerPage: itemPerPage },
   })
-  const pack = useGetDeckInfoQuery({ id: packId })
+  const { data: deckData } = useGetDeckInfoQuery({ id: packId })
+  const isMyPack = meData?.id === deckData?.userId
 
   const cardsColumns = [
     {
@@ -71,7 +73,7 @@ export const Cards = () => {
 
       <div className={s.section}>
         <div className={s.sectionHeader}>
-          <Typography variant={'large'}>{pack.data?.name}</Typography>
+          <Typography variant={'large'}>{deckData?.name}</Typography>
 
           {isMyPack && (
             <Dropdown align={'center'} className={s.dropDown} sideOffset={-10}>
@@ -87,11 +89,11 @@ export const Cards = () => {
             </Button>
           )}
         </div>
-        {pack.data?.cover && (
+        {deckData?.cover && (
           <img
             alt={'Cover'}
             className={s.packsImg}
-            src={pack.data.cover ? pack.data.cover : defaultMask}
+            src={deckData.cover ? deckData.cover : defaultMask}
           />
         )}
 
@@ -106,7 +108,7 @@ export const Cards = () => {
       <Table.Root className={s.table}>
         <TableHeader columns={cardsColumns} />
         <Table.Body>
-          {cards.data?.items.map(items => {
+          {cardsData?.items.map(items => {
             return (
               <Table.Row key={items.id}>
                 <Table.Cell className={s.questionCell}>
@@ -135,8 +137,8 @@ export const Cards = () => {
                 {isMyPack && (
                   <Table.Cell>
                     <div className={s.editButtons}>
-                      <EditCard />
-                      <DeleteCardButton id={items.id} name={pack.data?.name || ''} />
+                      <EditCard answer={items.answer} cardId={items.id} question={items.question} />
+                      <DeleteCardButton id={items.id} name={deckData?.name || ''} />
                     </div>
                   </Table.Cell>
                 )}
@@ -151,7 +153,7 @@ export const Cards = () => {
         itemsPerPage={itemPerPage}
         onChangeItemsPerPage={setItemPerPage}
         onChangePage={setCurrentPage}
-        totalPages={cards.data?.pagination.totalItems}
+        totalPages={cardsData?.pagination.totalItems}
       />
     </section>
   )

@@ -20,4 +20,14 @@ export const addNewDeckSchema = z.object({
   name: nameSchema,
 })
 
+export const updatesCardsSchema = z.object({
+  answer: nameSchema,
+  answerImg: coverSchema,
+  answerVideo: z.string().optional(),
+  question: nameSchema,
+  questionImg: coverSchema,
+  questionVideo: z.string().optional(),
+})
+
 export type PackFormType = z.infer<typeof addNewDeckSchema>
+export type UpdatesCardsType = z.infer<typeof updatesCardsSchema>
