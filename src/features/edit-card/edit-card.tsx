@@ -1,21 +1,29 @@
 import { useState } from 'react'
+import { SubmitHandler } from 'react-hook-form'
+import { toast } from 'react-toastify'
 
-import notImg from '@/assets/images/not-img.jpg'
-import { ButtonBlock } from '@/components/button-block/button-block'
 import { AddCardForm } from '@/components/forms/add-card-form'
 import { Icon } from '@/components/icon/Icon'
-import { Button } from '@/components/ui/button'
 import { IconButton } from '@/components/ui/icon-button'
 import { Modal } from '@/components/ui/modal'
-import { Select } from '@/components/ui/select'
-import { TextField } from '@/components/ui/textField'
-import { Typography } from '@/components/ui/typography'
+import { useUpdateCardMutation } from '@/services/cards-api/cards-api'
+import { UpdatesCardsType } from '@/utils/zod-resolvers/file-update-resolver'
 
-import s from '@/features/edit-card/edit-card.module.scss'
+type Props = {
+  answer?: string
+  cardId?: string
+  question?: string
+}
 
-export const EditCard = () => {
+export const EditCard = ({ answer, cardId = '', question }: Props) => {
   const [open, setOpen] = useState(false)
   const [option, setOption] = useState('1')
+  const [updateCard] = useUpdateCardMutation()
+
+  const onCancel = () => {
+    setOpen(false)
+  }
+
   const options = [
     {
       title: 'Text',
@@ -27,38 +35,51 @@ export const EditCard = () => {
     },
   ]
 
+  const handleSubmit: SubmitHandler<UpdatesCardsType> = async data => {
+    const form = new FormData()
+
+    form.append('question', data.question)
+    form.append('answer', data.answer)
+    form.append('questionImg', data.questionImg || '')
+    form.append('answerImg', data.answerImg || '')
+
+    setOpen(!open)
+    try {
+      await toast.promise(updateCard({ cardId, data: form }), {
+        pending: 'Cards is updating!',
+        success: 'Cards was be updates',
+      })
+    } catch (error) {
+      toast.error('Card is not updated')
+    }
+  }
+
   return (
     <>
       {option === '1' && (
         <Modal open={open} setOpen={setOpen} title={'Editing a card'}>
-          <AddCardForm onSubmit={() => {}} onValueChange={setOption} options={options} />
-          <ButtonBlock className={s.buttonBlock} primary={'Save changes'} secondary={'Cancel'} />
+          <AddCardForm
+            answer={answer}
+            onCancel={onCancel}
+            onSubmit={handleSubmit}
+            onValueChange={setOption}
+            options={options}
+            question={question}
+          />
         </Modal>
       )}
 
       {option === '2' && (
         <Modal open={open} setOpen={setOpen} title={'Editing a card'}>
-          <div className={s.inputBlock}>
-            <Select
-              label={'Choose a question format'}
-              onValueChange={setOption}
-              options={options}
-            />
-            <TextField label={'Question:'} />
-            <img alt={'notImg'} src={notImg} />
-            <Typography className={s.uploadButton} variant={'subtitle2'}>
-              <Button variant={'secondary'}>Change cover</Button>
-              <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 18 18'} />
-            </Typography>
-
-            <TextField label={'Answer:'} />
-            <img alt={'notImg'} src={notImg} />
-            <Typography className={s.uploadButton} variant={'subtitle2'}>
-              <Button variant={'secondary'}>Change cover</Button>
-              <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 18 18'} />
-            </Typography>
-          </div>
-          <ButtonBlock primary={'Save changes'} secondary={'Cancel'} />
+          <AddCardForm
+            answer={answer}
+            onCancel={onCancel}
+            onSubmit={handleSubmit}
+            onValueChange={setOption}
+            options={options}
+            question={question}
+            withImg
+          />
         </Modal>
       )}
 

@@ -1,8 +1,8 @@
 import {
   BaseQueryFn,
   FetchArgs,
-  FetchBaseQueryError,
   fetchBaseQuery,
+  FetchBaseQueryError,
 } from '@reduxjs/toolkit/query/react'
 import { Mutex } from 'async-mutex'
 
