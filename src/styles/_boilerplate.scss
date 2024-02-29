@@ -1,5 +1,4 @@
 html {
-  overflow-y: auto;
 
   box-sizing: border-box;
 
@@ -8,19 +7,6 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  &::-webkit-scrollbar {
-    width: 8px;
-    background-color: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: var(--color-dark-300);
-    border-radius: 3px;
-
-    &:hover {
-      background-color: var(--color-dark-100);
-    }
-  }
 }
 
 *,
