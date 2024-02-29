@@ -3,10 +3,10 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 const initialState = {
   filter: {
     authorId: undefined as string | undefined,
-    searchName: '',
+    searchName: '' as null | string,
     sliderValueMax: undefined as number | undefined,
     sliderValueMin: 0,
-    tabValue: 'all',
+    tabValue: 'all' as null | string,
   },
   pagination: {
     currentPage: 1,
@@ -31,14 +31,17 @@ const slice = createSlice({
     setPageSize: (state, action: PayloadAction<{ newPageSize: number }>) => {
       state.pagination.pageSize = action.payload.newPageSize
     },
-    setSearchName: (state, action: PayloadAction<{ newSearchName: string }>) => {
+    setSearchName: (state, action: PayloadAction<{ newSearchName: null | string }>) => {
       state.filter.searchName = action.payload.newSearchName
     },
     setSliderValue: (state, action: PayloadAction<{ newSliderValue: number[] }>) => {
       state.filter.sliderValueMin = action.payload.newSliderValue[0]
       state.filter.sliderValueMax = action.payload.newSliderValue[1]
     },
-    setTabValue: (state, action: PayloadAction<{ authorId?: string; newTabValue: string }>) => {
+    setTabValue: (
+      state,
+      action: PayloadAction<{ authorId?: string; newTabValue: null | string }>
+    ) => {
       state.filter.tabValue = action.payload.newTabValue
       state.filter.authorId = action.payload.authorId
     },
