@@ -1,108 +1,134 @@
 import { useState } from 'react'
 
-import { AddCardForm } from '@/components/forms/add-card-form'
 import { Icon } from '@/components/icon/Icon'
-import { IconButton } from '@/components/ui/icon-button'
+import { Button } from '@/components/ui/button'
+import { FileUploader } from '@/components/ui/file-uploader'
 import { Modal } from '@/components/ui/modal'
-import { EditCard } from '@/features/edit-card/edit-card'
+import { TextField } from '@/components/ui/textField'
+import { Typography } from '@/components/ui/typography'
+import { ButtonFooter } from '@/features/button-footer'
 import { Meta, StoryObj } from '@storybook/react'
 
+import s from 'src/features/add-new-card/add-and-update-card.scss'
+
+import notImg from '../../assets/images/not-img.jpg'
+
 const meta = {
-  component: EditCard,
+  args: {
+    open: false,
+    setOpen: () => {},
+    title: 'test',
+  },
+  component: Modal,
   parameters: {
     layout: 'centered',
   },
-  title: 'Components/features/edit-card',
-} satisfies Meta<typeof EditCard>
+  title: 'Components/features/add-new-card',
+} satisfies Meta<typeof Modal>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const EditCardButton: Story = {
+export const AddCardModal: Story = {
   render: () => {
     const [open, setOpen] = useState(false)
-    const options = [
-      {
-        title: 'Text',
-        value: '1',
-      },
-      {
-        title: 'Picture',
-        value: '2',
-      },
-    ]
+    const [imgQestion, setImgQestion] = useState<File | null>(null)
+    const [imgAnswer, setImgAnswer] = useState<File | null>(null)
+    const imgQ = imgQestion ? URL.createObjectURL(imgQestion) : null
+    const imgA = imgAnswer ? URL.createObjectURL(imgAnswer) : null
 
     return (
       <>
         {open && (
-          <Modal open setOpen={setOpen} title={'Editing a card'}>
-            <AddCardForm onSubmit={() => {}} onValueChange={() => {}} options={options} />
+          <Modal open={open} setOpen={setOpen} title={'Adding a new card'}>
+            <div className={s.inputBlock}>
+              <Typography variant={'subtitle1'}>
+                Enter your question and give the correct answer:
+              </Typography>
+              <TextField label={'Question:'} />
+              <img
+                alt={'notImg'}
+                src={imgQ ?? notImg}
+                style={{ objectFit: 'cover', width: '100%' }}
+              />
+              <div
+                style={{
+                  alignItems: 'center',
+                  display: 'flex',
+                  gap: '1rem',
+                  justifyContent: 'space-between',
+                }}
+              >
+                {imgQ && (
+                  <Button
+                    fullWidth
+                    onClick={() => setImgQestion(null)}
+                    type={'reset'}
+                    variant={'secondary'}
+                  >
+                    <Typography variant={'subtitle2'}>Delete Cover</Typography>
+                    <Icon fill={'white'} name={'trashBin'} size={'18px'} />
+                  </Button>
+                )}
+
+                <FileUploader
+                  name={''}
+                  onChange={e => {
+                    setImgQestion(e.target.files?.[0] || null)
+                    e.target.value = ''
+                  }}
+                  style={{ width: '100%' }}
+                  variant={'secondary'}
+                >
+                  <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 18 18'} />
+                  <Typography variant={'subtitle2'}>Change Image</Typography>
+                </FileUploader>
+              </div>
+
+              <TextField label={'Answer:'} />
+              <img alt={'notImg'} src={imgA ?? notImg} />
+              <div
+                style={{
+                  alignItems: 'center',
+                  display: 'flex',
+                  gap: '1rem',
+                  justifyContent: 'space-between',
+                }}
+              >
+                {imgA && (
+                  <Button
+                    fullWidth
+                    onClick={() => setImgAnswer(null)}
+                    type={'reset'}
+                    variant={'secondary'}
+                  >
+                    <Typography variant={'subtitle2'}>Delete Cover</Typography>
+                    <Icon fill={'white'} name={'trashBin'} size={'18px'} />
+                  </Button>
+                )}
+
+                <FileUploader
+                  name={''}
+                  onChange={e => {
+                    setImgAnswer(e.target.files?.[0] || null)
+                    e.target.value = ''
+                  }}
+                  style={{ width: '100%' }}
+                  variant={'secondary'}
+                >
+                  <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 18 18'} />
+                  <Typography variant={'subtitle2'}>Change Image</Typography>
+                </FileUploader>
+              </div>
+
+              <ButtonFooter onClickCancel={() => setOpen(false)} option={2} />
+            </div>
           </Modal>
         )}
-        <IconButton
-          icon={<Icon height={'16px'} name={'edit'} width={'16px'} />}
-          onClick={() => setOpen(true)}
-        />
+        <Button onClick={() => setOpen(true)} variant={'secondary'}>
+          Add Card
+        </Button>
       </>
     )
   },
 }
-
-// export const EditCardTextModal: Story = {
-//   render: () => {
-//     const options = [
-//       {
-//         title: 'Text',
-//         value: '1',
-//       },
-//       {
-//         title: 'Picture',
-//         value: '2',
-//       },
-//     ]
-//
-//     return (
-//       <Modal open title={'Editing a card'}>
-//         <AddCardForm onSubmit={() => {}} onValueChange={() => {}} options={options} />
-//         <ButtonBlock primary={'Save changes'} secondary={'Cancel'} />
-//       </Modal>
-//     )
-//   },
-// }
-
-// export const EditCardPictureModal: Story = {
-//   render: () => {
-//     const options = [
-//       {
-//         title: 'Text',
-//         value: '1',
-//       },
-//       {
-//         title: 'Picture',
-//         value: '2',
-//       },
-//     ]
-//
-//     return (
-//       <Modal open title={'Editing a card'}>
-//         <div className={s.inputBlock}>
-//           <Select label={'Choose a question format'} onValueChange={() => {}} options={options} />
-//           <TextField label={'Question:'} />
-//           <img alt={'notImg'} src={notImg} />
-//           <Typography className={s.uploadButton} variant={'subtitle2'}>
-//             <Button variant={'secondary'}>Change cover</Button>
-//             <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 18 18'} />
-//           </Typography>
-//
-//           <TextField label={'Answer:'} />
-//           <img alt={'notImg'} src={notImg} />
-//           <Typography className={s.uploadButton} variant={'subtitle2'}>
-//             <Button variant={'secondary'}>Change cover</Button>
-//             <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 18 18'} />
-//           </Typography>
-//           <ButtonFooter titleCancel={'Cancel'} titleConfirm={'Save changes'} />
-//         </div>
-//       </Modal>
-//     )
-//   },
-// }

@@ -1,29 +1,24 @@
 import { useState } from 'react'
-import { SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { AddCardForm } from '@/components/forms/add-card-form'
+import { CreateAndModifyCardForm } from '@/components/forms/create-and-modify-card-form'
 import { Icon } from '@/components/icon/Icon'
 import { IconButton } from '@/components/ui/icon-button'
 import { Modal } from '@/components/ui/modal'
 import { useUpdateCardMutation } from '@/services/cards-api/cards-api'
-import { UpdatesCardsType } from '@/utils/zod-resolvers/file-update-resolver'
 
 type Props = {
   answer?: string
+  answerImg?: string
   cardId?: string
   question?: string
+  questionImg?: string
 }
 
-export const EditCard = ({ answer, cardId = '', question }: Props) => {
-  const [open, setOpen] = useState(false)
+export const EditCard = ({ answer, answerImg, cardId = '', question, questionImg }: Props) => {
+  const [openModal, setOpenModal] = useState(false)
   const [option, setOption] = useState('1')
   const [updateCard] = useUpdateCardMutation()
-
-  const onCancel = () => {
-    setOpen(false)
-  }
-
   const options = [
     {
       title: 'Text',
@@ -35,56 +30,42 @@ export const EditCard = ({ answer, cardId = '', question }: Props) => {
     },
   ]
 
-  const handleSubmit: SubmitHandler<UpdatesCardsType> = async data => {
-    const form = new FormData()
+  const defaultValues = {
+    answer,
+    answerImg,
+    question,
+    questionImg,
+  }
 
-    form.append('question', data.question)
-    form.append('answer', data.answer)
-    form.append('questionImg', data.questionImg || '')
-    form.append('answerImg', data.answerImg || '')
-
-    setOpen(!open)
+  const updateCardOnSubmit = async (data: FormData) => {
     try {
-      await toast.promise(updateCard({ cardId, data: form }), {
-        pending: 'Cards is updating!',
-        success: 'Cards was be updates',
+      await toast.promise(updateCard({ cardId, data }), {
+        pending: 'Updating a card!',
+        success: 'The card has been updated!',
       })
     } catch (error) {
-      toast.error('Card is not updated')
+      toast.error('Error updating card :(')
     }
+    setOpenModal(false)
   }
 
   return (
     <>
-      {option === '1' && (
-        <Modal open={open} setOpen={setOpen} title={'Editing a card'}>
-          <AddCardForm
-            answer={answer}
-            onCancel={onCancel}
-            onSubmit={handleSubmit}
-            onValueChange={setOption}
-            options={options}
-            question={question}
-          />
-        </Modal>
-      )}
-
-      {option === '2' && (
-        <Modal open={open} setOpen={setOpen} title={'Editing a card'}>
-          <AddCardForm
-            answer={answer}
-            onCancel={onCancel}
-            onSubmit={handleSubmit}
-            onValueChange={setOption}
-            options={options}
-            question={question}
-            withImg
-          />
-        </Modal>
-      )}
+      <Modal open={openModal} setOpen={setOpenModal} title={'Editing a card'}>
+        <CreateAndModifyCardForm
+          defaultValue={defaultValues}
+          onCancel={() => setOpenModal(false)}
+          onSubmit={updateCardOnSubmit}
+          onValueChange={setOption}
+          options={options}
+          selectOption={option}
+        />
+      </Modal>
 
       <IconButton
-        icon={<Icon height={'16px'} name={'edit'} onClick={() => setOpen(true)} width={'16px'} />}
+        icon={
+          <Icon height={'16px'} name={'edit'} onClick={() => setOpenModal(true)} width={'16px'} />
+        }
       />
     </>
   )
