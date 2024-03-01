@@ -10,10 +10,10 @@ import { Table } from '@/components/ui/table'
 import { TableHeader } from '@/components/ui/table-header'
 import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
-import { AddNewCard } from '@/features/add-new-card'
+import { AddNewCard } from '@/features/add-new-card/add-new-card'
 import { DeleteCardButton } from '@/features/delete-card-button/delete-card-button'
 import { DropdownCard } from '@/features/dropdown-card/dropdown-card'
-import { EditCard } from '@/features/edit-card'
+import { EditCard } from '@/features/edit-card/edit-card'
 import { useMeQuery } from '@/services/auth-api/auth'
 import { useGetCardsInDeckQuery } from '@/services/cards-api/cards-api'
 import { useGetDeckInfoQuery } from '@/services/decks-api/decks-api'
@@ -82,7 +82,7 @@ export const Cards = () => {
           )}
 
           {isMyPack ? (
-            <AddNewCard />
+            <AddNewCard deckId={id} />
           ) : (
             <Button as={Link} to={`learn`}>
               <Typography variant={'subtitle2'}>Learn cards</Typography>
@@ -137,7 +137,13 @@ export const Cards = () => {
                 {isMyPack && (
                   <Table.Cell>
                     <div className={s.editButtons}>
-                      <EditCard answer={items.answer} cardId={items.id} question={items.question} />
+                      <EditCard
+                        answer={items.answer}
+                        answerImg={items.answerImg}
+                        cardId={items.id}
+                        question={items.question}
+                        questionImg={items.questionImg}
+                      />
                       <DeleteCardButton id={items.id} name={deckData?.name || ''} />
                     </div>
                   </Table.Cell>
