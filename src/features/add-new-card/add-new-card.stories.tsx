@@ -9,7 +9,7 @@ import { Typography } from '@/components/ui/typography'
 import { ButtonFooter } from '@/features/button-footer'
 import { Meta, StoryObj } from '@storybook/react'
 
-import s from './add-new-card.module.scss'
+import s from 'src/features/add-new-card/add-and-update-card.scss'
 
 import notImg from '../../assets/images/not-img.jpg'
 
