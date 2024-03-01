@@ -1,1 +1,1 @@
-export * from 'src/features/add-new-card/add-new-card'
+export * from './add-new-card'
