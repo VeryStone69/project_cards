@@ -174,7 +174,7 @@ export const CreateAndModifyCardForm = ({
         onClickCancel={onCancel}
         option={2}
         titleCancel={'Cancel'}
-        titleConfirm={picture ? 'Update card' : 'Create card'}
+        titleConfirm={!defaultValue ? 'Create card' : 'Update card'}
       />
     </form>
   )
