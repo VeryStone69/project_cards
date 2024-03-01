@@ -11,7 +11,7 @@ export type DropDownHeaderProps = {
   onSelect?: (event: Event) => void
   userEmail?: string
   userLogo?: string
-  userName?: string
+  userName: string
 } & ComponentPropsWithoutRef<'div'>
 export const DropdownItemHeader = ({
   className,
@@ -24,7 +24,7 @@ export const DropdownItemHeader = ({
 }: DropDownHeaderProps) => {
   return (
     <DropdownMenu.Item className={className} onSelect={onSelect} style={style} {...props}>
-      <Avatar className={s.avatar} src={userLogo} />
+      <Avatar className={s.avatar} src={userLogo} userName={userName} />
       <div>
         <Typography variant={'subtitle2'}>{userName}</Typography>
         <Typography className={s.caption} variant={'caption'}>
