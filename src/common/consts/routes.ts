@@ -8,4 +8,5 @@ export const PATH = {
   profile: '/profile',
   recover: '/recovery',
   register: '/register',
+  learn: '/learn',
 } as const

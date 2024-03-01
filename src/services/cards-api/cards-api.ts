@@ -16,7 +16,7 @@ export const cardsApi = baseApi.injectEndpoints({
           id: string
         }
       >({
-        invalidatesTags: ['Decks'],
+        invalidatesTags: ['Cards'],
         query: arg => {
           return {
             body: arg.data,

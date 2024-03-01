@@ -24,14 +24,15 @@ export const DeleteCardButton = memo(({ id, name }: Props) => {
     <>
       <IconButton icon={<Icon name={'remove'} size={'16px'} />} onClick={() => setOpen(true)} />
       {open && (
-        <Modal open setOpen={() => setOpen(false)} title={'Delete card'}>
+        <Modal open setOpen={() => setOpen(false)} title={'Removing a card'}>
           <Typography variant={'body1'}>
-            Do you really want to remove {name}? Сard will be deleted.
+            Are you sure you want to remove a card from the {name} deck?
           </Typography>
           <ButtonFooter
             onClickCancel={() => setOpen(false)}
             onClickConfirm={deleteCard}
             option={2}
+            titleConfirm={'Remove'}
           />
         </Modal>
       )}

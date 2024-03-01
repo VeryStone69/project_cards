@@ -1,47 +1,57 @@
 import { useState } from 'react'
+import { toast } from 'react-toastify'
 
-import notImg from '@/assets/images/not-img.jpg'
-import { ButtonBlock } from '@/components/button-block/button-block'
-import { Icon } from '@/components/icon/Icon'
+import { CreateAndModifyCardForm } from '@/components/forms/create-and-modify-card-form'
 import { Button } from '@/components/ui/button'
-import { FileUploader } from '@/components/ui/file-uploader'
 import { Modal } from '@/components/ui/modal'
-import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
+import { useCreateCardsInDeckMutation } from '@/services/cards-api/cards-api'
 
-import s from './add-new-card.module.scss'
+type Props = {
+  deckId?: string
+}
 
-export const AddNewCard = () => {
-  const [open, setOpen] = useState(false)
+export const AddNewCard = ({ deckId = '' }: Props) => {
+  const [openModal, setOpenModal] = useState(false)
+  const [option, setOption] = useState('1')
+  const [createCard] = useCreateCardsInDeckMutation()
+  const options = [
+    {
+      title: 'Text',
+      value: '1',
+    },
+    {
+      title: 'Picture',
+      value: '2',
+    },
+  ]
+
+  const addCardOnSubmit = async (data: FormData) => {
+    try {
+      await toast.promise(createCard({ data, id: deckId }), {
+        pending: 'Creating a card!',
+        success: 'The card has been created!',
+      })
+    } catch (error) {
+      toast.error('Error creating card :(')
+    }
+    setOpenModal(false)
+  }
 
   return (
     <>
-      {open && (
-        <Modal open={open} setOpen={setOpen} title={'Adding a new card'}>
-          <div className={s.inputBlock}>
-            <Typography variant={'subtitle2'}>
-              Enter your question and give the correct answer:
-            </Typography>
-            <TextField label={'Question:'} />
-            <img alt={'notImg'} src={notImg} />
-            <FileUploader name={''} onChange={() => {}} variant={'secondary'}>
-              <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 18 18'} />
-              <Typography variant={'subtitle2'}>Upload Image</Typography>
-            </FileUploader>
+      <Modal open={openModal} setOpen={setOpenModal} title={'Adding a new card'}>
+        <CreateAndModifyCardForm
+          onCancel={() => setOpenModal(false)}
+          onSubmit={addCardOnSubmit}
+          onValueChange={setOption}
+          options={options}
+          selectOption={option}
+        />
+      </Modal>
 
-            <TextField label={'Answer:'} />
-            <img alt={'notImg'} src={notImg} />
-            <Button fullWidth variant={'secondary'}>
-              <Typography variant={'subtitle2'}>Change image</Typography>
-              <Icon name={'img'} viewBox={'0 0 18 18'} />
-            </Button>
-          </div>
-
-          <ButtonBlock primary={'Add a card'} secondary={'Cancel'} />
-        </Modal>
-      )}
-      <Button onClick={() => setOpen(!open)} variant={'primary'}>
-        <Typography variant={'subtitle2'}>Add New Card</Typography>
+      <Button onClick={() => setOpenModal(!openModal)} variant={'primary'}>
+        <Typography variant={'subtitle2'}>Add a new card</Typography>
       </Button>
     </>
   )
