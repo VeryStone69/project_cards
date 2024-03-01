@@ -20,7 +20,7 @@ export const Profile = () => {
         <Typography className={s.title} variant={'h1'}>
           Personal Information
         </Typography>
-        <ProfilePhotoUpdate avatar={me?.avatar || ''} isEdit={isEdit} />
+        <ProfilePhotoUpdate avatar={me?.avatar || ''} isEdit={isEdit} userName={me?.name} />
         <ProfileNameUpdate email={me?.email} isEdit={isEdit} name={me?.name} setEdit={setEdit} />
       </Card>
     </>
