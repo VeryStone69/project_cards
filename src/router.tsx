@@ -1,9 +1,9 @@
 import {
+  createBrowserRouter,
   Navigate,
   Outlet,
   RouteObject,
   RouterProvider,
-  createBrowserRouter,
 } from 'react-router-dom'
 
 import { PATH } from '@/common/consts/routes'
@@ -57,7 +57,7 @@ const privateRoutes: RouteObject[] = [
   },
   {
     element: <LearnCard />,
-    path: `${PATH.decks}/:id/learn`,
+    path: `${PATH.decks}/:id${PATH.learn}`,
   },
   {
     element: <Cards />,
@@ -111,6 +111,7 @@ function PrivateRoutes() {
 
   return isAuthenticated ? <Outlet /> : <Navigate to={PATH.login} />
 }
+
 function RedirectSingInToDeck() {
   const { data, isError, isLoading } = useMeQuery()
   const isAuthenticated = (!isError && !isLoading && !!data) || false

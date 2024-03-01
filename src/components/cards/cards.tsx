@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useCallback, useState } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 
 import { BackButton } from '@/components/ui/back-button'
 import { Button } from '@/components/ui/button'
@@ -16,14 +16,24 @@ import { DropdownCard } from '@/features/dropdown-card/dropdown-card'
 import { EditCard } from '@/features/edit-card/edit-card'
 import { useMeQuery } from '@/services/auth-api/auth'
 import { useGetCardsInDeckQuery } from '@/services/cards-api/cards-api'
-import { useGetDeckInfoQuery } from '@/services/decks-api/decks-api'
+import {
+  useDeleteDeckMutation,
+  useGetDeckInfoQuery,
+  useUpdateDeckMutation,
+} from '@/services/decks-api/decks-api'
 
 import s from './cards.module.scss'
 
 import defaultMask from '../../assets/images/not-img.jpg'
+import { ButtonFooter } from '@/features/button-footer'
+import { Modal } from '@/components/ui/modal'
+import { toast } from 'react-toastify'
+import { CreateAndModifyDeckForm } from '@/components/forms/create-and-modify-deck-form'
 
 export const Cards = () => {
   const { id } = useParams()
+  const [deleteDeckModal, setDeleteDeckModal] = useState(false)
+  const [editDeckModal, setEditDeckModal] = useState(false)
   const [itemPerPage, setItemPerPage] = useState(5)
   const [currentPageDecks, setCurrentPage] = useState(1)
   const packId = id ?? ('' as string)
@@ -34,7 +44,41 @@ export const Cards = () => {
     params: { currentPage: currentPageDecks, itemsPerPage: itemPerPage },
   })
   const { data: deckData } = useGetDeckInfoQuery({ id: packId })
+  const defaultValue = {
+    cover: deckData?.cover || null,
+    isPrivate: deckData?.isPrivate || false,
+    name: deckData?.name || '',
+  }
   const isMyPack = meData?.id === deckData?.userId
+  const navigate = useNavigate()
+
+  const [delDeck] = useDeleteDeckMutation()
+  const [updateDeck] = useUpdateDeckMutation()
+
+  const editDeckHandler = async (data: FormData) => {
+    try {
+      await toast.promise(updateDeck({ id: packId, data }).unwrap, {
+        pending: 'Editing a Deck!',
+        success: 'The deck has been edited!',
+      })
+    } catch (error) {
+      toast.error('Error editing deck :(')
+    }
+    setEditDeckModal(false)
+  }
+
+  const deleteDeckHandler = useCallback(async () => {
+    try {
+      await toast.promise(delDeck({ id: id as string }).unwrap, {
+        pending: 'Removing a deck!',
+        success: 'The deck has been removed!',
+      })
+    } catch (error) {
+      toast.error('Error when deleting deck :(')
+    }
+    setDeleteDeckModal(false)
+    navigate('/decks')
+  }, [delDeck, id])
 
   const cardsColumns = [
     {
@@ -77,8 +121,35 @@ export const Cards = () => {
 
           {isMyPack && (
             <Dropdown align={'center'} className={s.dropDown} sideOffset={-10}>
-              <DropdownCard />
+              <DropdownCard
+                setDeleteDeckModal={setDeleteDeckModal}
+                setEditDeckModal={setEditDeckModal}
+              />
             </Dropdown>
+          )}
+
+          {editDeckModal && (
+            <Modal open setOpen={() => setEditDeckModal(false)} title={'Editing a Deck'}>
+              <CreateAndModifyDeckForm
+                defaultValue={defaultValue}
+                onCancel={() => setEditDeckModal(false)}
+                onSubmit={editDeckHandler}
+              />
+            </Modal>
+          )}
+
+          {deleteDeckModal && (
+            <Modal open setOpen={() => setDeleteDeckModal(false)} title={'Removing a deck'}>
+              <Typography variant={'body1'}>
+                Are you sure you want to delete the {deckData?.name} deck?
+              </Typography>
+              <ButtonFooter
+                onClickCancel={() => setDeleteDeckModal(false)}
+                onClickConfirm={deleteDeckHandler}
+                option={2}
+                titleConfirm={'Delete'}
+              />
+            </Modal>
           )}
 
           {isMyPack ? (
