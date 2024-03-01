@@ -20,11 +20,13 @@ export type DefaultValueType = {
   isPrivate: boolean
   name: string
 }
+
 type Props<C extends ElementType = 'div'> = {
   defaultValue?: DefaultValueType
   onCancel: () => void
   onSubmit: (data: FormData) => void
 } & Omit<ComponentPropsWithoutRef<C>, 'defaultValue' | 'onSubmit'>
+
 export const CreateAndModifyDeckForm = ({
   className,
   defaultValue,
