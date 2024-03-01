@@ -9,7 +9,7 @@ type Props = {
   onlogOut?: () => void
   userEmail?: string
   userLogo?: string
-  userName?: string
+  userName: string
 }
 export const DropDownUser = ({ onlogOut, userEmail, userLogo, userName }: Props) => {
   const navigate = useNavigate()

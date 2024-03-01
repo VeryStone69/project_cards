@@ -1,5 +1,26 @@
 .container {
   width: 100%;
   max-width: 1140px;
-  margin: 0 auto;
+  max-height: calc(100vh - 1px);
+}
+
+.wrapper {
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--color-dark-300);
+    border-radius: 3px;
+
+    &:hover {
+      background-color: var(--color-dark-100);
+    }
+  }
 }

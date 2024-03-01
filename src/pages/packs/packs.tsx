@@ -16,8 +16,6 @@ import { TableContentDeck } from '@/widgets/table-content-deck'
 import s from './packs.module.scss'
 
 export const Packs = () => {
-  const { changeItemPerPage, changePage, currentPage, itemsPerPage } = usePaginationDecks()
-
   const { data: me } = useMeQuery()
   const currentUserId = me?.id || ''
 
@@ -26,7 +24,9 @@ export const Packs = () => {
     getMyCard,
     orderBy,
     searchName,
+    searchParams,
     setName,
+    setSearchParams,
     setSlider,
     setSort,
     sliderValueMax,
@@ -34,7 +34,10 @@ export const Packs = () => {
     sort,
     tabValue,
   } = useFilterSetting(currentUserId)
-
+  const { changeItemPerPage, changePage, currentPage, itemsPerPage } = usePaginationDecks(
+    searchParams,
+    setSearchParams
+  )
   const minCardsCount = useDebounce(sliderValueMin)
   const maxCardsCount = useDebounce(sliderValueMax)
 

@@ -14,8 +14,10 @@ export const Layout = ({ className }: Props) => {
   return (
     <>
       <Header avatar={data?.avatar || undefined} email={data?.email} userName={data?.name} />
-      <div className={className ? className : s.container}>
-        <Outlet />
+      <div className={s.wrapper}>
+        <div className={className ? className : s.container}>
+          <Outlet />
+        </div>
       </div>
     </>
   )

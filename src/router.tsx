@@ -24,8 +24,7 @@ import { useMeQuery } from '@/services/auth-api/auth'
 const publicRoutes: RouteObject[] = [
   { element: <NotFound />, path: PATH.notFound },
   {
-    children: [{ element: <Login /> }],
-    element: <RedirectSingInToDeck />,
+    element: <Login />,
     path: PATH.login,
   },
   {
@@ -119,5 +118,5 @@ function RedirectSingInToDeck() {
     return <InitialLoader />
   }
 
-  return isAuthenticated ? <Navigate to={PATH.decks} /> : <Outlet />
+  return isAuthenticated ? <Navigate to={PATH.base} /> : <Outlet />
 }

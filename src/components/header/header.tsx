@@ -21,6 +21,10 @@ type ProfileData = {
   email?: string
   userName?: string
 }
+enum Direction {
+  Down = -2,
+  Up = 2,
+}
 
 export const Header = memo(({ avatar, email, userName }: ProfileData) => {
   const [logOut] = useLogOutMutation()
@@ -52,7 +56,7 @@ export const Header = memo(({ avatar, email, userName }: ProfileData) => {
             </Typography>
             <Dropdown
               align={'end'}
-              sideOffset={2}
+              sideOffset={avatar ? Direction.Down : Direction.Up}
               trigger={
                 <button>
                   <Avatar src={avatar} userName={userName} />
