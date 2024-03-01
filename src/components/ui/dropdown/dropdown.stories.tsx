@@ -20,7 +20,14 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const DropDownWithUser: Story = {
-  args: { align: 'center', children: '', className: '', key: '', ref: null, trigger: '' },
+  args: {
+    align: 'center',
+    children: '',
+    className: '',
+    key: '',
+    ref: null,
+    trigger: '',
+  },
   parameters: { layout: 'centered' },
   render: () => {
     const data = {
@@ -46,12 +53,19 @@ export const DropDownWithUser: Story = {
 }
 
 export const DropDownWithSvg: Story = {
-  args: { align: 'start', children: '', className: '', key: '', ref: null, trigger: '' },
+  args: {
+    align: 'start',
+    children: '',
+    className: '',
+    key: '',
+    ref: null,
+    trigger: '',
+  },
   parameters: { layout: 'centered' },
   render: () => {
     return (
       <Dropdown sideOffset={10}>
-        <DropdownCard />
+        <DropdownCard setDeleteDeckModal={() => {}} setEditDeckModal={() => {}} />
       </Dropdown>
     )
   },
