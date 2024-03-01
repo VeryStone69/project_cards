@@ -28,6 +28,10 @@ const publicRoutes: RouteObject[] = [
     path: PATH.login,
   },
   {
+    element: <NotFound />,
+    path: PATH.notFound,
+  },
+  {
     element: <Register />,
     path: PATH.register,
   },
