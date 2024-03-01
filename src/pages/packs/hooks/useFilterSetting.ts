@@ -16,10 +16,26 @@ export const useFilterSetting = (currentUserId: string | undefined) => {
   const sliderValueMax = Number(searchParams.get('maxCardsCount')) || sliderRangeMax
 
   const searchName = searchParams.get('name') || ''
-
+  const orderBy = searchParams.get('orderBy')
   const tabValue = searchParams.get('currentTab') || 'all'
-  const [sort, setSort] = useState<Sort>(null)
+  const sortTable = orderBy && orderBy.split('-')
 
+  const [sort, setSortTable] = useState<Sort>({
+    direction: sortTable ? (sortTable[1] as 'asc' | 'desc') : 'asc',
+    key: sortTable ? sortTable[0] : '',
+  })
+
+  const setSort = (sort: Sort) => {
+    if (sort !== null) {
+      searchParams.set('orderBy', `${sort.key}-${sort.direction}`)
+    }
+    if (sort === null) {
+      searchParams.delete('orderBy')
+    }
+
+    setSearchParams(searchParams)
+    setSortTable(sort)
+  }
   const clearFilter = useCallback(() => {
     dispatch(packsActions.resetFilters())
     setSort(null)
@@ -29,17 +45,18 @@ export const useFilterSetting = (currentUserId: string | undefined) => {
     setSearchParams('')
   }, [])
 
-  const orderBy = sort ? `${sort.key}-${sort.direction}` : null
-
-  const setName = useCallback((value: string) => {
-    searchParams.delete('currentPage')
-    searchParams.set('name', value)
-    if (value === '') {
-      searchParams.delete('name')
-    }
-    setSearchParams(searchParams)
-    dispatch(packsActions.setSearchName({ newSearchName: searchParams.get('name') }))
-  }, [])
+  const setName = useCallback(
+    (value: string) => {
+      searchParams.delete('currentPage')
+      searchParams.set('name', value)
+      if (value === '') {
+        searchParams.delete('name')
+      }
+      setSearchParams(searchParams)
+      dispatch(packsActions.setSearchName({ newSearchName: searchParams.get('name') }))
+    },
+    [searchParams]
+  )
 
   const setSlider = useCallback(
     (value: number[]) => {
