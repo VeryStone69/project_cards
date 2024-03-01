@@ -1,9 +1,9 @@
 import {
-  createBrowserRouter,
   Navigate,
   Outlet,
   RouteObject,
   RouterProvider,
+  createBrowserRouter,
 } from 'react-router-dom'
 
 import { PATH } from '@/common/consts/routes'
