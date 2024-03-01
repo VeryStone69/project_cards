@@ -62,12 +62,6 @@ export const CreateAndModifyDeckForm = ({
         <div className={s.inputBlock}>
           <img alt={'notImg'} className={imgClasses} onClick={onClickHandler} src={img || notImg} />
           <div className={s.deleteCover}>
-            {img && (
-              <Button fullWidth onClick={deleteCover} type={'reset'} variant={'secondary'}>
-                <Typography variant={'subtitle2'}>Delete Cover</Typography>
-                <Icon fill={'white'} name={'trashBin'} size={'18px'} />
-              </Button>
-            )}
             <ControlledFileUploader
               control={control}
               errorToast={toastError}
@@ -77,8 +71,14 @@ export const CreateAndModifyDeckForm = ({
               variant={'secondary'}
             >
               <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 18 18'} />
-              <Typography variant={'subtitle2'}>Upload Image</Typography>
+              <Typography variant={'subtitle2'}>Upload image</Typography>
             </ControlledFileUploader>
+            {img && (
+              <Button fullWidth onClick={deleteCover} type={'reset'} variant={'secondary'}>
+                <Typography variant={'subtitle2'}>Delete image</Typography>
+                <Icon fill={'white'} name={'trashBin'} size={'18px'} />
+              </Button>
+            )}
           </div>
           <ControlledTextField control={control} label={'Deck name'} name={'name'} />
 
@@ -86,7 +86,11 @@ export const CreateAndModifyDeckForm = ({
             <ControlledCheckbox control={control} label={'Private deck'} name={'isPrivate'} />
           </Typography>
         </div>
-        <ButtonFooter onClickCancel={onCancel} option={2} titleConfirm={'Save'} />
+        <ButtonFooter
+          onClickCancel={onCancel}
+          option={2}
+          titleConfirm={defaultValue ? 'Update' : 'Create'}
+        />
       </form>
     </div>
   )

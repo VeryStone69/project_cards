@@ -37,11 +37,11 @@ export const ProfileNameUpdate = <T extends ElementType = 'div'>(
     try {
       setEdit(false)
       await toast.promise(updateProfile(form).unwrap(), {
-        pending: 'Change name',
-        success: 'name successful changed',
+        pending: 'Name change...',
+        success: 'Name changed successfully!',
       })
     } catch (err) {
-      toast.error('renaming canceled')
+      toast.error('Error changing name :(')
     }
   }
 

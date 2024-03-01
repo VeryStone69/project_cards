@@ -29,13 +29,13 @@ export const DropDownUser = ({ onlogOut, userEmail, userLogo, userName }: Props)
         className={s.itemWithIcon}
         icon={<Icon className={s.svgWhite} name={'logoUserDrop'} size={'16px'} />}
         onSelect={onSelected}
-        title={'My profile'}
+        title={'Profile'}
       />
       <DropdownItemContent
         className={s.itemWithIcon}
         icon={<Icon className={s.svgWhite} name={'logout'} size={'16px'} />}
         onlogOut={onlogOut}
-        title={'Sign Out'}
+        title={'Logout'}
       />
     </>
   )

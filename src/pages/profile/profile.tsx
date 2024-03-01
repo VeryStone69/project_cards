@@ -18,7 +18,7 @@ export const Profile = () => {
       <BackButton className={s.backButton} />
       <Card className={s.card}>
         <Typography className={s.title} variant={'h1'}>
-          Personal Information
+          Personal information
         </Typography>
         <ProfilePhotoUpdate avatar={me?.avatar || ''} isEdit={isEdit} userName={me?.name} />
         <ProfileNameUpdate email={me?.email} isEdit={isEdit} name={me?.name} setEdit={setEdit} />

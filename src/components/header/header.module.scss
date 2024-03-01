@@ -12,6 +12,7 @@
 
   .logo {
     cursor: pointer;
+    display: flex;
 
     > svg {
       transition: 0.3s;
@@ -41,7 +42,6 @@
 
     .userName {
       text-decoration: none;
-      border-bottom: 2px dashed var(--color-light-100);
       outline: none;
       transition: 0.3s;
 

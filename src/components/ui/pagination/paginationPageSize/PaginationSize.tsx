@@ -20,7 +20,7 @@ export const PaginationSize = ({
   return (
     <>
       <Typography className={s.typographyShow} variant={'body2'}>
-        Показать
+        show
       </Typography>
       <div className={s.selectStyle}>
         <Select
@@ -32,7 +32,7 @@ export const PaginationSize = ({
         />
       </div>
       <Typography className={s.typographyPage} variant={'body2'}>
-        на странице
+        on the page
       </Typography>
     </>
   )

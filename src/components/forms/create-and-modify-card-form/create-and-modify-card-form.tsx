@@ -118,7 +118,7 @@ export const CreateAndModifyCardForm = ({
                 variant={'secondary'}
               >
                 <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 18 18'} />
-                <Typography variant={'subtitle2'}>Upload Cover</Typography>
+                <Typography variant={'subtitle2'}>Upload image</Typography>
               </ControlledFileUploader>
 
               {questionCover && (
@@ -128,7 +128,7 @@ export const CreateAndModifyCardForm = ({
                   type={'reset'}
                   variant={'secondary'}
                 >
-                  <Typography variant={'subtitle2'}>Delete Cover</Typography>
+                  <Typography variant={'subtitle2'}>Delete image</Typography>
                   <Icon fill={'white'} name={'trashBin'} size={'18px'} />
                 </Button>
               )}
@@ -156,12 +156,12 @@ export const CreateAndModifyCardForm = ({
                 variant={'secondary'}
               >
                 <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 18 18'} />
-                <Typography variant={'subtitle2'}>Upload Cover</Typography>
+                <Typography variant={'subtitle2'}>Upload image</Typography>
               </ControlledFileUploader>
 
               {answerCover && (
                 <Button fullWidth onClick={deleteAnswerCover} type={'reset'} variant={'secondary'}>
-                  <Typography variant={'subtitle2'}>Delete Cover</Typography>
+                  <Typography variant={'subtitle2'}>Delete image</Typography>
                   <Icon fill={'white'} name={'trashBin'} size={'18px'} />
                 </Button>
               )}

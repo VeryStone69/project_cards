@@ -67,7 +67,7 @@ export const Packs = () => {
       <div className={s.setting}>
         <div className={s.addCard}>
           <Typography as={'h1'} variant={'large'}>
-            Packs list
+            List of decks
           </Typography>
           <AddNewDeck />
         </div>

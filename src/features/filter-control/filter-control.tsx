@@ -1,7 +1,7 @@
 import { Icon } from '@/components/icon/Icon'
 import { Button } from '@/components/ui/button'
 import { Slider } from '@/components/ui/slider'
-import { TabSwitcher, Tabs } from '@/components/ui/tabSwitcher'
+import { Tabs, TabSwitcher } from '@/components/ui/tabSwitcher'
 import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
 
@@ -28,8 +28,8 @@ export const FilterControl = ({
   tabValue,
 }: FilterControlProps) => {
   const tabs: Tabs[] = [
-    { disabled: false, title: 'My cards', value: 'my' },
-    { disabled: false, title: 'All cards', value: 'all' },
+    { disabled: false, title: 'My decks', value: 'my' },
+    { disabled: false, title: 'All decks', value: 'all' },
   ]
 
   const onChangeSwitcher = (value: string) => {
@@ -42,17 +42,18 @@ export const FilterControl = ({
         className={s.textField}
         clearField={() => setSearchName('')}
         onChange={e => setSearchName(e.currentTarget.value)}
+        placeholder={'Search by name'}
         type={'search'}
         value={searchName}
       />
       <TabSwitcher
-        label={'Show packs cards'}
+        label={'Show decks'}
         onValueChange={onChangeSwitcher}
         tabs={tabs}
         value={tabValue}
       />
       <Slider
-        label={'Number of cards'}
+        label={'Number of cards in the deck'}
         max={sliderMaxValue}
         min={0}
         onChange={setSliderValue}
@@ -60,7 +61,7 @@ export const FilterControl = ({
       />
       <Button className={s.clearButton} onClick={clearFilter} variant={'secondary'}>
         <Icon className={s.icon} name={'remove'} size={'16px'} />
-        <Typography variant={'subtitle2'}> Clear Filter</Typography>
+        <Typography variant={'subtitle2'}> Clear filters</Typography>
       </Button>
     </div>
   )

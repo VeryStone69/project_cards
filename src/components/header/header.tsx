@@ -12,7 +12,6 @@ import { Typography } from '@/components/ui/typography'
 import { DropDownUser } from '@/features/dropdown-user/drop-down-user'
 import { useLogOutMutation } from '@/services/auth-api/auth'
 import { packsActions } from '@/store/packs-slice/packs-slice'
-import { errorNotification } from '@/utils/error-notification/error-notification'
 
 import s from './header.module.scss'
 
@@ -21,6 +20,7 @@ type ProfileData = {
   email?: string
   userName?: string
 }
+
 enum Direction {
   Down = -2,
   Up = 2,
@@ -33,12 +33,12 @@ export const Header = memo(({ avatar, email, userName }: ProfileData) => {
   const onLogOut = async () => {
     try {
       await toast.promise(logOut().unwrap(), {
-        pending: 'Logout from account',
-        success: 'You successfully logged out',
+        pending: 'Logout...',
+        success: 'You have successfully logged out of your account!',
       })
       dispatch(packsActions.resetFilters())
     } catch (err) {
-      errorNotification(err)
+      toast.error('Error logging out of account :(')
     }
   }
 
@@ -51,14 +51,18 @@ export const Header = memo(({ avatar, email, userName }: ProfileData) => {
 
         {userName && (
           <div className={s.userInfo}>
-            <Typography className={s.userName} variant={'subtitle1'}>
+            <Typography
+              className={s.userName}
+              onClick={() => navigate('/profile')}
+              variant={'subtitle1'}
+            >
               {userName}
             </Typography>
             <Dropdown
               align={'end'}
               sideOffset={avatar ? Direction.Down : Direction.Up}
               trigger={
-                <button>
+                <button style={{ display: 'flex' }}>
                   <Avatar src={avatar} userName={userName} />
                 </button>
               }
@@ -74,7 +78,7 @@ export const Header = memo(({ avatar, email, userName }: ProfileData) => {
         )}
         {!userName && (
           <Button as={Link} to={'/login'} variant={'secondary'}>
-            <Typography variant={'subtitle2'}>Sign in</Typography>
+            <Typography variant={'subtitle2'}>Login</Typography>
           </Button>
         )}
       </div>

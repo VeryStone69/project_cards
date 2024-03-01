@@ -14,11 +14,11 @@ export const AddNewDeck = () => {
     setOpen(!open)
     try {
       await toast.promise(createDeck(data).unwrap(), {
-        pending: 'adding a deck',
-        success: `deck added successfully`,
+        pending: 'Adding a deck...',
+        success: `Deck added successfully!`,
       })
     } catch (err) {
-      toast.error('deck not added')
+      toast.error('Error adding deck :(')
     }
   }
 
@@ -32,7 +32,7 @@ export const AddNewDeck = () => {
 
       <Typography variant={'subtitle2'}>
         <Button onClick={() => setOpen(!open)} variant={'primary'}>
-          Add New Deck
+          Add a new deck
         </Button>
       </Typography>
     </div>
