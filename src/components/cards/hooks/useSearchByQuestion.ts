@@ -18,17 +18,17 @@ export const useSearchByQuestion = () => {
       if (value === '') {
         searchParams.delete('name')
       }
-      setSearchParams(searchParams)
+      setSearchParams(searchParams, { replace: true })
       dispatch(cardsActions.setSearchName({ newSearchQuestion: searchParams.get('name') }))
     },
     [searchParams]
   )
 
   return {
+    name,
     searchName,
     searchParams,
     setNameQuestion,
     setSearchParams,
-    name,
   }
 }
