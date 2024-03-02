@@ -12,6 +12,7 @@ import { Typography } from '@/components/ui/typography'
 import { DropDownUser } from '@/features/dropdown-user/drop-down-user'
 import { useLogOutMutation } from '@/services/auth-api/auth'
 import { packsActions } from '@/store/packs-slice/packs-slice'
+import { errorNotification } from '@/utils/error-notification/error-notification'
 
 import s from './header.module.scss'
 
@@ -19,11 +20,6 @@ type ProfileData = {
   avatar?: string
   email?: string
   userName?: string
-}
-
-enum Direction {
-  Down = -2,
-  Up = 2,
 }
 
 export const Header = memo(({ avatar, email, userName }: ProfileData) => {
@@ -38,7 +34,7 @@ export const Header = memo(({ avatar, email, userName }: ProfileData) => {
       })
       dispatch(packsActions.resetFilters())
     } catch (err) {
-      toast.error('Error logging out of account :(')
+      errorNotification(err)
     }
   }
 
@@ -53,14 +49,14 @@ export const Header = memo(({ avatar, email, userName }: ProfileData) => {
           <div className={s.userInfo}>
             <Typography
               className={s.userName}
-              onClick={() => navigate('/profile')}
+              onClick={() => navigate(PATH.profile)}
               variant={'subtitle1'}
             >
               {userName}
             </Typography>
             <Dropdown
               align={'end'}
-              sideOffset={avatar ? Direction.Down : Direction.Up}
+              sideOffset={2}
               trigger={
                 <button style={{ display: 'flex' }}>
                   <Avatar src={avatar} userName={userName} />
@@ -77,7 +73,7 @@ export const Header = memo(({ avatar, email, userName }: ProfileData) => {
           </div>
         )}
         {!userName && (
-          <Button as={Link} to={'/login'} variant={'secondary'}>
+          <Button as={Link} to={PATH.login} variant={'secondary'}>
             <Typography variant={'subtitle2'}>Login</Typography>
           </Button>
         )}
