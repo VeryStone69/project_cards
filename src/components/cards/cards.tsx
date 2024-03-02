@@ -1,5 +1,5 @@
-import { useCallback, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
 
 import { BackButton } from '@/components/ui/back-button'
 import { Button } from '@/components/ui/button'
@@ -14,106 +14,54 @@ import { AddNewCard } from '@/features/add-new-card/add-new-card'
 import { DeleteCardButton } from '@/features/delete-card-button/delete-card-button'
 import { DropdownCard } from '@/features/dropdown-card/dropdown-card'
 import { EditCard } from '@/features/edit-card/edit-card'
-import { useMeQuery } from '@/services/auth-api/auth'
 import { useGetCardsInDeckQuery } from '@/services/cards-api/cards-api'
-import {
-  useDeleteDeckMutation,
-  useGetDeckInfoQuery,
-  useUpdateDeckMutation,
-} from '@/services/decks-api/decks-api'
+import { useGetDeckInfoQuery } from '@/services/decks-api/decks-api'
 
 import s from './cards.module.scss'
 
 import defaultMask from '../../assets/images/not-img.jpg'
 import { ButtonFooter } from '@/features/button-footer'
 import { Modal } from '@/components/ui/modal'
-import { toast } from 'react-toastify'
 import { CreateAndModifyDeckForm } from '@/components/forms/create-and-modify-deck-form'
+import { useSearchByQuestion } from '@/components/cards/hooks/useSearchByQuestion'
+import { InitialLoader, PreLoader } from '@/components/ui/loader'
+import { useDeleteDeck } from '@/components/cards/hooks/useDeleteDeck'
+import { useEditDeck } from '@/components/cards/hooks/useEditDeck'
+import { useTableCardsInfo } from '@/components/cards/hooks/useTableCardsInfo'
 
 export const Cards = () => {
   const { id } = useParams()
-  const [deleteDeckModal, setDeleteDeckModal] = useState(false)
-  const [editDeckModal, setEditDeckModal] = useState(false)
+  const packId = id ?? ('' as string)
+
   const [itemPerPage, setItemPerPage] = useState(5)
   const [currentPageDecks, setCurrentPage] = useState(1)
-  const packId = id ?? ('' as string)
-  const { data: meData } = useMeQuery()
-
-  const { data: cardsData } = useGetCardsInDeckQuery({
-    packId,
-    params: { currentPage: currentPageDecks, itemsPerPage: itemPerPage },
-  })
+  const { searchName, setNameQuestion, name } = useSearchByQuestion()
+  const { deleteDeckModal, deleteDeckHandler, setDeleteDeckModal } = useDeleteDeck(packId)
+  const { setEditDeckModal, editDeckModal, editDeckHandler } = useEditDeck(packId)
   const { data: deckData } = useGetDeckInfoQuery({ id: packId })
-  const defaultValue = {
-    cover: deckData?.cover || null,
-    isPrivate: deckData?.isPrivate || false,
-    name: deckData?.name || '',
+  const { cardsColumns, isMyPack, defaultValue } = useTableCardsInfo(deckData)
+
+  const {
+    data: cardsData,
+    isFetching,
+    isLoading,
+  } = useGetCardsInDeckQuery({
+    packId,
+    params: {
+      currentPage: currentPageDecks,
+      itemsPerPage: itemPerPage,
+      question: name,
+    },
+  })
+
+  if (isLoading) {
+    return <PreLoader />
   }
-  const isMyPack = meData?.id === deckData?.userId
-  const navigate = useNavigate()
-
-  const [delDeck] = useDeleteDeckMutation()
-  const [updateDeck] = useUpdateDeckMutation()
-
-  const editDeckHandler = async (data: FormData) => {
-    try {
-      await toast.promise(updateDeck({ id: packId, data }).unwrap, {
-        pending: 'Editing a Deck!',
-        success: 'The deck has been edited!',
-      })
-    } catch (error) {
-      toast.error('Error editing deck :(')
-    }
-    setEditDeckModal(false)
-  }
-
-  const deleteDeckHandler = useCallback(async () => {
-    try {
-      await toast.promise(delDeck({ id: id as string }).unwrap, {
-        pending: 'Removing a deck!',
-        success: 'The deck has been removed!',
-      })
-    } catch (error) {
-      toast.error('Error when deleting deck :(')
-    }
-    setDeleteDeckModal(false)
-    navigate('/decks')
-  }, [delDeck, id])
-
-  const cardsColumns = [
-    {
-      key: 'name',
-      sortable: true,
-      title: 'Question',
-    },
-    {
-      key: 'answer',
-      sortable: true,
-      title: 'Answer',
-    },
-    {
-      key: 'updated',
-      sortable: true,
-      title: 'Last Updated',
-    },
-    {
-      key: 'grade',
-      sortable: true,
-      title: 'Grade',
-    },
-  ]
-
-  isMyPack
-    ? cardsColumns.push({
-        key: 'edit',
-        sortable: true,
-        title: '',
-      })
-    : false
 
   return (
     <section className={s.layout}>
-      <BackButton />
+      <BackButton text={'Return to deck page'} />
+      {isFetching && <InitialLoader />}
 
       <div className={s.section}>
         <div className={s.sectionHeader}>
@@ -169,11 +117,11 @@ export const Cards = () => {
         )}
 
         <TextField
-          clearField={() => {}}
-          onChange={() => {}}
+          clearField={() => setNameQuestion('')}
+          onChange={e => setNameQuestion(e.currentTarget.value)}
           placeholder={'Search by question'}
           type={'search'}
-          value={''}
+          value={searchName}
         />
       </div>
       <Table.Root className={s.table}>
