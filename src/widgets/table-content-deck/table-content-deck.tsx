@@ -29,7 +29,7 @@ export const TableContentDeck = memo(({ currentUserId, deck }: Props) => {
     <Table.Row key={deck.id}>
       <Table.Cell align={'left'} className={s.cell}>
         <Button as={Link} className={s.link} to={deck.id} variant={'link'}>
-          <img alt={'Pack cover'} className={s.iconTable} src={deck.cover ?? defaultMask} />
+          <img alt={'Pack cover'} className={s.iconTable} src={defaultMask || deck.cover} />
           <Typography as={'h3'} className={s.title} variant={'body2'}>
             {deck.name}
           </Typography>
