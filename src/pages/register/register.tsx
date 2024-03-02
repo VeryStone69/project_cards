@@ -20,7 +20,7 @@ export const Register = () => {
         pending: 'register user',
         success: `You are successful register!`,
       })
-      navigate(`${PATH.login}`)
+      navigate(PATH.login)
     } catch (err) {
       errorNotification(err)
     }
