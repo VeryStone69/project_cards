@@ -1,9 +1,16 @@
 import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
+import { useDeleteDeck } from '@/components/cards/hooks/useDeleteDeck'
+import { useEditDeck } from '@/components/cards/hooks/useEditDeck'
+import { useSearchByQuestion } from '@/components/cards/hooks/useSearchByQuestion'
+import { useTableCardsInfo } from '@/components/cards/hooks/useTableCardsInfo'
+import { CreateAndModifyDeckForm } from '@/components/forms/create-and-modify-deck-form'
 import { BackButton } from '@/components/ui/back-button'
 import { Button } from '@/components/ui/button'
 import { Dropdown } from '@/components/ui/dropdown'
+import { InitialLoader, PreLoader } from '@/components/ui/loader'
+import { Modal } from '@/components/ui/modal'
 import { Pagination } from '@/components/ui/pagination/Pagination'
 import { Rating } from '@/components/ui/rating'
 import { Table } from '@/components/ui/table'
@@ -11,6 +18,7 @@ import { TableHeader } from '@/components/ui/table-header'
 import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
 import { AddNewCard } from '@/features/add-new-card/add-new-card'
+import { ButtonFooter } from '@/features/button-footer'
 import { DeleteCardButton } from '@/features/delete-card-button/delete-card-button'
 import { DropdownCard } from '@/features/dropdown-card/dropdown-card'
 import { EditCard } from '@/features/edit-card/edit-card'
@@ -20,14 +28,6 @@ import { useGetDeckInfoQuery } from '@/services/decks-api/decks-api'
 import s from './cards.module.scss'
 
 import defaultMask from '../../assets/images/not-img.jpg'
-import { ButtonFooter } from '@/features/button-footer'
-import { Modal } from '@/components/ui/modal'
-import { CreateAndModifyDeckForm } from '@/components/forms/create-and-modify-deck-form'
-import { useSearchByQuestion } from '@/components/cards/hooks/useSearchByQuestion'
-import { InitialLoader, PreLoader } from '@/components/ui/loader'
-import { useDeleteDeck } from '@/components/cards/hooks/useDeleteDeck'
-import { useEditDeck } from '@/components/cards/hooks/useEditDeck'
-import { useTableCardsInfo } from '@/components/cards/hooks/useTableCardsInfo'
 
 export const Cards = () => {
   const { id } = useParams()
@@ -35,11 +35,11 @@ export const Cards = () => {
 
   const [itemPerPage, setItemPerPage] = useState(5)
   const [currentPageDecks, setCurrentPage] = useState(1)
-  const { searchName, setNameQuestion, name } = useSearchByQuestion()
-  const { deleteDeckModal, deleteDeckHandler, setDeleteDeckModal } = useDeleteDeck(packId)
-  const { setEditDeckModal, editDeckModal, editDeckHandler } = useEditDeck(packId)
+  const { name, searchName, setNameQuestion } = useSearchByQuestion()
+  const { deleteDeckHandler, deleteDeckModal, setDeleteDeckModal } = useDeleteDeck(packId)
+  const { editDeckHandler, editDeckModal, setEditDeckModal } = useEditDeck(packId)
   const { data: deckData } = useGetDeckInfoQuery({ id: packId })
-  const { cardsColumns, isMyPack, defaultValue } = useTableCardsInfo(deckData)
+  const { cardsColumns, defaultValue, isMyPack } = useTableCardsInfo(deckData)
 
   const {
     data: cardsData,
