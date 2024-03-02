@@ -1,17 +1,14 @@
 import { useDebounce } from '@/app/hooks'
-import { packsColumns } from '@/common/consts/packs-columns'
 import { InitialLoader, PreLoader } from '@/components/ui/loader'
 import { Pagination } from '@/components/ui/pagination/Pagination'
-import { Table } from '@/components/ui/table'
-import { TableHeader } from '@/components/ui/table-header'
 import { Typography } from '@/components/ui/typography'
 import { AddNewDeck } from '@/features/add-new-deck'
 import { FilterControl } from '@/features/filter-control'
 import { useFilterSetting } from '@/pages/packs/hooks/useFilterSetting'
 import { usePaginationDecks } from '@/pages/packs/hooks/usePaginationDecks'
+import { PacksTable } from '@/pages/packs/packs-table/packs-table'
 import { useMeQuery } from '@/services/auth-api/auth'
 import { useGetDecksQuery } from '@/services/decks-api/decks-api'
-import { TableContentDeck } from '@/widgets/table-content-deck'
 
 import s from './packs.module.scss'
 
@@ -82,22 +79,25 @@ export const Packs = () => {
           tabValue={tabValue}
         />
       </div>
-      <Table.Root className={s.table}>
-        <TableHeader columns={packsColumns} onSort={setSort} sort={sort} />
-        <Table.Body>
-          {decks?.items.map(decks => (
-            <TableContentDeck currentUserId={currentUserId} deck={decks} key={decks.id} />
-          ))}
-        </Table.Body>
-      </Table.Root>
-      <Pagination
-        className={s.pagination}
-        currentPage={currentPage}
-        itemsPerPage={itemsPerPage}
-        onChangeItemsPerPage={changeItemPerPage}
-        onChangePage={changePage}
-        totalPages={decks?.pagination.totalPages}
-      />
+      {decks?.items && (
+        <PacksTable
+          currentUserId={currentUserId}
+          items={decks?.items}
+          setSort={setSort}
+          sort={sort}
+        />
+      )}
+
+      {decks && decks.items.length >= 5 && (
+        <Pagination
+          className={s.pagination}
+          currentPage={currentPage}
+          itemsPerPage={itemsPerPage}
+          onChangeItemsPerPage={changeItemPerPage}
+          onChangePage={changePage}
+          totalPages={decks?.pagination.totalPages}
+        />
+      )}
     </div>
   )
 }

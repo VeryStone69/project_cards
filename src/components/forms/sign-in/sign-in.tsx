@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
+import { PATH } from '@/common/consts/routes'
 import { ControlledCheckbox } from '@/components/ui/controlled/controlled-checkbox/controlled-checkbox'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field/controlled-text-field'
 import { Typography } from '@/components/ui/typography'
@@ -54,7 +55,7 @@ export const SignIn = ({ className, onSubmit }: LoginProps) => {
         />
 
         <Typography className={s.forgot} variant={'body2'}>
-          <Link className={s.forgotLink} to={'/recovery'}>
+          <Link className={s.forgotLink} to={PATH.recover}>
             forgot password?
           </Link>
         </Typography>
@@ -68,7 +69,7 @@ export const SignIn = ({ className, onSubmit }: LoginProps) => {
         <Typography variant={'body2'}>Don`t have an account?</Typography>
 
         <Typography className={s.register} variant={'h2'}>
-          <Link className={s.registerLink} to={'/register'}>
+          <Link className={s.registerLink} to={PATH.register}>
             Register
           </Link>
         </Typography>

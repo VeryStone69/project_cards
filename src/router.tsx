@@ -85,7 +85,7 @@ export const router = createBrowserRouter([
             children: [
               {
                 element: <Login />,
-                path: `${PATH.login}`,
+                path: PATH.login,
               },
             ],
             element: <Outlet />,
@@ -118,10 +118,6 @@ function PrivateRoutes() {
 function RedirectSingInToDeck() {
   const { data, isError, isLoading } = useMeQuery()
   const isAuthenticated = (!isError && !isLoading && !!data) || false
-
-  if (isLoading) {
-    return <InitialLoader />
-  }
 
   return isAuthenticated ? <Navigate to={PATH.base} /> : <Outlet />
 }
