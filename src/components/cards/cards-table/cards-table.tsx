@@ -1,20 +1,20 @@
-import { TableHeader } from '@/components/ui/table-header'
-import { Table } from '@/components/ui/table'
 import defaultMask from '@/assets/images/not-img.jpg'
 import { Rating } from '@/components/ui/rating'
-import { EditCard } from '@/features/edit-card'
+import { Table } from '@/components/ui/table'
+import { TableHeader } from '@/components/ui/table-header'
+import { Typography } from '@/components/ui/typography'
 import { DeleteCardButton } from '@/features/delete-card-button'
+import { EditCard } from '@/features/edit-card'
 import { CardResponse } from '@/services/cards-api/cards-api-types'
 import { DecksItems } from '@/services/decks-api/decks-api.types'
-import { Typography } from '@/components/ui/typography'
 
 import s from '../cards.module.scss'
 
 type Props = {
   cardsColumns: CardColumn[]
   cardsData?: CardResponse
-  isMyPack: boolean
   deckData?: DecksItems
+  isMyPack: boolean
 }
 
 type CardColumn = {
