@@ -1,8 +1,9 @@
-import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
+import { CardsTable } from '@/components/cards/cards-table/cards-table'
 import { useDeleteDeck } from '@/components/cards/hooks/useDeleteDeck'
 import { useEditDeck } from '@/components/cards/hooks/useEditDeck'
+import { usePaginationCards } from '@/components/cards/hooks/usePaginationCards'
 import { useSearchByQuestion } from '@/components/cards/hooks/useSearchByQuestion'
 import { useTableCardsInfo } from '@/components/cards/hooks/useTableCardsInfo'
 import { CreateAndModifyDeckForm } from '@/components/forms/create-and-modify-deck-form'
@@ -12,6 +13,7 @@ import { Dropdown } from '@/components/ui/dropdown'
 import { InitialLoader, PreLoader } from '@/components/ui/loader'
 import { Modal } from '@/components/ui/modal'
 import { Pagination } from '@/components/ui/pagination/Pagination'
+import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
 import { AddNewCard } from '@/features/add-new-card/add-new-card'
 import { ButtonFooter } from '@/features/button-footer'
@@ -22,20 +24,20 @@ import { useGetDeckInfoQuery } from '@/services/decks-api/decks-api'
 import s from './cards.module.scss'
 
 import defaultMask from '../../assets/images/not-img.jpg'
-import { CardsTable } from '@/components/cards/cards-table/cards-table'
-import { TextField } from '@/components/ui/textField'
 
 export const Cards = () => {
   const { id } = useParams()
   const packId = id ?? ('' as string)
 
-  const [itemPerPage, setItemPerPage] = useState(5)
-  const [currentPageDecks, setCurrentPage] = useState(1)
-  const { name, searchName, setNameQuestion } = useSearchByQuestion()
+  const { name, searchName, searchParams, setNameQuestion, setSearchParams } = useSearchByQuestion()
   const { deleteDeckHandler, deleteDeckModal, setDeleteDeckModal } = useDeleteDeck(packId)
   const { editDeckHandler, editDeckModal, setEditDeckModal } = useEditDeck(packId)
   const { data: deckData } = useGetDeckInfoQuery({ id: packId })
   const { cardsColumns, defaultValue, isMyPack } = useTableCardsInfo(deckData)
+  const { changeItemPerPage, changePage, currentPage, itemsPerPage } = usePaginationCards(
+    searchParams,
+    setSearchParams
+  )
 
   const {
     data: cardsData,
@@ -44,11 +46,13 @@ export const Cards = () => {
   } = useGetCardsInDeckQuery({
     packId,
     params: {
-      currentPage: currentPageDecks,
-      itemsPerPage: itemPerPage,
+      currentPage,
+      itemsPerPage,
       question: name,
     },
   })
+
+  const show = !!cardsData?.items.length
 
   if (isLoading) {
     return <PreLoader />
@@ -99,9 +103,11 @@ export const Cards = () => {
           {isMyPack ? (
             <AddNewCard deckId={id} />
           ) : (
-            <Button as={Link} to={`learn`}>
-              <Typography variant={'subtitle2'}>Learn cards</Typography>
-            </Button>
+            show && (
+              <Button as={Link} to={`learn`}>
+                <Typography variant={'subtitle2'}>Learn cards</Typography>
+              </Button>
+            )
           )}
         </div>
         {deckData?.cover && (
@@ -113,13 +119,15 @@ export const Cards = () => {
         )}
       </div>
 
-      <TextField
-        clearField={() => setNameQuestion('')}
-        onChange={e => setNameQuestion(e.currentTarget.value)}
-        placeholder={'Search by question'}
-        type={'search'}
-        value={searchName}
-      />
+      {show && (
+        <TextField
+          clearField={() => setNameQuestion('')}
+          onChange={e => setNameQuestion(e.currentTarget.value)}
+          placeholder={'Search by question'}
+          type={'search'}
+          value={searchName}
+        />
+      )}
 
       {cardsData?.items && (
         <CardsTable
@@ -130,14 +138,14 @@ export const Cards = () => {
         />
       )}
 
-      {cardsData && cardsData?.items.length >= 5 && (
+      {cardsData && cardsData?.pagination.totalItems > 5 && (
         <Pagination
           className={s.pagination}
-          currentPage={currentPageDecks}
-          itemsPerPage={itemPerPage}
-          onChangeItemsPerPage={setItemPerPage}
-          onChangePage={setCurrentPage}
-          totalPages={cardsData?.pagination.totalItems}
+          currentPage={currentPage}
+          itemsPerPage={itemsPerPage}
+          onChangeItemsPerPage={changeItemPerPage}
+          onChangePage={changePage}
+          totalPages={cardsData?.pagination.totalPages}
         />
       )}
     </section>
