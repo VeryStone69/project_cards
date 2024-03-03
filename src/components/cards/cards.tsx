@@ -12,22 +12,18 @@ import { Dropdown } from '@/components/ui/dropdown'
 import { InitialLoader, PreLoader } from '@/components/ui/loader'
 import { Modal } from '@/components/ui/modal'
 import { Pagination } from '@/components/ui/pagination/Pagination'
-import { Rating } from '@/components/ui/rating'
-import { Table } from '@/components/ui/table'
-import { TableHeader } from '@/components/ui/table-header'
-import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
 import { AddNewCard } from '@/features/add-new-card/add-new-card'
 import { ButtonFooter } from '@/features/button-footer'
-import { DeleteCardButton } from '@/features/delete-card-button/delete-card-button'
 import { DropdownCard } from '@/features/dropdown-card/dropdown-card'
-import { EditCard } from '@/features/edit-card/edit-card'
 import { useGetCardsInDeckQuery } from '@/services/cards-api/cards-api'
 import { useGetDeckInfoQuery } from '@/services/decks-api/decks-api'
 
 import s from './cards.module.scss'
 
 import defaultMask from '../../assets/images/not-img.jpg'
+import { CardsTable } from '@/components/cards/cards-table/cards-table'
+import { TextField } from '@/components/ui/textField'
 
 export const Cards = () => {
   const { id } = useParams()
@@ -59,7 +55,7 @@ export const Cards = () => {
   }
 
   return (
-    <section className={s.layout}>
+    <section className={s.cardsPage}>
       <BackButton text={'Return to deck page'} />
       {isFetching && <InitialLoader />}
 
@@ -115,71 +111,35 @@ export const Cards = () => {
             src={deckData.cover ? deckData.cover : defaultMask}
           />
         )}
-
-        <TextField
-          clearField={() => setNameQuestion('')}
-          onChange={e => setNameQuestion(e.currentTarget.value)}
-          placeholder={'Search by question'}
-          type={'search'}
-          value={searchName}
-        />
       </div>
-      <Table.Root className={s.table}>
-        <TableHeader columns={cardsColumns} />
-        <Table.Body>
-          {cardsData?.items.map(items => {
-            return (
-              <Table.Row key={items.id}>
-                <Table.Cell className={s.questionCell}>
-                  <img
-                    alt={'Pack cover'}
-                    className={s.questionImg}
-                    src={items.questionImg ?? defaultMask}
-                  />
-                  <p>{items.question}</p>
-                </Table.Cell>
-                <Table.Cell className={s.answerCell}>
-                  <img
-                    alt={'Pack cover'}
-                    className={s.answerImg}
-                    src={items.answerImg ?? defaultMask}
-                  />
-                  <p>{items.answer}</p>
-                </Table.Cell>
-                <Table.Cell className={s.dateCell}>
-                  {new Date(items.updated).toLocaleDateString()}
-                </Table.Cell>
-                <Table.Cell className={s.rateCell}>
-                  <Rating rating={items.grade} />
-                </Table.Cell>
 
-                {isMyPack && (
-                  <Table.Cell>
-                    <div className={s.editButtons}>
-                      <EditCard
-                        answer={items.answer}
-                        answerImg={items.answerImg}
-                        cardId={items.id}
-                        question={items.question}
-                        questionImg={items.questionImg}
-                      />
-                      <DeleteCardButton id={items.id} name={deckData?.name || ''} />
-                    </div>
-                  </Table.Cell>
-                )}
-              </Table.Row>
-            )
-          })}
-        </Table.Body>
-      </Table.Root>
-      <Pagination
-        className={s.pagination}
-        currentPage={currentPageDecks}
-        itemsPerPage={itemPerPage}
-        onChangeItemsPerPage={setItemPerPage}
-        onChangePage={setCurrentPage}
-        totalPages={cardsData?.pagination.totalItems}
+      <TextField
+        clearField={() => setNameQuestion('')}
+        onChange={e => setNameQuestion(e.currentTarget.value)}
+        placeholder={'Search by question'}
+        type={'search'}
+        value={searchName}
       />
+
+      {cardsData?.items && (
+        <CardsTable
+          cardsColumns={cardsColumns}
+          cardsData={cardsData}
+          deckData={deckData}
+          isMyPack={isMyPack}
+        />
+      )}
+
+      {cardsData && cardsData?.items.length >= 5 && (
+        <Pagination
+          className={s.pagination}
+          currentPage={currentPageDecks}
+          itemsPerPage={itemPerPage}
+          onChangeItemsPerPage={setItemPerPage}
+          onChangePage={setCurrentPage}
+          totalPages={cardsData?.pagination.totalItems}
+        />
+      )}
     </section>
   )
 }
