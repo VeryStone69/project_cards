@@ -1,5 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
+
+import { store } from '@/services/store'
 import { FormValuesForgotPassword } from '@/utils/zod-resolvers/file-update-resolver'
 
 import { ForgotPassword } from './forgot-password'
@@ -14,12 +18,18 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const ForgotPasswordForm: Story = {
-  args: {} as any,
+  args: {},
   render: () => {
     const onSubmit = (data: FormValuesForgotPassword) => {
       console.log(data)
     }
 
-    return <ForgotPassword onSubmit={onSubmit} />
+    return (
+      <BrowserRouter>
+        <Provider store={store}>
+          <ForgotPassword onSubmit={onSubmit} />
+        </Provider>
+      </BrowserRouter>
+    )
   },
 }

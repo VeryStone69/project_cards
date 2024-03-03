@@ -7,8 +7,6 @@ import { DropdownCard } from '@/features/dropdown-card'
 import { DropDownUser } from '@/features/dropdown-user'
 import { Meta, StoryObj } from '@storybook/react'
 
-import s from '@/components/header/header.module.scss'
-
 const meta = {
   args: { align: 'center', className: '', trigger: '' },
   component: Dropdown,
@@ -41,7 +39,7 @@ export const DropDownWithUser: Story = {
           sideOffset={-7}
           trigger={
             <button>
-              <Avatar className={s.userPhoto} src={avatar} userName={data.name} />
+              <Avatar src={avatar} userName={data.name} />
             </button>
           }
         >
@@ -64,9 +62,11 @@ export const DropDownWithSvg: Story = {
   parameters: { layout: 'centered' },
   render: () => {
     return (
-      <Dropdown sideOffset={10}>
-        <DropdownCard setDeleteDeckModal={() => {}} setEditDeckModal={() => {}} />
-      </Dropdown>
+      <BrowserRouter>
+        <Dropdown align={'center'} sideOffset={10}>
+          <DropdownCard setDeleteDeckModal={() => {}} setEditDeckModal={() => {}} />
+        </Dropdown>
+      </BrowserRouter>
     )
   },
 }

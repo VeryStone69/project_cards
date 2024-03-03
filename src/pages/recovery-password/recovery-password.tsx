@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { htmlRecovery } from '@/common/consts/recovery-password'
+import { PATH } from '@/common/consts/routes'
 import { ForgotPassword } from '@/components/forms/forgot-password'
 import { Card } from '@/components/ui/card'
 import { useRecoverPasswordMutation } from '@/services/auth-api/auth'
@@ -20,7 +21,7 @@ export const RecoveryPassword = () => {
         pending: 'password recovery',
         success: 'follow the link in the message that was sent to your email',
       })
-      navigate(`/check-email/${data.email}`)
+      navigate(`${PATH.check}/${data.email}`)
     } catch (err) {
       errorNotification(err)
     }
