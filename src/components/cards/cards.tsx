@@ -53,7 +53,7 @@ export const Cards = () => {
   })
 
   const showLearnCard = !!cardsData?.items.length
-  const showSearch = !!deckData?.cardsCount
+  const showSearch = cardsData?.pagination.totalItems || false
 
   if (isLoading) {
     return <PreLoader />
