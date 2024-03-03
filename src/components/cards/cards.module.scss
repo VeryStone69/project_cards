@@ -2,12 +2,19 @@
   padding-bottom: 36px;
 }
 
+.noItems {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5rem;
+}
+
 .dropDown {
   margin-right: auto;
   margin-left: 1rem;
 }
 
-.layout {
+.cardsPage {
   margin-top: 100px;
 
   .section {
