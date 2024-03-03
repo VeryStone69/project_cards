@@ -8,6 +8,9 @@ import avatar from '../../../assets/images/avatar.jpg'
 const meta = {
   args: { userName: 'Alex' },
   component: Avatar,
+  parameters: {
+    layout: 'centered',
+  },
   tags: ['autodocs'],
   title: 'Components/ui/Avatar',
 } satisfies Meta<typeof Avatar>

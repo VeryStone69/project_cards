@@ -8,6 +8,9 @@ import { Modal } from './modal'
 
 const meta = {
   component: Modal,
+  parameters: {
+    layout: 'centered',
+  },
   tags: ['autodocs'],
   title: 'Components/ui/Modal',
 } satisfies Meta<typeof Modal>

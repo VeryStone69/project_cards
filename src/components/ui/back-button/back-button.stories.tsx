@@ -5,6 +5,9 @@ import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   component: BackButton,
+  parameters: {
+    layout: 'centered',
+  },
   tags: ['autodocs'],
   title: 'Components/ui/Back Button',
 } satisfies Meta<typeof BackButton>

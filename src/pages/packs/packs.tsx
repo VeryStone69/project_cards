@@ -87,8 +87,7 @@ export const Packs = () => {
           sort={sort}
         />
       )}
-
-      {decks && decks.items.length >= 5 && (
+      {decks && decks?.pagination.totalItems > 5 && (
         <Pagination
           className={s.pagination}
           currentPage={currentPage}
