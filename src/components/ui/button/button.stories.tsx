@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Icon } from '@/components/icon/Icon'
+import { Typography } from '@/components/ui/typography'
 
 import { Button } from './'
 
@@ -12,6 +13,9 @@ const meta = {
     },
   },
   component: Button,
+  parameters: {
+    layout: 'centered',
+  },
   tags: ['autodocs'],
   title: 'Components/ui/Button',
 } satisfies Meta<typeof Button>
@@ -31,8 +35,8 @@ export const PrimaryWithIcon: Story = {
   args: {
     children: (
       <>
-        <Icon name={'logout'} />
-        Button primary
+        <Icon fill={'white'} name={'logout'} size={'18px'} />
+        <Typography variant={'subtitle2'}>Button primary</Typography>
       </>
     ),
     disabled: false,

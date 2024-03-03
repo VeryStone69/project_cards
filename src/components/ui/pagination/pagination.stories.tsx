@@ -7,6 +7,9 @@ import { Pagination } from '@/components/ui/pagination/Pagination'
 const meta = {
   argTypes: {},
   component: Pagination,
+  parameters: {
+    layout: 'centered',
+  },
   tags: ['autodocs'],
   title: 'Components/ui/Pagination',
 } satisfies Meta<typeof Pagination>
