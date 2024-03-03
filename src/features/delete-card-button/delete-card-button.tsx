@@ -1,4 +1,5 @@
-import { memo, useCallback, useState } from 'react'
+import { memo, useState } from 'react'
+import { toast } from 'react-toastify'
 
 import { Icon } from '@/components/icon/Icon'
 import { IconButton } from '@/components/ui/icon-button'
@@ -14,11 +15,18 @@ type Props = {
 export const DeleteCardButton = memo(({ id, name }: Props) => {
   const [open, setOpen] = useState(false)
   const [delCard] = useDeleteCardMutation()
-  const deleteCard = useCallback(() => {
-    delCard({ id }).finally(() => {
-      setOpen(false)
-    })
-  }, [id])
+
+  const deleteCard = async () => {
+    try {
+      await toast.promise(delCard({ id }).unwrap, {
+        pending: 'Deleting a card!',
+        success: 'The card has been deleted!',
+      })
+    } catch (error) {
+      toast.error('Error deleting card :(')
+    }
+    setOpen(false)
+  }
 
   return (
     <>

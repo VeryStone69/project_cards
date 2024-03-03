@@ -52,7 +52,7 @@ export const Cards = () => {
     },
   })
 
-  const show = !!cardsData?.items.length
+  const showLearnCardButton = !!cardsData?.items.length
 
   if (isLoading) {
     return <PreLoader />
@@ -103,7 +103,7 @@ export const Cards = () => {
           {isMyPack ? (
             <AddNewCard deckId={id} />
           ) : (
-            show && (
+            showLearnCardButton && (
               <Button as={Link} to={`learn`}>
                 <Typography variant={'subtitle2'}>Learn cards</Typography>
               </Button>
@@ -119,7 +119,7 @@ export const Cards = () => {
         )}
       </div>
 
-      {show && (
+      {showLearnCardButton && (
         <TextField
           clearField={() => setNameQuestion('')}
           onChange={e => setNameQuestion(e.currentTarget.value)}
