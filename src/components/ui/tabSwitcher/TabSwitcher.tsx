@@ -9,13 +9,21 @@ export type Tabs = {
 }
 type TabSwitcherProps = {
   className?: string
+  disabled: boolean
   label?: string
   onValueChange: (value: string) => void
   tabs: Tabs[]
   value: string
 }
 
-export const TabSwitcher = ({ className, label, onValueChange, tabs, value }: TabSwitcherProps) => {
+export const TabSwitcher = ({
+  className,
+  disabled,
+  label,
+  onValueChange,
+  tabs,
+  value,
+}: TabSwitcherProps) => {
   const classes = '' || className
 
   return (
@@ -28,7 +36,7 @@ export const TabSwitcher = ({ className, label, onValueChange, tabs, value }: Ta
               return (
                 <TabsSwitcher.Trigger
                   className={s.TabsTrigger}
-                  disabled={tabs.disabled}
+                  disabled={disabled}
                   key={tabs.value}
                   value={tabs.value}
                 >
