@@ -27,6 +27,6 @@ export type CardsParams = {
   answer?: string
   currentPage?: number
   itemsPerPage?: number
-  orderBy?: string
+  orderBy?: null | string
   question?: string
 } | void
