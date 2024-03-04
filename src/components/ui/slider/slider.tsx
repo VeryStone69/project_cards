@@ -1,9 +1,11 @@
 import { Typography } from '@/components/ui/typography'
 import * as SliderRadix from '@radix-ui/react-slider'
+import { clsx } from 'clsx'
 
 import s from './slider.module.scss'
 
 type SliderProps = {
+  disabled: boolean
   label?: string
   max?: number
   min?: number
@@ -12,7 +14,10 @@ type SliderProps = {
   value: number[]
 }
 
-export const Slider = ({ label, max, min, onChange, step = 1, value }: SliderProps) => {
+export const Slider = ({ disabled, label, max, min, onChange, step = 1, value }: SliderProps) => {
+  const thumb = clsx(disabled && s.thumbDisabled, !disabled && s.thumb)
+  const range = clsx(disabled && s.rangeDisabled, !disabled && s.range)
+
   return (
     <Typography as={'label'} className={s.label} variant={'body2'}>
       {label}
@@ -24,6 +29,7 @@ export const Slider = ({ label, max, min, onChange, step = 1, value }: SliderPro
 
         <SliderRadix.Root
           className={s.line}
+          disabled={disabled}
           max={max}
           min={min}
           onValueChange={onChange}
@@ -31,14 +37,14 @@ export const Slider = ({ label, max, min, onChange, step = 1, value }: SliderPro
           value={value}
         >
           <SliderRadix.Track className={s.track}>
-            <SliderRadix.Range className={s.range} />
+            <SliderRadix.Range className={range} />
           </SliderRadix.Track>
 
-          <SliderRadix.Thumb aria-label={'Volume'} className={s.thumb}>
+          <SliderRadix.Thumb aria-label={'Volume'} className={thumb}>
             <div className={s.dot}></div>
           </SliderRadix.Thumb>
 
-          <SliderRadix.Thumb aria-label={'Volume'} className={s.thumb}>
+          <SliderRadix.Thumb aria-label={'Volume'} className={thumb}>
             <div className={s.dot}></div>
           </SliderRadix.Thumb>
         </SliderRadix.Root>
