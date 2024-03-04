@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { useAppDispatch } from '@/app/hooks'
+import { Logo } from '@/assets/illustrations/logo'
 import { PATH } from '@/common/consts/routes'
 import { Avatar } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
@@ -14,8 +15,6 @@ import { packsActions } from '@/store/packs-slice/packs-slice'
 import { errorNotification } from '@/utils/error-notification/error-notification'
 
 import s from './header.module.scss'
-
-import logo from '../../assets/images/logo.png'
 
 type ProfileData = {
   avatar?: string
@@ -43,7 +42,7 @@ export const Header = memo(({ avatar, email, userName }: ProfileData) => {
     <div className={s.root}>
       <div className={s.container}>
         <div className={s.logo} onClick={() => navigate(PATH.base)}>
-          <img alt={'logo'} src={logo} />
+          <Logo />
         </div>
 
         {userName && (
