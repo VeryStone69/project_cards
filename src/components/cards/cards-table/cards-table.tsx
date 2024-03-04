@@ -1,20 +1,18 @@
-import defaultMask from '@/assets/images/not-img.jpg'
-import { Rating } from '@/components/ui/rating'
+import { ContentTable } from '@/components/cards/content-table/content-table'
 import { Table } from '@/components/ui/table'
-import { TableHeader } from '@/components/ui/table-header'
+import { Sort, TableHeader } from '@/components/ui/table-header'
 import { Typography } from '@/components/ui/typography'
-import { DeleteCardButton } from '@/features/delete-card-button'
-import { EditCard } from '@/features/edit-card'
 import { CardResponse } from '@/services/cards-api/cards-api-types'
-import { DecksItems } from '@/services/decks-api/decks-api.types'
 
 import s from '../cards.module.scss'
 
 type Props = {
   cardsColumns: CardColumn[]
   cardsData?: CardResponse
-  deckData?: DecksItems
+  deckName?: string
   isMyPack: boolean
+  setSort: (sort: Sort) => void
+  sort: Sort
 }
 
 type CardColumn = {
@@ -23,7 +21,14 @@ type CardColumn = {
   title: string
 }
 
-export const CardsTable = ({ cardsColumns, cardsData, deckData, isMyPack }: Props) => {
+export const CardsTable = ({
+  cardsColumns,
+  cardsData,
+  deckName,
+  isMyPack,
+  setSort,
+  sort,
+}: Props) => {
   if (!cardsData?.items.length) {
     return (
       <div className={s.noItems}>
@@ -32,53 +37,15 @@ export const CardsTable = ({ cardsColumns, cardsData, deckData, isMyPack }: Prop
     )
   }
 
+  const columns = cardsColumns.filter(c => (isMyPack ? c : c.key !== 'controls'))
+
   return (
     <Table.Root className={s.table}>
-      <TableHeader columns={cardsColumns} />
+      <TableHeader columns={columns} onSort={setSort} sort={sort} />
       <Table.Body>
-        {cardsData?.items.map(items => {
-          return (
-            <Table.Row key={items.id}>
-              <Table.Cell className={s.questionCell}>
-                <img
-                  alt={'Pack cover'}
-                  className={s.questionImg}
-                  src={items.questionImg ?? defaultMask}
-                />
-                <p>{items.question}</p>
-              </Table.Cell>
-              <Table.Cell className={s.answerCell}>
-                <img
-                  alt={'Pack cover'}
-                  className={s.answerImg}
-                  src={items.answerImg ?? defaultMask}
-                />
-                <p>{items.answer}</p>
-              </Table.Cell>
-              <Table.Cell className={s.dateCell}>
-                {new Date(items.updated).toLocaleDateString()}
-              </Table.Cell>
-              <Table.Cell className={s.rateCell}>
-                <Rating rating={items.grade} />
-              </Table.Cell>
-
-              {isMyPack && (
-                <Table.Cell>
-                  <div className={s.editButtons}>
-                    <EditCard
-                      answer={items.answer}
-                      answerImg={items.answerImg}
-                      cardId={items.id}
-                      question={items.question}
-                      questionImg={items.questionImg}
-                    />
-                    <DeleteCardButton id={items.id} name={deckData?.name || ''} />
-                  </div>
-                </Table.Cell>
-              )}
-            </Table.Row>
-          )
-        })}
+        {cardsData?.items.map(items => (
+          <ContentTable deckName={deckName} isMyPack={isMyPack} items={items} key={items.id} />
+        ))}
       </Table.Body>
     </Table.Root>
   )

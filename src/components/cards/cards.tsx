@@ -29,7 +29,17 @@ export const Cards = () => {
   const { id } = useParams()
   const packId = id ?? ('' as string)
 
-  const { name, searchName, searchParams, setNameQuestion, setSearchParams } = useSearchByQuestion()
+  const {
+    name,
+    orderBy,
+    searchName,
+    searchParams,
+    setNameQuestion,
+    setSearchParams,
+    setSort,
+    sort,
+  } = useSearchByQuestion()
+
   const { deleteDeckHandler, deleteDeckModal, setDeleteDeckModal } = useDeleteDeck(packId)
   const { editDeckHandler, editDeckModal, setEditDeckModal } = useEditDeck(packId)
   const { data: deckData } = useGetDeckInfoQuery({ id: packId })
@@ -48,12 +58,14 @@ export const Cards = () => {
     params: {
       currentPage,
       itemsPerPage,
+      orderBy,
       question: name,
     },
   })
 
   const showLearnCard = !!cardsData?.items.length
   const showSearch = cardsData?.pagination.totalItems || name.length || false
+  const deckName = deckData?.name
 
   if (isLoading) {
     return <PreLoader />
@@ -134,8 +146,10 @@ export const Cards = () => {
         <CardsTable
           cardsColumns={cardsColumns}
           cardsData={cardsData}
-          deckData={deckData}
+          deckName={deckName}
           isMyPack={isMyPack}
+          setSort={setSort}
+          sort={sort}
         />
       )}
 

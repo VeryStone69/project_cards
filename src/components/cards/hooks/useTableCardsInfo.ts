@@ -1,3 +1,4 @@
+import { cardsColumns } from '@/common/consts/cards-columns'
 import { useMeQuery } from '@/services/auth-api/auth'
 import { DecksItems } from '@/services/decks-api/decks-api.types'
 
@@ -12,40 +13,9 @@ export const useTableCardsInfo = (data?: DecksItems) => {
     name: data?.name || '',
   }
 
-  const cardsColumns = [
-    {
-      key: 'name',
-      sortable: true,
-      title: 'Question',
-    },
-    {
-      key: 'answer',
-      sortable: true,
-      title: 'Answer',
-    },
-    {
-      key: 'updated',
-      sortable: true,
-      title: 'Last Updated',
-    },
-    {
-      key: 'grade',
-      sortable: true,
-      title: 'Grade',
-    },
-  ]
-
-  isMyPack
-    ? cardsColumns.push({
-        key: 'edit',
-        sortable: true,
-        title: '',
-      })
-    : false
-
   return {
     cardsColumns,
-    isMyPack,
     defaultValue,
+    isMyPack,
   }
 }
