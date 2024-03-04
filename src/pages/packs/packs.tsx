@@ -70,6 +70,7 @@ export const Packs = () => {
         </div>
         <FilterControl
           clearFilter={clearFilter}
+          disabled={isFetching}
           searchName={searchName}
           setSearchName={setName}
           setSliderValue={setSlider}
