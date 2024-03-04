@@ -74,8 +74,8 @@ export const Header = memo(({ avatar, email, userName }: ProfileData) => {
           </div>
         )}
         {!userName && (
-          <Button as={Link} to={PATH.login} variant={'secondary'}>
-            <Typography variant={'subtitle2'}>Login</Typography>
+          <Button as={Link} to={PATH.register} variant={'secondary'}>
+            <Typography variant={'subtitle2'}>Register</Typography>
           </Button>
         )}
       </div>
