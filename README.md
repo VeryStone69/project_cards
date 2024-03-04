@@ -1,5 +1,8 @@
 
 ## Flash Cards
+<p align="center">
+  <img src="src/assets/images/logo.png" style="width: 400px" alt="logo" />
+</p>
 ### Links:
 
 > [UI-kit](https://storybook-project-cards-three.vercel.app/) on Storybook

@@ -5,6 +5,7 @@ import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   args: {
+    disabled: false,
     searchName: '',
     setSearchName: () => {},
     setSliderValue: () => {},
@@ -33,6 +34,7 @@ export const FilterComponent: Story = {
           setTabValue('')
           setName('')
         }}
+        disabled={false}
         searchName={name}
         setSearchName={setName}
         setSliderValue={setSliderValue}

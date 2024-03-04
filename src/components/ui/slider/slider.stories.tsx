@@ -18,6 +18,7 @@ type Story = StoryObj<typeof meta>
 
 export const DefaultSlider: Story = {
   args: {
+    disabled: false,
     label: 'Page size',
     max: 100,
     min: 0,
