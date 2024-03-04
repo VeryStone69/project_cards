@@ -22,6 +22,7 @@ const tabs = [
 
 export const Tab: Story = {
   args: {
+    disabled: false,
     tabs,
     value: '',
   },
@@ -30,7 +31,12 @@ export const Tab: Story = {
 
     return (
       <>
-        <TabSwitcher onValueChange={value => setTitle(value)} tabs={tabs} value={title} />
+        <TabSwitcher
+          disabled={false}
+          onValueChange={value => setTitle(value)}
+          tabs={tabs}
+          value={title}
+        />
         <div style={{ marginTop: '10px' }}>TabSwitcher is {title}</div>
       </>
     )

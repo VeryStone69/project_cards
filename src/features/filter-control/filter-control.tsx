@@ -1,7 +1,8 @@
+import { tabs } from '@/common/consts/tab-switch'
 import { Icon } from '@/components/icon/Icon'
 import { Button } from '@/components/ui/button'
 import { Slider } from '@/components/ui/slider'
-import { Tabs, TabSwitcher } from '@/components/ui/tabSwitcher'
+import { TabSwitcher } from '@/components/ui/tabSwitcher'
 import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
 
@@ -9,6 +10,7 @@ import s from './filter-control.module.scss'
 
 type FilterControlProps = {
   clearFilter: () => void
+  disabled: boolean
   searchName: string
   setSearchName: (value: string) => void
   setSliderValue: (newValue: number[]) => void
@@ -19,6 +21,7 @@ type FilterControlProps = {
 }
 export const FilterControl = ({
   clearFilter,
+  disabled,
   searchName,
   setSearchName,
   setSliderValue,
@@ -27,11 +30,6 @@ export const FilterControl = ({
   sliderValue,
   tabValue,
 }: FilterControlProps) => {
-  const tabs: Tabs[] = [
-    { disabled: false, title: 'My decks', value: 'my' },
-    { disabled: false, title: 'All decks', value: 'all' },
-  ]
-
   const onChangeSwitcher = (value: string) => {
     setTabValue(value)
   }
@@ -41,28 +39,38 @@ export const FilterControl = ({
       <TextField
         className={s.textField}
         clearField={() => setSearchName('')}
+        disabled={disabled}
         onChange={e => setSearchName(e.currentTarget.value)}
         placeholder={'Search by name'}
         type={'search'}
         value={searchName}
       />
       <TabSwitcher
+        disabled={disabled}
         label={'Show decks'}
         onValueChange={onChangeSwitcher}
         tabs={tabs}
         value={tabValue}
       />
       <Slider
+        disabled={disabled}
         label={'Number of cards in the deck'}
         max={sliderMaxValue}
         min={0}
         onChange={setSliderValue}
         value={sliderValue}
       />
-      <Button className={s.clearButton} onClick={clearFilter} variant={'secondary'}>
-        <Icon className={s.icon} name={'remove'} size={'16px'} />
-        <Typography variant={'subtitle2'}> Clear filters</Typography>
-      </Button>
+      <Typography variant={'subtitle2'}>
+        <Button
+          className={s.clearButton}
+          disabled={disabled}
+          onClick={clearFilter}
+          variant={'secondary'}
+        >
+          <Icon className={s.icon} name={'remove'} size={'16px'} />
+          Clear filters
+        </Button>
+      </Typography>
     </div>
   )
 }
