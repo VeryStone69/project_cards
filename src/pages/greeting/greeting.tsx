@@ -1,5 +1,6 @@
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
+import { PATH } from '@/common/consts/routes'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
@@ -29,10 +30,10 @@ export const Greeting = () => {
         </Button>
 
         <Typography className={s.rules} variant={'caption'}>
-          You can also learn the{' '}
-          <a className={s.rulesLink} href={'/rules'}>
+          You can also learn the
+          <Link className={s.rulesLink} to={PATH.rules}>
             rules
-          </a>{' '}
+          </Link>
           of the game.
         </Typography>
       </Card>
