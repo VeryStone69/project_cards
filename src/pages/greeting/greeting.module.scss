@@ -23,8 +23,11 @@
     }
 
     .rules {
+      font-size: 0.8rem;
+
       .rulesLink {
         all: unset;
+        margin: 0.2rem;
         text-decoration: underline;
 
         &:hover {
