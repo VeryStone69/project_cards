@@ -18,11 +18,11 @@ export const ContentTable = ({ deckName = '', isMyPack, items }: Props) => {
   return (
     <Table.Row key={items.id}>
       <Table.Cell className={s.questionCell}>
-        <img alt={'Pack cover'} className={s.questionImg} src={items.questionImg ?? defaultMask} />
+        <img alt={'Pack cover'} className={s.questionImg} src={items.questionImg || defaultMask} />
         <p>{items.question}</p>
       </Table.Cell>
       <Table.Cell className={s.answerCell}>
-        <img alt={'Pack cover'} className={s.answerImg} src={items.answerImg ?? defaultMask} />
+        <img alt={'Pack cover'} className={s.answerImg} src={items.answerImg || defaultMask} />
         <p>{items.answer}</p>
       </Table.Cell>
       <Table.Cell className={s.dateCell}>{formatDate(items.updated)}</Table.Cell>

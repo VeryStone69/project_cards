@@ -1,9 +1,9 @@
 import { baseApi } from '@/services/base-api/base-api'
 import {
   CardRate,
-  CardResponse,
   CardsItem,
   CardsParams,
+  CardsResponse,
 } from '@/services/cards-api/cards-api-types'
 
 export const cardsApi = baseApi.injectEndpoints({
@@ -27,6 +27,33 @@ export const cardsApi = baseApi.injectEndpoints({
       }),
       deleteCard: builder.mutation<void, { id: string }>({
         invalidatesTags: ['Cards'],
+        async onQueryStarted({ id }, { dispatch, getState, queryFulfilled }) {
+          let patchResult: any
+
+          for (const { endpointName, originalArgs } of cardsApi.util.selectInvalidatedBy(
+            getState(),
+            [{ type: 'Cards' }]
+          )) {
+            if (endpointName !== 'getCardsInDeck') {
+              continue
+            }
+            patchResult = dispatch(
+              cardsApi.util.updateQueryData(endpointName, originalArgs, draft => {
+                const index = draft?.items?.findIndex(card => card.id === id)
+
+                if (index !== undefined && index !== -1) {
+                  draft?.items?.splice(index, 1)
+                }
+              })
+            )
+          }
+
+          try {
+            await queryFulfilled
+          } catch {
+            patchResult?.undo()
+          }
+        },
         query: arg => ({
           body: arg,
           method: 'DELETE',
@@ -34,7 +61,7 @@ export const cardsApi = baseApi.injectEndpoints({
         }),
       }),
       getCardsInDeck: builder.query<
-        CardResponse,
+        CardsResponse,
         {
           packId: string
           params: CardsParams
@@ -64,6 +91,41 @@ export const cardsApi = baseApi.injectEndpoints({
         }
       >({
         invalidatesTags: ['Cards'],
+        async onQueryStarted({ cardId, ...data }, { dispatch, getState, queryFulfilled }) {
+          let patchResult: any
+
+          const parsedData: Record<string, any> = {}
+
+          data.data.forEach((value, key) => {
+            parsedData[key] = value
+          })
+
+          for (const { endpointName, originalArgs } of cardsApi.util.selectInvalidatedBy(
+            getState(),
+            [{ type: 'Cards' }]
+          )) {
+            if (endpointName !== 'getCardsInDeck') {
+              continue
+            }
+            patchResult = dispatch(
+              cardsApi.util.updateQueryData(endpointName, originalArgs, draft => {
+                const index = draft?.items?.findIndex(card => card.id === cardId)
+
+                if (index === -1) {
+                  return
+                }
+
+                Object.assign(draft?.items[index], parsedData)
+              })
+            )
+          }
+
+          try {
+            await queryFulfilled
+          } catch {
+            patchResult?.undo()
+          }
+        },
         query: ({ cardId, data }) => ({
           body: data,
           method: 'PATCH',
