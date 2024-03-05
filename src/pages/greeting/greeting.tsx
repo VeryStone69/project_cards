@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 
+import { Icon } from '@/components/icon/Icon'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
@@ -16,6 +17,8 @@ export const Greeting = () => {
           Welcome to the web version of the popular game Flash Cards!
         </Typography>
 
+        <Icon height={'100px'} name={'logo'} viewBox={'0 0 1400 2200'} width={'60px'} />
+
         <Typography className={s.description} variant={'subtitle2'}>
           Quiz Decks is a web version of the Flash Cards game. It offers a convenient and
           interactive way to play without the need for physical cards. It allows users to create
@@ -25,7 +28,7 @@ export const Greeting = () => {
         </Typography>
 
         <Button onClick={() => navigate('/login')} variant={'primary'}>
-          <Typography variant={'subtitle2'}>Login to start training!</Typography>
+          <Typography variant={'subtitle2'}> Login to start training!</Typography>
         </Button>
 
         <Typography className={s.rules} variant={'caption'}>
