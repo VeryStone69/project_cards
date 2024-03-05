@@ -28,7 +28,7 @@ export const Greeting = () => {
         </Typography>
 
         <Button onClick={() => navigate('/login')} variant={'primary'}>
-          <Typography variant={'subtitle2'}> Login to start training!</Typography>
+          <Typography variant={'subtitle2'}> Login to start learning!</Typography>
         </Button>
 
         <Typography className={s.rules} variant={'caption'}>
