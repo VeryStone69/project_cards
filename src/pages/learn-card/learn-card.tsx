@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 
-import { BackButton } from '@/components/ui/back-button'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { RadioGroup } from '@/components/ui/radioGroup'
@@ -13,15 +12,17 @@ import s from './learn-card.module.scss'
 
 export const LearnCard = () => {
   const { id } = useParams()
+  const deckId = id as string
+  const navigate = useNavigate()
 
-  const { data: cardData } = useGetLearnCardQuery({ id: id ? id : '' })
-
-  const { data: deckData } = useGetDeckInfoQuery({ id: id ? id : '' })
+  const { data: deckData } = useGetDeckInfoQuery({ id: deckId })
+  const { data: cardData } = useGetLearnCardQuery({ id: deckId })
 
   const [nextQuestion] = useUpdateRateCardMutation()
 
   const nextQuestionHandler = () => {
-    nextQuestion({ cardId: cardData ? cardData.id : '', grade: 1 })
+    nextQuestion({ cardId: cardData ? cardData?.id : '', grade: 1 })
+    setShowAnswer(!showAnswer)
   }
 
   const [showAnswer, setShowAnswer] = useState(false)
@@ -33,14 +34,30 @@ export const LearnCard = () => {
     { title: 'Knew the answer', value: '5' },
   ]
 
+  const questionImg = cardData?.questionImg
+  const answerImg = cardData?.answerImg
+
   return (
     <>
-      <BackButton className={s.backButton} />
+      <Button
+        as={Link}
+        className={s.backButton}
+        onClick={() => navigate(-1)}
+        relative={'path'}
+        to={'..'}
+        variant={'secondary'}
+      >
+        <Typography className={s.text} variant={'body2'}>
+          End learning
+        </Typography>
+      </Button>
       {!showAnswer && (
         <Card className={s.card}>
           <Typography variant={'h1'}>{`Learn "${deckData?.name}"`}</Typography>
           <div className={s.info}>
+            {questionImg && <img alt={questionImg} className={s.questionImg} src={questionImg} />}
             <Typography variant={'subtitle1'}>{`Questions: ${cardData?.question}`}</Typography>
+
             <Typography variant={'subtitle2'}>{`Count of attempts: ${cardData?.shots}`}</Typography>
           </div>
           <Button
@@ -58,11 +75,14 @@ export const LearnCard = () => {
         <Card className={s.card}>
           <Typography variant={'h1'}>{`Learn "${deckData?.name}"`}</Typography>
           <div className={s.info}>
-            <Typography variant={'subtitle1'}>{`Questions:  ${cardData?.question}`}</Typography>
+            {questionImg && <img alt={questionImg} className={s.questionImg} src={questionImg} />}
+            <Typography variant={'subtitle1'}>{`Questions: ${cardData?.question}`}</Typography>
             <Typography variant={'subtitle2'}>{`Count of attempts: ${cardData?.shots}`}</Typography>
           </div>
           <div className={s.answer}>
+            {answerImg && <img alt={'answerImg'} className={s.answerImg} src={answerImg} />}
             <Typography variant={'subtitle1'}>{`Answer: ${cardData?.answer}`}</Typography>
+
             <Typography variant={'subtitle1'}>{`Rate yourself:`}</Typography>
           </div>
           <div className={s.rate}>
