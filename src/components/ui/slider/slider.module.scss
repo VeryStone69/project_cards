@@ -5,16 +5,18 @@
   align-items: flex-start;
   justify-content: flex-start;
 
+
   .body {
     display: flex;
     flex-direction: row;
-    gap: 0 0;
+    gap:12px;
     align-items: center;
     justify-content: space-between;
 
-    width: 15.6rem;
-    height: 2.1rem;
-    margin-top: 5px;
+    width: 100%;
+
+
+
 
     .value {
       display: grid;
@@ -37,9 +39,9 @@
 
       display: flex;
       flex-direction: row;
-      gap: 0 0;
       align-items: center;
       justify-content: space-between;
+
 
       width: 9.6rem;
       height: 1rem;
@@ -49,6 +51,7 @@
 
         flex-grow: 1;
 
+        width: 100%;
         height: 4px;
 
         background-color: var(--color-accent-900);
@@ -61,7 +64,15 @@
           border-radius: 9999px;
         }
       }
+
+      @media screen and (width <= 768px) {
+        width: 100%;
+      }
     }
+  }
+
+  @media screen and (width <= 768px) {
+    width: 100%;
   }
 }
 
