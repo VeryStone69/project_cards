@@ -1,9 +1,10 @@
+import { useNavigate } from 'react-router-dom'
+
+import { PATH } from '@/common/consts/routes'
 import { Icon } from '@/components/icon/Icon'
 import { DropdownItemContent } from '@/components/ui/dropdown'
 
 import s from './dropdown-card.module.scss'
-import { useNavigate } from 'react-router-dom'
-import { PATH } from '@/common/consts/routes'
 
 type Props = {
   setDeleteDeckModal: (value: boolean) => void
@@ -12,6 +13,7 @@ type Props = {
 
 export const DropdownCard = ({ setDeleteDeckModal, setEditDeckModal }: Props) => {
   const navigate = useNavigate()
+
   return (
     <div className={s.dropdownCard}>
       <DropdownItemContent

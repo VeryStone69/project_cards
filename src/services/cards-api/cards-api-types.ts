@@ -1,9 +1,10 @@
 import { DecksPagination } from '@/services/decks-api/decks-api.types'
 
-export type CardResponse = {
+export type CardsResponse = {
   items: CardsItem[]
   pagination: DecksPagination
 }
+
 export type CardsItem = {
   answer: string
   answerImg: string
@@ -21,6 +22,7 @@ export type CardsItem = {
 }
 export type CardRate = {
   cardId: string
+  deckId: string
   grade: number
 }
 export type CardsParams = {
@@ -30,3 +32,8 @@ export type CardsParams = {
   orderBy?: null | string
   question?: string
 } | void
+
+export type RandomCardRequest = {
+  id: string
+  previousCardId?: string
+}

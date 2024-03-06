@@ -2,13 +2,13 @@ import { ContentTable } from '@/components/cards/content-table/content-table'
 import { Table } from '@/components/ui/table'
 import { Sort, TableHeader } from '@/components/ui/table-header'
 import { Typography } from '@/components/ui/typography'
-import { CardResponse } from '@/services/cards-api/cards-api-types'
+import { CardsResponse } from '@/services/cards-api/cards-api-types'
 
 import s from '../cards.module.scss'
 
 type Props = {
   cardsColumns: CardColumn[]
-  cardsData?: CardResponse
+  cardsData?: CardsResponse
   deckName?: string
   isMyPack: boolean
   setSort: (sort: Sort) => void
