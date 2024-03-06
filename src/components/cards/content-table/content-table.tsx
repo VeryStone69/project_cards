@@ -1,10 +1,10 @@
-import defaultMask from '@/assets/images/not-img.jpg'
 import { Rating } from '@/components/ui/rating'
 import { Table } from '@/components/ui/table'
 import { DeleteCardButton } from '@/features/delete-card-button'
 import { EditCard } from '@/features/edit-card'
 import { CardsItem } from '@/services/cards-api/cards-api-types'
 import { formatDate } from '@/utils/format-date'
+import { clsx } from 'clsx'
 
 import s from '@/components/cards/cards.module.scss'
 
@@ -15,25 +15,30 @@ type Props = {
 }
 
 export const ContentTable = ({ deckName = '', isMyPack, items }: Props) => {
+  const question = clsx(items.questionImg ? s.questionWithImg : s.question)
+  const answer = clsx(items.answerImg ? s.answerWithImg : s.answer)
+
+  const showAnswer =
+    items.grade !== 5
+      ? items.answer
+          .split('')
+          .map(() => '*')
+          .join('')
+      : items.answer
+
   return (
     <Table.Row key={items.id}>
       <Table.Cell className={s.questionCell}>
         {items.questionImg && (
-          <img
-            alt={'Pack cover'}
-            className={s.questionImg}
-            src={items.questionImg || defaultMask}
-          />
+          <img alt={'Pack cover'} className={s.questionImg} src={items.questionImg} />
         )}
-        <p className={items.questionImg ? s.questionWithImg : s.question}>{items.question}</p>
+        <p className={question}>{items.question}</p>
       </Table.Cell>
       <Table.Cell className={s.answerCell}>
         {items.answerImg && (
-          <img alt={'Pack cover'} className={s.answerImg} src={items.answerImg || defaultMask} />
+          <img alt={'Pack cover'} className={s.answerImg} src={items.answerImg} />
         )}
-        <p className={items.answerImg ? s.answerWithImg : s.answer}>
-          {items.grade !== 5 ? '*****' : items.answer}
-        </p>
+        <p className={answer}>{showAnswer}</p>
       </Table.Cell>
       <Table.Cell className={s.dateCell}>{formatDate(items.updated)}</Table.Cell>
       <Table.Cell className={s.rateCell}>

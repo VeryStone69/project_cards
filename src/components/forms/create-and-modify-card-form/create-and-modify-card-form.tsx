@@ -24,7 +24,6 @@ type Props<C extends ElementType = 'div'> = {
   onSubmit: (data: FormData) => void
   onValueChange: (value: string) => void
   options: Option[]
-  selectOption: string
 } & Omit<ComponentPropsWithoutRef<C>, 'defaultValue' | 'onSubmit'>
 
 export const CreateAndModifyCardForm = ({
@@ -33,9 +32,7 @@ export const CreateAndModifyCardForm = ({
   onSubmit,
   onValueChange,
   options,
-  selectOption,
 }: Props) => {
-  const picture = selectOption === '2'
   const {
     answerCover,
     answerImgOpen,
@@ -52,6 +49,7 @@ export const CreateAndModifyCardForm = ({
 
   const answerImgClasses = clsx(s.image, answerCover && s.hover, answerImgOpen && s.open)
   const questionImgClasses = clsx(s.image, questionCover && s.hover, questionImgOpen && s.open)
+  const picture = !!defaultValue?.answerImg || !!defaultValue?.questionImg
 
   const onSubmitHandler: SubmitHandler<UpdatesCardsType> = async data => {
     const form = new FormData()
