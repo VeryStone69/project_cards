@@ -1,5 +1,12 @@
 .navigation {
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.navigationBlock{
+  display: flex;
   align-items: center;
   justify-content: center;
 }
