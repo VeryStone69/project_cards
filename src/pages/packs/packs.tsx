@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import { useDebounce } from '@/app/hooks'
 import { InitialLoader, PreLoader } from '@/components/ui/loader'
 import { Pagination } from '@/components/ui/pagination/Pagination'
@@ -9,6 +11,7 @@ import { usePaginationDecks } from '@/pages/packs/hooks/usePaginationDecks'
 import { PacksTable } from '@/pages/packs/packs-table/packs-table'
 import { useMeQuery } from '@/services/auth-api/auth'
 import { useGetDecksQuery } from '@/services/decks-api/decks-api'
+import { TableContentDeckMobile } from '@/widgets/table-content-deck-mobile/table-content-deck-mobile'
 
 import s from './packs.module.scss'
 
@@ -40,6 +43,12 @@ export const Packs = () => {
 
   const name = useDebounce(searchName)
   const authorId = tabValue === 'my' ? currentUserId : undefined
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
+  const handleResize = () => {
+    setIsMobile(window.innerWidth <= 768)
+  }
+
+  window.addEventListener('resize', handleResize)
   const {
     data: decks,
     isFetching,
@@ -63,7 +72,7 @@ export const Packs = () => {
       {isFetching && <InitialLoader />}
       <div className={s.setting}>
         <div className={s.addCard}>
-          <Typography as={'h1'} variant={'large'}>
+          <Typography as={'h1'} className={s.title} variant={'large'}>
             List of decks
           </Typography>
           <AddNewDeck />
@@ -80,7 +89,10 @@ export const Packs = () => {
           tabValue={tabValue}
         />
       </div>
-      {decks?.items && (
+      {decks?.items && isMobile && (
+        <TableContentDeckMobile currentUserId={currentUserId} items={decks?.items} />
+      )}
+      {decks?.items && !isMobile && (
         <PacksTable
           currentUserId={currentUserId}
           items={decks?.items}
@@ -88,6 +100,7 @@ export const Packs = () => {
           sort={sort}
         />
       )}
+
       {decks && decks?.pagination.totalItems > 5 && (
         <Pagination
           className={s.pagination}

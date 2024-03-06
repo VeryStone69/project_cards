@@ -5,6 +5,9 @@
   right: 0;
   left: 0;
 
+  display: flex;
+  justify-content: center;
+
   height: 65px;
 
   background-color: var(--color-dark-700);
@@ -29,9 +32,11 @@
   align-items: center;
   justify-content: space-between;
 
+  width: 100%;
   max-width: 1140px;
   height: 100%;
-  margin: 0 auto;
+  margin-right: 1rem;
+  margin-left: 1rem;
 
   .userInfo {
     display: flex;
@@ -75,4 +80,3 @@
   display: flex;
   gap: 10px;
 }
-

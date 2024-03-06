@@ -5,6 +5,7 @@ import { clsx } from 'clsx'
 import s from './slider.module.scss'
 
 type SliderProps = {
+  className?: string
   disabled: boolean
   label?: string
   max?: number
@@ -14,18 +15,30 @@ type SliderProps = {
   value: number[]
 }
 
-export const Slider = ({ disabled, label, max, min, onChange, step = 1, value }: SliderProps) => {
+export const Slider = ({
+  className,
+  disabled,
+  label,
+  max,
+  min,
+  onChange,
+  step = 1,
+  value,
+}: SliderProps) => {
   const thumb = clsx(disabled && s.thumbDisabled, !disabled && s.thumb)
   const range = clsx(disabled && s.rangeDisabled, !disabled && s.range)
+  const labelStyle = clsx(s.label, className)
 
   return (
-    <Typography as={'label'} className={s.label} variant={'body2'}>
+    <Typography as={'label'} className={labelStyle} variant={'body2'}>
       {label}
 
       <div className={s.body}>
-        <Typography as={'h3'} className={s.value} variant={'body1'}>
-          {value[0]}
-        </Typography>
+        <div>
+          <Typography as={'h3'} className={s.value} variant={'body1'}>
+            {value[0]}
+          </Typography>
+        </div>
 
         <SliderRadix.Root
           className={s.line}
