@@ -1,5 +1,6 @@
 import { Typography } from '@/components/ui/typography'
 import * as TabsSwitcher from '@radix-ui/react-tabs'
+import { clsx } from 'clsx'
 
 import s from './tabSwitcher.module.scss'
 export type Tabs = {
@@ -24,7 +25,7 @@ export const TabSwitcher = ({
   tabs,
   value,
 }: TabSwitcherProps) => {
-  const classes = '' || className
+  const classes = clsx(className)
 
   return (
     <>
