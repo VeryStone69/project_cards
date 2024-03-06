@@ -45,32 +45,37 @@ export const FilterControl = ({
         type={'search'}
         value={searchName}
       />
-      <TabSwitcher
-        disabled={disabled}
-        label={'Show decks'}
-        onValueChange={onChangeSwitcher}
-        tabs={tabs}
-        value={tabValue}
-      />
-      <Slider
-        disabled={disabled}
-        label={'Number of cards in the deck'}
-        max={sliderMaxValue}
-        min={0}
-        onChange={setSliderValue}
-        value={sliderValue}
-      />
-      <Typography variant={'subtitle2'}>
-        <Button
-          className={s.clearButton}
+
+      <div className={s.setting}>
+        <TabSwitcher
+          className={s.tabSwitcher}
           disabled={disabled}
-          onClick={clearFilter}
-          variant={'secondary'}
-        >
-          <Icon className={s.icon} name={'remove'} size={'16px'} />
-          Clear filters
-        </Button>
-      </Typography>
+          label={'Show decks'}
+          onValueChange={onChangeSwitcher}
+          tabs={tabs}
+          value={tabValue}
+        />
+        <Slider
+          className={s.slider}
+          disabled={disabled}
+          label={'Number of cards in the deck'}
+          max={sliderMaxValue}
+          min={0}
+          onChange={setSliderValue}
+          value={sliderValue}
+        />
+        <Typography className={s.clearButtonBlock} variant={'subtitle2'}>
+          <Button
+            className={s.clearButton}
+            disabled={disabled}
+            onClick={clearFilter}
+            variant={'secondary'}
+          >
+            <Icon className={s.icon} name={'remove'} size={'16px'} />
+            Clear filters
+          </Button>
+        </Typography>
+      </div>
     </div>
   )
 }
