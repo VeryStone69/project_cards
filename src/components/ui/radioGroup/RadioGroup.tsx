@@ -2,14 +2,16 @@ import { Typography } from '@/components/ui/typography'
 import * as RadioGroupRadix from '@radix-ui/react-radio-group'
 
 import s from './radioGroup.module.scss'
-type Option = {
-  title: string
+
+export type Option = {
+  label: string
   value: string
 }
-type RadioGroupProps = {
+export type RadioGroupProps = {
   className?: string
   disabled?: boolean
   error?: string
+  name?: string
   onValueChange?: (value: string) => void
   options: Option[]
   value?: string
@@ -22,7 +24,7 @@ export const RadioGroup = ({
   options,
   value,
 }: RadioGroupProps) => {
-  const stylesRadiogroup = disabled ? '' : s.styleUnchecked
+  const stylesRadioGroup = disabled ? '' : s.styleUnchecked
   const styleTypography = disabled ? s.typographyDisabled : s.typography
 
   return (
@@ -42,9 +44,9 @@ export const RadioGroup = ({
           >
             <RadioGroupRadix.Item className={s.item} value={radioButton.value}>
               <RadioGroupRadix.Indicator className={s.indicator} />
-              <div className={stylesRadiogroup}></div>
+              <div className={stylesRadioGroup}></div>
             </RadioGroupRadix.Item>
-            {radioButton.title}
+            {radioButton.label}
           </Typography>
         )
       })}

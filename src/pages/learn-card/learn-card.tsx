@@ -3,10 +3,12 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { RadioGroup } from '@/components/ui/radioGroup'
 import { Typography } from '@/components/ui/typography'
-import { useGetLearnCardQuery, useUpdateRateCardMutation } from '@/services/cards-api/cards-api'
+import { ShowAnswer } from '@/pages/learn-card/show-answer/show-answer'
+import { ShowQuestion } from '@/pages/learn-card/show-question/show-question'
+import { useGetLearnCardQuery, useRateCardMutation } from '@/services/cards-api/cards-api'
 import { useGetDeckInfoQuery } from '@/services/decks-api/decks-api'
+import { errorNotification } from '@/utils/error-notification/error-notification'
 
 import s from './learn-card.module.scss'
 
@@ -18,24 +20,25 @@ export const LearnCard = () => {
   const { data: deckData } = useGetDeckInfoQuery({ id: deckId })
   const { data: cardData } = useGetLearnCardQuery({ id: deckId })
 
-  const [nextQuestion] = useUpdateRateCardMutation()
+  const [rateCard] = useRateCardMutation()
 
-  const nextQuestionHandler = () => {
-    nextQuestion({ cardId: cardData ? cardData?.id : '', grade: 1 })
-    setShowAnswer(!showAnswer)
+  const nextQuestionHandler = async (data: { grade: string }) => {
+    try {
+      await rateCard({
+        cardId: cardData!.id,
+        deckId,
+        grade: +data.grade,
+      }).unwrap()
+    } catch (error) {
+      errorNotification(error)
+    }
+    setShowAnswer(false)
   }
 
   const [showAnswer, setShowAnswer] = useState(false)
-  const rate = [
-    { title: 'Did you know', value: '1' },
-    { title: 'Forgot', value: '2' },
-    { title: 'A lot of through', value: '3' },
-    { title: 'Confused', value: '4' },
-    { title: 'Knew the answer', value: '5' },
-  ]
 
-  const questionImg = cardData?.questionImg
-  const answerImg = cardData?.answerImg
+  const isShowQuestionImg = cardData?.questionImg
+  const isShowAnswerImg = cardData?.answerImg
 
   return (
     <>
@@ -51,48 +54,26 @@ export const LearnCard = () => {
           End learning
         </Typography>
       </Button>
-      {!showAnswer && (
-        <Card className={s.card}>
-          <Typography variant={'h1'}>{`Learn "${deckData?.name}"`}</Typography>
-          <div className={s.info}>
-            {questionImg && <img alt={questionImg} className={s.questionImg} src={questionImg} />}
-            <Typography variant={'subtitle1'}>{`Questions: ${cardData?.question}`}</Typography>
 
-            <Typography variant={'subtitle2'}>{`Count of attempts: ${cardData?.shots}`}</Typography>
-          </div>
-          <Button
-            fullWidth
-            onClick={() => {
-              setShowAnswer(!showAnswer)
-            }}
-            variant={'primary'}
-          >
+      <Card className={s.card}>
+        <Typography variant={'h1'}>{`Learn "${deckData?.name}"`}</Typography>
+        <ShowQuestion
+          isShowQuestionImg={isShowQuestionImg}
+          question={cardData?.question}
+          shots={cardData?.shots}
+        />
+        {showAnswer ? (
+          <ShowAnswer
+            answer={cardData?.answer}
+            isShowAnswerImg={isShowAnswerImg}
+            nextQuestionHandler={nextQuestionHandler}
+          />
+        ) : (
+          <Button fullWidth onClick={() => setShowAnswer(true)}>
             <Typography variant={'subtitle2'}>Show answer</Typography>
           </Button>
-        </Card>
-      )}
-      {showAnswer && (
-        <Card className={s.card}>
-          <Typography variant={'h1'}>{`Learn "${deckData?.name}"`}</Typography>
-          <div className={s.info}>
-            {questionImg && <img alt={questionImg} className={s.questionImg} src={questionImg} />}
-            <Typography variant={'subtitle1'}>{`Questions: ${cardData?.question}`}</Typography>
-            <Typography variant={'subtitle2'}>{`Count of attempts: ${cardData?.shots}`}</Typography>
-          </div>
-          <div className={s.answer}>
-            {answerImg && <img alt={'answerImg'} className={s.answerImg} src={answerImg} />}
-            <Typography variant={'subtitle1'}>{`Answer: ${cardData?.answer}`}</Typography>
-
-            <Typography variant={'subtitle1'}>{`Rate yourself:`}</Typography>
-          </div>
-          <div className={s.rate}>
-            <RadioGroup options={rate} />
-          </div>
-          <Button fullWidth onClick={nextQuestionHandler} variant={'primary'}>
-            <Typography variant={'subtitle2'}>Next question</Typography>
-          </Button>
-        </Card>
-      )}
+        )}
+      </Card>
     </>
   )
 }

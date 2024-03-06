@@ -1,4 +1,5 @@
 .card {
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -6,9 +7,23 @@
   justify-content: space-between;
 
   width: 420px;
-  height: max-content;
+  height: 80vh;
   margin: 90px auto 0;
   padding: 36px;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--color-dark-300);
+    border-radius: 3px;
+
+    &:hover {
+      background-color: var(--color-dark-100);
+    }
+  }
 
   .info {
     width: 100%;
