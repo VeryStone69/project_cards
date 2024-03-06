@@ -58,6 +58,7 @@ export const EditCard = ({ answer, answerImg, cardId = '', question, questionImg
           onSubmit={updateCardOnSubmit}
           onValueChange={setOption}
           options={options}
+          selectOption={option}
         />
       </Modal>
 
