@@ -1,7 +1,7 @@
 import { RateCardForm } from '@/components/forms/rate-card'
 import { Typography } from '@/components/ui/typography'
 
-import s from '@/pages/learn-card/learn-card.module.scss'
+import s from './show-answer.module.scss'
 
 type Props = {
   answer?: string
@@ -16,7 +16,7 @@ export const ShowAnswer = ({ answer, isShowAnswerImg, nextQuestionHandler }: Pro
         {isShowAnswerImg && <img alt={'answerImg'} className={s.answerImg} src={isShowAnswerImg} />}
         <Typography variant={'subtitle1'}>{`Answer: ${answer}`}</Typography>
 
-        <Typography variant={'subtitle1'}>{`Rate yourself:`}</Typography>
+        <Typography variant={'subtitle1'} className={s.rate}>{`Rate yourself:`}</Typography>
       </div>
       <RateCardForm onSubmit={nextQuestionHandler} />
     </>
