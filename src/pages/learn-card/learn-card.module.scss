@@ -1,4 +1,5 @@
 .card {
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -10,23 +11,28 @@
   margin: 90px auto 0;
   padding: 36px;
 
-  .info {
-    width: 100%;
-    text-align: left;
+  &::-webkit-scrollbar {
+    width: 8px;
+    background-color: transparent;
   }
 
-  .answer {
-    width: 100%;
-    text-align: left;
-  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--color-dark-300);
+    border-radius: 3px;
 
-  .rate {
-    width: 100%;
-    text-align: left;
+    &:hover {
+      background-color: var(--color-dark-100);
+    }
   }
 }
 
 .backButton {
   position: relative;
-  top: 100px;
+  top: 125px;
+  left: 80%;
+
+  width: max-content;
+
+  text-decoration: none;
 }
+

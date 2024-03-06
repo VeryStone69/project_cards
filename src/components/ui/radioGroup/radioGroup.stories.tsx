@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 
 import { RadioGroup } from './'
+
 const meta = {
   component: RadioGroup,
   parameters: { layout: 'centered' },
@@ -16,18 +17,18 @@ type Story = StoryObj<typeof meta>
 export const RadioGroupUncontrolled: Story = {
   args: {
     options: [
-      { title: 'Radio button 1', value: '1' },
-      { title: 'Radio button 2', value: '2' },
-      { title: 'Radio button 3', value: '3' },
+      { label: 'Radio button 1', value: '1' },
+      { label: 'Radio button 2', value: '2' },
+      { label: 'Radio button 3', value: '3' },
     ],
   },
 }
 export const RadioGroupControlled: Story = {
   args: {
     options: [
-      { title: 'Radio button 1', value: '1' },
-      { title: 'Radio button 2', value: '2' },
-      { title: 'Radio button 3', value: '3' },
+      { label: 'Radio button 1', value: '1' },
+      { label: 'Radio button 2', value: '2' },
+      { label: 'Radio button 3', value: '3' },
     ],
   },
   render: () => {
@@ -38,9 +39,9 @@ export const RadioGroupControlled: Story = {
         <RadioGroup
           onValueChange={value => setValue(value)}
           options={[
-            { title: 'Radio button 1', value: '1' },
-            { title: 'Radio button 2', value: '2' },
-            { title: 'Radio button 3', value: '3' },
+            { label: 'Radio button 1', value: '1' },
+            { label: 'Radio button 2', value: '2' },
+            { label: 'Radio button 3', value: '3' },
           ]}
           value={value}
         />
@@ -56,9 +57,9 @@ export const RadioGroupDisabled: Story = {
   args: {
     disabled: true,
     options: [
-      { title: 'Radio button 1', value: '1' },
-      { title: 'Radio button 2', value: '2' },
-      { title: 'Radio button 3', value: '3' },
+      { label: 'Radio button 1', value: '1' },
+      { label: 'Radio button 2', value: '2' },
+      { label: 'Radio button 3', value: '3' },
     ],
     value: '1',
   },
@@ -69,9 +70,9 @@ export const RadioGroupWithError: Story = {
     disabled: true,
     error: 'Error',
     options: [
-      { title: 'Radio button 1', value: '1' },
-      { title: 'Radio button 2', value: '2' },
-      { title: 'Radio button 3', value: '3' },
+      { label: 'Radio button 1', value: '1' },
+      { label: 'Radio button 2', value: '2' },
+      { label: 'Radio button 3', value: '3' },
     ],
     value: '1',
   },

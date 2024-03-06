@@ -28,14 +28,13 @@ type Props<C extends ElementType = 'div'> = {
 } & Omit<ComponentPropsWithoutRef<C>, 'defaultValue' | 'onSubmit'>
 
 export const CreateAndModifyCardForm = ({
+  selectOption,
   defaultValue,
   onCancel,
   onSubmit,
   onValueChange,
   options,
-  selectOption,
 }: Props) => {
-  const picture = selectOption === '2'
   const {
     answerCover,
     answerImgOpen,
@@ -52,6 +51,9 @@ export const CreateAndModifyCardForm = ({
 
   const answerImgClasses = clsx(s.image, answerCover && s.hover, answerImgOpen && s.open)
   const questionImgClasses = clsx(s.image, questionCover && s.hover, questionImgOpen && s.open)
+
+  const formWithPicture =
+    defaultValue?.answerImg || defaultValue?.questionImg || selectOption === '2'
 
   const onSubmitHandler: SubmitHandler<UpdatesCardsType> = async data => {
     const form = new FormData()
@@ -90,16 +92,16 @@ export const CreateAndModifyCardForm = ({
         label={'Choose a question format'}
         onValueChange={onValueChange}
         options={options}
-        placeholder={picture ? 'Picture' : 'Text'}
+        placeholder={formWithPicture ? 'Picture' : 'Text'}
       />
       <div className={s.inputBlock}>
         <Typography variant={'subtitle2'}>
-          {picture
+          {formWithPicture
             ? 'Upload pictures as questions and answers:'
             : 'Write a question and give the correct answer'}
         </Typography>
         <ControlledTextField control={control} label={'Question:'} name={'question'} />
-        {picture && (
+        {formWithPicture && (
           <>
             <img
               alt={'notImg'}
@@ -138,7 +140,7 @@ export const CreateAndModifyCardForm = ({
 
         <ControlledTextField control={control} label={'Answer:'} name={'answer'} />
 
-        {picture && (
+        {formWithPicture && (
           <>
             <img
               alt={'notImg'}

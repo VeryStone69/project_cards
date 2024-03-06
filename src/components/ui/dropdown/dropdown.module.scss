@@ -3,7 +3,9 @@ button {
 }
 
 .DropdownMenuContent {
+  position: relative;
   z-index: 100;
+  top: 5px;
 
   padding: 12px;
 
@@ -24,7 +26,6 @@ button {
 .DropdownMenuTwoArrow {
   position: relative;
   z-index: 1;
-  top: -1px;
   left: 0;
 
   fill: var(--color-dark-700);
