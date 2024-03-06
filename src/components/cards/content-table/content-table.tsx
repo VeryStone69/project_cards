@@ -1,13 +1,14 @@
 import { Rating } from '@/components/ui/rating'
 import { Table } from '@/components/ui/table'
+import { Typography } from '@/components/ui/typography'
 import { DeleteCardButton } from '@/features/delete-card-button'
 import { EditCard } from '@/features/edit-card'
 import { CardsItem } from '@/services/cards-api/cards-api-types'
 import { formatDate } from '@/utils/format-date'
-import noImage from '../../../assets/images/not-img.jpg'
 
 import s from '@/components/cards/cards.module.scss'
-import { Typography } from '@/components/ui/typography'
+
+import noImage from '../../../assets/images/not-img.jpg'
 
 type Props = {
   deckName?: string
@@ -23,7 +24,7 @@ export const ContentTable = ({ deckName = '', isMyPack, items }: Props) => {
       <Table.Cell className={s.questionCell}>
         <div className={s.cell}>
           <img alt={'Pack cover'} className={s.cover} src={items.questionImg || noImage} />
-          <Typography as={'h3'} variant={'body2'} className={s.question}>
+          <Typography as={'h3'} className={s.question} variant={'body2'}>
             {items.question}
           </Typography>
         </div>
@@ -31,7 +32,7 @@ export const ContentTable = ({ deckName = '', isMyPack, items }: Props) => {
       <Table.Cell className={s.answerCell}>
         <div className={s.cell}>
           <img alt={'Pack cover'} className={s.cover} src={items.answerImg || noImage} />
-          <Typography as={'h3'} variant={'body2'} className={s.answer}>
+          <Typography as={'h3'} className={s.answer} variant={'body2'}>
             {showAnswer}
           </Typography>
         </div>
