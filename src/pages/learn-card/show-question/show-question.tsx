@@ -1,6 +1,6 @@
 import { Typography } from '@/components/ui/typography'
 
-import s from '@/pages/learn-card/learn-card.module.scss'
+import s from './show-question.module.scss'
 
 type Props = {
   isShowQuestionImg?: string
@@ -14,6 +14,7 @@ export const ShowQuestion = ({ isShowQuestionImg, question, shots }: Props) => {
       {isShowQuestionImg && (
         <img alt={isShowQuestionImg} className={s.questionImg} src={isShowQuestionImg} />
       )}
+
       <Typography variant={'subtitle1'}>{`Questions: ${question}`}</Typography>
       <Typography variant={'subtitle2'}>{`Count of attempts: ${shots}`}</Typography>
     </div>
