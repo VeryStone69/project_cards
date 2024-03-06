@@ -22,6 +22,7 @@ export type CardsItem = {
 }
 export type CardRate = {
   cardId: string
+  deckId: string
   grade: number
 }
 export type CardsParams = {

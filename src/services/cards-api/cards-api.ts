@@ -5,10 +5,32 @@ import {
   CardsParams,
   CardsResponse,
 } from '@/services/cards-api/cards-api-types'
+import { errorNotification } from '@/utils/error-notification/error-notification'
 
 export const cardsApi = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
+      RateCard: builder.mutation<CardsItem, CardRate>({
+        invalidatesTags: ['Cards'],
+        async onQueryStarted({ deckId }, { dispatch, queryFulfilled }) {
+          try {
+            const { data: newCard } = await queryFulfilled
+
+            dispatch(
+              cardsApi.util.updateQueryData('getLearnCard', { id: deckId }, () => {
+                return newCard
+              })
+            )
+          } catch (error) {
+            errorNotification(error)
+          }
+        },
+        query: ({ deckId, ...rest }) => ({
+          body: rest,
+          method: 'POST',
+          url: `v1/decks/${deckId}/learn`,
+        }),
+      }),
       createCardsInDeck: builder.mutation<
         Omit<CardsItem, 'grade'>,
         {
@@ -132,14 +154,6 @@ export const cardsApi = baseApi.injectEndpoints({
           url: `v1/cards/${cardId}`,
         }),
       }),
-      updateRateCard: builder.mutation<CardsItem, CardRate>({
-        invalidatesTags: ['Cards'],
-        query: arg => ({
-          body: arg,
-          method: 'POST',
-          url: `v1/decks/${arg.cardId}/learn`,
-        }),
-      }),
     }
   },
 })
@@ -152,5 +166,5 @@ export const {
   useLazyGetCardsInDeckQuery,
   useLazyGetLearnCardQuery,
   useUpdateCardMutation,
-  useUpdateRateCardMutation,
+  useRateCardMutation,
 } = cardsApi
