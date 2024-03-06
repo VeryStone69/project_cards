@@ -39,12 +39,23 @@
 
     .questionCell {
       width: 365px;
+      height: 70.05px;
 
       .questionImg {
         max-width: 70px;
         height: 50px;
         object-fit: cover;
         border-radius: 3px;
+      }
+
+      .question {
+        position: relative;
+        top: 0;
+      }
+
+      .questionWithImg {
+        position: relative;
+        top: -20px;
       }
     }
   }
@@ -56,12 +67,23 @@
 
   .answerCell {
     width: 365px;
+    height: 70.05px;
 
     .answerImg {
       max-width: 70px;
       height: 50px;
       object-fit: cover;
       border-radius: 3px;
+    }
+
+    .answer {
+      position: relative;
+      top: 0;
+    }
+
+    .answerWithImg {
+      position: relative;
+      top: -20px;
     }
   }
 
