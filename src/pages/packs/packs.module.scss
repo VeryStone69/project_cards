@@ -3,7 +3,7 @@
   padding-bottom: 1.5rem;
 
   @media screen and (width <= 576px) {
-   flex-direction: column;
+    flex-direction: column;
     gap: 1rem;
   }
 }
@@ -19,10 +19,9 @@
 .addCard {
   display: flex;
   justify-content: space-between;
-
 }
 
-.title{
+.title {
   @media screen and (width <= 576px) {
     font-size: var(--font-size-xl);
   }

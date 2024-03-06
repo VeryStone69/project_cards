@@ -8,12 +8,11 @@
 .table {
   margin-bottom: 1.5rem;
 
-
   @media screen and (width <= 768px) {
     width: 100%;
     border: none;
 
-    :hover{
+    :hover {
       background: none;
     }
   }

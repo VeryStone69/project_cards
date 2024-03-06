@@ -2,15 +2,12 @@
   display: flex;
   align-items: flex-end;
 
-
   @media screen and (width <= 420px) {
     flex-direction: column;
-
   }
 
   @media screen and (width <= 1024px) {
     flex-direction: column;
-
   }
 }
 
@@ -20,7 +17,7 @@
   margin-right: auto;
 
   @media screen and (width <= 1024px) {
-   width: 100%;
+    width: 100%;
     max-width: 100%;
     margin-top: 1rem;
   }
@@ -35,35 +32,31 @@
   }
 
   @media screen and (width <= 768px) {
-   align-self: center;
-    max-width:100%;
+    align-self: center;
+    max-width: 100%;
   }
-
 }
 
-.slider{
-
-
+.slider {
   @media screen and (width <= 768px) {
-
   }
 }
 
-.tabSwitcher{
+.tabSwitcher {
   @media screen and (width <= 1024px) {
-    align-self:  flex-start;
+    align-self: flex-start;
   }
 
   @media screen and (width <= 768px) {
-flex-shrink: 1;
+    flex-shrink: 1;
     width: 100%;
   }
 }
 
-.setting{
-    display: flex;
+.setting {
+  display: flex;
   flex-grow: 1;
-  align-items:flex-end ;
+  align-items: flex-end;
   justify-content: space-between;
 
   margin-left: 24px;
@@ -78,15 +71,14 @@ flex-shrink: 1;
     flex-wrap: wrap;
     gap: 1rem;
   }
-
 }
 
-.clearButtonBlock{
+.clearButtonBlock {
   align-self: flex-end;
 
   @media screen and (width <= 768px) {
     display: flex;
     flex-grow: 1;
-    justify-content:  space-between;
+    justify-content: space-between;
   }
 }

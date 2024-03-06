@@ -5,18 +5,14 @@
   align-items: flex-start;
   justify-content: flex-start;
 
-
   .body {
     display: flex;
     flex-direction: row;
-    gap:12px;
+    gap: 12px;
     align-items: center;
     justify-content: space-between;
 
     width: 100%;
-
-
-
 
     .value {
       display: grid;
@@ -41,7 +37,6 @@
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
-
 
       width: 9.6rem;
       height: 1rem;
@@ -124,7 +119,6 @@
     transform: translate(-50%, -50%) scale(1);
     opacity: 0.3;
     background-color: var(--color-accent-500);
-
   }
 
   .dot {
@@ -141,8 +135,6 @@
   }
 }
 
-
-
 .thumbDisabled {
   cursor: pointer;
 
@@ -154,7 +146,7 @@
   width: 16px;
   height: 16px;
 
-  background-color:var(--color-accent-900);
+  background-color: var(--color-accent-900);
   border-radius: 10px;
   outline: none;
 
@@ -183,7 +175,7 @@
   &:focus-visible::after {
     transform: translate(-50%, -50%) scale(1);
     opacity: 0.3;
-    background-color:var(--color-accent-900);
+    background-color: var(--color-accent-900);
   }
 
   .dot {
@@ -198,5 +190,4 @@
     background-color: var(--color-light-900);
     border-radius: 50%;
   }
-
 }
