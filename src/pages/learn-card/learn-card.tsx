@@ -50,9 +50,7 @@ export const LearnCard = () => {
         to={'..'}
         variant={'secondary'}
       >
-        <Typography className={s.text} variant={'body2'}>
-          End learning
-        </Typography>
+        <Typography variant={'subtitle2'}>End learning</Typography>
       </Button>
 
       <Card className={s.card}>
