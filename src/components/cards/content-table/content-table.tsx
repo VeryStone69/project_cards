@@ -18,12 +18,22 @@ export const ContentTable = ({ deckName = '', isMyPack, items }: Props) => {
   return (
     <Table.Row key={items.id}>
       <Table.Cell className={s.questionCell}>
-        <img alt={'Pack cover'} className={s.questionImg} src={items.questionImg || defaultMask} />
-        <p>{items.question}</p>
+        {items.questionImg && (
+          <img
+            alt={'Pack cover'}
+            className={s.questionImg}
+            src={items.questionImg || defaultMask}
+          />
+        )}
+        <p className={items.questionImg ? s.questionWithImg : s.question}>{items.question}</p>
       </Table.Cell>
       <Table.Cell className={s.answerCell}>
-        <img alt={'Pack cover'} className={s.answerImg} src={items.answerImg || defaultMask} />
-        <p>{items.answer}</p>
+        {items.answerImg && (
+          <img alt={'Pack cover'} className={s.answerImg} src={items.answerImg || defaultMask} />
+        )}
+        <p className={items.answerImg ? s.answerWithImg : s.answer}>
+          {items.grade !== 5 ? '*****' : items.answer}
+        </p>
       </Table.Cell>
       <Table.Cell className={s.dateCell}>{formatDate(items.updated)}</Table.Cell>
       <Table.Cell className={s.rateCell}>
