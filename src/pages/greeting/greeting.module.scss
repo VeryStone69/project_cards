@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   margin-top: 100px;
-
 }
 
 .greetingCard {
@@ -31,7 +30,7 @@
 
     .rulesLink {
       all: unset;
-    margin: 0.4rem;
+      margin: 0.4rem;
       text-decoration: underline;
       transition: 0.5s;
 
@@ -43,7 +42,7 @@
   }
 }
 
-.logo{
+.logo {
   transition: 0.5s;
 
   &:hover {
@@ -51,6 +50,6 @@
   }
 }
 
-.login{
+.login {
   margin: 1rem;
 }
