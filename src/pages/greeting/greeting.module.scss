@@ -2,39 +2,54 @@
   display: flex;
   justify-content: center;
   margin-top: 100px;
+}
 
-  .greetingCard {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+.greetingCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 
-    width: 50%;
-    height: 70vh;
-    padding: 36px;
+  width: 100%;
+  max-width: 420px;
+  height: max-content;
+  margin-bottom: 3rem;
+  padding: 28px;
 
-    .title {
-      font-size: 30px;
-      text-align: center;
-    }
+  .title {
+    font-size: 30px;
+    text-align: center;
+  }
 
-    .description {
-      text-align: center;
-    }
+  .description {
+    text-align: center;
+  }
 
-    .rules {
-      font-size: 0.8rem;
+  .rules {
+    font-size: 0.8rem;
 
-      .rulesLink {
-        all: unset;
-        margin: 0.2rem;
-        text-decoration: underline;
+    .rulesLink {
+      all: unset;
+      margin: 0.4rem;
+      text-decoration: underline;
+      transition: 0.5s;
 
-        &:hover {
-          cursor: pointer;
-          color: var(--color-accent-500);
-        }
+      &:hover {
+        cursor: pointer;
+        color: var(--color-accent-500);
       }
     }
   }
+}
+
+.logo {
+  transition: 0.5s;
+
+  &:hover {
+    filter: drop-shadow(0 0 6px var(--color-accent-100));
+  }
+}
+
+.login {
+  margin: 1rem;
 }
