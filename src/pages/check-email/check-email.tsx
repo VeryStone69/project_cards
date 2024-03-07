@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
 
-import styles from './check-email.module.scss'
+import s from './check-email.module.scss'
 
 import checkEmail from '../../assets/images/check-email.png'
 
@@ -12,14 +12,14 @@ export const CheckEmail = () => {
   const { email } = useParams()
 
   return (
-    <Card className={styles.card}>
-      <Typography className={styles.title} variant={'h1'}>
+    <Card className={s.card}>
+      <Typography className={s.title} variant={'h1'}>
         Check your email
       </Typography>
 
       <img alt={'check-email'} src={checkEmail} />
 
-      <Typography className={styles.text} variant={'body2'}>
+      <Typography className={s.text} variant={'body2'}>
         We’ve sent an Email with instructions to {email}
       </Typography>
 
