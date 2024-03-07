@@ -1,7 +1,7 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-import { Icon } from '@/components/icon/Icon'
 import { PATH } from '@/common/consts/routes'
+import { Icon } from '@/components/icon/Icon'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
@@ -9,8 +9,6 @@ import { Typography } from '@/components/ui/typography'
 import s from './greeting.module.scss'
 
 export const Greeting = () => {
-  const navigate = useNavigate()
-
   return (
     <div className={s.wrapper}>
       <Card className={s.greetingCard}>
@@ -18,7 +16,13 @@ export const Greeting = () => {
           Welcome to the web version of the popular game Flash Cards!
         </Typography>
 
-        <Icon height={'100px'} name={'logo'} viewBox={'0 0 1400 2200'} width={'60px'} />
+        <Icon
+          className={s.logo}
+          height={'100px'}
+          name={'logo'}
+          viewBox={'0 0 1400 2200'}
+          width={'60px'}
+        />
 
         <Typography className={s.description} variant={'subtitle2'}>
           Quiz Decks is a web version of the Flash Cards game. It offers a convenient and
@@ -28,7 +32,7 @@ export const Greeting = () => {
           improve their knowledge and remember important information.
         </Typography>
 
-        <Button onClick={() => navigate('/login')} variant={'primary'}>
+        <Button as={Link} className={s.login} to={PATH.login} variant={'primary'}>
           <Typography variant={'subtitle2'}>Login to start training!</Typography>
         </Button>
 
