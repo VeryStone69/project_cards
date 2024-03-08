@@ -27,6 +27,7 @@ export const AddNewCard = ({ deckId = '' }: Props) => {
   ]
 
   const addCardOnSubmit = async (data: FormData) => {
+    setOpenModal(false)
     try {
       await toast.promise(createCard({ data, id: deckId }), {
         pending: 'Creating a card!',
@@ -35,7 +36,6 @@ export const AddNewCard = ({ deckId = '' }: Props) => {
     } catch (error) {
       toast.error('Error creating card :(')
     }
-    setOpenModal(false)
   }
 
   return (
