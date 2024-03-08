@@ -38,6 +38,7 @@ export const EditCard = ({ answer, answerImg, cardId = '', question, questionImg
   }
 
   const updateCardOnSubmit = async (data: FormData) => {
+    setOpenModal(false)
     try {
       await toast.promise(updateCard({ cardId, data }), {
         pending: 'Updating a card!',
@@ -46,7 +47,6 @@ export const EditCard = ({ answer, answerImg, cardId = '', question, questionImg
     } catch (error) {
       toast.error('Error updating card :(')
     }
-    setOpenModal(false)
   }
 
   return (
