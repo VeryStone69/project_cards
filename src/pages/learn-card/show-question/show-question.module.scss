@@ -1,6 +1,7 @@
 .info {
-  width: 100%;
-  text-align: left;
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
 
   .questionImg {
     width: 100%;
