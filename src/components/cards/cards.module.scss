@@ -1,5 +1,10 @@
 .pagination {
   padding-bottom: 36px;
+
+  @media screen and (width <= 576px) {
+    flex-direction: column;
+    gap: 1rem;
+  }
 }
 
 .noItems {
@@ -17,55 +22,26 @@
 .cardsPage {
   margin-top: 100px;
   padding-bottom: 20px;
+  
+}
 
-  .section {
-    margin-top: 34px;
+.table {
+  margin: 24px 0;
+}
 
-    .sectionHeader {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      margin-bottom: 24px;
-    }
 
-    .packsImg {
-      height: 100px;
-      margin: 15px 0 24px;
-    }
-  }
+.section {
+  margin-top: 34px;
 
-  .table {
-    margin: 24px 0;
-
-    .questionCell,
-    .answerCell {
-      width: 365px;
-
-      .cell {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-
-        .cover {
-          max-width: 70px;
-          height: 50px;
-          object-fit: cover;
-          border-radius: 3px;
-        }
-      }
-    }
-  }
-
-  .editButtons {
+  .sectionHeader {
     display: flex;
-    justify-content: space-around;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 24px;
   }
 
-  .dateCell {
-    width: 140px;
-  }
-
-  .rateCell {
-    width: 170px;
+  .packsImg {
+    height: 100px;
+    margin: 15px 0 24px;
   }
 }
