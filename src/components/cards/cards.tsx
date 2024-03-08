@@ -88,7 +88,7 @@ export const Cards = () => {
           <Typography variant={'large'}>{deckData?.name}</Typography>
 
           {isMyPack && (
-            <Dropdown align={'center'} className={s.dropDown} sideOffset={-10}>
+            <Dropdown align={'center'} className={s.dropDown} sideOffset={-6}>
               <DropdownCard
                 setDeleteDeckModal={setDeleteDeckModal}
                 setEditDeckModal={setEditDeckModal}
