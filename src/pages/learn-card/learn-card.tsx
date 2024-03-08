@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -42,17 +42,6 @@ export const LearnCard = () => {
 
   return (
     <>
-      <Button
-        as={Link}
-        className={s.backButton}
-        onClick={() => navigate(-1)}
-        relative={'path'}
-        to={'..'}
-        variant={'secondary'}
-      >
-        <Typography variant={'subtitle2'}>End learning</Typography>
-      </Button>
-
       <Card className={s.card}>
         <Typography variant={'h1'}>{`Learn "${deckData?.name}"`}</Typography>
         <ShowQuestion
@@ -60,17 +49,21 @@ export const LearnCard = () => {
           question={cardData?.question}
           shots={cardData?.shots}
         />
-        {showAnswer ? (
+        {showAnswer && (
           <ShowAnswer
             answer={cardData?.answer}
             isShowAnswerImg={isShowAnswerImg}
             nextQuestionHandler={nextQuestionHandler}
           />
-        ) : (
+        )}
+        {!showAnswer && (
           <Button fullWidth onClick={() => setShowAnswer(true)}>
             <Typography variant={'subtitle2'}>Show answer</Typography>
           </Button>
         )}
+        <Button onClick={() => navigate(-1)} variant={'secondary'}>
+          <Typography variant={'subtitle2'}>End learning</Typography>
+        </Button>
       </Card>
     </>
   )

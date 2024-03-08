@@ -6,7 +6,7 @@ import { EditCard } from '@/features/edit-card'
 import { CardsItem } from '@/services/cards-api/cards-api-types'
 import { formatDate } from '@/utils/format-date'
 
-import s from '@/components/cards/cards.module.scss'
+import s from './content-table.module.scss'
 
 import noImage from '../../../assets/images/not-img.jpg'
 
@@ -20,30 +20,30 @@ export const ContentTable = ({ deckName = '', isMyPack, items }: Props) => {
   const showAnswer = items.grade !== 5 ? 'unavailable' : items.answer
 
   return (
-    <Table.Row key={items.id}>
-      <Table.Cell className={s.questionCell}>
-        <div className={s.cell}>
+    <Table.Row className={s.row} key={items.id}>
+      <Table.Cell>
+        <div className={s.container}>
           <img alt={'Pack cover'} className={s.cover} src={items.questionImg || noImage} />
-          <Typography as={'h3'} className={s.question} variant={'body2'}>
+          <Typography as={'h3'} className={s.title} variant={'body2'}>
             {items.question}
           </Typography>
         </div>
       </Table.Cell>
-      <Table.Cell className={s.answerCell}>
-        <div className={s.cell}>
+      <Table.Cell>
+        <div className={s.container}>
           <img alt={'Pack cover'} className={s.cover} src={items.answerImg || noImage} />
-          <Typography as={'h3'} className={s.answer} variant={'body2'}>
+          <Typography as={'h3'} className={s.title} variant={'body2'}>
             {showAnswer}
           </Typography>
         </div>
       </Table.Cell>
-      <Table.Cell className={s.dateCell}>{formatDate(items.updated)}</Table.Cell>
-      <Table.Cell className={s.rateCell}>
-        <Rating rating={items.grade} />
+      <Table.Cell>{formatDate(items.updated)}</Table.Cell>
+      <Table.Cell className={s.cell}>
+        <Rating className={s.grade} rating={items.grade} />
       </Table.Cell>
 
       {isMyPack && (
-        <Table.Cell>
+        <Table.Cell className={s.cell}>
           <div className={s.editButtons}>
             <EditCard
               answer={items.answer}

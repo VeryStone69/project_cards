@@ -1,6 +1,10 @@
 .buttons {
   display: flex;
   gap: 1rem;
+
+  @media screen and (width <= 576px) {
+    flex-direction: column;
+  }
 }
 
 .fileUploader {

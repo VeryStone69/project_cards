@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import { CardsTable } from '@/components/cards/cards-table/cards-table'
@@ -20,6 +21,7 @@ import { ButtonFooter } from '@/features/button-footer'
 import { DropdownCard } from '@/features/dropdown-card/dropdown-card'
 import { useGetCardsInDeckQuery } from '@/services/cards-api/cards-api'
 import { useGetDeckInfoQuery } from '@/services/decks-api/decks-api'
+import { TableContentCardsMobile } from '@/widgets/table-content-cards-modile'
 
 import s from './cards.module.scss'
 
@@ -27,7 +29,7 @@ import defaultMask from '../../assets/images/not-img.jpg'
 
 export const Cards = () => {
   const { id } = useParams()
-  const packId = id ?? ('' as string)
+  const packId = id as string
 
   const {
     name,
@@ -62,7 +64,12 @@ export const Cards = () => {
       question: name,
     },
   })
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
+  const handleResize = () => {
+    setIsMobile(window.innerWidth <= 768)
+  }
 
+  window.addEventListener('resize', handleResize)
   const showLearnCard = !!cardsData?.items.length
   const showSearch = cardsData?.pagination.totalItems || name.length || false
   const deckName = deckData?.name
@@ -81,7 +88,7 @@ export const Cards = () => {
           <Typography variant={'large'}>{deckData?.name}</Typography>
 
           {isMyPack && (
-            <Dropdown align={'center'} className={s.dropDown} sideOffset={-10}>
+            <Dropdown align={'center'} className={s.dropDown} sideOffset={-6}>
               <DropdownCard
                 setDeleteDeckModal={setDeleteDeckModal}
                 setEditDeckModal={setEditDeckModal}
@@ -113,14 +120,11 @@ export const Cards = () => {
             </Modal>
           )}
 
-          {isMyPack ? (
-            <AddNewCard deckId={id} />
-          ) : (
-            showLearnCard && (
-              <Button as={Link} to={`learn`}>
-                <Typography variant={'subtitle2'}>Learn cards</Typography>
-              </Button>
-            )
+          {isMyPack && <AddNewCard deckId={id} />}
+          {!isMyPack && showLearnCard && (
+            <Button as={Link} to={`learn`}>
+              <Typography variant={'subtitle2'}>Learn cards</Typography>
+            </Button>
           )}
         </div>
         {deckData?.cover && (
@@ -142,7 +146,7 @@ export const Cards = () => {
         />
       )}
 
-      {cardsData?.items && (
+      {cardsData?.items && !isMobile && (
         <CardsTable
           cardsColumns={cardsColumns}
           cardsData={cardsData}
@@ -151,6 +155,9 @@ export const Cards = () => {
           setSort={setSort}
           sort={sort}
         />
+      )}
+      {cardsData?.items && isMobile && (
+        <TableContentCardsMobile cardsData={cardsData} isMyPack={isMyPack} />
       )}
 
       {cardsData && cardsData?.pagination.totalItems > 5 && (
