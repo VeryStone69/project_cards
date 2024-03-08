@@ -1,0 +1,59 @@
+.container{
+  display: inline-flex;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  align-items: center;
+
+  width: 100%;
+
+
+  @media screen and (width <= 1024px) {
+    display: block;
+    flex-direction: column;
+
+    //padding: 0;
+  }
+}
+
+.cell{
+  @media screen and (width <= 1024px) {
+    padding: 0;
+  }
+}
+
+.title{
+  margin-left: 1rem;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+
+  @media screen and (width <= 1024px) {
+    margin-left: 0;
+  }
+}
+
+.cover {
+  width: 100%;
+  max-width: 70px;
+  height: 50px;
+
+  object-fit: cover;
+  border-radius: 3px;
+}
+
+.editButtons {
+  display: flex;
+  gap: 1.5rem;
+
+  @media screen and (width <= 1024px) {
+  flex-direction: column;
+    gap: 2rem;
+    padding: 0;
+  }
+}
+
+.grade{
+  display: flex;
+  align-items: center;
+}
+
+
