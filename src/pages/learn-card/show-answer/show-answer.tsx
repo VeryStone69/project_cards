@@ -15,9 +15,8 @@ export const ShowAnswer = ({ answer, isShowAnswerImg, nextQuestionHandler }: Pro
       <div className={s.answer}>
         {isShowAnswerImg && <img alt={'answerImg'} className={s.answerImg} src={isShowAnswerImg} />}
         <Typography variant={'subtitle1'}>{`Answer: ${answer}`}</Typography>
-
-        <Typography variant={'subtitle1'} className={s.rate}>{`Rate yourself:`}</Typography>
       </div>
+      <Typography className={s.rate} variant={'subtitle1'}>{`Rate yourself:`}</Typography>
       <RateCardForm onSubmit={nextQuestionHandler} />
     </>
   )
