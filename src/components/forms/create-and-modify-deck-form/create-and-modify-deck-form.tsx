@@ -74,7 +74,13 @@ export const CreateAndModifyDeckForm = ({
               <Typography variant={'subtitle2'}>Upload image</Typography>
             </ControlledFileUploader>
             {img && (
-              <Button fullWidth onClick={deleteCover} type={'reset'} variant={'secondary'}>
+              <Button
+                className={s.deleteImage}
+                fullWidth
+                onClick={deleteCover}
+                type={'reset'}
+                variant={'secondary'}
+              >
                 <Typography variant={'subtitle2'}>Delete image</Typography>
                 <Icon fill={'white'} name={'trashBin'} size={'18px'} />
               </Button>
