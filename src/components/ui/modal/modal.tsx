@@ -5,18 +5,18 @@ import { Card } from '@/components/ui/card'
 import { IconButton } from '@/components/ui/icon-button'
 import { Typography } from '@/components/ui/typography'
 import * as Dialog from '@radix-ui/react-dialog'
-
-import s from './modal.module.scss'
 import { clsx } from 'clsx'
 
+import s from './modal.module.scss'
+
 type Props = {
+  className?: string
   open: boolean
   setOpen?: (value: boolean) => void
   title?: string
-  className?: string
 } & PropsWithChildren
 
-export const Modal = ({ children, open, setOpen, title, className }: Props) => {
+export const Modal = ({ children, className, open, setOpen, title }: Props) => {
   const classNames = clsx(s.card, className)
 
   return (

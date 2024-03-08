@@ -12,12 +12,11 @@
 
   display: flex;
   flex-direction: column;
-  gap: 0;
   align-items: stretch;
   justify-content: center;
 
-  box-sizing: content-box;
   max-width: 590px;
+  height: 100%;
   margin: 15px auto 0;
   padding: 0 0 24px;
   padding-inline: 12px;
