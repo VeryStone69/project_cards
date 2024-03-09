@@ -22,7 +22,9 @@ export const usePaginationDecks = (
   const changeItemPerPage = useCallback(
     (item: number) => {
       searchParams.set('itemsPerPage', String(item))
+      searchParams.set('currentPage', '1')
       setSearchParams(searchParams)
+      dispatch(packsActions.setCurrentPage({ newPage: 1 }))
       dispatch(packsActions.setPageSize({ newPageSize: Number(searchParams.get('itemsPerPage')) }))
     },
     [searchParams]
