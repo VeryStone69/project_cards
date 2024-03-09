@@ -18,7 +18,7 @@ export default function usePagination({
     { title: '10', value: '10' },
     { title: '15', value: '15' },
   ]
-  const totalElements = Math.ceil(totalPages)
+  const totalElements = totalPages
 
   const hideNextButton = currentPage === totalElements
   const hidePrevButton = currentPage === Page.first
@@ -43,7 +43,7 @@ export default function usePagination({
           We do not show dots when there is just one page number to be inserted between the extremes of sibling and the page limits i.e 1 and totalElements.
            Hence, we are using leftSiblingIndex > 2 and rightSiblingIndex < totalElements - 2
         */
-  const shouldShowLeftDots = leftSiblingIndex > 2
+  const shouldShowLeftDots = leftSiblingIndex > 2 && totalPages > 5
   const shouldShowRightDots = rightSiblingIndex < totalElements - 2
 
   const firstPageIndex = { onClickChangePage, page: Page.first }
@@ -53,7 +53,9 @@ export default function usePagination({
       starting value to ending value.
     */
   const siblingPage = (first: number, last: number) => {
-    return Array.from({ length: last - first + 1 }, (_, index) => first + index)
+    const length = last - first + 1
+
+    return Array.from({ length }, (_, index) => first + index)
   }
 
   /*
