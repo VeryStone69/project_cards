@@ -2,6 +2,7 @@ import { useCallback } from 'react'
 
 import { useAppDispatch } from '@/app/hooks'
 import { cardsActions } from '@/store/cards-slice/cards-slice'
+import { packsActions } from '@/store/packs-slice/packs-slice'
 
 export const usePaginationCards = (
   searchParams: URLSearchParams,
@@ -22,7 +23,9 @@ export const usePaginationCards = (
   const changeItemPerPage = useCallback(
     (item: number) => {
       searchParams.set('itemsPerPage', String(item))
+      searchParams.set('currentPage', '1')
       setSearchParams(searchParams)
+      dispatch(packsActions.setCurrentPage({ newPage: 1 }))
       dispatch(cardsActions.setPageSize({ newPageSize: Number(searchParams.get('itemsPerPage')) }))
     },
     [searchParams]
