@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next'
+
 import { tabs } from '@/common/consts/tab-switch'
 import { Icon } from '@/components/icon/Icon'
 import { Button } from '@/components/ui/button'
@@ -33,6 +35,7 @@ export const FilterControl = ({
   const onChangeSwitcher = (value: string) => {
     setTabValue(value)
   }
+  const { t } = useTranslation()
 
   return (
     <div className={s.filter}>
@@ -41,7 +44,7 @@ export const FilterControl = ({
         clearField={() => setSearchName('')}
         disabled={disabled}
         onChange={e => setSearchName(e.currentTarget.value)}
-        placeholder={'Search by name'}
+        placeholder={t('decks.search.placeholder')}
         type={'search'}
         value={searchName}
       />
@@ -50,7 +53,7 @@ export const FilterControl = ({
         <TabSwitcher
           className={s.tabSwitcher}
           disabled={disabled}
-          label={'Show decks'}
+          label={t('decks.tabSwitcher.title')}
           onValueChange={onChangeSwitcher}
           tabs={tabs}
           value={tabValue}
@@ -58,7 +61,7 @@ export const FilterControl = ({
         <Slider
           className={s.slider}
           disabled={disabled}
-          label={'Number of cards in the deck'}
+          label={t('decks.slider.title')}
           max={sliderMaxValue}
           min={0}
           onChange={setSliderValue}
@@ -72,7 +75,7 @@ export const FilterControl = ({
             variant={'secondary'}
           >
             <Icon className={s.icon} name={'remove'} size={'16px'} />
-            Clear filters
+            {t('decks.clearFilter.title')}
           </Button>
         </Typography>
       </div>

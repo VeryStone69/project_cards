@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field/controlled-text-field'
 import { Typography } from '@/components/ui/typography'
@@ -27,28 +28,29 @@ export const CreatePassword = ({ className, onSubmit }: LoginProps) => {
   })
 
   const classNames = clsx(s.form, className)
+  const { t } = useTranslation()
 
   return (
     <div className={s.formCard}>
       <Typography className={s.title} variant={'h1'}>
-        Create new password
+        {t('newPassword.title')}
       </Typography>
 
       <form className={classNames} onSubmit={handleSubmit(onSubmit)}>
         <ControlledTextField
           control={control}
-          label={'New password'}
+          label={t('newPassword.password')}
           name={'password'}
           type={'password'}
         />
 
         <Typography className={s.content} variant={'body2'}>
-          Create new password and we will send you further instructions to email
+          {t('newPassword.description')}
         </Typography>
 
         <Typography variant={'subtitle2'}>
           <Button fullWidth type={'submit'}>
-            Create
+            {t('newPassword.create')}
           </Button>
         </Typography>
       </form>

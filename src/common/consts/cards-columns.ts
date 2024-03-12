@@ -10,7 +10,7 @@ export const cardsColumns = [
     title: 'Answer',
   },
   {
-    key: 'updated',
+    key: 'lastUpdated',
     sortable: true,
     title: 'Last Updated',
   },

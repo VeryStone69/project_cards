@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 
 import { CreateAndModifyCardForm } from '@/components/forms/create-and-modify-card-form'
@@ -12,16 +13,17 @@ type Props = {
 }
 
 export const AddNewCard = ({ deckId = '' }: Props) => {
+  const { t } = useTranslation()
   const [openModal, setOpenModal] = useState(false)
   const [option, setOption] = useState('1')
   const [createCard] = useCreateCardsInDeckMutation()
   const options = [
     {
-      title: 'Text',
+      title: t('addCardModal.select.text'),
       value: '1',
     },
     {
-      title: 'Picture',
+      title: t('addCardModal.select.picture'),
       value: '2',
     },
   ]
@@ -30,17 +32,17 @@ export const AddNewCard = ({ deckId = '' }: Props) => {
     setOpenModal(false)
     try {
       await toast.promise(createCard({ data, id: deckId }), {
-        pending: 'Creating a card!',
-        success: 'The card has been created!',
+        pending: t('addCardModal.toast.pending'),
+        success: t('addCardModal.toast.success'),
       })
     } catch (error) {
-      toast.error('Error creating card :(')
+      toast.error(t('addCardModal.toast.error'))
     }
   }
 
   return (
     <>
-      <Modal open={openModal} setOpen={setOpenModal} title={'Adding a new card'}>
+      <Modal open={openModal} setOpen={setOpenModal} title={t('addCardModal.title')}>
         <CreateAndModifyCardForm
           onCancel={() => setOpenModal(false)}
           onSubmit={addCardOnSubmit}
@@ -51,7 +53,7 @@ export const AddNewCard = ({ deckId = '' }: Props) => {
       </Modal>
 
       <Button onClick={() => setOpenModal(!openModal)} variant={'primary'}>
-        <Typography variant={'subtitle2'}>Add a new card</Typography>
+        <Typography variant={'subtitle2'}>{t('cards.addNewCard.title')}</Typography>
       </Button>
     </>
   )

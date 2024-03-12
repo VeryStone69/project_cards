@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 
 import { CreateAndModifyCardForm } from '@/components/forms/create-and-modify-card-form'
@@ -19,6 +20,7 @@ export const EditCard = ({ answer, answerImg, cardId = '', question, questionImg
   const [openModal, setOpenModal] = useState(false)
   const [option, setOption] = useState('1')
   const [updateCard] = useUpdateCardMutation()
+  const { t } = useTranslation()
   const options = [
     {
       title: 'Text',
@@ -41,17 +43,17 @@ export const EditCard = ({ answer, answerImg, cardId = '', question, questionImg
     setOpenModal(false)
     try {
       await toast.promise(updateCard({ cardId, data }), {
-        pending: 'Updating a card!',
-        success: 'The card has been updated!',
+        pending: t('editCardModal.toast.pending'),
+        success: t('editCardModal.toast.success'),
       })
     } catch (error) {
-      toast.error('Error updating card :(')
+      toast.error(t('editCardModal.toast.error'))
     }
   }
 
   return (
     <>
-      <Modal open={openModal} setOpen={setOpenModal} title={'Editing a card'}>
+      <Modal open={openModal} setOpen={setOpenModal} title={t('editCardModal.title')}>
         <CreateAndModifyCardForm
           defaultValue={defaultValues}
           onCancel={() => setOpenModal(false)}

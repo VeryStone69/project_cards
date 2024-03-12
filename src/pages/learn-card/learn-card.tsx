@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
@@ -16,6 +17,7 @@ export const LearnCard = () => {
   const { id } = useParams()
   const deckId = id as string
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   const { data: deckData } = useGetDeckInfoQuery({ id: deckId })
   const { data: cardData } = useGetLearnCardQuery({ id: deckId })
@@ -43,7 +45,7 @@ export const LearnCard = () => {
   return (
     <>
       <Card className={s.card}>
-        <Typography variant={'h1'}>{`Learn "${deckData?.name}"`}</Typography>
+        <Typography variant={'h1'}>{t('learn.title', { name: deckData?.name })}</Typography>
         <ShowQuestion
           isShowQuestionImg={isShowQuestionImg}
           question={cardData?.question}
@@ -58,11 +60,11 @@ export const LearnCard = () => {
         )}
         {!showAnswer && (
           <Button fullWidth onClick={() => setShowAnswer(true)}>
-            <Typography variant={'subtitle2'}>Show answer</Typography>
+            <Typography variant={'subtitle2'}>{t('learn.show')}</Typography>
           </Button>
         )}
         <Button onClick={() => navigate(-1)} variant={'secondary'}>
-          <Typography variant={'subtitle2'}>End learning</Typography>
+          <Typography variant={'subtitle2'}>{t('learn.end')}</Typography>
         </Button>
       </Card>
     </>

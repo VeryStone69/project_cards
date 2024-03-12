@@ -1,4 +1,5 @@
 import { memo, useState } from 'react'
+import { Trans, useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 
 import { Icon } from '@/components/icon/Icon'
@@ -15,15 +16,16 @@ type Props = {
 export const DeleteCardButton = memo(({ id, name }: Props) => {
   const [open, setOpen] = useState(false)
   const [delCard] = useDeleteCardMutation()
+  const { t } = useTranslation()
 
   const deleteCard = async () => {
     try {
       await toast.promise(delCard({ id }).unwrap, {
-        pending: 'Deleting a card!',
-        success: 'The card has been deleted!',
+        pending: t('deleteCardModal.toast.pending'),
+        success: t('deleteCardModal.toast.success'),
       })
     } catch (error) {
-      toast.error('Error deleting card :(')
+      toast.error(t('deleteCardModal.toast.error'))
     }
     setOpen(false)
   }
@@ -32,15 +34,16 @@ export const DeleteCardButton = memo(({ id, name }: Props) => {
     <>
       <IconButton icon={<Icon name={'remove'} size={'16px'} />} onClick={() => setOpen(true)} />
       {open && (
-        <Modal open setOpen={() => setOpen(false)} title={'Removing a card'}>
+        <Modal open setOpen={() => setOpen(false)} title={t('deleteCardModal.title')}>
           <Typography variant={'body1'}>
-            Are you sure you want to remove a card from the {name} deck?
+            <Trans>{t('deleteCardModal.description', { name })}</Trans>
           </Typography>
           <ButtonFooter
             onClickCancel={() => setOpen(false)}
             onClickConfirm={deleteCard}
             option={2}
-            titleConfirm={'Remove'}
+            titleCancel={t('deleteCardModal.cancel')}
+            titleConfirm={t('deleteCardModal.remove')}
           />
         </Modal>
       )}

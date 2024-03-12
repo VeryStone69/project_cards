@@ -1,4 +1,5 @@
 import { ComponentPropsWithoutRef, forwardRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { Icon } from '@/components/icon/Icon'
 import { Typography } from '@/components/ui/typography'
@@ -18,6 +19,8 @@ type Props = TextFieldProps & Omit<ComponentPropsWithoutRef<'input'>, keyof Text
 export const TextField = forwardRef<HTMLInputElement, Props>(
   ({ className, clearField, errorMessage, label, type = 'text', ...rest }, ref) => {
     const [showPassword, setShowPassword] = useState(false)
+
+    const { t } = useTranslation()
 
     const isPasswordType = type === 'password'
 
@@ -74,7 +77,7 @@ export const TextField = forwardRef<HTMLInputElement, Props>(
         </Typography>
         {!!errorMessage && (
           <Typography className={s.errorMessage} variant={'caption'}>
-            {errorMessage}
+            {t(`validate.${errorMessage}`)}
           </Typography>
         )}
       </div>

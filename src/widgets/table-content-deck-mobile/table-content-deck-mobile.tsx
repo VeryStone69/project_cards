@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next'
+
 import { Table } from '@/components/ui/table'
 import { Typography } from '@/components/ui/typography'
 import { DecksItems } from '@/services/decks-api/decks-api.types'
@@ -10,10 +12,12 @@ type Props = {
   items?: DecksItems[]
 }
 export const TableContentDeckMobile = ({ currentUserId, items }: Props) => {
+  const { t } = useTranslation()
+
   if (!items?.length) {
     return (
       <div className={s.noItems}>
-        <Typography variant={'body1'}>No content with these terms...</Typography>
+        <Typography variant={'body1'}>{t('terms')}</Typography>
       </div>
     )
   }

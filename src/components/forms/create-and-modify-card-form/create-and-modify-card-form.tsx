@@ -1,5 +1,6 @@
 import { ComponentPropsWithoutRef, ElementType } from 'react'
 import { SubmitHandler } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 
 import notImg from '@/assets/images/not-img.jpg'
 import {
@@ -28,12 +29,12 @@ type Props<C extends ElementType = 'div'> = {
 } & Omit<ComponentPropsWithoutRef<C>, 'defaultValue' | 'onSubmit'>
 
 export const CreateAndModifyCardForm = ({
-  selectOption,
   defaultValue,
   onCancel,
   onSubmit,
   onValueChange,
   options,
+  selectOption,
 }: Props) => {
   const {
     answerCover,
@@ -54,6 +55,7 @@ export const CreateAndModifyCardForm = ({
 
   const formWithPicture =
     defaultValue?.answerImg || defaultValue?.questionImg || selectOption === '2'
+  const { t } = useTranslation()
 
   const onSubmitHandler: SubmitHandler<UpdatesCardsType> = async data => {
     const form = new FormData()
@@ -89,18 +91,22 @@ export const CreateAndModifyCardForm = ({
   return (
     <form onSubmit={handleSubmit(onSubmitHandler)}>
       <Select
-        label={'Choose a question format'}
+        label={t('editCardModal.select.title')}
         onValueChange={onValueChange}
         options={options}
-        placeholder={formWithPicture ? 'Picture' : 'Text'}
+        placeholder={
+          formWithPicture ? t('editCardModal.select.picture') : t('editCardModal.select.text')
+        }
       />
       <div className={s.inputBlock}>
         <Typography variant={'subtitle2'}>
-          {formWithPicture
-            ? 'Upload pictures as questions and answers:'
-            : 'Write a question and give the correct answer'}
+          {formWithPicture ? t('editCardModal.subtitle.picture') : t('editCardModal.subtitle.text')}
         </Typography>
-        <ControlledTextField control={control} label={'Question:'} name={'question'} />
+        <ControlledTextField
+          control={control}
+          label={t('editCardModal.question')}
+          name={'question'}
+        />
         {formWithPicture && (
           <>
             <img
@@ -120,7 +126,7 @@ export const CreateAndModifyCardForm = ({
                 variant={'secondary'}
               >
                 <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 18 18'} />
-                <Typography variant={'subtitle2'}>Upload image</Typography>
+                <Typography variant={'subtitle2'}>{t('editCardModal.upload')}</Typography>
               </ControlledFileUploader>
 
               {questionCover && (
@@ -130,7 +136,7 @@ export const CreateAndModifyCardForm = ({
                   type={'reset'}
                   variant={'secondary'}
                 >
-                  <Typography variant={'subtitle2'}>Delete image</Typography>
+                  <Typography variant={'subtitle2'}>{t('editCardModal.delete')}</Typography>
                   <Icon fill={'white'} name={'trashBin'} size={'18px'} />
                 </Button>
               )}
@@ -138,7 +144,7 @@ export const CreateAndModifyCardForm = ({
           </>
         )}
 
-        <ControlledTextField control={control} label={'Answer:'} name={'answer'} />
+        <ControlledTextField control={control} label={t('editCardModal.answer')} name={'answer'} />
 
         {formWithPicture && (
           <>
@@ -158,12 +164,12 @@ export const CreateAndModifyCardForm = ({
                 variant={'secondary'}
               >
                 <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 18 18'} />
-                <Typography variant={'subtitle2'}>Upload image</Typography>
+                <Typography variant={'subtitle2'}>{t('editCardModal.upload')}</Typography>
               </ControlledFileUploader>
 
               {answerCover && (
                 <Button fullWidth onClick={deleteAnswerCover} type={'reset'} variant={'secondary'}>
-                  <Typography variant={'subtitle2'}>Delete image</Typography>
+                  <Typography variant={'subtitle2'}>{t('editCardModal.delete')}</Typography>
                   <Icon fill={'white'} name={'trashBin'} size={'18px'} />
                 </Button>
               )}
@@ -175,8 +181,8 @@ export const CreateAndModifyCardForm = ({
       <ButtonFooter
         onClickCancel={onCancel}
         option={2}
-        titleCancel={'Cancel'}
-        titleConfirm={!defaultValue ? 'Create card' : 'Update card'}
+        titleCancel={t('editCardModal.cancel')}
+        titleConfirm={!defaultValue ? t('editCardModal.create') : t('editCardModal.update')}
       />
     </form>
   )

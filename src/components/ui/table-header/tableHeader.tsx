@@ -1,4 +1,5 @@
 import { ComponentPropsWithoutRef } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { Icon } from '@/components/icon/Icon'
 
@@ -43,17 +44,18 @@ export const TableHeader = ({ columns, onSort, sort, ...props }: TableHeaderProp
       key,
     })
   }
+  const { t } = useTranslation()
 
   return (
     <Table.Head {...props}>
       <Table.Row className={s.row}>
-        {columns.map(({ key, sortable, title }) => {
+        {columns.map(({ key, sortable, title }, index) => {
           const sortCondition = sort && sort.key === key
           const classesIcon = s.icon + ' ' + (sort?.direction === 'desc' && s.iconDown)
 
           return (
             <Table.HeadCell className={s.ceil} key={title} onClick={handleSort(key, sortable)}>
-              {title}
+              {index === columns.length - 1 ? title : t(`columns.${key}`)}
               {sortCondition && <Icon className={classesIcon} name={'arrowDown'} />}
             </Table.HeadCell>
           )

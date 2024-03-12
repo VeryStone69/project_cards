@@ -1,4 +1,5 @@
 import { SubmitHandler } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
@@ -15,11 +16,12 @@ import s from './recovery-password.module.scss'
 export const RecoveryPassword = () => {
   const [recoverPassword] = useRecoverPasswordMutation()
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const submitHandler: SubmitHandler<FormValuesForgotPassword> = async data => {
     try {
       await toast.promise(recoverPassword({ email: data.email, html: htmlRecovery }), {
-        pending: 'password recovery',
-        success: 'follow the link in the message that was sent to your email',
+        pending: t('recovery.toast.pending'),
+        success: t('recovery.toast.success'),
       })
       navigate(`${PATH.check}/${data.email}`)
     } catch (err) {

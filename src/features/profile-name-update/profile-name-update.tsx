@@ -1,5 +1,6 @@
 import { ComponentPropsWithoutRef, ElementType } from 'react'
 import { SubmitHandler } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 
 import { EditProfile } from '@/components/forms/personal-information'
@@ -28,6 +29,7 @@ export const ProfileNameUpdate = <T extends ElementType = 'div'>(
   const onLogOut = () => {
     logOut()
   }
+  const { t } = useTranslation()
 
   const onSubmitHandler: SubmitHandler<{ name: string }> = async data => {
     const form = new FormData()
@@ -37,11 +39,11 @@ export const ProfileNameUpdate = <T extends ElementType = 'div'>(
     try {
       setEdit(false)
       await toast.promise(updateProfile(form).unwrap(), {
-        pending: 'Name change...',
-        success: 'Name changed successfully!',
+        pending: t('profile.toast.pending'),
+        success: t('profile.toast.success'),
       })
     } catch (err) {
-      toast.error('Error changing name :(')
+      toast.error(t('profile.toast.error'))
     }
   }
 
@@ -58,7 +60,7 @@ export const ProfileNameUpdate = <T extends ElementType = 'div'>(
           </Typography>
           <Button onClick={onLogOut} variant={'secondary'}>
             <Icon fill={'white'} name={'logout'} size={'16px'} />
-            <Typography variant={'subtitle2'}>Logout</Typography>
+            <Typography variant={'subtitle2'}>{t('profile.logout')}</Typography>
           </Button>
         </>
       ) : (

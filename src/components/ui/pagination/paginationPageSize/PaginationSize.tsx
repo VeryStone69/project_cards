@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next'
+
 import { Option, Select } from '@/components/ui/select'
 import { Typography } from '@/components/ui/typography'
 
@@ -13,6 +15,8 @@ export const PaginationSize = ({
   onChangeItemsPerPage,
   pageSizeSelect,
 }: PaginationSizeProps) => {
+  const { t } = useTranslation()
+
   const onValueChange = (page: string) => {
     onChangeItemsPerPage(+page)
   }
@@ -20,7 +24,7 @@ export const PaginationSize = ({
   return (
     <>
       <Typography className={s.typographyShow} variant={'body2'}>
-        show
+        {t('decks.pagination.show')}
       </Typography>
       <div className={s.selectStyle}>
         <Select
@@ -32,7 +36,7 @@ export const PaginationSize = ({
         />
       </div>
       <Typography className={s.typographyPage} variant={'body2'}>
-        on the page
+        {t('decks.pagination.onThePage')}
       </Typography>
     </>
   )

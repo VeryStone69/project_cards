@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 
 import { CreateAndModifyDeckForm } from '@/components/forms/create-and-modify-deck-form'
@@ -17,23 +18,24 @@ export const EditPack = ({ cover, id, isPrivate, name }: Props) => {
   const defaultValue = { cover, isPrivate, name }
   const [open, setOpen] = useState(false)
   const [updateDeck] = useUpdateDeckMutation()
+  const { t } = useTranslation()
   const editDeckHandler = async (data: FormData) => {
     setOpen(!open)
 
     try {
       await toast.promise(updateDeck({ data, id }).unwrap(), {
-        pending: 'Deck update...',
-        success: `Deck updated successfully!`,
+        pending: t('editDeckModal.toast.pending'),
+        success: t('editDeckModal.toast.success'),
       })
     } catch (err) {
-      toast.error('Error updating deck :(')
+      toast.error(t('editDeckModal.toast.error'))
     }
   }
 
   return (
     <>
       {open && (
-        <Modal open={open} setOpen={setOpen} title={'Editing a Deck'}>
+        <Modal open={open} setOpen={setOpen} title={t('editDeckModal.title')}>
           <CreateAndModifyDeckForm
             defaultValue={defaultValue}
             onCancel={() => setOpen(false)}

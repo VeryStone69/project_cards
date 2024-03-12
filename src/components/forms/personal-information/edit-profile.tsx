@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field/controlled-text-field'
 import { Typography } from '@/components/ui/typography'
@@ -27,6 +28,7 @@ export const EditProfile = ({ className, name, onSubmit }: LoginProps) => {
   })
 
   const classNames = clsx(s.form, className)
+  const { t } = useTranslation()
 
   return (
     <>
@@ -34,11 +36,11 @@ export const EditProfile = ({ className, name, onSubmit }: LoginProps) => {
         <ControlledTextField
           className={s.textField}
           control={control}
-          label={'Nickname'}
+          label={t('profile.name')}
           name={'name'}
         />
         <Button fullWidth type={'submit'} variant={'primary'}>
-          <Typography variant={'subtitle2'}>Save Changes</Typography>
+          <Typography variant={'subtitle2'}>{t('profile.save')}</Typography>
         </Button>
       </form>
     </>

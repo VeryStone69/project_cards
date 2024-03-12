@@ -13,7 +13,7 @@ const nameValid = z
   .string()
   .trim()
   .min(3, 'The name must be at least 3 characters')
-  .max(30, 'the name must be no more than 30 characters')
+  .max(30, 'The name must be no more than 30 characters')
 
 export const coverSchema = z
   .instanceof(File)
@@ -28,8 +28,8 @@ export const editProfileSchema = z.object({
   name: z
     .string()
     .trim()
-    .max(30, { message: '\n' + 'The name must be no more than 30 characters' })
-    .min(7, { message: 'The name must be at least 7 characters' }),
+    .max(30, { message: 'The name must be no more than 30 characters' })
+    .min(3, { message: 'The name must be at least 3 characters' }),
 })
 
 export const addNewDeckSchema = z.object({

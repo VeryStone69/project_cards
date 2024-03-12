@@ -1,4 +1,5 @@
 import { memo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
@@ -22,15 +23,25 @@ type ProfileData = {
   userName?: string
 }
 
+type Locales = {
+  en: { title: 'English' }
+  ru: { title: 'Русский' }
+}
+
 export const Header = memo(({ avatar, email, userName }: ProfileData) => {
+  const locales: Locales = {
+    en: { title: 'English' },
+    ru: { title: 'Русский' },
+  }
   const [logOut] = useLogOutMutation()
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
+  const { i18n, t } = useTranslation()
   const onLogOut = async () => {
     try {
       await toast.promise(logOut().unwrap(), {
-        pending: 'Logout...',
-        success: 'You have successfully logged out of your account!',
+        pending: t('header.toast.pending'),
+        success: t('header.toast.success'),
       })
       dispatch(packsActions.resetFilters())
     } catch (err) {
@@ -43,6 +54,19 @@ export const Header = memo(({ avatar, email, userName }: ProfileData) => {
       <div className={s.container}>
         <div className={s.logo} onClick={() => navigate(PATH.base)}>
           <Logo />
+        </div>
+
+        <div style={{ display: 'flex', gap: '5px' }}>
+          {Object.keys(locales).map(el => (
+            <Typography key={el} variant={'subtitle2'}>
+              <Button
+                onClick={() => i18n.changeLanguage(el)}
+                variant={i18n.resolvedLanguage === el ? 'primary' : 'secondary'}
+              >
+                {locales[el as keyof Locales].title}
+              </Button>
+            </Typography>
+          ))}
         </div>
 
         {userName && (
@@ -64,7 +88,7 @@ export const Header = memo(({ avatar, email, userName }: ProfileData) => {
               }
             >
               <DropDownUser
-                onlogOut={onLogOut}
+                onLogOut={onLogOut}
                 userEmail={email}
                 userLogo={avatar}
                 userName={userName}
@@ -72,9 +96,10 @@ export const Header = memo(({ avatar, email, userName }: ProfileData) => {
             </Dropdown>
           </div>
         )}
+
         {!userName && (
           <Button as={Link} to={PATH.register} variant={'secondary'}>
-            <Typography variant={'subtitle2'}>Register</Typography>
+            <Typography variant={'subtitle2'}>{t('header.register')}</Typography>
           </Button>
         )}
       </div>

@@ -1,11 +1,10 @@
-.container{
+.container {
   display: inline-flex;
   flex-grow: 1;
   flex-wrap: wrap;
   align-items: center;
 
   width: 100%;
-
 
   @media screen and (width <= 1024px) {
     display: block;
@@ -15,13 +14,13 @@
   }
 }
 
-.cell{
+.cell {
   @media screen and (width <= 1024px) {
     padding: 0;
   }
 }
 
-.title{
+.title {
   margin-left: 1rem;
   text-overflow: ellipsis;
   word-wrap: break-word;
@@ -45,15 +44,13 @@
   gap: 1.5rem;
 
   @media screen and (width <= 1024px) {
-  flex-direction: column;
+    flex-direction: column;
     gap: 2rem;
     padding: 0;
   }
 }
 
-.grade{
+.grade {
   display: flex;
   align-items: center;
 }
-
-

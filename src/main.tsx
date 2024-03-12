@@ -5,6 +5,7 @@ import { App } from '@/App'
 import { store } from '@/services/store'
 import { createRoot } from 'react-dom/client'
 
+import './i18next'
 import './styles/index.scss'
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/700.css'

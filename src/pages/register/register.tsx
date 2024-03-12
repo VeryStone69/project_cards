@@ -1,4 +1,5 @@
 import { SubmitHandler } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
@@ -13,12 +14,13 @@ import s from './register.module.scss'
 
 export const Register = () => {
   const [register] = useRegisterMutation()
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const handleRegister: SubmitHandler<RegisterForm> = async ({ confirmPassword, ...rest }) => {
     try {
       await toast.promise(register(rest).unwrap(), {
-        pending: 'register user',
-        success: `You are successful register!`,
+        pending: t('register.toast.pending'),
+        success: t('register.toast.success'),
       })
       navigate(PATH.login)
     } catch (err) {

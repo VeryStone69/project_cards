@@ -16,16 +16,14 @@
   justify-content: space-between;
 
   @media screen and (width <= 576px) {
-  flex-direction: column;
+    flex-direction: column;
   }
 }
 
 .image {
   aspect-ratio: 2/1;
 
-
   width: 100%;
-
 
   object-fit: cover;
   border-radius: 4px;
@@ -41,14 +39,14 @@
   }
 }
 
-.deleteImage{
+.deleteImage {
   transition: 0.2s;
 
-  &:hover{
+  &:hover {
     background: var(--color-danger-700);
   }
 }
 
-.formCard{
+.formCard {
   margin-top: 2rem;
 }
