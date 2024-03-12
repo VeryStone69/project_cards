@@ -1,8 +1,15 @@
 .buttonGroup {
   display: flex;
+  gap: 50px;
   justify-content: space-between;
+
   height: 2.25rem;
   margin-top: 2.3rem;
+
+  @media screen and (width <= 576px) {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
 }
 
 .buttonSingle {

@@ -25,6 +25,10 @@
       }
     }
   }
+
+  @media screen and (width <= 576px) {
+    height: 85px;
+  }
 }
 
 .container {
@@ -79,4 +83,20 @@
 .loginButton {
   display: flex;
   gap: 10px;
+}
+
+.loginData {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  .langSelect {
+    background-color: var(--color-dark-700);
+  }
+
+  @media screen and (width <= 576px) {
+    flex-direction: column;
+    gap: 0;
+    align-items: stretch;
+  }
 }

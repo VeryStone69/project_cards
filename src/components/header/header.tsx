@@ -9,6 +9,7 @@ import { PATH } from '@/common/consts/routes'
 import { Avatar } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Dropdown } from '@/components/ui/dropdown'
+import { Option, Select } from '@/components/ui/select'
 import { Typography } from '@/components/ui/typography'
 import { DropDownUser } from '@/features/dropdown-user/drop-down-user'
 import { useLogOutMutation } from '@/services/auth-api/auth'
@@ -23,20 +24,22 @@ type ProfileData = {
   userName?: string
 }
 
-type Locales = {
-  en: { title: 'English' }
-  ru: { title: 'Русский' }
-}
-
 export const Header = memo(({ avatar, email, userName }: ProfileData) => {
-  const locales: Locales = {
-    en: { title: 'English' },
-    ru: { title: 'Русский' },
-  }
+  const locales: Option[] = [
+    { title: 'English', value: 'en' },
+    { title: 'Русский', value: 'ru' },
+    { title: '中國人', value: 'zh' },
+    { title: 'Polski', value: 'pl' },
+    { title: 'Deutsch', value: 'de' },
+    { title: 'Latviski', value: 'lv' },
+    { title: 'Беларускі', value: 'by' },
+  ]
+
+  const { i18n, t } = useTranslation()
+
   const [logOut] = useLogOutMutation()
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const { i18n, t } = useTranslation()
   const onLogOut = async () => {
     try {
       await toast.promise(logOut().unwrap(), {
@@ -56,52 +59,49 @@ export const Header = memo(({ avatar, email, userName }: ProfileData) => {
           <Logo />
         </div>
 
-        <div style={{ display: 'flex', gap: '5px' }}>
-          {Object.keys(locales).map(el => (
-            <Typography key={el} variant={'subtitle2'}>
-              <Button
-                onClick={() => i18n.changeLanguage(el)}
-                variant={i18n.resolvedLanguage === el ? 'primary' : 'secondary'}
+        <div className={s.loginData}>
+          {userName && (
+            <div className={s.userInfo}>
+              <Typography
+                className={s.userName}
+                onClick={() => navigate(PATH.profile)}
+                variant={'subtitle1'}
               >
-                {locales[el as keyof Locales].title}
-              </Button>
-            </Typography>
-          ))}
+                {userName}
+              </Typography>
+              <Dropdown
+                align={'end'}
+                sideOffset={2}
+                trigger={
+                  <button style={{ display: 'flex' }}>
+                    <Avatar src={avatar} userName={userName} />
+                  </button>
+                }
+              >
+                <DropDownUser
+                  onLogOut={onLogOut}
+                  userEmail={email}
+                  userLogo={avatar}
+                  userName={userName}
+                />
+              </Dropdown>
+            </div>
+          )}
+
+          {!userName && (
+            <Button as={Link} to={PATH.register} variant={'secondary'}>
+              <Typography variant={'subtitle2'}>{t('header.register')}</Typography>
+            </Button>
+          )}
+
+          <Select
+            className={s.langSelect}
+            onValueChange={value => i18n.changeLanguage(value)}
+            options={locales}
+            sizeSelect={'small'}
+            value={i18n.resolvedLanguage}
+          />
         </div>
-
-        {userName && (
-          <div className={s.userInfo}>
-            <Typography
-              className={s.userName}
-              onClick={() => navigate(PATH.profile)}
-              variant={'subtitle1'}
-            >
-              {userName}
-            </Typography>
-            <Dropdown
-              align={'end'}
-              sideOffset={2}
-              trigger={
-                <button style={{ display: 'flex' }}>
-                  <Avatar src={avatar} userName={userName} />
-                </button>
-              }
-            >
-              <DropDownUser
-                onLogOut={onLogOut}
-                userEmail={email}
-                userLogo={avatar}
-                userName={userName}
-              />
-            </Dropdown>
-          </div>
-        )}
-
-        {!userName && (
-          <Button as={Link} to={PATH.register} variant={'secondary'}>
-            <Typography variant={'subtitle2'}>{t('header.register')}</Typography>
-          </Button>
-        )}
       </div>
     </div>
   )
