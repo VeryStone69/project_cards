@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { useDebounce } from '@/app/hooks'
 import { InitialLoader, PreLoader } from '@/components/ui/loader'
@@ -18,6 +19,7 @@ import s from './packs.module.scss'
 export const Packs = () => {
   const { data: me } = useMeQuery()
   const currentUserId = me?.id || ''
+  const { t } = useTranslation()
 
   const {
     clearFilter,
@@ -73,8 +75,9 @@ export const Packs = () => {
       <div className={s.setting}>
         <div className={s.addCard}>
           <Typography as={'h1'} className={s.title} variant={'large'}>
-            List of decks
+            {t('decks.title')}
           </Typography>
+
           <AddNewDeck />
         </div>
         <FilterControl

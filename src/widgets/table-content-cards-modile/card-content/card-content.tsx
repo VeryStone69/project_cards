@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next'
+
 import noImage from '@/assets/images/not-img.jpg'
 import { Rating } from '@/components/ui/rating'
 import { Typography } from '@/components/ui/typography'
@@ -8,6 +10,7 @@ import { formatDate } from '@/utils/format-date'
 import { clsx } from 'clsx'
 
 import s from './card-content.module.scss'
+
 type Props = {
   deckName?: string
   isMyPack: boolean
@@ -16,6 +19,7 @@ type Props = {
 export const CardContent = ({ deckName = '', isMyPack, items }: Props) => {
   const showAnswer = items.grade !== 5 ? 'unavailable' : items.answer
   const content = clsx(s.content, !isMyPack && s.block)
+  const { t } = useTranslation()
 
   return (
     <>
@@ -24,7 +28,7 @@ export const CardContent = ({ deckName = '', isMyPack, items }: Props) => {
           <div className={s.imgBlock}>
             <img alt={'question'} className={s.iconTable} src={items.questionImg || noImage} />
             <Typography as={'h3'} variant={'body2'}>
-              question
+              {t('columns.question')}
             </Typography>
           </div>
           <Typography as={'h3'} variant={'body2'}>
@@ -34,7 +38,7 @@ export const CardContent = ({ deckName = '', isMyPack, items }: Props) => {
         <div className={s.description}>
           <div className={s.imgBlock}>
             <Typography as={'h3'} variant={'body2'}>
-              answer
+              {t('columns.answer')}
             </Typography>
             <img alt={'question'} className={s.iconTable} src={items.answerImg || noImage} />
           </div>
@@ -44,7 +48,7 @@ export const CardContent = ({ deckName = '', isMyPack, items }: Props) => {
         </div>
         <div className={s.title}>
           <Typography as={'h3'} variant={'body2'}>
-            updated
+            {t('columns.lastUpdated')}
           </Typography>
           <Typography as={'h3'} variant={'body2'}>
             {formatDate(items.updated)}
@@ -52,7 +56,7 @@ export const CardContent = ({ deckName = '', isMyPack, items }: Props) => {
         </div>
         <div className={s.title}>
           <Typography as={'h3'} variant={'body2'}>
-            Grade
+            {t('columns.grade')}
           </Typography>
           <Rating rating={items.grade} />
         </div>

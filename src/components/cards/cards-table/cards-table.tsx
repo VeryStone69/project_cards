@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next'
+
 import { ContentTable } from '@/components/cards/content-table/content-table'
 import { Table } from '@/components/ui/table'
 import { Sort, TableHeader } from '@/components/ui/table-header'
@@ -29,10 +31,12 @@ export const CardsTable = ({
   setSort,
   sort,
 }: Props) => {
+  const { t } = useTranslation()
+
   if (!cardsData?.items.length) {
     return (
       <div className={s.noItems}>
-        <Typography variant={'body1'}>No content with these terms...</Typography>
+        <Typography variant={'body1'}>{t('terms')}</Typography>
       </div>
     )
   }

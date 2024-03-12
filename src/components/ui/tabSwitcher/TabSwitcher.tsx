@@ -1,8 +1,11 @@
+import { useTranslation } from 'react-i18next'
+
 import { Typography } from '@/components/ui/typography'
 import * as TabsSwitcher from '@radix-ui/react-tabs'
 import { clsx } from 'clsx'
 
 import s from './tabSwitcher.module.scss'
+
 export type Tabs = {
   disabled: boolean
   title: string
@@ -26,6 +29,7 @@ export const TabSwitcher = ({
   value,
 }: TabSwitcherProps) => {
   const classes = clsx(className)
+  const { t } = useTranslation()
 
   return (
     <>
@@ -41,7 +45,7 @@ export const TabSwitcher = ({
                   key={tabs.value}
                   value={tabs.value}
                 >
-                  {tabs.title}
+                  {t(`decks.tabSwitcher.${tabs.value}`)}
                 </TabsSwitcher.Trigger>
               )
             })}

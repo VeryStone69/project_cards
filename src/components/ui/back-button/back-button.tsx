@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { Icon } from '@/components/icon/Icon'
@@ -14,6 +15,7 @@ type Props = {
 
 export const BackButton = ({ className, text = 'Back to Previous Page', ...props }: Props) => {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const classes = clsx(s.button, className)
   const backHandler = () => {
     navigate(-1)
@@ -31,7 +33,7 @@ export const BackButton = ({ className, text = 'Back to Previous Page', ...props
     >
       <Icon name={'arrow-back'} />
       <Typography className={s.text} variant={'body2'}>
-        {text}
+        {t('rules.back')}
       </Typography>
     </Button>
   )

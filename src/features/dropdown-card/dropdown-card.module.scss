@@ -1,6 +1,6 @@
 .dropdownCard {
   z-index: 100;
-  width: 5rem;
+  width: max-content;
 
   > div {
     &:not(:last-child) {

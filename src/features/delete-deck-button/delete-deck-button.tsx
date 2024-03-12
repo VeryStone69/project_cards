@@ -1,4 +1,5 @@
 import { memo, useCallback, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 
 import { Icon } from '@/components/icon/Icon'
@@ -15,16 +16,17 @@ type Props = {
 export const DeleteDeckButton = memo(({ id, name }: Props) => {
   const [open, setOpen] = useState(false)
   const [delDeck] = useDeleteDeckMutation()
+  const { t } = useTranslation()
   const deleteCard = useCallback(async () => {
     setOpen(false)
 
     try {
       await toast.promise(delDeck({ id }).unwrap(), {
-        pending: 'Removing a deck...',
-        success: `Deck deleted successfully!`,
+        pending: t('deleteDeckModal.toast.pending'),
+        success: t('deleteDeckModal.toast.success'),
       })
     } catch (err) {
-      toast.error('Error deleting deck :(')
+      toast.error(t('deleteDeckModal.toast.error'))
     }
   }, [delDeck, id])
 
@@ -32,13 +34,14 @@ export const DeleteDeckButton = memo(({ id, name }: Props) => {
     <>
       <IconButton icon={<Icon name={'remove'} size={'16px'} />} onClick={() => setOpen(true)} />
       {open && (
-        <Modal open setOpen={() => setOpen(false)} title={'Removing a deck'}>
-          <Typography variant={'body1'}>Do you really want to remove the {name} deck?</Typography>
+        <Modal open setOpen={() => setOpen(false)} title={t('deleteDeckModal.title')}>
+          <Typography variant={'body1'}>{t('deleteDeckModal.description', { name })}</Typography>
           <ButtonFooter
             onClickCancel={() => setOpen(false)}
             onClickConfirm={deleteCard}
             option={2}
-            titleConfirm={'Delete'}
+            titleCancel={t('deleteDeckModal.cancel')}
+            titleConfirm={t('deleteDeckModal.remove')}
           />
         </Modal>
       )}

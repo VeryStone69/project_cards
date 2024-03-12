@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field/controlled-text-field'
@@ -28,29 +29,30 @@ export const ForgotPassword = ({ className, onSubmit }: LoginProps) => {
   })
 
   const classNames = clsx(s.form, className)
+  const { t } = useTranslation()
 
   return (
     <div className={s.formCard}>
       <Typography className={s.title} variant={'h1'}>
-        Password recovery
+        {t('recovery.title')}
       </Typography>
 
       <form className={classNames} onSubmit={handleSubmit(onSubmit)}>
-        <ControlledTextField control={control} label={'Email'} name={'email'} />
+        <ControlledTextField control={control} label={t('recovery.email')} name={'email'} />
         <Typography className={s.content} variant={'body2'}>
-          Enter your email address and we well send you to hell
+          {t('recovery.subtitle')}
         </Typography>
 
         <Button fullWidth type={'submit'}>
-          <Typography variant={'subtitle2'}>Send</Typography>
+          <Typography variant={'subtitle2'}>{t('recovery.send')}</Typography>
         </Button>
       </form>
 
       <div className={s.sendCard}>
-        <Typography variant={'body2'}>Did you remember your password?</Typography>
+        <Typography variant={'body2'}>{t('recovery.remember')}</Typography>
 
         <Typography className={s.sendCardButton} variant={'h2'}>
-          <Link to={'/login'}>Login</Link>
+          <Link to={'/login'}>{t('recovery.login')}</Link>
         </Typography>
       </div>
     </div>

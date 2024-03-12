@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field/controlled-text-field'
@@ -27,20 +28,26 @@ export const SignUp = ({ className, onSubmit }: LoginProps) => {
   })
 
   const classNames = clsx(s.form, className)
+  const { t } = useTranslation()
 
   return (
     <div className={s.formCard}>
       <Typography className={s.title} variant={'h1'}>
-        Registration
+        {t('register.title')}
       </Typography>
 
       <form className={classNames} onSubmit={handleSubmit(onSubmit)}>
-        <ControlledTextField className={s.email} control={control} label={'Email'} name={'email'} />
+        <ControlledTextField
+          className={s.email}
+          control={control}
+          label={t('register.email')}
+          name={'email'}
+        />
 
         <ControlledTextField
           className={s.password}
           control={control}
-          label={'Password'}
+          label={t('register.password')}
           name={'password'}
           type={'password'}
         />
@@ -48,21 +55,21 @@ export const SignUp = ({ className, onSubmit }: LoginProps) => {
         <ControlledTextField
           className={s.conformPassword}
           control={control}
-          label={'Confirm password'}
+          label={t('register.confirm')}
           name={'confirmPassword'}
           type={'password'}
         />
 
         <Button className={s.button} fullWidth type={'submit'}>
-          <Typography variant={'subtitle2'}>Register</Typography>
+          <Typography variant={'subtitle2'}>{t('register.register')}</Typography>
         </Button>
       </form>
 
       <div className={s.signin}>
-        <Typography variant={'body2'}>Already have an account?</Typography>
+        <Typography variant={'body2'}>{t('register.haveAcc')}</Typography>
 
         <Typography className={s.signinButton} variant={'h2'}>
-          <Link to={'/login'}>Login</Link>
+          <Link to={'/login'}>{t('register.login')}</Link>
         </Typography>
       </div>
     </div>

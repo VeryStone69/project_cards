@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link, useParams } from 'react-router-dom'
 
 import { CardsTable } from '@/components/cards/cards-table/cards-table'
@@ -46,6 +47,7 @@ export const Cards = () => {
   const { editDeckHandler, editDeckModal, setEditDeckModal } = useEditDeck(packId)
   const { data: deckData } = useGetDeckInfoQuery({ id: packId })
   const { cardsColumns, defaultValue, isMyPack } = useTableCardsInfo(deckData)
+  const { t } = useTranslation()
   const { changeItemPerPage, changePage, currentPage, itemsPerPage } = usePaginationCards(
     searchParams,
     setSearchParams
@@ -80,7 +82,7 @@ export const Cards = () => {
 
   return (
     <section className={s.cardsPage}>
-      <BackButton text={'Return to deck page'} />
+      <BackButton text={t('cards.back')} />
       {isFetching && <InitialLoader />}
 
       <div className={s.section}>
@@ -97,7 +99,7 @@ export const Cards = () => {
           )}
 
           {editDeckModal && (
-            <Modal open setOpen={() => setEditDeckModal(false)} title={'Editing a Deck'}>
+            <Modal open setOpen={() => setEditDeckModal(false)} title={t('editDeckModal.title')}>
               <CreateAndModifyDeckForm
                 defaultValue={defaultValue}
                 onCancel={() => setEditDeckModal(false)}
@@ -107,15 +109,20 @@ export const Cards = () => {
           )}
 
           {deleteDeckModal && (
-            <Modal open setOpen={() => setDeleteDeckModal(false)} title={'Removing a deck'}>
+            <Modal
+              open
+              setOpen={() => setDeleteDeckModal(false)}
+              title={t('deleteDeckModal.title')}
+            >
               <Typography variant={'body1'}>
-                Are you sure you want to delete the {deckData?.name} deck?
+                {t('deleteDeckModal.description', { name: deckData?.name })}
               </Typography>
               <ButtonFooter
                 onClickCancel={() => setDeleteDeckModal(false)}
                 onClickConfirm={deleteDeckHandler}
                 option={2}
-                titleConfirm={'Delete'}
+                titleCancel={t('deleteCardModal.cancel')}
+                titleConfirm={t('deleteCardModal.remove')}
               />
             </Modal>
           )}
@@ -123,7 +130,7 @@ export const Cards = () => {
           {isMyPack && <AddNewCard deckId={id} />}
           {!isMyPack && showLearnCard && (
             <Button as={Link} to={`learn`}>
-              <Typography variant={'subtitle2'}>Learn cards</Typography>
+              <Typography variant={'subtitle2'}>{t('cards.learn.title')}</Typography>
             </Button>
           )}
         </div>
@@ -140,7 +147,7 @@ export const Cards = () => {
         <TextField
           clearField={() => setNameQuestion('')}
           onChange={e => setNameQuestion(e.currentTarget.value)}
-          placeholder={'Search by question'}
+          placeholder={t('cards.search.placeholder')}
           type={'search'}
           value={searchName}
         />

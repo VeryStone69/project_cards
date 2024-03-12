@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Link, useNavigate } from 'react-router-dom'
 
 import defaultMask from '@/assets/images/not-img.jpg'
@@ -20,6 +21,7 @@ type Props = {
 export const TableContentMobile = ({ currentUserId, deck }: Props) => {
   const isMyDeck = currentUserId === deck.author.id
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const onClickLearnCards = () => {
     navigate(`${deck.id}/learn`)
   }
@@ -35,7 +37,7 @@ export const TableContentMobile = ({ currentUserId, deck }: Props) => {
         <Table.Cell align={'left'} className={s.tableItems}>
           <Button as={Link} to={deck.id} variant={'link'}>
             <Typography as={'h3'} variant={'body2'}>
-              Name
+              {t('columns.name')}
             </Typography>
           </Button>
 
@@ -47,19 +49,19 @@ export const TableContentMobile = ({ currentUserId, deck }: Props) => {
         </Table.Cell>
         <Table.Cell className={s.tableItems}>
           <Typography as={'h3'} variant={'body2'}>
-            Cards
+            {t('columns.cardsCount')}
           </Typography>
           {deck.cardsCount}
         </Table.Cell>
         <Table.Cell className={s.tableItems}>
           <Typography as={'h3'} variant={'body2'}>
-            Last Updated
+            {t('columns.updated')}
           </Typography>
           {formatDate(deck.updated)}
         </Table.Cell>
         <Table.Cell className={s.tableItems}>
           <Typography as={'h3'} variant={'body2'}>
-            Created by
+            {t('columns.created')}
           </Typography>
           {deck.author.name}
         </Table.Cell>

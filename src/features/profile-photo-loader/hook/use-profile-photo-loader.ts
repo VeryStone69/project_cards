@@ -1,4 +1,5 @@
 import { ChangeEvent } from 'react'
+import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 
 import { useUpdateProfileMutation } from '@/services/auth-api/auth'
@@ -8,6 +9,7 @@ import * as z from 'zod'
 
 export const useProfilePhotoLoader = () => {
   const [updateProfile] = useUpdateProfileMutation()
+  const { t } = useTranslation()
 
   const onChangeHandler = async (e: ChangeEvent<HTMLInputElement>) => {
     try {
@@ -20,12 +22,12 @@ export const useProfilePhotoLoader = () => {
       form.append('avatar', file || '')
 
       await toast.promise(updateProfile(form).unwrap(), {
-        pending: 'avatar is updating',
-        success: 'avatar successful changed',
+        pending: t('photo.load.toast.pending'),
+        success: t('photo.load.toast.success'),
       })
     } catch (err) {
       if (err instanceof z.ZodError) {
-        toast.error(err.issues[0].message)
+        toast.error(t(`validate.${err.issues[0].message}`))
       } else {
         errorNotification(err)
       }
@@ -37,8 +39,8 @@ export const useProfilePhotoLoader = () => {
     form.append('avatar', '')
     try {
       await toast.promise(updateProfile(form).unwrap(), {
-        pending: 'avatar is deleting',
-        success: 'avatar successful deleted',
+        pending: t('photo.load.toast.pending'),
+        success: t('photo.load.toast.success'),
       })
     } catch (err) {
       errorNotification(err)

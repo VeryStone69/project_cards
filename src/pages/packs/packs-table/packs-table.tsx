@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next'
+
 import { packsColumns } from '@/common/consts/packs-columns'
 import { Table } from '@/components/ui/table'
 import { Sort, TableHeader } from '@/components/ui/table-header'
@@ -14,10 +16,12 @@ type PacksTableProps = {
   sort: Sort
 }
 export const PacksTable = ({ currentUserId, items, setSort, sort }: PacksTableProps) => {
+  const { t } = useTranslation()
+
   if (!items?.length) {
     return (
       <div className={s.noItems}>
-        <Typography variant={'body1'}>No content with these terms...</Typography>
+        <Typography variant={'body1'}>{t('terms')}</Typography>
       </div>
     )
   }

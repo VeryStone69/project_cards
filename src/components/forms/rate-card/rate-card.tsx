@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 
 import { rateOptions } from '@/common/consts/rate-options'
 import { Button } from '@/components/ui/button'
@@ -14,6 +15,7 @@ type Props = {
 }
 
 export const RateCardForm = ({ onSubmit }: Props) => {
+  const { t } = useTranslation()
   const { control, handleSubmit } = useForm<RateType>({
     defaultValues: { grade: '1' },
   })
@@ -22,7 +24,7 @@ export const RateCardForm = ({ onSubmit }: Props) => {
     <form className={s.rateForm} onSubmit={handleSubmit(onSubmit)}>
       <ControlledRadioGroup control={control} name={'grade'} options={rateOptions} />
       <Button className={s.button} fullWidth>
-        <Typography variant={'subtitle2'}>Next question</Typography>
+        <Typography variant={'subtitle2'}>{t('learn.next')}</Typography>
       </Button>
     </form>
   )

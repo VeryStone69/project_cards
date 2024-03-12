@@ -1,5 +1,6 @@
 import { ComponentPropsWithoutRef, ElementType } from 'react'
 import { SubmitHandler } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 
 import notImg from '@/assets/images/not-img.jpg'
 import { useAddDeckForm } from '@/components/forms/create-and-modify-deck-form/hook/useAddDeckForm'
@@ -38,6 +39,7 @@ export const CreateAndModifyDeckForm = ({
   const { control, deleteCover, handleSubmit, img, open, setOpen, toastError } =
     useAddDeckForm(defaultValue)
   const imgClasses = clsx(s.image, img && s.hover, open && s.open)
+  const { t } = useTranslation()
   const onClickHandler = () => {
     if (img) {
       setOpen(prevState => !prevState)
@@ -71,7 +73,7 @@ export const CreateAndModifyDeckForm = ({
               variant={'secondary'}
             >
               <Icon className={s.imgOnButton} name={'img'} viewBox={'0 0 18 18'} />
-              <Typography variant={'subtitle2'}>Upload image</Typography>
+              <Typography variant={'subtitle2'}>{t('addDeckModal.upload')}</Typography>
             </ControlledFileUploader>
             {img && (
               <Button
@@ -81,21 +83,26 @@ export const CreateAndModifyDeckForm = ({
                 type={'reset'}
                 variant={'secondary'}
               >
-                <Typography variant={'subtitle2'}>Delete image</Typography>
+                <Typography variant={'subtitle2'}>{t('addDeckModal.delete')}</Typography>
                 <Icon fill={'white'} name={'trashBin'} size={'18px'} />
               </Button>
             )}
           </div>
-          <ControlledTextField control={control} label={'Deck name'} name={'name'} />
+          <ControlledTextField control={control} label={t('addDeckModal.deckName')} name={'name'} />
 
           <Typography variant={'body2'}>
-            <ControlledCheckbox control={control} label={'Private deck'} name={'isPrivate'} />
+            <ControlledCheckbox
+              control={control}
+              label={t('addDeckModal.private')}
+              name={'isPrivate'}
+            />
           </Typography>
         </div>
         <ButtonFooter
           onClickCancel={onCancel}
           option={2}
-          titleConfirm={defaultValue ? 'Update' : 'Create'}
+          titleCancel={t('addDeckModal.cancel')}
+          titleConfirm={defaultValue ? t('addDeckModal.update') : t('addDeckModal.create')}
         />
       </form>
     </div>

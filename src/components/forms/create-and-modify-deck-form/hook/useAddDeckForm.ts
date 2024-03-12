@@ -1,14 +1,16 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 
 import { DefaultValueType } from '@/components/forms/create-and-modify-deck-form'
-import { addNewDeckSchema, PackFormType } from '@/utils/zod-resolvers/file-update-resolver'
+import { PackFormType, addNewDeckSchema } from '@/utils/zod-resolvers/file-update-resolver'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 export const useAddDeckForm = (defaultValue?: DefaultValueType) => {
   const [open, setOpen] = useState(false)
   const [img, setImg] = useState<null | string>(defaultValue?.cover || null)
+  const { t } = useTranslation()
 
   const { control, getFieldState, getValues, handleSubmit, reset, setValue, trigger, watch } =
     useForm<PackFormType>({
@@ -23,7 +25,7 @@ export const useAddDeckForm = (defaultValue?: DefaultValueType) => {
 
   const deleteCover = async () => {
     reset({ ...getValues(), cover: null })
-    toast.warning('You deleted cover')
+    toast.warning(t('cover.load.toast.warning'))
     setOpen(false)
     setImg(null)
   }
@@ -38,7 +40,7 @@ export const useAddDeckForm = (defaultValue?: DefaultValueType) => {
       setImg(URL.createObjectURL(file))
     }
     if (!success && error?.message) {
-      toast.error(error.message)
+      toast.error(t(`validate.${error.message}`))
       reset({ ...getValues(), cover: null })
     }
   }
