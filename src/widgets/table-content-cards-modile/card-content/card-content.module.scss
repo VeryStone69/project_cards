@@ -1,40 +1,39 @@
-.content{
+.content {
   padding-top: 12px;
   padding-bottom: 12px;
-border: 1px solid var(--color-dark-500);;
+  border: 1px solid var(--color-dark-500);
 }
 
-.block:not(:last-child){
+.block:not(:last-child) {
   margin-bottom: 24px;
 }
 
-
-.description{
+.description {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
   padding: 6px 16px;
 }
 
-.imgBlock{
+.imgBlock {
   display: flex;
   flex-direction: column;
 }
 
-.iconTable{
+.iconTable {
   width: 50px;
   height: 50px;
   object-fit: cover;
   border-radius: 50%;
 }
 
-.title{
+.title {
   display: flex;
   justify-content: space-between;
   padding: 6px 16px;
 }
 
-.myPack{
+.myPack {
   display: flex;
 
   height: 36px;
@@ -45,7 +44,7 @@ border: 1px solid var(--color-dark-500);;
   border-bottom-left-radius: 5px;
 }
 
-.editCard{
+.editCard {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -53,10 +52,9 @@ border: 1px solid var(--color-dark-500);;
   width: 50%;
 
   border-right: 1px solid green;
-
 }
 
-.deleteCard{
+.deleteCard {
   display: flex;
   align-items: center;
   justify-content: center;
