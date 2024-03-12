@@ -37,6 +37,10 @@
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 24px;
+
+    @media screen and (width <= 576px) {
+      flex-wrap: wrap;
+    }
   }
 
   .packsImg {

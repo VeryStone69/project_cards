@@ -9,6 +9,7 @@ export type Option = {
   value: string
 }
 type SelectProps = {
+  className?: string
   disabled?: boolean
   label?: string
   onValueChange: (value: string) => void
@@ -18,6 +19,7 @@ type SelectProps = {
   value?: string
 }
 export const Select = ({
+  className,
   disabled,
   label,
   onValueChange,
@@ -26,7 +28,8 @@ export const Select = ({
   sizeSelect,
   value,
 }: SelectProps) => {
-  const selectSize = sizeSelect === 'small' ? s.SelectTriggerSmall : s.SelectTrigger
+  const selectSize =
+    sizeSelect === 'small' ? s.SelectTriggerSmall + ' ' + className : s.SelectTrigger
   const selectItemSize = sizeSelect === 'small' ? s.SelectItemSmall : s.SelectItem
   const typographyTextSize = sizeSelect === 'small' ? s.typographyTextSmall : s.typographyText
   const typographyStyle = (disabled && s.typographyLabelDisabled) || ''

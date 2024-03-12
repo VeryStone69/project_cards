@@ -99,6 +99,7 @@ export const CreateAndModifyDeckForm = ({
           </Typography>
         </div>
         <ButtonFooter
+          fullWidth
           onClickCancel={onCancel}
           option={2}
           titleCancel={t('addDeckModal.cancel')}
