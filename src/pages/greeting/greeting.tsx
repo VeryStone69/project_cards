@@ -31,7 +31,7 @@ export const Greeting = () => {
           {t('greeting.description')}
         </Typography>
 
-        <Button as={Link} className={s.login} to={PATH.login} variant={'primary'}>
+        <Button as={Link} className={s.login} id={'login'} to={PATH.login} variant={'primary'}>
           <Typography variant={'subtitle2'}>{t('greeting.login')}</Typography>
         </Button>
 

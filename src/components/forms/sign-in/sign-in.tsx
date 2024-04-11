@@ -42,6 +42,7 @@ export const SignIn = ({ className, onSubmit }: LoginProps) => {
         <ControlledTextField
           className={s.email}
           control={control}
+          id={'email'}
           label={t('login.email')}
           name={'email'}
         />
@@ -49,6 +50,7 @@ export const SignIn = ({ className, onSubmit }: LoginProps) => {
         <ControlledTextField
           className={s.password}
           control={control}
+          id={'password'}
           label={t('login.password')}
           name={'password'}
           type={'password'}
@@ -57,6 +59,7 @@ export const SignIn = ({ className, onSubmit }: LoginProps) => {
         <ControlledCheckbox
           className={s.checkbox}
           control={control}
+          id={'rememberMe'}
           label={t('login.remember')}
           name={'rememberMe'}
         />
@@ -67,7 +70,7 @@ export const SignIn = ({ className, onSubmit }: LoginProps) => {
           </Link>
         </Typography>
 
-        <Button className={s.button} fullWidth>
+        <Button className={s.button} fullWidth id={'signIn'}>
           <Typography variant={'subtitle2'}>{t('login.login')}</Typography>
         </Button>
       </form>
